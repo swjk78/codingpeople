@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-05-18T08:26:30.347Z" agent="5.0 (Windows)" etag="EsH-7nh0qhsVNL9Ywk8Z" version="14.6.13" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-18T08:52:36.861Z" agent="5.0 (Windows)" etag="cdWp1GDb_ksJAjog61Az" version="14.6.13" type="github">
   <diagram id="mC9mLiqQ_s6ltAapUeoM" name="Page-1">
-    <mxGraphModel dx="2530" dy="1842" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1849" dy="1573" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -340,7 +340,7 @@
         <mxCell id="R1qjKSbSTeQgbjsGCtFt-23" value="&lt;div&gt;블라인드 처리&lt;/div&gt;&lt;div&gt;/manage/blind.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="1110" y="107.5" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="R1qjKSbSTeQgbjsGCtFt-25" value="&lt;div&gt;회원 활동정지 처리&lt;/div&gt;&lt;div&gt;/manage/stop.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+        <mxCell id="R1qjKSbSTeQgbjsGCtFt-25" value="&lt;div&gt;회원 활동정지 처리&lt;/div&gt;&lt;div&gt;/manage/lock.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="1110" y="10" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="zA-9McpOUw8L5y3S4UUD-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="zA-9McpOUw8L5y3S4UUD-1" target="zA-9McpOUw8L5y3S4UUD-10" edge="1">
