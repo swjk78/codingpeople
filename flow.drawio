@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-18T07:19:06.747Z" agent="5.0 (Windows)" etag="ashjuEnpHPrLbUqnYKkV" version="14.6.13" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-18T08:26:30.347Z" agent="5.0 (Windows)" etag="EsH-7nh0qhsVNL9Ywk8Z" version="14.6.13" type="github">
   <diagram id="mC9mLiqQ_s6ltAapUeoM" name="Page-1">
     <mxGraphModel dx="2530" dy="1842" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -402,12 +402,6 @@
               <mxPoint x="610" y="-20" />
             </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="zA-9McpOUw8L5y3S4UUD-15" value="처리 서블릿" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
-          <mxGeometry x="-190" y="-210" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="zA-9McpOUw8L5y3S4UUD-16" value="JSP" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
-          <mxGeometry x="-30" y="-210" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
