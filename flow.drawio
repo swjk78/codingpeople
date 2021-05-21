@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-05-18T09:16:06.205Z" agent="5.0 (Windows)" etag="v7KLF_B19tyNBgWvd_y9" version="14.6.13" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-21T07:22:19.801Z" agent="5.0 (Windows)" etag="9XDDFp4_-T2Tb7d2gYJ-" version="14.6.13" type="github">
   <diagram id="mC9mLiqQ_s6ltAapUeoM" name="Page-1">
-    <mxGraphModel dx="2029" dy="1644" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2287" dy="1746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -75,7 +75,7 @@
         <mxCell id="QGhlJYClcwNzzbrt0RkC-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="Nu2AYAcBw3wLmnYxCcNV-31" target="Nu2AYAcBw3wLmnYxCcNV-33" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Nu2AYAcBw3wLmnYxCcNV-31" value="&lt;div&gt;회원 프로필 페이지&lt;br&gt;&lt;/div&gt;&lt;div&gt;/client/profile.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+        <mxCell id="Nu2AYAcBw3wLmnYxCcNV-31" value="&lt;div&gt;회원 프로필 카드 페이지&lt;br&gt;&lt;/div&gt;&lt;div&gt;/client/profile.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="180" y="690" width="140" height="80" as="geometry" />
         </mxCell>
         <mxCell id="nnKQ1JKZnjKHlzkCzVtV-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="Nu2AYAcBw3wLmnYxCcNV-32" target="Nu2AYAcBw3wLmnYxCcNV-37" edge="1">
@@ -223,7 +223,7 @@
         <mxCell id="R1qjKSbSTeQgbjsGCtFt-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="nnKQ1JKZnjKHlzkCzVtV-21" target="nnKQ1JKZnjKHlzkCzVtV-24" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5oeBRz327jG7m60Wxrw5-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="nnKQ1JKZnjKHlzkCzVtV-21" target="5oeBRz327jG7m60Wxrw5-1">
+        <mxCell id="5oeBRz327jG7m60Wxrw5-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="nnKQ1JKZnjKHlzkCzVtV-21" target="5oeBRz327jG7m60Wxrw5-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="nnKQ1JKZnjKHlzkCzVtV-21" value="&lt;div&gt;게시판(게시글 목록)&lt;br&gt;&lt;/div&gt;&lt;div&gt;/board/postList.jsp&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
@@ -396,10 +396,10 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="5oeBRz327jG7m60Wxrw5-1" value="&lt;div&gt;검색 처리&lt;/div&gt;&lt;div&gt;/board/postSearch.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="5oeBRz327jG7m60Wxrw5-1" value="&lt;div&gt;검색 처리&lt;/div&gt;&lt;div&gt;/board/postSearch.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="715" y="220" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="5oeBRz327jG7m60Wxrw5-3" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="5oeBRz327jG7m60Wxrw5-1" target="nnKQ1JKZnjKHlzkCzVtV-21">
+        <mxCell id="5oeBRz327jG7m60Wxrw5-3" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="5oeBRz327jG7m60Wxrw5-1" target="nnKQ1JKZnjKHlzkCzVtV-21" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1030" y="260" as="sourcePoint" />
             <mxPoint x="1080" y="210" as="targetPoint" />
@@ -410,7 +410,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="5oeBRz327jG7m60Wxrw5-4" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="joYM71LnYFRUX5e8SblC-1" target="nnKQ1JKZnjKHlzkCzVtV-21">
+        <mxCell id="5oeBRz327jG7m60Wxrw5-4" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="joYM71LnYFRUX5e8SblC-1" target="nnKQ1JKZnjKHlzkCzVtV-21" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="635" y="410" as="sourcePoint" />
             <mxPoint x="685" y="360" as="targetPoint" />
