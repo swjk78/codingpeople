@@ -1,6 +1,6 @@
 ## post 테이블 관련 SQL문 설명
 
-### 게시글 테이블, 시퀀스
+### 게시글 테이블
 
 ```sql
 create table post(
