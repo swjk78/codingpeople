@@ -1,12 +1,4 @@
-# post 테이블 관련 SQL문 설명
-
-## 파일 설명
-
--   post.sql : post 테이블 관련 SQL문 모음
--   post_full.sql : 위의 SQL문 테스트 시 사용한 테스트용 테이블 포함<br>
-<br>
-
-## 각 SQL문 설명
+## post 테이블 관련 SQL문 설명
 
 ### 게시글 테이블, 시퀀스
 
