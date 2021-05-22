@@ -1,3 +1,6 @@
+### post 테이블 관련 SQL문 모음
+
+```sql
 -- 게시글 테이블, 시퀀스
 create table post(
 post_no number(19) primary key,
@@ -36,3 +39,4 @@ where post_no = ?;
 update post
 set post_comments_count = (select count(*) from comments where comments_post_no = ?)
 where post_no = ?;
+```

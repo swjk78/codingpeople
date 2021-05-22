@@ -1,3 +1,6 @@
+### post 관련 SQL문 테스트 시 사용한 테스트용 테이블 포함
+
+```sql
 drop table comments;
 drop sequence comments_seq;
 drop table post;
@@ -84,3 +87,4 @@ where post_no = ?;
 update post
 set post_comments_count = (select count(*) from comments where comments_post_no = ?)
 where post_no = ?;
+```
