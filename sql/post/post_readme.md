@@ -1,6 +1,6 @@
 ## post 테이블 관련 SQL문 설명
 
-### 게시글 테이블
+### 게시글 테이블 생성 SQL문
 
 ```sql
 create table post(
