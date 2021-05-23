@@ -67,7 +67,7 @@ update post set post_view_count = post_view_count + 1 where post_no = ?;
 
 ```sql
 update post
-set post_like_count = (select count(\*) from post_like where post_like_post_no = ?)
+set post_like_count = (select count(*) from post_like where post_like_post_no = ?)
 where post_no = ?;
 ```
 
@@ -77,6 +77,6 @@ where post_no = ?;
 
 ```sql
 update post
-set post_comments_count = (select count(\*) from comments where comments_post_no = ?)
+set post_comments_count = (select count(*) from comments where comments_post_no = ?)
 where post_no = ?;
 ```
