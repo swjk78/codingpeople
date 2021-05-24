@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context>
+	<!-- 자원(DBCP) 정의 및 운영 규칙 설정 -->
 	<Resource name="jdbc/oracle"
 			  type="javax.sql.DataSource"
 			  auth="Container"
