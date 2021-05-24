@@ -50,7 +50,7 @@ where post_no = ?;
 delete post where post_no = ?;
 ```
 
--   게시글 수정과 같은 이유로 where문에서 회워번호를 보는 조건은 작성하지 않음
+-   게시글 수정과 같은 이유로 where문에서 회원번호를 보는 조건은 작성하지 않음
 <br>
 
 ### 게시글의 조회수 증가 SQL문
