@@ -15,7 +15,7 @@ public class BoardDeleteServlet extends HttpServlet {
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
-				//준비 : 게시판 번호
+				//준비 : 게시판 번호만 부릅니다
 				int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 				
 				//처리
