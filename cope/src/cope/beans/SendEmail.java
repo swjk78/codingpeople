@@ -52,11 +52,11 @@ public class SendEmail {
 	public void send() {
 		// SMTP 서버 정보 설정
 		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "smtp.gmail.com");
-		prop.put("mail.smtp.port", 465);
-		prop.put("mail.smtp.auth", "true");
-		prop.put("mail.smtp.ssl.enable", "true");
-		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		prop.put("mail.smtp.host", "smtp.gmail.com"); // SMTP 서버
+		prop.put("mail.smtp.port", 465); // SMTP 서버와 통신하는 포트 번호
+		prop.put("mail.smtp.auth", "true"); // SMTP 서버 인증 사용
+		prop.put("mail.smtp.ssl.enable", "true"); // 로그인 시 SSL 사용
+		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com"); // 인증 처리
 		
 		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
