@@ -28,4 +28,13 @@ public class ClientDaoTest {
 		
 		return clientId;
 	}
+	
+	// 회원번호 찾기 기능
+//	public long findNo(String inputEmail) throws Exception {
+//		Connection con = JdbcUtils.getConnection();
+//		
+//		String sql = "select client_no from client where client_email = "
+//		
+//		con.close();
+//	}
 }
