@@ -25,7 +25,7 @@ public class FindIdServlet extends HttpServlet {
 			
 			// 일치하는 이메일이 없는 경우
 			if (clientId == null) {
-				throw new Exception(); // 다른 오류로 바꿀 예정
+				throw new Exception(); // 다른 예외로 바꿀 예정
 			}
 			// 메일 전송
 			else {
