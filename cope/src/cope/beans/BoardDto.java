@@ -5,6 +5,8 @@ public class BoardDto {
 	private String boardName;
 	private int boardGroup;
 	private int boardSuperNo;
+	
+	
 	public int getBoardNo() {
 		return boardNo;
 	}
