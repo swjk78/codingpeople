@@ -29,12 +29,18 @@ public class ClientDaoTest {
 		return clientId;
 	}
 	
-	// 회원번호 찾기 기능
-//	public long findNo(String inputEmail) throws Exception {
-//		Connection con = JdbcUtils.getConnection();
-//		
-//		String sql = "select client_no from client where client_email = "
-//		
-//		con.close();
-//	}
+	// 비밀번호 재설정 기능
+	public boolean resetPw(String inputPw, String inputEmail) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update client set client_pw = ? where client_email = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, inputPw);
+		ps.setString(2, inputEmail);
+		int count = ps.executeUpdate();
+		
+		con.close();
+		
+		return count == 1;
+	}
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import cope.beans.ClientDaoTest;
 import cope.beans.SendEmail;
 
+// 비밀번호 재설정을 위해 입력된 이메일로 인증번호를 전송하는 서블릿
 @WebServlet(urlPatterns = "/client/findPw.kh")
 public class FindPwServlet extends HttpServlet {
 	public final String SENDERMAIL = "codingpeople7@gmail.com";
@@ -20,26 +21,31 @@ public class FindPwServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			req.setCharacterEncoding("UTF-8");
+			
 			String inputEmail = req.getParameter("inputEmail");
 			ClientDaoTest clientDao = new ClientDaoTest();
 			String clientId = clientDao.findId(inputEmail);
 			
-			// 일치하는 이메일이 없는 경우
-			if (clientId == null) {
-				throw new Exception(); // 다른 오류로 바꿀 예정
-			}
 			// 메일 전송
-			else {
+			if (clientId != null) {
 				SendEmail sendEmail = new SendEmail();
 				String authNum = getAuthNum();
 				req.getSession().setAttribute("authNum", authNum);
+				req.getSession().setAttribute("inputEmail", inputEmail);
+				
 				sendEmail.setSenderEmail(SENDERMAIL);
 				sendEmail.setSenderPw(SENDERPW);
 				sendEmail.setReceiverEmail(inputEmail);
 				sendEmail.setEmailSubject("비밀번호를 재설정 안내");
 				sendEmail.setEmailContents("인증번호: " + authNum);
+				
 				sendEmail.send();
+				
 				resp.sendRedirect("resetPw.jsp");
+			}
+			// 일치하는 이메일이 없는 경우
+			else {
+				resp.sendRedirect("findPw.jsp?error");
 			}
 		}
 		catch (Exception e) {

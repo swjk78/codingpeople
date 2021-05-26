@@ -1,6 +1,7 @@
 package cope.servlet.client;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import cope.beans.ClientDaoTest;
 import cope.beans.SendEmail;
 
+// 입력된 이메일로 회원 아이디를 찾아서 이메일로 전송하는 서블릿
 @WebServlet(urlPatterns = "/client/findId.kh")
 public class FindIdServlet extends HttpServlet {
 	public final String SENDERMAIL = "codingpeople7@gmail.com";
@@ -23,20 +25,22 @@ public class FindIdServlet extends HttpServlet {
 			ClientDaoTest clientDao = new ClientDaoTest();
 			String clientId = clientDao.findId(inputEmail);
 			
-			// 일치하는 이메일이 없는 경우
-			if (clientId == null) {
-				throw new Exception(); // 다른 예외로 바꿀 예정
-			}
 			// 메일 전송
-			else {
+			if (clientId != null) {
 				SendEmail sendEmail = new SendEmail();
 				sendEmail.setSenderEmail(SENDERMAIL);
 				sendEmail.setSenderPw(SENDERPW);
 				sendEmail.setReceiverEmail(inputEmail);
 				sendEmail.setEmailSubject("찾으신 아이디입니다");
 				sendEmail.setEmailContents("아이디: " + clientId);
+				
 				sendEmail.send();
+				
 				resp.sendRedirect("login.jsp");
+			}
+			// 일치하는 이메일이 없는 경우
+			else {
+				resp.sendRedirect("findId.jsp?error");
 			}
 		}
 		catch (Exception e) {
