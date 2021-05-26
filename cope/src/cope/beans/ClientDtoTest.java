@@ -18,7 +18,6 @@ public class ClientDtoTest {
 	public long getClientNo() {
 		return clientNo;
 	}
-	
 	public void setClientNo(long clientNo) {
 		this.clientNo = clientNo;
 	}
@@ -52,7 +51,7 @@ public class ClientDtoTest {
 	public String getClientGrade() {
 		return clientGrade;
 	}
-	// 정규 표현식 필요
+	// 조건 필요
 	public void setClientGrade(String clientGrade) {
 		this.clientGrade = clientGrade;
 	}
