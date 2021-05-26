@@ -9,9 +9,6 @@ import java.sql.Types;
 
 public class BoardDao {
 
-	public static final String USERNAME = "cope";
-	public static final String PASSWORD = "cope";
-
 	// 상위 게시판 추가 기능
 	public void insertBoardSuper(BoardDto boardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
