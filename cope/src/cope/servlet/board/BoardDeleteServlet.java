@@ -1,4 +1,4 @@
-package cope.board.servlet;
+package cope.servlet.board;
 
 import java.io.IOException;
 
