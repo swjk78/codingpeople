@@ -1,7 +1,6 @@
 package cope.servlet.client;
 
 import java.io.IOException;
-import java.util.InputMismatchException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
