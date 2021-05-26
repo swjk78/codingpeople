@@ -5,77 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-	<style>
-* {
- 	font-family: 'NanumSquare', sans-serif;
-	box-sizing: border-box;
-	}
-	
-.border{			
-			width: 100%;
-			border: 2px solid #B8BAD4;
-			padding-top: 15px;
-			padding-left : 30px;
-			padding-right : 30px;
-}
-
-.row{
-			width:100%;
-			margin-top: 30px;
-			margin-bottom : 30px;
+<link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/join.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script>
+	$(function(){
+	$("#clientId").on("input",function(){
+		var id = $(this).val();
+		var regex = /^[a-zA-Z0-9]{8,20}$/;
+		if(regex.test(id)){
+			$(this).nextAll(".fail").hide();
+			$(this).nextAll(".success").show();
+		}
+		else{
+		$(this).nextAll(".fail").show();
+		$(this).nextAll(".success").hide();
+		}
+	});	
+		
+	$(function(){
+		$("#clientPw").on("input",function(){
+			var pw = $(this).val();
+			var regex = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+			if(regex.test(id)){
+				$(this).nextAll(".fail-pw").hide();
+				$(this).nextAll(".success-pw").show();
 			}
-			
-.text-center{
-			text-align:center;
-}
-.text-left{
-			text-align:left;
+			else{
+			$(this).nextAll(".fail-pw").show();
+			$(this).nextAll(".success-pw").hide();
 			}
-
-.container{
-			width : 500px;
-			margin-left:auto;
-			margin-right:auto;
-}
-
-.containerimg{
-			width : 400px;
-			margin-left:auto;
-			margin-right:auto;
-}
-
-.form-input, .form-btn {
-			width : 100%;
-			padding : 1;
-			margin-top: 10px;
-			outline: none;
-}
-
-.form-input.form-input-underline {
-			border:none;
-			border-bottom: 2px solid #E2E3ED;
-}
-
-.form-input.form-input-underline:focus {
-			border-bottom-color: #9A9EC2;		
-}
-
-.form-input.form-input-inline,
-.form-btn.form-btn-inline {
-			width:auto;
-}
+		});	
 	
-.form-btn {
-			border:none;
-}
-.form-btn.form-btn-normal {
-			background-color: #9A9EC2;
-			font-size: 15px;
-			color:white;
-			padding : 18px
-}
-
-</style>
+	});
+	</script>
 </head>
 <body>
 <div class = "text-center">
@@ -89,33 +51,34 @@
 	</div>
 	<form action = "join.kh" method = "post">
 		<div class = "row text-left">
-			<label>아이디</label>
-			<input type = "text" name = "clientId" required class = "form-input form-input-underline" placeholder = "8~20자 이내의 영문 소문자, 숫자">
+			<label for = "clientId">아이디</label>
+			<input type = "text" id = "clientId" required class = "form-input form-input-underline" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
+			<span class = "fail">아이디 형식이 올바르지 않습니다</span>
+			<span class = "success">올바른 형식의 아이디입니다</span>
 		</div>
 		<div class = "row text-left">
-			<label>비밀번호</label>
-			<input type = "text" name = "clientPw" required class = "form-input form-input-underline"
-						placeholder = "8~16자 이내의 영문 소문자, 숫자, 특수문자">
-		</div>
-		<div>
-			<label> </label>
-			<input type = "text" name = "clientPw" required class = "form-input form-input-underline"
+			<label for = "clientPw">비밀번호</label>
+			<input type = "password" id = "clientPw" required class = "form-input form-input-underline"
+						placeholder = "8~16자 이내의 영문 소대문자, 숫자, 특수문자(!@#$%^&*)조합 가능">
+		    <span class = "failPw">비밀번호 형식이 올바르지 않습니다</span>
+			<span class = "successPw">올바른 형식의 아이디입니다.</span>
+			<input type = "password" id = "clientPw2" required class = "form-input form-input-underline padding-t"
 						placeholder = "비밀번호 재입력">
 		</div>
 		<div class = "row text-left">
-			<label>이메일</label>
-			<input type = "text" name = "clientEmail" required class = "form-input form-input-underline"
+			<label for = "clientEmail">이메일</label>
+			<input type = "email" id = "clientEmail" required class = "form-input form-input-underline"
 						placeholder = "자주 사용하는 이메일">
 		</div>
 		<div class = "row text-left">
-			<label>닉네임</label>
-			<input type = "text" name = "clientNick" required class= "form-input form-input-underline"
+			<label for = "clientNick">닉네임</label>
+			<input type = "text" id = "clientNick" required class= "form-input form-input-underline"
 						placeholder = "한 글자 이상, 형식 제한 없음 ">
 		</div>
 
 		<div class = "row text-left">
-			<label>출생년도</label>
-			<select name = "clientBirthYear" class= "form-input form-input-underline"></select>
+			<label for = "clientBirthYear">출생년도</label>
+			<select id = "clientBirthYear" class= "form-input form-input-underline"></select>
 		</div>
 		<div class = "row text-center">
 		<input type = "submit" value = "가입" class = "form-btn form-btn-normal ">
