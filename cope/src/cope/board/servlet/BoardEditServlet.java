@@ -16,7 +16,7 @@ public class BoardEditServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			//준비 : 게시판 번호, 바꿀게시판이름
+			//준비 : 2개 게시판 번호, 바꿀게시판이름
 			req.setCharacterEncoding("UTF-8");
 			BoardDto boardDto = new BoardDto();
 			boardDto.setBoardNo(Integer.parseInt(req.getParameter("boardNo")));

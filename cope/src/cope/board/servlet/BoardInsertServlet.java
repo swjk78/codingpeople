@@ -17,7 +17,7 @@ public class BoardInsertServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
-			//준비 파라미터2개(게시판 이름, 상위게시판을 의미 하는 0)
+			//준비 2개(게시판 이름, 상위게시판을 의미 하는 0)
 			req.setCharacterEncoding("UTF-8");
 			BoardDto boardDto = new BoardDto();
 			boardDto.setBoardName(req.getParameter("boardName"));
