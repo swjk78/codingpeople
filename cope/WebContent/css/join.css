@@ -86,4 +86,13 @@ input[type=password]::after placeholder {
 .fail, .success{
 	display:none;
 	font-size: 15px;
+	color: green;
+}
+
+.fail.fail-pw {
+	color: blue;
+}
+
+.success.success-pw {
+	color: purple;
 }
