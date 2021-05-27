@@ -1,4 +1,4 @@
-package cope.beans;
+package cope.beans.utils;
 
 import java.util.Properties;
 

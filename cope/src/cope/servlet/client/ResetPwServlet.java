@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.ClientDaoTest;
+import cope.beans.client.ClientDaoTest;
 
 // 비밀번호 재설정 서블릿
 @WebServlet(urlPatterns = "/client/resetPw.kh")

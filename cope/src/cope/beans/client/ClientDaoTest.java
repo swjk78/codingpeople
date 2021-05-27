@@ -1,8 +1,11 @@
-package cope.beans;
+package cope.beans.client;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+
+import cope.beans.utils.JdbcUtils;
 
 // 아이디, 비번 찾기 기능 구현을 위한 테스트 ClientDao
 // 차후 ClientDao와 병합 예정
@@ -43,4 +46,19 @@ public class ClientDaoTest {
 		
 		return count == 1;
 	}
+	
+	// 회원 목록 기능
+//	public List<ClientDtoTest> list(int startRow, int endRow, String sortType, String orderType) throws Exception {
+//		Connection con = JdbcUtils.getConnection();
+//		
+//		String sql = "select * from("
+//						+ "select rownum rn, tmp.* from("
+//							+ "select * from client order by client_no desc"
+//						+ ") tmp"
+//					+ ") where rn between ? and ?;";
+//		
+//		con.close();
+//	}
+	
+	// 회원 목록 검색 기능
 }

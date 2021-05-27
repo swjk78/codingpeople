@@ -1,4 +1,4 @@
-package cope.beans;
+package cope.beans.client;
 
 import java.sql.Date;
 

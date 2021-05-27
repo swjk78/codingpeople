@@ -1,10 +1,13 @@
-package cope.beans;
+package cope.beans.board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import cope.beans.utils.JdbcUtils;
+
 import java.sql.Types;
 
 public class BoardDao {
