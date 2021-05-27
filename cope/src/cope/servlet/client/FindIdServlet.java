@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.ClientDaoTest;
-import cope.beans.SendEmail;
+import cope.beans.client.ClientDaoTest;
+import cope.beans.utils.SendEmail;
 
 // 입력된 이메일로 회원 아이디를 찾아서 이메일로 전송하는 서블릿
 @WebServlet(urlPatterns = "/client/findId.kh")

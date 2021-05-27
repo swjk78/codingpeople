@@ -1,4 +1,4 @@
-package cope.beans;
+package cope.beans.board;
 
 public class BoardDto {
 	private int boardNo;

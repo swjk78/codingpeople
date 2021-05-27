@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.BoardDao;
-import cope.beans.BoardDto;
+import cope.beans.board.BoardDao;
+import cope.beans.board.BoardDto;
 
 @WebServlet (urlPatterns = "/manage/createBoard.kh")
 public class BoardInsertServlet extends HttpServlet{

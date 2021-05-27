@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.ClientDaoTest;
-import cope.beans.SendEmail;
+import cope.beans.client.ClientDaoTest;
+import cope.beans.utils.SendEmail;
 
 // 비밀번호 재설정을 위해 입력된 이메일로 인증번호를 전송하는 서블릿
 @WebServlet(urlPatterns = "/client/findPw.kh")

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.BoardDao;
+import cope.beans.board.BoardDao;
 
 @WebServlet(urlPatterns = "/manage/deleteBoard.kh")
 public class BoardDeleteServlet extends HttpServlet {
