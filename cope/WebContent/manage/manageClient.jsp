@@ -15,11 +15,13 @@
 	boolean isOrder = orderType != null && orderDirection != null; 
 	boolean isSearch = searchType != null && searchKeyword != null && !searchKeyword.trim().equals("");
 	
+	// 정렬 기능을 사용하지 않을 시의 기본값
 	if (!isOrder) {
 		orderType = "client_no";
 		orderDirection = "desc";
 	}
 	
+	// 페이지 번호
 	int pageNo;
 	try {
 		pageNo = Integer.parseInt(request.getParameter("pageNo"));
@@ -31,6 +33,7 @@
 		pageNo = 1;
 	}
 	
+	// 한 페이지에 보일 글의 개수
 	int pageSize;
 	try {
 		pageSize = Integer.parseInt(request.getParameter("pageSize"));
@@ -42,6 +45,7 @@
 		pageSize = 10;
 	}
 	
+	// 전달받은 파라미터들로 회원목록 불러오기
 	int startRow = pageNo * pageSize - (pageSize - 1);
 	int endRow = pageNo * pageSize; 
 	
@@ -63,8 +67,8 @@
 		clientList = clientDao.list(listParameter);
 	}
 	
+	// 페이지 네비게이션 영역 계산
 	int clientCount;
-	
 	if (isSearch) {
 		clientCount = clientDao.getClientCount(listParameter);
 	}
