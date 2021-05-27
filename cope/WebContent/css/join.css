@@ -1,14 +1,11 @@
 @charset "UTF-8";
-* {
- 	font-family: 'NanumSquare', sans-serif;
-	box-sizing: border-box;
-	}
-input[type=password] {
-	font-family:'Malgun gothic', dotum, sans-serif;}
-	
-input[type=password]::after placeholder {
-        	font-family: "NanumSquare";
-    } 
+
+ .blank-top{ 
+    padding-top : 80px;
+    }
+.blank-bottom{
+    padding-top: 80px;
+    }
     
 .border{			
 			width: 100%;
@@ -76,23 +73,10 @@ input[type=password]::after placeholder {
 			padding : 18px
 }
 
-
-.fail{
-	color : red;
-}
-.success{	
-}
-
 .fail, .success{
 	display:none;
 	font-size: 15px;
-	color: green;
 }
-
-.fail.fail-pw {
-	color: blue;
-}
-
-.success.success-pw {
-	color: purple;
+.fail{
+	color : red;
 }
