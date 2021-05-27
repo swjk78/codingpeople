@@ -23,9 +23,9 @@ public class JoinServlet extends HttpServlet{
 			joinDto.setClientPw(req.getParameter("clientPw"));
 			joinDto.setClientEmail(req.getParameter("clientEmail"));			
 			joinDto.setClientNick(req.getParameter("clientNick"));
-			joinDto.setClientBirthYear(Date.valueOf(req.getParameter("clientBirthYear")));
+			joinDto.setClientBirthYear(Short.parseShort(req.getParameter("clientBirthYear")));
 			joinDto.setClientGrade(req.getParameter("clientGrade"));
-			joinDto.setClientUnlockDate(req.getParameter("clientUnlockDate"));
+			joinDto.setClientUnlockDate(Date.valueOf(req.getParameter("clientUnlockDate")));
 			
 			JoinDao joinDao = new JoinDao();
 			joinDao.regist(joinDto);

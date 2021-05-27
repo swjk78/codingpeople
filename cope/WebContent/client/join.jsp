@@ -59,36 +59,35 @@
 			}
 		});	
 		
-		$("#clientEmail").on("input",function(){
-			var pw = $(this).val();
-			var regex = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
-			if(regex.test(pw)){
-				$(this).nextAll(".fail").hide();
-				$(this).nextAll(".successPw").show();
-				$(this).off();
-			}
-			else{
-			$(this).nextAll(".failPw").show();
-			$(this).nextAll(".success").hide();
-			}
-		});	
-		
 		$("#clientNick").on("input",function(){
 			var pw = $(this).val();
-			var regex = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+			var regex = /^[가-힣a-zA-Z0-9!@#$%^&*]{1,30}$/;
 			if(regex.test(pw)){
 				$(this).nextAll(".fail").hide();
-				$(this).nextAll(".successPw").show();
-				$(this).off();
+				$(this).nextAll(".success").show();
 			}
 			else{
-			$(this).nextAll(".failPw").show();
+			$(this).nextAll(".fail").show();
 			$(this).nextAll(".success").hide();
 			}
 		});	
 		
-		
 	});
+	
+    $(document).ready(function(){
+        setDateBox();
+    // select box 연도 표시
+    function setDateBox(){
+        var dt = new Date();
+        var com_year = dt.getFullYear();
+
+        $("#clientBirthYear").append("");
+        for(var y = 1950; y <= com_year; y++){
+            $("#clientBirthYear").append("<option value='"+ y +"'>"+ y +"</option>");
+        }
+    }
+    });   
+    
 	</script>
 </head>
 
@@ -127,8 +126,6 @@
 			<label for = "clientEmail">이메일</label>
 			<input type = "email" id = "clientEmail" required class = "form-input form-input-underline"
 						placeholder = "자주 사용하는 이메일">
-				<span class = "fail">이메일 형식이 올바르지 않습니다</span>
-				<span class = "success">올바른 형식의 이메일입니다</span>
 		</div>
 		
 		<div class = "row text-left">
@@ -141,7 +138,7 @@
 
 		<div class = "row text-left">
 			<label for = "clientBirthYear">출생년도</label>
-			<select id = "clientBirthYear" class= "form-input form-input-underline"></select>
+			<select id = "clientBirthYear" class= "form-input form-input-underline" placeholder = "필수사항 아님"></select>
 		</div>
 		<div class = "row text-center">
 		<input type = "submit" value = "가입" class = "form-btn form-btn-normal ">
