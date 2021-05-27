@@ -9,6 +9,12 @@ input[type=password] {
 input[type=password]::after placeholder {
         	font-family: "NanumSquare";
     } 
+ .blank-top{ 
+    padding-top : 80px;
+    }
+.blank-bottom{
+    padding-top: 80px;
+    }
     
 .border{			
 			width: 100%;
@@ -76,14 +82,13 @@ input[type=password]::after placeholder {
 			padding : 18px
 }
 
-
-.fail{
-	color : red;
-}
-.success{	
-}
-
 .fail, .success{
 	display:none;
 	font-size: 15px;
 }
+.fail{
+	color : red;
+}
+
+
+
