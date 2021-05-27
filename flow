@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-05-21T07:22:19.801Z" agent="5.0 (Windows)" etag="9XDDFp4_-T2Tb7d2gYJ-" version="14.6.13" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-26T13:26:04.584Z" agent="5.0 (Windows)" etag="VnBbhdYuvTs-fR0mzPFQ" version="14.7.1" type="github">
   <diagram id="mC9mLiqQ_s6ltAapUeoM" name="Page-1">
-    <mxGraphModel dx="2287" dy="1746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1849" dy="1573" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -312,7 +312,7 @@
         <mxCell id="zA-9McpOUw8L5y3S4UUD-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="R1qjKSbSTeQgbjsGCtFt-19" target="R1qjKSbSTeQgbjsGCtFt-21" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="R1qjKSbSTeQgbjsGCtFt-19" value="&lt;div&gt;관리 페이지&lt;/div&gt;&lt;div&gt;(신고된 글 목록)&lt;br&gt;&lt;/div&gt;&lt;div&gt;/manage/reportList.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+        <mxCell id="R1qjKSbSTeQgbjsGCtFt-19" value="&lt;div&gt;관리 페이지&lt;/div&gt;&lt;div&gt;(신고된 글 목록)&lt;br&gt;&lt;/div&gt;&lt;div&gt;/manage/이름변경예정.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="677.5" y="107.5" width="135" height="60" as="geometry" />
         </mxCell>
         <mxCell id="R1qjKSbSTeQgbjsGCtFt-20" value="" style="endArrow=classic;html=1;exitX=0.696;exitY=0.002;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="joYM71LnYFRUX5e8SblC-1" target="R1qjKSbSTeQgbjsGCtFt-19" edge="1">
