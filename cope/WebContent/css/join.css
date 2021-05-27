@@ -1,5 +1,14 @@
 @charset "UTF-8";
-
+* {
+ 	font-family: 'NanumSquare', sans-serif;
+	box-sizing: border-box;
+	}
+input[type=password] {
+	font-family:'Malgun gothic', dotum, sans-serif;}
+	
+input[type=password]::after placeholder {
+        	font-family: "NanumSquare";
+    } 
  .blank-top{ 
     padding-top : 80px;
     }
