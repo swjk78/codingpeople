@@ -132,6 +132,7 @@ public class BoardDao {
 		ps.execute();
 	}
 
+	//게시판 개수 세기
 	public int countBoardSuper() throws Exception {
 		
 		Connection con = JdbcUtils.getConnection();

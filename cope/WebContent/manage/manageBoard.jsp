@@ -9,7 +9,7 @@
  <%String root = request.getContextPath(); %>
 <%BoardDao boardDao = new BoardDao(); %>
 <%List<BoardDto>boardSuperList = boardDao.showListBoardSuper();%>
-<%int countSuper = boardDao.countBoardSuper(); %>
+<%int countSuper = boardDao.countBoardSuper();%>
 <!DOCTYPE html>
 <html>
 <head>
