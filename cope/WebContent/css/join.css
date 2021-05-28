@@ -89,3 +89,7 @@ input[type=password]::after placeholder {
 .fail{
 	color : red;
 }
+
+.a{
+	text-decoration: underline;
+}
