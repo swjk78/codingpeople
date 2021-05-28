@@ -66,5 +66,4 @@
 		</div>
 	</form>
 </div>
-</body>
-</html>
+<jsp:include page="/template/miniFooter.jsp"></jsp:include>
