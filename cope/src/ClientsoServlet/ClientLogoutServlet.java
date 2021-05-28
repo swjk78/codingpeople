@@ -23,4 +23,4 @@ public class ClientLogoutServlet extends HttpServlet{
 	}
 	}
 	}
-
+//주석
