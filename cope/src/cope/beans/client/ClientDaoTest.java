@@ -9,8 +9,9 @@ import java.util.List;
 import cope.beans.utils.JdbcUtils;
 import cope.beans.utils.ListParameter;
 
-// 아이디, 비번 찾기 기능 구현을 위한 테스트 ClientDao
-// 차후 ClientDao와 병합 예정
+// 아이디/비번 찾기, 회원관리 기능 구현을 위한 ClientDao
+// 충돌 방지를 위해 ClientDaoTest로 명명
+// by JK
 public class ClientDaoTest {
 	// 아이디 찾기 기능
 	public String findId(String inputEmail) throws Exception {
