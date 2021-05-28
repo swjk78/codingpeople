@@ -10,6 +10,7 @@ function password(){
 	var target = document.querySelector("input[name=ClientPw]");
 	target.type = "password";
 }
+
 </script>
 <style>
 /* 아이디,비밀번호입력창 회원가입 로그인버튼 */
@@ -59,10 +60,13 @@ padding:2rem;
 }
 /* 회원가입 버튼 */
 .btn-noraml{
+background-color: rgb(0, 116, 233);
+color:white;
 }
 /* 로그인 버튼 */
 .btn-submit{
-
+border-style: solid;
+border-color: #2bd400;
 }
 </style>
 </head>
@@ -73,9 +77,9 @@ padding:2rem;
 			<span>cope로그인화면</span>
 </div>
 </div>
-	<form action = "#" method = "post">
+	<form action = "/client/login.kh" method = "post">
 	<div class="row">
-	<input type = "text" name = "clientId" placeholder="아이디" class="form-input id-intput">
+	<input type = "text" name = "clientId" placeholder="아이디" required class="form-input id-intput">
 	</div>
 	<div class="row">
 	<input type = "password" name = "clientPw" placeholder="비밀번호" required class="form-input pw-input">	
@@ -86,8 +90,23 @@ padding:2rem;
 	</form>
 	<hr>
 	<div class="row">
-	<input type="button" value="회원가입" class="form-btn btn-normal">
+	<input type="button" value="회원가입" class="form-btn btn-normal" onclick="location.href='<%=request.getContextPath()%>/index.jsp'">
 	</div>
 		</div>
+			<%if(request.getParameter("error") != null){ %>
+	<div class="row">
+		<h5 class="error">정보가 일치하지 않습니다</h5>
+	</div>
+	<%} %>
+	
+	<div class="row">
+		<h4><a href="/client/findId">아이디찾기</a></h4>
+	</div>
+	<div class="row">
+		<h4><a href="/client/findPw">비밀번호찾기</a></h4>
+	</div>
+</div>
+
+<jsp:include page="/template/footer.jsp"></jsp:include>
 </body>
 </html>

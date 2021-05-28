@@ -13,7 +13,7 @@ import cope.beans.ClientsoDto;
 @WebServlet(urlPatterns="/client/login.kh")
 public class ClientLoginServlet extends HttpServlet{
 @Override
-protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	try {
 		req.setCharacterEncoding("UTF-8");
 		ClientsoDto clientsoDto = new ClientsoDto();
@@ -24,7 +24,7 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 		ClientsoDto find =clientDao.login(clientsoDto);
 
 		if(find!=null){//성공시메인페이지
-		resp.sendRedirect("login.jsp");
+		resp.sendRedirect(req.getContextPath());
 	}
 	else {//실패시로그인페이지
 		resp.sendRedirect("login.jsp");

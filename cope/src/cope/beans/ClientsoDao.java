@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import cope.beans.ClientsoDto;
 
 	public class ClientsoDao {
+		//로그인기능
 		public ClientsoDto login(ClientsoDto clientDto)throws Exception{
 			Connection con = JdbcUtils.getConnection();
 			String sql = "select * from client where client_id = ? and client_pw = ?";
