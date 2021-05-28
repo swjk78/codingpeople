@@ -65,7 +65,7 @@
 		<input type = "submit" value = "가입" class = "form-btn form-btn-normal ">
 		</div>
 	</form>
- 
+  
 </div>
 </body>
 </html>
