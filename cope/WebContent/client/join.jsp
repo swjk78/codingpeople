@@ -21,7 +21,7 @@
 		<h2>회원 가입</h2>
 	</div>
 	
-	<form action = "join.kh" method = "post">
+	<form action = "join.kh" id = "form" method = "post" class="join-form">
 		<div class = "row text-left">
 			<label for = "clientId">아이디</label>
 			<input type = "text" name="clientId" id = "clientId" required class = "form-input form-input-underline" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
@@ -62,10 +62,9 @@
 			</select>
 		</div>
 		<div class = "row text-center">
-		<input type = "submit" value = "가입" class = "form-btn form-btn-normal ">
+		<input type = "submit" id= "submit" style= 'cursor:pointer' value = "가입" class = "form-btn form-btn-normal ">
 		</div>
 	</form>
-  
 </div>
 </body>
 </html>
