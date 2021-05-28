@@ -91,16 +91,50 @@
 	window.addEventListener('load', function() {
 		var selectSearchType = document.querySelector('select[name=searchType]');
 		var inputSearchKeyword = document.querySelector('input[name=searchKeyword]');
+		var inputPageSize = document.querySelector('input[name=pageSize]');
 		selectSearchType.value = '<%=searchType%>';
 		inputSearchKeyword.value = '<%=searchKeyword%>';
-	})
+		inputPageSize.value = '<%=pageSize%>';
+	});
 </script>
 <%} %>
+
+<script>
+	window.addEventListener('load', function() {
+		document.querySelector('.pageSize-form').addEventListener('change', function() {
+			this.submit();
+		})
+		var selectPageSize = document.querySelector('select[name=pageSize]');
+		selectPageSize.value = '<%=pageSize%>';
+		var pageBtn = document.querySelectorAll('.pagination > a');
+		for (var i = 0; i < pageBtn.length; i++) {
+			pageBtn[i].addEventListener('click', function() {
+				var pageNo = this.textContent;
+				var pageMoveBtn = document.querySelectorAll('.pagination > a:not(.move-link)');
+				if (pageNo === '<') {
+					pageNo = parseInt(pageMoveBtn[0].textContent) - 1;
+				}
+				else if (pageNo === '<<') {
+					pageNo = 1;
+				}
+				else if (pageNo === '>') {
+					pageNo = parseInt(pageMoveBtn[pageMoveBtn.length-1].textContent) + 1;
+				}
+				else if (pageNo === '>>') {
+					pageNo = <%=lastBlock%>;
+				}
+				document.querySelector('input[name=pageNo]').value = pageNo;
+				document.querySelector('.search-form').submit();
+			});
+		}
+	});
+</script>
 
 <div class="container-1000">
 	<div class="row">
 		<h2><a href="manageClient.jsp">회원관리</a></h2>
 	</div>
+	<!-- 정렬 링크 -->
 	<div class="row">
 	<%if (isSearch) {%>
 		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_no")) {%>
@@ -136,6 +170,21 @@
 		<%} %>
 	<%} %>
 	</div>
+	<!-- 페이지 크기 조절 -->
+	<div class="row">
+		<form action="manageClient.jsp" method="get" class="pageSize-form">
+			<select name="pageSize" onchange="this.form.submit()">
+				<option>10</option>
+				<option>20</option>
+				<option>30</option>
+			</select>
+			<%if (searchType != null && searchKeyword != null) {%>
+				<input type="hidden" name="searchType" value="<%=searchType%>">
+				<input type="hidden" name="searchKeyword" value="<%=searchKeyword%>">
+			<%} %>
+		</form>
+	</div>
+	<!-- 회원 목록 -->
 	<div class="row">
 		<table class="table table-border table-hover text-center">
 			<thead>
@@ -157,53 +206,70 @@
 					<td><%=clientDto.getClientId()%></td>
 					<td><a href=""><%=clientDto.getClientNick()%></a></td>
 					<td><%=clientDto.getClientEmail()%></td>
-					<td><%=clientDto.getClientBirthYear()%></td>
+					<td>
+						<%if (clientDto.getClientBirthYear() == 0) {%>
+						미입력
+						<%} else {%>
+							<%=clientDto.getClientBirthYear()%>
+						<%} %>
+					</td>
 					<td><%=clientDto.getClientGradeKorean()%></td>
 					<td>
-					<%if (clientDto.getClientUnlockDate()==null) {%>
+					<%if (clientDto.getClientUnlockDate() == null) {%>
 					미정지
 					<%} else {%>
-					<%=clientDto.getClientUnlockDate()%>
+					<%=clientDto.getClientUnlockDate().toLocaleString()%>
 					<%} %>
 					</td>
-					<form action="lock.kh" method="post">
-						<td>
-							<select name="lockTime">
-								<option>1시간</option>
-								<option>1일</option>
-								<option>3일</option>
-								<option>7일</option>
-								<option>30일</option>
-								<option>1년</option>
-								<option>1000년</option>
-							</select>
-							<input type="submit" value="활동정지">
-						</td>
-					</form>
+					<td>
+						<%if (clientDto.getClientGrade().equals("normal")) {%>
+							<form action="lock.kh" method="post">
+								<%if (clientDto.getClientUnlockDate() == null) {%>
+								<select name="lockTime">
+									<option>1시간</option>
+									<option>1일</option>
+									<option>3일</option>
+									<option>7일</option>
+									<option>30일</option>
+									<option>1년</option>
+									<option>1000년</option>
+								</select>
+								<input type="submit" value="활동정지">
+								<%} else {%>
+								<input type="submit" value="정지해제">
+								<%} %>
+							</form>
+						<%} else {%>
+							<%=clientDto.getClientGradeKorean()%>
+						<%} %>
+					</td>
 				</tr>
-				<% }%>
+				<%} %>
 			</tbody>
 		</table>
 		<div class="row">
 			<div class="pagination">
 				<% if (startBlock > 1) {%>
-				<a class="move-link">이전</a>
-				<% }%>
+				<a class="move-link">&lt;&lt;</a>
+				<a class="move-link">&lt;</a>
+				<%} %>
 				<% for (int i = startBlock; i <= endBlock; i++) {%>
 					<% if (i == pageNo) {%>
 						<a class="on"><%=i%></a>
 					<% } else {%>
 						<a><%=i%></a>
-					<% }%>
-				<% }%>
+					<%} %>
+				<%} %>
 				<% if (endBlock < lastBlock) {%>
-				<a class="move-link">다음</a>
-				<% }%>
+				<a class="move-link">&gt;</a>
+				<a class="move-link">&gt;&gt;</a>
+				<%} %>
 			</div>
 		</div>
 		<div class="row">
 			<form action="manageClient.jsp" method="get" class="search-form">
 				<input type="hidden" name="pageNo">
+				<input type="hidden" name="pageSize" value="<%=pageSize%>">
 				<select class="form-input form-input-inline" name="searchType">
 					<option value="client_id">아이디</option>
 					<option value="client_nick">닉네임</option>
