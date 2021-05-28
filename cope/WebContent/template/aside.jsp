@@ -1,6 +1,6 @@
 
-<%@page import="cope.beans.BoardDao"%>
-<%@page import="cope.beans.BoardDto"%>
+<%@page import="cope.beans.board.BoardDto"%>
+<%@page import="cope.beans.board.BoardDao"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
