@@ -90,7 +90,7 @@
 <script>
 	window.addEventListener('load', function() {
 		var selectSearchType = document.querySelector('select[name=searchType]');
-		var inputSearchKeyword = document.querySelector('input[name=searchKeyword]');
+		var inputSearchKeyword = document.querySelector('.searchKeywordMain');
 		var inputPageSize = document.querySelector('input[name=pageSize]');
 		selectSearchType.value = '<%=searchType%>';
 		inputSearchKeyword.value = '<%=searchKeyword%>';
@@ -101,6 +101,7 @@
 
 <script>
 	window.addEventListener('load', function() {
+		// 페이지 사이즈 변경 시 form 전송
 		document.querySelector('.pageSize-form').addEventListener('change', function() {
 			this.submit();
 		})
@@ -138,19 +139,19 @@
 	<div class="row">
 	<%if (isSearch) {%>
 		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_no")) {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>">가입순</a>
+			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">가입순</a>
 		<%}  else {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>">가입순</a>
+			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">가입순</a>
 		<%} %>
 		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_id")) {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>">아이디순</a>
+			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">아이디순</a>
 		<%}  else {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>">아이디순</a>
+			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">아이디순</a>
 		<%} %>
 		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_nick")) {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>">닉네임순</a>
+			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">닉네임순</a>
 		<%}  else {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>">닉네임순</a>
+			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">닉네임순</a>
 		<%} %>
 	<%} else {%>
 		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_no")) {%>
@@ -274,7 +275,7 @@
 					<option value="client_id">아이디</option>
 					<option value="client_nick">닉네임</option>
 				</select>
-				<input type="text" name="searchKeyword" placeholder="검색어" class="form-input form-input-inline" />
+				<input type="text" name="searchKeyword" class="searchKeywordMain" placeholder="검색어" class="form-input form-input-inline" />
 				<input type="submit" value="검색" class="form-btn form-btn-positive form-btn-inline" />
 			</form>
 		</div>
