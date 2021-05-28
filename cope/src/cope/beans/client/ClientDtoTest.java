@@ -2,8 +2,9 @@ package cope.beans.client;
 
 import java.sql.Date;
 
-//아이디, 비번 찾기 기능 구현을 위한 테스트 ClientDto
-//차후 ClientDto와 병합 예정
+// 아이디/비번 찾기, 회원관리 기능 구현을 위한 ClientDto
+// 충돌 방지를 위해 ClientDtoTest로 명명
+// by JK
 public class ClientDtoTest {
 	private int clientNo;
 	private String clientId, clientPw, clientNick, clientEmail;
@@ -70,6 +71,7 @@ public class ClientDtoTest {
 		return clientUnlockDate;
 	}
 	public void setClientUnlockDate(Date clientUnlockDate) {
-		this.clientUnlockDate = clientUnlockDate;
+		if (clientGrade.equals("normal")) this.clientUnlockDate = clientUnlockDate;
+		else this.clientUnlockDate = null;
 	}
 }
