@@ -71,6 +71,7 @@ public class ClientDtoTest {
 		return clientUnlockDate;
 	}
 	public void setClientUnlockDate(Date clientUnlockDate) {
-		this.clientUnlockDate = clientUnlockDate;
+		if (clientGrade.equals("normal")) this.clientUnlockDate = clientUnlockDate;
+		else this.clientUnlockDate = null;
 	}
 }
