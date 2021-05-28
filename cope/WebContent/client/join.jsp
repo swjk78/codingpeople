@@ -57,13 +57,15 @@
 
 		<div class = "row text-left">
 			<label for = "clientBirthYear">출생년도</label>
-			<select name="clientBirthYear" id = "clientBirthYear" class= "form-input form-input-underline"></select>
+			<select name="clientBirthYear" id = "clientBirthYear" class= "form-input form-input-underline">
+			<option value = "0">(선택 사항) 연도를 선택해주세요</option>
+			</select>
 		</div>
 		<div class = "row text-center">
 		<input type = "submit" value = "가입" class = "form-btn form-btn-normal ">
 		</div>
 	</form>
-
+  
 </div>
 </body>
 </html>
