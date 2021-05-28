@@ -56,49 +56,36 @@ String root = request.getContextPath();
 		<span><a class ="v-align-center" href = "<%=root%>/client/join.jsp">회원가입</a></span>
 		<%} %>
 		</div>
-		<hr>
-<div class=menu>
-	<%BoardDao boardDao = new BoardDao(); %>
-	<%List<BoardDto>boardSuperList = boardDao.showListBoardSuper();%>
-	<%for(BoardDto boardDtoSuper : boardSuperList){ %>
-	<ul>
-		<li class="menu-btn boardSuper"><%=boardDtoSuper.getBoardName() %>
-		<ul>
-			<%List<BoardDto>boardSubList = boardDao.showListBoardSub(boardDtoSuper.getBoardNo()); %>
-			<%for(BoardDto boardDtoSub : boardSubList){%>
-				<li class="menu-btn boardSub">
-					<a href="<%=root %>board/boardList.jsp?boardSuperNo=<%=boardDtoSub.getBoardSuperNo()%>&boardNo<%=boardDtoSub.getBoardNo() %>">
-					<%=boardDtoSub.getBoardName()%>
-					</a>
-				</li>
-			<%} %>
-		</ul>
-		</li>
-	</ul>
-</div>
-<%} %>
+		
+		
+		<div>
+		
+		
+		
+		</div>
+
+<!-- <div class=menu> -->
+<%-- 	<%BoardDao boardDao = new BoardDao(); %> --%>
+<%-- 	<%List<BoardDto>boardSuperList = boardDao.showListBoardSuper();%> --%>
+<%-- 	<%for(BoardDto boardDtoSuper : boardSuperList){ %> --%>
+<!-- 	<ul> -->
+<%-- 		<li class="menu-btn boardSuper"><%=boardDtoSuper.getBoardName() %> --%>
+<!-- 		<ul> -->
+<%-- 			<%List<BoardDto>boardSubList = boardDao.showListBoardSub(boardDtoSuper.getBoardNo()); %> --%>
+<%-- 			<%for(BoardDto boardDtoSub : boardSubList){%> --%>
+<!-- 				<li class="menu-btn boardSub"> -->
+<%-- 					<a href="<%=root %>board/boardList.jsp?boardSuperNo=<%=boardDtoSub.getBoardSuperNo()%>&boardNo<%=boardDtoSub.getBoardNo() %>"> --%>
+<%-- 					<%=boardDtoSub.getBoardName()%> --%>
+<!-- 					</a> -->
+<!-- 				</li> -->
+<%-- 			<%} %> --%>
+<!-- 		</ul> -->
+<!-- 		</li> -->
+<!-- 	</ul> -->
+<!-- </div> -->
+<%-- <%} %> --%>
 
 <hr>
-<div>
-<input type="button" id="debug-logout" onclick="debugLogout()" value="dbg-logout">
-<input type="button" id="debug-login" onclick="debugLogin()" value="dbg-login">
-<input type="button" id="debug-master" onclick="debugMaster()" value="dbg-master">
-
-
-
-		<footer>
-		<hr>
-세션 ID: <%=session.getId()%><br>
-세션 회원번호: <%=session.getAttribute("clientNo")%><br>
-세션 인증번호: <%=session.getAttribute("authNum")%><br>
-세션 이메일: <%=session.getAttribute("inputEmail")%>
-		</footer>
-
-</div>
-
-
-</div>
-
 
 
 

@@ -1,0 +1,50 @@
+@charset "UTF-8";
+ul, li{
+	outline-width: 0px;
+	margin:0;
+	padding:0.5rem 0rem 0.5rem 0rem;
+	list-style: none;
+	font-size: 18px;
+}
+.menu-btn.boardSuper{
+	color:green;
+	display: inline-block;
+	position: relative;
+}
+.menu-btn.boardSub>a{
+	color: black;
+	text-decoration: none;
+	display:none; 
+}
+
+.sidemenu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    padding: 0 20px;
+	background-color: #9A9EC2;
+    width: 200;
+    height: auto;
+}
+
+.center{
+	margin-left: auto;
+	margin-right: auto;
+}
+.text-center{
+	text-align: center;
+}
+
+.container-500 { width:500px; }
+
+.v-align-center{
+	vertical-align: middle;
+}
+
+.login-box a {
+    color: #333399;
+    text-decoration: none;
+    display: inline;
+}
