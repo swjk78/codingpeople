@@ -1,6 +1,7 @@
 package cope.beans.client;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 // 아이디/비번 찾기, 회원관리 기능 구현을 위한 ClientDto
 // 충돌 방지를 위해 ClientDtoTest로 명명
@@ -69,6 +70,10 @@ public class ClientDtoTest {
 	}
 	public Date getClientUnlockDate() {
 		return clientUnlockDate;
+	}
+	public String getClientUnlockDateString() {
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");				
+		return simpleDateformat.format(clientUnlockDate);
 	}
 	public void setClientUnlockDate(Date clientUnlockDate) {
 		if (clientGrade.equals("normal")) this.clientUnlockDate = clientUnlockDate;

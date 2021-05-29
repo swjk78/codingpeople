@@ -17,8 +17,8 @@
 
 <form action="findId.kh" method="POST" class="find-id-form">
 	<label for="input-email">이메일</label>
-	<input type="email" name="inputEmail" id="input-email" required />
-	<input type="submit" value="전송" />
+	<input type="email" name="inputEmail" id="input-email" required>
+	<input type="submit" value="전송">
 </form>
 
 <jsp:include page="/template/sessionView.jsp"></jsp:include>

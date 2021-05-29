@@ -105,8 +105,20 @@
 		document.querySelector('.pageSize-form').addEventListener('change', function() {
 			this.submit();
 		})
+		
+		var errorCheck = '<%=request.getParameter("error")%>';
+		if (errorCheck == 'lockFail') {
+			alert('관리자는 정지시킬 수 없습니다');
+		}
+		else if (errorCheck == 'unlockFail') {
+			alert('정지해제하는데 실패했습니다');
+		}
+		
+		// 페이지 사이즈 유지
 		var selectPageSize = document.querySelector('select[name=pageSize]');
 		selectPageSize.value = '<%=pageSize%>';
+		
+		// 페이지네이션 버튼 처리
 		var pageBtn = document.querySelectorAll('.pagination > a');
 		for (var i = 0; i < pageBtn.length; i++) {
 			pageBtn[i].addEventListener('click', function() {
@@ -219,24 +231,27 @@
 					<%if (clientDto.getClientUnlockDate() == null) {%>
 					미정지
 					<%} else {%>
-					<%=clientDto.getClientUnlockDate().toLocaleString()%>
+					<%=clientDto.getClientUnlockDateString()%>
 					<%} %>
 					</td>
 					<td>
 						<%if (clientDto.getClientGrade().equals("normal")) {%>
-							<form action="lock.kh" method="post">
+							<form action="lockClient.kh" method="POST" class="lock-client-form">
+								<input type="hidden" name="clientNo" value="<%=clientDto.getClientNo()%>">
 								<%if (clientDto.getClientUnlockDate() == null) {%>
-								<select name="lockTime">
-									<option>1시간</option>
-									<option>1일</option>
-									<option>3일</option>
-									<option>7일</option>
-									<option>30일</option>
-									<option>1년</option>
-									<option>1000년</option>
+								<select name="lockHour">
+									<option value="0">10초(시연용)</option>
+									<option value="<%=1%>">1시간</option>
+									<option value="<%=24%>">1일</option>
+									<option value="<%=24 * 3%>">3일</option>
+									<option value="<%=24 * 7%>">7일</option>
+									<option value="<%=24 * 30%>">30일</option>
+									<option value="<%=24 * 365%>">1년</option>
+									<option value="<%=24 * 365 * 1000%>">1000년</option>
 								</select>
 								<input type="submit" value="활동정지">
 								<%} else {%>
+								<input type="hidden" name="lockHour" value="-1">
 								<input type="submit" value="정지해제">
 								<%} %>
 							</form>
@@ -275,8 +290,8 @@
 					<option value="client_id">아이디</option>
 					<option value="client_nick">닉네임</option>
 				</select>
-				<input type="text" name="searchKeyword" class="searchKeywordMain" placeholder="검색어" class="form-input form-input-inline" />
-				<input type="submit" value="검색" class="form-btn form-btn-positive form-btn-inline" />
+				<input type="text" name="searchKeyword" class="searchKeywordMain" placeholder="검색어" class="form-input form-input-inline">
+				<input type="submit" value="검색" class="form-btn form-btn-positive form-btn-inline">
 			</form>
 		</div>
 	</div>
