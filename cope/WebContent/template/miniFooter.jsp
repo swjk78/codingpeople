@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <style>
     * {
  	font-family: 'NanumSquare', sans-serif;
@@ -12,14 +12,14 @@
 <br></br>
 <footer class = ".back">
 <div class = "text-center">
-<span class = decoration->¼Ò°³ </span>
+<span class = decoration->Â¼Ã’Â°Â³ </span>
 <a href  ="https://github.com/swjk78/codingpeople" class = "text-decoration-none">
-<span class = decoration->±êÇãºê</span></a>
-<span>¹®ÀÇ</span>
-<span>¸ŞÀÎ</span>
+<span class = decoration->Â±ÃªÃ‡Ã£ÂºÃª</span></a>
+<span>Â¹Â®Ã€Ã‡</span>
+<span>Â¸ÃÃ€Ã</span>
 
 </div>
-<div class = "text-center"> ¨Ï 2021 CODINGPEOPLE. All Rights Reserved.
+<div class = "text-center"> Â¨Ã 2021 CODINGPEOPLE. All Rights Reserved.
 </div>
 </footer>
 </body>
