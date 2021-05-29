@@ -25,6 +25,7 @@
 			else{
 			$(this).nextAll(".failPw").show();
 			$(this).nextAll(".success").hide();
+			 $(this).focus();
 			}
 		});	
 	
@@ -53,7 +54,7 @@
 		
 		$("#clientNick").blur("input",function(){
 			var nick = $(this).val();
-			var regexNick = /^[가-힣a-zA-Z0-9!@#$%^&*]{1,30}$/;
+			var regexNick = /^[가-힣a-zA-Z0-9!@#$%^&*]{1,10}$/;
 			if(regexNick.test(nick)){
 				$(this).nextAll(".fail").hide();
 				$(this).nextAll(".success").show();
@@ -83,11 +84,22 @@
 		var regexId = /^[a-zA-Z0-9]{8,20}$/;
 		var pw = $("#clientPw").val();
 		var regexPw = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+		var pw2 = $("#clientPw2").val();
+		var regexPw2 = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 		var nick = $("#clientNick").val();
-		var regexNick = /^[가-힣a-zA-Z0-9!@#$%^&*]{1,30}$/;
-        if(!regexId.test(id)||!regexPw.test(pw)||!regexNick.test(nick)){
-        e.preventDefault();
-        window.alert("형식이 잘못되었습니다.");
-        }
+		var regexNick = /^[가-힣a-zA-Z0-9!@#$%^&*]{1,10}$/;
+		
+
+	        if(!regexId.test(id)||!regexPw.test(pw)||!regexPw2.test(pw2)||!regexNick.test(nick)){
+	        e.preventDefault();
+	        window.alert("형식이 잘못되었습니다.");
+	        }
+			else if(pw!=pw2){
+			e.preventDefault();
+			 window.alert("비빌번호가 일치하지 않습니다.");
+			}
+			else{
+			}
+
     });   
     	});
