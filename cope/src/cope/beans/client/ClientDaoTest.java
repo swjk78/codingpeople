@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
+import cope.beans.utils.DateUtils;
 import cope.beans.utils.JdbcUtils;
 import cope.beans.utils.ListParameter;
 
@@ -68,6 +70,7 @@ public class ClientDaoTest {
 		ResultSet rs = ps.executeQuery();
 		
 		List<ClientDtoTest> clientList = new ArrayList<>();
+		DateUtils dateUtils = new DateUtils();
 		while (rs.next()) {
 			ClientDtoTest clientDto = new ClientDtoTest();
 			clientDto.setClientNo(rs.getInt("client_no"));
@@ -76,12 +79,17 @@ public class ClientDaoTest {
 			clientDto.setClientEmail(rs.getString("client_email"));
 			clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
+			if (rs.getDate("client_unlock_date") != null && dateUtils.compareDate(rs.getDate("client_unlock_date"))) {
+				refreshUnlockDate(rs.getInt("client_no"));
+				clientDto.setClientUnlockDate(null);
+			} else {
+				clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
+			}
 			clientList.add(clientDto);
 		}
 		
 		con.close();
-		
+
 		return clientList;
 	}
 	
@@ -106,6 +114,7 @@ public class ClientDaoTest {
 		ResultSet rs = ps.executeQuery();
 		
 		List<ClientDtoTest> clientList = new ArrayList<>();
+		DateUtils dateUtils = new DateUtils();
 		while (rs.next()) {
 			ClientDtoTest clientDto = new ClientDtoTest();
 			clientDto.setClientNo(rs.getInt("client_no"));
@@ -114,7 +123,12 @@ public class ClientDaoTest {
 			clientDto.setClientEmail(rs.getString("client_email"));
 			clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
+			if (rs.getDate("client_unlock_date") != null && dateUtils.compareDate(rs.getDate("client_unlock_date"))) {
+				refreshUnlockDate(rs.getInt("client_no"));
+				clientDto.setClientUnlockDate(null);
+			} else {
+				clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
+			}
 			clientList.add(clientDto);
 		}
 		
@@ -153,5 +167,41 @@ public class ClientDaoTest {
 		con.close();
 		
 		return clientCount;
+	}
+	
+	// 정지 해제 날짜 갱신 기능
+	public void refreshUnlockDate(int clientNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update client set client_unlock_date = null where client_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.executeUpdate();
+
+		con.close();
+	}
+	
+	// 회원 정지 기능
+	public boolean lockClient(int clientNo, int lockHour) throws Exception {
+		Date unlockDate;
+		if (lockHour > -1) {
+			DateUtils dateUtils = new DateUtils();
+			long unlockDateUtil = dateUtils.getUnlockDate(lockHour).getTime();
+			unlockDate = new Date(unlockDateUtil);
+		}
+		else {
+			unlockDate = null;
+		}
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update client set client_unlock_date = ? where client_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setDate(1, unlockDate);
+		ps.setInt(2, clientNo);
+		int result = ps.executeUpdate();
+		
+		con.close();
+		
+		return result > 0;
 	}
 }
