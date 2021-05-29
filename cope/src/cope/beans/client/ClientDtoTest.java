@@ -72,7 +72,7 @@ public class ClientDtoTest {
 		return clientUnlockDate;
 	}
 	public String getClientUnlockDateString() {
-		SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss");				
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");				
 		return simpleDateformat.format(clientUnlockDate);
 	}
 	public void setClientUnlockDate(Date clientUnlockDate) {
