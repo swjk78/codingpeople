@@ -1,5 +1,5 @@
 package cope.beans.post;
 
-public class postDto {
+public class PostDto {
 	private int postNo, clientNo, boardNo;
 }
