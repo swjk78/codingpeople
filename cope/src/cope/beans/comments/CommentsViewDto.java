@@ -2,7 +2,7 @@ package cope.beans.comments;
 
 import java.sql.Date;
 
-public class CommentsViewDto {
+public class CommentsViewDto { //client와 조인하여 사용될 Dto
 	private int commentsNo;
 	private int commentsClientNo;
 	private int commentsPostNo;
