@@ -11,9 +11,9 @@ import cope.beans.utils.DateUtils;
 import cope.beans.utils.JdbcUtils;
 import cope.beans.utils.ListParameter;
 
-// 아이디/비번 찾기, 회원관리 기능 구현을 위한 ClientDao
+// 아이디/비번 찾기, 회원관리, 정지된 계정의 로그인 방지 기능 구현을 위한 ClientDao
 // 충돌 방지를 위해 ClientDaoTest로 명명
-// by JK
+// create by JK
 public class ClientDaoTest {
 	// 아이디 찾기 기능
 	public String findId(String inputEmail) throws Exception {
@@ -203,5 +203,31 @@ public class ClientDaoTest {
 		con.close();
 		
 		return result > 0;
+	}
+	
+	// 로그인 기능(회원 활동정지 테스트용)
+	public ClientDtoTest login(ClientDtoTest clientDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select client_no, client_unlock_date from client where client_id = ? and client_pw = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, clientDto.getClientId());
+		ps.setString(2, clientDto.getClientPw());
+		ResultSet rs = ps.executeQuery();
+		
+		ClientDtoTest find;
+		if (rs.next()) {
+			find = new ClientDtoTest();
+			
+			find.setClientNo(rs.getInt("client_no"));
+			find.setClientUnlockDate(rs.getDate("client_unlock_date"));
+		}
+		else {
+			find = null;
+		}
+		
+		con.close();
+		
+		return find;
 	}
 }

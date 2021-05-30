@@ -52,8 +52,4 @@ public class PostDao {
 		ps.setInt(1, postNo);
 		ps.execute();
 	}
-	
-	
-	
-	
 }

@@ -11,6 +11,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+// 메일 전송을 위한 클래스
 public class SendEmail {
 	private String senderEmail, senderPw, receiverEmail, mailSubject, mailContents;
 	
