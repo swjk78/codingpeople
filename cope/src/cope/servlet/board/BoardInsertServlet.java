@@ -17,20 +17,26 @@ public class BoardInsertServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
-			//준비 2개(게시판 이름, 상위게시판을 의미 하는 0)
+			
+			//준비 3개(게시판 이름, 그룹번호, 상위게시판번호 )
 			req.setCharacterEncoding("UTF-8");
 			BoardDto boardDto = new BoardDto();
 			boardDto.setBoardName(req.getParameter("boardName"));
+			boardDto.setBoardGroup(Integer.parseInt(req.getParameter("boardSuperNo")));//상위는 Dao에서 자기 번호로 자동 변환
 			boardDto.setBoardSuperNo(Integer.parseInt(req.getParameter("boardSuperNo")));
 			
-			//처리
+			//처리 준비...
 			BoardDao boardDao = new BoardDao();
-			boardDao.insertBoardSuper(boardDto);
-			
-			//출력
+			//처리1 상위게시판
+			if(Integer.parseInt(req.getParameter("boardSuperNo"))==0) {
+				boardDao.insertBoardSuper(boardDto);
+				System.out.println("이상무");
+			}
+			else {
+				boardDao.insertBoardSub(boardDto);
+			}
+				
 			resp.sendRedirect("manageBoard.jsp");
-
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
