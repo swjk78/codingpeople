@@ -1,5 +1,6 @@
 package cope.beans.utils;
 
+// 게시판에서 리스트를 나열할 때 필요한 파라미터 모음 클래스
 public class ListParameter {
 	private int startRow, endRow;
 	private String orderType, orderDirection, searchType, searchKeyword;
