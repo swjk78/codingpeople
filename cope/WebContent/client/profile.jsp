@@ -10,6 +10,7 @@
 //파라미터는 남들도 내정보를볼수있으므로 세션으로 구현
 //Integer도 써도되지만 로그인후처리이므로 null값이 나올수가없어 int썻습니다
 //내정보불러오기
+	request.setCharacterEncoding("UTF-8");
 	int clientNo = (int)session.getAttribute("clientNo");
 	ClientDao clientDao = new ClientDao();
 	ClientDto clientDto = clientDao.myInfo(clientNo);

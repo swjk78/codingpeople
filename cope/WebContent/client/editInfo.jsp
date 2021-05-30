@@ -15,6 +15,7 @@
 		}
 	</style>
 <%
+	request.setCharacterEncoding("UTF-8");
 	int clientNo = (int)session.getAttribute("clientNo");
 	ClientDao clientDao = new ClientDao();
 	ClientDto clientDto = clientDao.myInfo(clientNo);
