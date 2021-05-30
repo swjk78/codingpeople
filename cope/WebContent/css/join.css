@@ -9,13 +9,15 @@ input[type=password] {
 input[type=password]::after placeholder {
         	font-family: "NanumSquare";
     } 
+ 
+    
  .blank-top{ 
     padding-top : 80px;
     }
 .blank-bottom{
     padding-top: 80px;
     }
-    
+
 .border{			
 			width: 100%;
 			border: 2px solid #B8BAD4;
@@ -93,3 +95,28 @@ input[type=password]::after placeholder {
 .a{
 	text-decoration: underline;
 }
+
+ .decoration-none{
+ text-decoration: none;
+ }
+ 
+ 
+     .text-center{
+    text-align: center; 
+    }
+    
+    .box{
+    width:30%;
+    height:30%;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    display: inline-block;	
+    }
+    
+    .hr{
+    border: 0px;
+    height:2px;
+    background:#9A9EC2;
+    }
+ 
+ 

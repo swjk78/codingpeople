@@ -1,5 +1,5 @@
 package cope.sevlet.post;
 
-public class PostInsertServlet {
+public class PostDeleteServlet {
 
 }
