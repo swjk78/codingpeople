@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-29T08:19:51.819Z" agent="5.0 (Windows)" etag="P02qg_AFKuYneQ0H1Whi" version="14.7.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-30T14:50:30.785Z" agent="5.0 (Windows)" etag="vAgOio7JIJwkYsz1rK0Z" version="14.7.3" type="github">
   <diagram id="mC9mLiqQ_s6ltAapUeoM" name="Page-1">
     <mxGraphModel dx="1849" dy="1573" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -330,7 +330,7 @@
         <mxCell id="R1qjKSbSTeQgbjsGCtFt-21" value="&lt;div&gt;게시글&lt;/div&gt;&lt;div&gt;(댓글일 경우 해당 댓글이 쓰인 게시글)&lt;br&gt;&lt;/div&gt;&lt;div&gt;/board/post.jsp&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="910" y="105" width="120" height="65" as="geometry" />
         </mxCell>
-        <mxCell id="R1qjKSbSTeQgbjsGCtFt-23" value="&lt;div&gt;블라인드 처리&lt;/div&gt;&lt;div&gt;/manage/blind.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+        <mxCell id="R1qjKSbSTeQgbjsGCtFt-23" value="&lt;div&gt;게시글 블라인드 처리&lt;/div&gt;&lt;div&gt;/manage/blindPost.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="1110" y="107.5" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="R1qjKSbSTeQgbjsGCtFt-25" value="&lt;div&gt;회원 활동정지 처리&lt;/div&gt;&lt;div&gt;/manage/lockClient.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">

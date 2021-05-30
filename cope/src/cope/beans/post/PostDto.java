@@ -83,8 +83,4 @@ public class PostDto {
 	public void setPostBlind(String postBlind) {
 		this.postBlind = postBlind;
 	}
-	
-	
-	
 }
-	

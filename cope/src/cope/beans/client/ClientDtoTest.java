@@ -3,9 +3,9 @@ package cope.beans.client;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-// 아이디/비번 찾기, 회원관리 기능 구현을 위한 ClientDto
+// 아이디/비번 찾기, 회원관리, 정지된 계정의 로그인 방지 기능 구현을 위한 ClientDto
 // 충돌 방지를 위해 ClientDtoTest로 명명
-// by JK
+// create by JK
 public class ClientDtoTest {
 	private int clientNo;
 	private String clientId, clientPw, clientNick, clientEmail;
@@ -76,7 +76,7 @@ public class ClientDtoTest {
 		return simpleDateformat.format(clientUnlockDate);
 	}
 	public void setClientUnlockDate(Date clientUnlockDate) {
-		if (clientGrade.equals("normal")) this.clientUnlockDate = clientUnlockDate;
-		else this.clientUnlockDate = null;
+		this.clientUnlockDate = clientUnlockDate;
+		if (clientGrade != null && clientGrade.equals("super")) clientUnlockDate = null;
 	}
 }
