@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+메인 템플릿 footer입니다.
 </body>
 </html>

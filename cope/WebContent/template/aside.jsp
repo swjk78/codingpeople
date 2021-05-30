@@ -16,22 +16,9 @@ boolean isAdmin = 1==0;
 
 <%
 //root
-String root = request.getContextPath();
-%>
+String root = request.getContextPath();%>
 
-
-<link rel="stylesheet" type="text/css" href="<%=root%>/css/aside.css"> 
-
-
-<script>
-
-</script>
-
-
-<style>
-
-</style>
-
+<link rel="stylesheet" type="text/css" href="<%=root%>/css/aside.css">
 	
 </head>
 <body>
@@ -56,7 +43,8 @@ String root = request.getContextPath();
 		<span><a class ="v-align-center" href = "<%=root%>/client/join.jsp">회원가입</a></span>
 		<%} %>
 		</div>
-		
+				</div>
+
 		
 		<div>
 		
@@ -84,9 +72,6 @@ String root = request.getContextPath();
 <!-- 	</ul> -->
 <!-- </div> -->
 <%-- <%} %> --%>
-
-<hr>
-
 
 
 </body>
