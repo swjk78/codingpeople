@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
 <link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/join.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
-</head>
 
 <body>
 <div class = "text-center">
-<a href= home.jsp>
+<a href= "<%=request.getContextPath()%>/index.jsp">
 <img src="<%=request.getContextPath()%>/image/example.png" class = "containerimg">
 </a>
 </div>
@@ -66,4 +63,6 @@
 		</div>
 	</form>
 </div>
+</body>
+</html>
 <jsp:include page="/template/miniFooter.jsp"></jsp:include>
