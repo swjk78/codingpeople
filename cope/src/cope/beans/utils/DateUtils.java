@@ -6,8 +6,8 @@ import java.util.Date;
 
 // Date 자료형을 다루기 위한 클래스
 public class DateUtils {
-	// 회원 정지 날짜 갱신을 위한 날짜 비교 기능
-	public boolean compareDate(Date inputDate) throws Exception {
+	// 회원 정지 날짜 갱신을 위한 현재 시간과 비교하는 기능
+	public boolean compareWithSysdate(Date inputDate) throws Exception {
 		SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");				
 		String currentTime = simpleDateformat.format(System.currentTimeMillis());
 		Date sysdate = simpleDateformat.parse(currentTime);

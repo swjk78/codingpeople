@@ -79,7 +79,7 @@ public class ClientDaoTest {
 			clientDto.setClientEmail(rs.getString("client_email"));
 			clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			if (rs.getDate("client_unlock_date") != null && dateUtils.compareDate(rs.getDate("client_unlock_date"))) {
+			if (rs.getDate("client_unlock_date") != null && dateUtils.compareWithSysdate(rs.getDate("client_unlock_date"))) {
 				refreshUnlockDate(rs.getInt("client_no"));
 				clientDto.setClientUnlockDate(null);
 			} else {
@@ -123,7 +123,7 @@ public class ClientDaoTest {
 			clientDto.setClientEmail(rs.getString("client_email"));
 			clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			if (rs.getDate("client_unlock_date") != null && dateUtils.compareDate(rs.getDate("client_unlock_date"))) {
+			if (rs.getDate("client_unlock_date") != null && dateUtils.compareWithSysdate(rs.getDate("client_unlock_date"))) {
 				refreshUnlockDate(rs.getInt("client_no"));
 				clientDto.setClientUnlockDate(null);
 			} else {
