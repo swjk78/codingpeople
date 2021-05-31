@@ -33,4 +33,21 @@ public class DateUtils {
 		
 		return cal.getTime();
 	}
+	
+	//오늘인지 아닌지 식별하는 기능
+	public boolean isToday(Date inputDate) throws Exception{
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy-MM-dd");
+		String currentTime = simpleDateformat.format(System.currentTimeMillis());
+		String targetTime = simpleDateformat.format(inputDate);
+		
+		Date today = simpleDateformat.parse(currentTime);
+		Date thatDay = simpleDateformat.parse(targetTime);
+		
+		if(thatDay.compareTo(today) < 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
