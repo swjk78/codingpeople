@@ -20,12 +20,7 @@ import cope.beans.utils.ClientsoDto;
 			if(rs.next()) {
 				find = new ClientsoDto();
 				
-				
 				find.setClientNo(rs.getInt("client_no"));
-				find.setClientNickname(rs.getString("client_nickname"));
-				find.setClientId(rs.getString("client_id"));
-				find.setClientPw(rs.getString("client_pw"));
-				find.setClientBirth(rs.getString("client_birth"));
 			}
 			else {
 				find = null;
