@@ -1,4 +1,4 @@
-package cope.sevlet.post;
+package cope.servlet.post;
 
 import java.io.IOException;
 
