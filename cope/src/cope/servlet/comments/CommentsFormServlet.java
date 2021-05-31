@@ -13,7 +13,7 @@ import cope.beans.comments.CommentsDao;
 import cope.beans.comments.CommentsDto;
 
 @WebServlet (urlPatterns = "/board/commentsForm.kh")//패키지는 comments이지만 post.jsp에서 쓰이므로 "/board/"
-public class CommentsInsertServlet extends HttpServlet{
+public class CommentsFormServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
