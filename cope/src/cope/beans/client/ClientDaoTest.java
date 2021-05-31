@@ -1,10 +1,10 @@
 package cope.beans.client;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 
 import cope.beans.utils.DateUtils;
@@ -70,7 +70,6 @@ public class ClientDaoTest {
 		ResultSet rs = ps.executeQuery();
 		
 		List<ClientDtoTest> clientList = new ArrayList<>();
-		DateUtils dateUtils = new DateUtils();
 		while (rs.next()) {
 			ClientDtoTest clientDto = new ClientDtoTest();
 			clientDto.setClientNo(rs.getInt("client_no"));
@@ -79,12 +78,7 @@ public class ClientDaoTest {
 			clientDto.setClientEmail(rs.getString("client_email"));
 			clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			if (rs.getDate("client_unlock_date") != null && dateUtils.compareWithSysdate(rs.getDate("client_unlock_date"))) {
-				refreshUnlockDate(rs.getInt("client_no"));
-				clientDto.setClientUnlockDate(null);
-			} else {
-				clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
-			}
+			clientDto.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
 			clientList.add(clientDto);
 		}
 		
@@ -114,7 +108,6 @@ public class ClientDaoTest {
 		ResultSet rs = ps.executeQuery();
 		
 		List<ClientDtoTest> clientList = new ArrayList<>();
-		DateUtils dateUtils = new DateUtils();
 		while (rs.next()) {
 			ClientDtoTest clientDto = new ClientDtoTest();
 			clientDto.setClientNo(rs.getInt("client_no"));
@@ -123,12 +116,7 @@ public class ClientDaoTest {
 			clientDto.setClientEmail(rs.getString("client_email"));
 			clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			if (rs.getDate("client_unlock_date") != null && dateUtils.compareWithSysdate(rs.getDate("client_unlock_date"))) {
-				refreshUnlockDate(rs.getInt("client_no"));
-				clientDto.setClientUnlockDate(null);
-			} else {
-				clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
-			}
+			clientDto.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
 			clientList.add(clientDto);
 		}
 		
@@ -220,7 +208,7 @@ public class ClientDaoTest {
 			find = new ClientDtoTest();
 			
 			find.setClientNo(rs.getInt("client_no"));
-			find.setClientUnlockDate(rs.getDate("client_unlock_date"));
+			find.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
 		}
 		else {
 			find = null;
