@@ -12,7 +12,7 @@ public class DateUtils {
 		String currentTime = simpleDateformat.format(System.currentTimeMillis());
 		Date sysdate = simpleDateformat.parse(currentTime);
 
-		// 입력 날짜가 현재 시간을 지났을 경우 true를 반환하고 지나지 않았을 경우에는 false를 반환한다.
+		// 입력 날짜가 현재 시간을 지났을 경우 true를 반환
 		return inputDate.before(sysdate);
 	}
 	
