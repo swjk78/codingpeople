@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+게시글 작성/수정 페이지입니다.
 </body>
 </html>
