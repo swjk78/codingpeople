@@ -1,4 +1,4 @@
-package ClientsoServlet;
+package cope.servlet.client;
 
 import java.io.IOException;
 
