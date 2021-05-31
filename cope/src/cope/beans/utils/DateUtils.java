@@ -7,13 +7,13 @@ import java.util.Date;
 // Date 자료형을 다루기 위한 클래스
 public class DateUtils {
 	// 회원 정지 날짜 갱신을 위한 날짜 비교 기능
-	public boolean compareDate(Date unlockDate) throws Exception {
+	public boolean compareDate(Date inputDate) throws Exception {
 		SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");				
 		String currentTime = simpleDateformat.format(System.currentTimeMillis());
 		Date sysdate = simpleDateformat.parse(currentTime);
 
-		// 정지날짜가 현재시간을 지났을 경우 true를 반환하고 지나지 않았을 경우에는 false를 반환한다.
-		return unlockDate.before(sysdate);
+		// 입력날짜가 현재시간을 지났을 경우 true를 반환하고 지나지 않았을 경우에는 false를 반환한다.
+		return inputDate.before(sysdate);
 	}
 	
 	// 회원 정지 날짜 계산 기능
