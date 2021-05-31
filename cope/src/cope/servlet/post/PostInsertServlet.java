@@ -13,7 +13,7 @@ import cope.beans.board.BoardDto;
 import cope.beans.post.PostDao;
 import cope.beans.post.PostDto;
 
-@WebServlet(urlPatterns = "/board/postForm.kh")
+@WebServlet(urlPatterns = "/board/postInsert.kh")
 public class PostInsertServlet extends HttpServlet{
 	
 //게시물 등록
