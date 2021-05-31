@@ -28,12 +28,13 @@ public class PostDao {
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "insert into post(post_no, post_client_no, post_board_no,"
-				+ "post_title, post_contents) values(post_seq.nextval,?,?,?,?,?)";
+				+ "post_title, post_contents) values(?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, postDto.getPostClientNo());
-		ps.setInt(2, postDto.getPostBoardNo());
-		ps.setString(3, postDto.getPostTitle());
-		ps.setString(4, postDto.getPostContents());
+		ps.setInt(1, postDto.getPostNo());
+		ps.setInt(2, postDto.getPostClientNo());
+		ps.setInt(3, postDto.getPostBoardNo());
+		ps.setString(4, postDto.getPostTitle());
+		ps.setString(5, postDto.getPostContents());
 		ps.execute();
 		
 		con.close();		
