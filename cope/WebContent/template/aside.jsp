@@ -6,6 +6,18 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<style>
+.division{
+float:left;
+margin-left: auto;
+margin-right: auto;		   
+width : auto;
+height : 800px;
+display : block;
+border : solid black;
+position : static;
+}
+</style>
 <head>
 <%
 boolean isLogin = 1==1;
@@ -20,10 +32,13 @@ String root = request.getContextPath();%>
 
 <link rel="stylesheet" type="text/css" href="<%=root%>/css/aside.css">
 	
+
+
 </head>
-<body>
+
+
 <!-- 왼쪽 화면 구현 -->
-	
+	<div class = division>
 		<div class="sidemenu">
 			<div id="mainlogo" class="text-center">
 				<img src ="<%=root %>/image/example.png"  width="200" >
@@ -44,13 +59,9 @@ String root = request.getContextPath();%>
 		<%} %>
 		</div>
 				</div>
-
-		
-		<div>
-		
-		
-		
 		</div>
+
+</html>
 
 <!-- <div class=menu> -->
 <%-- 	<%BoardDao boardDao = new BoardDao(); %> --%>
@@ -72,7 +83,3 @@ String root = request.getContextPath();%>
 <!-- 	</ul> -->
 <!-- </div> -->
 <%-- <%} %> --%>
-
-
-</body>
-</html>
