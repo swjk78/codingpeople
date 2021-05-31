@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import cope.beans.client.ClientsoDto;
+import cope.beans.utils.JdbcUtils;
 
 	public class ClientsoDao {
 		//로그인기능
