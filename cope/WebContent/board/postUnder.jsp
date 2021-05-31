@@ -172,9 +172,9 @@ li{
 				<%DateUtils dateUtils = new DateUtils();
 				boolean isToday = dateUtils.isToday(commentsViewDto.getCommentsDate())==true;
 				%>
-				<%if(isToday){%>
+				<%if(isToday){ //오늘 인것%>
 				<span>(오늘)<%=commentsViewDto.getCommentsDateToday() %></span>
-				<%}else{ %>
+				<%}else{//오늘이 아닌것%>
 				<span><%=commentsViewDto.getCommentsDate()%></span><br>
 				<%} System.out.println(commentsViewDto.getCommentsBlind());%>
 				
