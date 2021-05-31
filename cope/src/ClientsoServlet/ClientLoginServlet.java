@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.ClientsoDao;
-import cope.beans.ClientsoDto;
+import cope.beans.client.ClientsoDao;
+import cope.beans.client.ClientsoDto;
 @WebServlet(urlPatterns="/client/login.kh")
 public class ClientLoginServlet extends HttpServlet{
 @Override
