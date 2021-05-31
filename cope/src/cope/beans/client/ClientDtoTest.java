@@ -3,6 +3,8 @@ package cope.beans.client;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import cope.beans.utils.DateUtils;
+
 // 아이디/비번 찾기, 회원관리, 정지된 계정의 로그인 방지 기능 구현을 위한 ClientDto
 // 충돌 방지를 위해 ClientDtoTest로 명명
 // create by JK
@@ -77,6 +79,13 @@ public class ClientDtoTest {
 	}
 	public void setClientUnlockDate(Date clientUnlockDate) {
 		this.clientUnlockDate = clientUnlockDate;
-		if (clientGrade != null && clientGrade.equals("super")) clientUnlockDate = null;
+	}
+	// 정지해제 날짜 설정 및 갱신
+	public void setClientUnlockDateRefresh(Date clientUnlockDate) throws Exception {
+		this.clientUnlockDate = clientUnlockDate;
+		DateUtils dateUtils = new DateUtils();
+		if (clientUnlockDate != null && dateUtils.compareWithSysdate(clientUnlockDate)) {
+			this.clientUnlockDate = null;
+		}
 	}
 }
