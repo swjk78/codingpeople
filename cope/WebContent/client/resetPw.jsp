@@ -23,12 +23,12 @@
 
 <form action="resetPw.kh" method="POST" class="reset-pw-form">
 	<label for="input-authNum">인증번호</label>
-	<input type="text" id="input-authNum" required />
+	<input type="text" id="input-authNum" required>
 	<label for="input-pw">새 비밀번호</label>
-	<input type="password" name="inputPw" id="input-pw" required />
+	<input type="password" name="inputPw" id="input-pw" required>
 	<label for="input-pw-re">새 비밀번호 확인</label>
-	<input type="password" id="input-pw-re" required />
-	<input type="submit" value="비밀번호 재설정" />
+	<input type="password" id="input-pw-re" required>
+	<input type="submit" value="비밀번호 재설정">
 </form>
 
 <jsp:include page="/template/sessionView.jsp"></jsp:include>

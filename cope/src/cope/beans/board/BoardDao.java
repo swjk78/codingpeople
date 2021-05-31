@@ -6,41 +6,65 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import cope.beans.utils.JdbcUtils;
 
-import java.sql.Types;
 
 public class BoardDao {
 
-	// 상위 게시판 추가 기능
-	public void insertBoardSuper(BoardDto boardDto) throws Exception {
+	// 상위 게시판 (중복검사 후)추가 기능
+	public boolean insertBoardSuper(BoardDto boardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-
-			String sql = "insert into board values(board_seq.nextval, ?, board_seq.currval, ?)";
+		
+			String sql = "select * from board where board_name=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, boardDto.getBoardName());
-			ps.setInt(2, boardDto.getBoardSuperNo());
-			ps.execute();
-			con.close();
+			ResultSet rs = ps.executeQuery();
+			
+			if(!rs.next()){
+				sql = "insert into board values(board_seq.nextval, ?, board_seq.currval, ?)";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, boardDto.getBoardName());
+				ps.setInt(2, boardDto.getBoardSuperNo());
+				ps.execute();
+				con.close();
+				
+				return true;
+			}
+			else {
+				return false;
+			}
 	}
 
 
 	// 하위 게시판 추가 기능
-	public void insertBoardSub(BoardDto boardDto) throws Exception {
+	public boolean insertBoardSub(BoardDto boardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-
-		String sql = "insert into board values(board_seq.nextval, ?, ?, ?)";
+		
+		String sql = "select * from board where board_name=? and board_super_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, boardDto.getBoardName());
-		ps.setInt(2, boardDto.getBoardGroup());
-		ps.setInt(3, boardDto.getBoardSuperNo());
-		ps.execute();
-		con.close();
+		ps.setInt(2, boardDto.getBoardSuperNo());
+		ResultSet rs = ps.executeQuery();
+		
+		if(!rs.next()){
+			sql = "insert into board values(board_seq.nextval, ?, ?, ?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, boardDto.getBoardName());
+			ps.setInt(2, boardDto.getBoardGroup());
+			ps.setInt(3, boardDto.getBoardSuperNo());
+			ps.execute();
+			con.close();
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
-
 	// 상위 게시판 조회 기능(게시판관리, 메인화면에서 쓰임)
 	public List<BoardDto> showListBoardSuper() throws Exception {
 
+		
 		Connection con = JdbcUtils.getConnection();
 		String sql = "select board_no, board_name from board where board_Super_no = 0  order by board_no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -64,7 +88,7 @@ public class BoardDao {
 
 	// 하위 게시판 조회 기능
 	public List<BoardDto> showListBoardSub(int boardSuperNo) throws Exception {
-
+		
 		Connection con = JdbcUtils.getConnection();
 		String sql = "select board_no, board_name, board_super_no from board where board_Super_no = ? order by board_no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -108,5 +132,16 @@ public class BoardDao {
 		ps.execute();
 	}
 
+	//게시판 개수 세기
+	public int countBoardSuper() throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select count(*) from board where board_super_no = 0";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		int countSuper =rs.getInt("count(*)");
+		return countSuper;
+	}
 }
-

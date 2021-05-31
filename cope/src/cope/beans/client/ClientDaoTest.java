@@ -4,13 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
+import cope.beans.utils.DateUtils;
 import cope.beans.utils.JdbcUtils;
 import cope.beans.utils.ListParameter;
 
-// 아이디, 비번 찾기 기능 구현을 위한 테스트 ClientDao
-// 차후 ClientDao와 병합 예정
+// 아이디/비번 찾기, 회원관리, 정지된 계정의 로그인 방지 기능 구현을 위한 ClientDao
+// 충돌 방지를 위해 ClientDaoTest로 명명
+// create by JK
 public class ClientDaoTest {
 	// 아이디 찾기 기능
 	public String findId(String inputEmail) throws Exception {
@@ -67,6 +70,7 @@ public class ClientDaoTest {
 		ResultSet rs = ps.executeQuery();
 		
 		List<ClientDtoTest> clientList = new ArrayList<>();
+		DateUtils dateUtils = new DateUtils();
 		while (rs.next()) {
 			ClientDtoTest clientDto = new ClientDtoTest();
 			clientDto.setClientNo(rs.getInt("client_no"));
@@ -75,12 +79,17 @@ public class ClientDaoTest {
 			clientDto.setClientEmail(rs.getString("client_email"));
 			clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
+			if (rs.getDate("client_unlock_date") != null && dateUtils.compareDate(rs.getDate("client_unlock_date"))) {
+				refreshUnlockDate(rs.getInt("client_no"));
+				clientDto.setClientUnlockDate(null);
+			} else {
+				clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
+			}
 			clientList.add(clientDto);
 		}
 		
 		con.close();
-		
+
 		return clientList;
 	}
 	
@@ -105,6 +114,7 @@ public class ClientDaoTest {
 		ResultSet rs = ps.executeQuery();
 		
 		List<ClientDtoTest> clientList = new ArrayList<>();
+		DateUtils dateUtils = new DateUtils();
 		while (rs.next()) {
 			ClientDtoTest clientDto = new ClientDtoTest();
 			clientDto.setClientNo(rs.getInt("client_no"));
@@ -113,7 +123,12 @@ public class ClientDaoTest {
 			clientDto.setClientEmail(rs.getString("client_email"));
 			clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 			clientDto.setClientGrade(rs.getString("client_grade"));
-			clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
+			if (rs.getDate("client_unlock_date") != null && dateUtils.compareDate(rs.getDate("client_unlock_date"))) {
+				refreshUnlockDate(rs.getInt("client_no"));
+				clientDto.setClientUnlockDate(null);
+			} else {
+				clientDto.setClientUnlockDate(rs.getDate("client_unlock_date"));
+			}
 			clientList.add(clientDto);
 		}
 		
@@ -152,5 +167,67 @@ public class ClientDaoTest {
 		con.close();
 		
 		return clientCount;
+	}
+	
+	// 정지 해제 날짜 갱신 기능
+	public void refreshUnlockDate(int clientNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update client set client_unlock_date = null where client_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.executeUpdate();
+
+		con.close();
+	}
+	
+	// 회원 정지 기능
+	public boolean lockClient(int clientNo, int lockHour) throws Exception {
+		Date unlockDate;
+		if (lockHour > -1) {
+			DateUtils dateUtils = new DateUtils();
+			long unlockDateUtil = dateUtils.getUnlockDate(lockHour).getTime();
+			unlockDate = new Date(unlockDateUtil);
+		}
+		else {
+			unlockDate = null;
+		}
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update client set client_unlock_date = ? where client_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setDate(1, unlockDate);
+		ps.setInt(2, clientNo);
+		int result = ps.executeUpdate();
+		
+		con.close();
+		
+		return result > 0;
+	}
+	
+	// 로그인 기능(회원 활동정지 테스트용)
+	public ClientDtoTest login(ClientDtoTest clientDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select client_no, client_unlock_date from client where client_id = ? and client_pw = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, clientDto.getClientId());
+		ps.setString(2, clientDto.getClientPw());
+		ResultSet rs = ps.executeQuery();
+		
+		ClientDtoTest find;
+		if (rs.next()) {
+			find = new ClientDtoTest();
+			
+			find.setClientNo(rs.getInt("client_no"));
+			find.setClientUnlockDate(rs.getDate("client_unlock_date"));
+		}
+		else {
+			find = null;
+		}
+		
+		con.close();
+		
+		return find;
 	}
 }

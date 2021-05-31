@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-메인 템플릿 footer입니다.
+	<h1> 탈퇴가 완료 되었습니다</h1>
+	<a href="/index.jsp">홈으로 이동</a>
 </body>
 </html>

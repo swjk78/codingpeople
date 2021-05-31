@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-메인 템플릿 footer입니다.
+	<form action="login.kh" method="post">
+	 아이디<input type="text" name="clientId">
+	 <input type="text" name="clientPw">
+	 <input type="submit" value="로그인">
+	 </form>
+	 
+	 
+	 
 </body>
 </html>

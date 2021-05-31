@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>홈화면</title>
 </head>
 <body>
-메인 템플릿 footer입니다.
+홈화면입니다.
 </body>
 </html>

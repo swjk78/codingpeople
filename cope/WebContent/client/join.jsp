@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
 <link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/join.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
-</head>
 
 <body>
 <div class = "text-center">
-<a href= home.jsp>
+<a href= "<%=request.getContextPath()%>/index.jsp">
 <img src="<%=request.getContextPath()%>/image/example.png" class = "containerimg">
 </a>
 </div>
@@ -21,7 +18,7 @@
 		<h2>회원 가입</h2>
 	</div>
 	
-	<form action = "join.kh" method = "post">
+	<form action = "join.kh" id = "form" method = "post" class="join-form">
 		<div class = "row text-left">
 			<label for = "clientId">아이디</label>
 			<input type = "text" name="clientId" id = "clientId" required class = "form-input form-input-underline" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
@@ -57,13 +54,15 @@
 
 		<div class = "row text-left">
 			<label for = "clientBirthYear">출생년도</label>
-			<select name="clientBirthYear" id = "clientBirthYear" class= "form-input form-input-underline"></select>
+			<select name="clientBirthYear" id = "clientBirthYear" class= "form-input form-input-underline">
+			<option value = "0">(선택 사항) 연도를 선택해주세요</option>
+			</select>
 		</div>
 		<div class = "row text-center">
-		<input type = "submit" value = "가입" class = "form-btn form-btn-normal ">
+		<input type = "submit" id= "submit" style= 'cursor:pointer' value = "가입" class = "form-btn form-btn-normal ">
 		</div>
 	</form>
-
 </div>
 </body>
 </html>
+<jsp:include page="/template/miniFooter.jsp"></jsp:include>
