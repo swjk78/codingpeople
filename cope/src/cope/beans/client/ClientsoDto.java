@@ -15,8 +15,8 @@ public class ClientsoDto {
 	public void setClientNo(int clientNo) {
 		this.clientNo = clientNo;
 	}
-	public String getClientNickname() {
-		return clientNickname;
+	public String getClientNick() {
+		return clientNick;
 	}
 	public void setClientNick(String clientNick) {
 		this.clientNick = clientNick;
@@ -34,7 +34,7 @@ public class ClientsoDto {
 		this.clientPw = clientPw;
 	}
 	public short getClientBirth() {
-		return ClientBirth;
+		return clientBirth;
 	}
 	public void setClientBirth(short clientBirth) {
 		this.clientBirth = clientBirth;
