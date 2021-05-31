@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>홈화면</title>
 </head>
 <body>
-게시글 작성/수정 페이지입니다.
+홈화면입니다.
 </body>
 </html>
