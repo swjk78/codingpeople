@@ -1,0 +1,26 @@
+-- 삭제 구문
+drop table post;
+drop sequence post_seq;
+
+-- 게시글 테이블
+create table post(
+post_no number(19) primary key,
+post_client_no references client(client_no) on delete set null,
+post_board_no references board(board_no) on delete set null,
+post_title varchar2(90) not null,
+post_contents varchar2(4000) not null,
+post_date date default sysdate not null,
+post_like_count number(10) default 0 not null,
+post_view_count number(10) default 0 not null,
+post_comments_count number(10) default 0 not null,
+post_blind char(1) default 'F' not null check(post_blind in ('T', 'F'))
+);
+
+-- 게시글 시퀀스
+create sequence post_seq;
+
+-- 게시글 목록 나열 시 필요한 뷰
+create or replace view post_list as
+select post_no, post_client_no, post_title, post_contents, post_date,
+post_like_count, post_comments_count, post_view_count, post_blind, client_nick
+from post left outer join client on post_client_no = client_no;
