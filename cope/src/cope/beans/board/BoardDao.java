@@ -12,7 +12,7 @@ import cope.beans.utils.JdbcUtils;
 
 public class BoardDao {
 
-	// 상위 게시판 (중복검사 후)추가 기능
+	// 상위 게시판 (중복검사 후)추가 기능 + 기본 하위 게시판(질문게시판, 팁게시판도 추가)
 	public boolean insertBoardSuper(BoardDto boardDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
@@ -22,11 +22,33 @@ public class BoardDao {
 			ResultSet rs = ps.executeQuery();
 			
 			if(!rs.next()){
+				//1. 상위 게시판 등록			
 				sql = "insert into board values(board_seq.nextval, ?, board_seq.currval, ?)";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, boardDto.getBoardName());
 				ps.setInt(2, boardDto.getBoardSuperNo());
 				ps.execute();
+				
+				//2.방금 등록된 게시판번호(board_no)가져오기	
+				sql= "select board_no from board where board_name=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, boardDto.getBoardName());
+				rs = ps.executeQuery();
+				
+				rs.next();
+				int boardNo = rs.getInt("board_no");
+				
+				//3. 가져온 번호로 기본 게시판 추가
+				String [] BoardSub = {"질문게시판","팁게시판", "아무거나"}; // 자동 추가 될 하위 게시판들
+				
+				for(int i =0; i<BoardSub.length; i++) {
+					sql = "insert into board values(board_seq.nextval, ?, ?, ?)";
+					ps = con.prepareStatement(sql);
+					ps.setString(1, BoardSub[i]);
+					ps.setInt(2, boardNo);
+					ps.setInt(3, boardNo);
+					ps.execute();
+				}
 				con.close();
 				
 				return true;
@@ -79,8 +101,6 @@ public class BoardDao {
 			boardDto.setBoardName(rs.getString("board_name"));
 
 			boardSuperList.add(boardDto);
-
-			System.out.println("dto추가!");
 		}
 		con.close();
 		return boardSuperList;
