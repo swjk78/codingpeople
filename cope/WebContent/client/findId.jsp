@@ -12,13 +12,13 @@
 	}
 
 	.loading-modal > .loading-icon {
-		width: 300px;
+		width: 400px;
 		height: 300px;
 		position: fixed;
 		top: 50%;
 		left: 50%;
-		margin-top: -150px;
-		margin-left: -150px;
+		margin-top: -200px;
+		margin-left: -200px;
 	}
 </style>
 
