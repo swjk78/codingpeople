@@ -2,6 +2,10 @@
 
 <script>
 	window.addEventListener('load', function () {
+		if (<%=request.getParameter("success") != null%>) {
+			alert('이메일 전송을 성공했습니다');
+			history.replaceState({}, null, location.pathname);
+		}
 		document.querySelector('.reset-pw-form').addEventListener('submit', function () {
 			var authNumInput = document.querySelector('#input-authNum');
 			var authNum = <%=request.getSession().getAttribute("authNum")%>;
