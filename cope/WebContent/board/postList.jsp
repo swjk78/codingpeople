@@ -1,3 +1,4 @@
+<%@page import="cope.beans.post.PostDaoTest"%>
 <%@page import="cope.beans.post.PostDtoTest"%>
 <%@page import="cope.beans.post.PostDto"%>
 <%@page import="cope.beans.utils.DateUtils"%>
@@ -33,7 +34,7 @@
 	
 	int pageSize; //페이지에 보여줄 글 갯수
 	try{
-		pageSize = Integer.parseInt(request.getParameter("pageCount"));
+		pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		if(pageSize<10){
 			throw new Exception(); //10보다작을시 강제 예외처리
 		}
@@ -85,6 +86,12 @@
 	//오늘날짜 구하기
 	DateUtils dateUtils = new DateUtils();
 	
+	
+// 	PostListDto postListDto = new PostListDto();
+// 	postListDto.setPostNo(Integer.parseInt(request.getParameter("postNo")));
+// 	postListDto.setBlind(request.getParameter("postBlind"));
+	
+	
 %>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <% if(isSearch){%>
@@ -96,6 +103,9 @@
  		
 		var selectInput = document.querySelector("input[name=keyword]");
 		selectInput.value = "<%=keyword%>"; <%--검색후 키워드값고정 --%>
+		
+		var inputSize = document.querySelector("input[name=pageSize]");		
+		inputSize.value = "<%=pageSize%>";	<%--검색후 페이지사이즈값고정 --%>
 		
 	});	
 </script>
@@ -132,15 +142,17 @@
 
 </script>
 
+
 <script>
-// 	window.addEventListener("load",function(){
-// 		var formSize = document.querySelector(".form-size");
-// 		formSize.addEventListener("change",function(){
-// 			this.submit();
-// 		});
-// 		var selectPageSize = document.querySelector("input[name=pageSize]");
-<%-- 		selectPageSize.value = "<%=pageSize%>" --%>
-// 	});
+	window.addEventListener("load",function(){
+
+		var formSize = document.querySelector(".form-size");
+		formSize.addEventListener("change",function(){
+			this.submit();
+		});
+		var selectPageSize = document.querySelector("select[name=pageSize]");
+		selectPageSize.value = "<%=pageSize%>"
+	});
 </script>
 
 
@@ -148,22 +160,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-		
+			<H1>게시판이름</H1>
 <%-- 			startRow = <%=startRow %> endRow = <%=endRow %> startBlock=<%=startBlock %> endBlock=<%=endBlock %> --%>
-<!-- 	<form action="postList.jsp" method="get" class="form-size"> -->
-<!-- 	<select name="pageSize"> -->
-<!-- 		<option value="10">10개씩</option> -->
-<!-- 		<option value="20">20개씩</option> -->
-<!-- 	</select> -->
-<!-- 	</form> -->
+	<form action="postList.jsp" method="post" class="form-size">
+	<select name="pageSize">
+		<option value="10">10개씩</option>
+		<option value="20">20개씩</option>
+		<option value="30">30개씩</option>
+	</select>
+	<%if(type != null && keyword != null){ %>
+	<input type="hidden" name="type" value ="<%=type%>">
+	<input type="hidden" name="keyword" value ="<%=keyword%>">
+	<%} %>
+	</form>
 	<table class="table table-border" >
 		<thead>
 		
 			
 			<tr>
 				<th>글번호</th>
-				<th width="50%">제목</th>
-				<th>댓글</th>				
+				<th width="50%">제목</th>							
 				<th>글쓴이</th>
 				<th>작성일</th>
 				<th>조회수</th>
@@ -179,11 +195,20 @@
 				<td><%=postListDto.getPostNo() %></td>				
 				
 				<td>
+				<% if(postListDto.getBlind() == 'F') {%>
+				
 					<a href="post.jsp"><%=postListDto.getPostTitle() %></a>
-				</td>						
-				<td><%=postListDto.getPostCommentsCount() %></td>
+				
+					<%if(postListDto.getPostCommentsCount()>0){ %>						
+					[<%=postListDto.getPostCommentsCount()%>]
+					
+					<%}%>
+				<%} else {%>
+					블라인드된 게시글입니다.				
+				<%} %>
+				</td>
 				<td>
-					<a href="#"><%=postListDto.getClientNick() %></a>
+					<a href="<%=request.getContextPath()%>/client/profile.jsp"><%=postListDto.getClientNick() %></a>
 				</td>
 				
 				<% boolean isToday = dateUtils.isToday(postListDto.getPostDate()) == true; %>
@@ -221,13 +246,14 @@
 	<%} %>
 	</div>
 	
+	
 	<a href="postList.jsp">목록</a>
 	<a href="postForm">글쓰기</a>
 	
-	<form class ="form" action="postList.jsp" method="get">
+	<form class ="form" action="postList.jsp" method="post">
 	
 	<input type="hidden" name ="pageNo">
-<%-- 	<input type="text" name = "pageSize" value="<%=pageSize%>"> --%>
+	<input type="hidden" name = "pageSize" value="<%=pageSize%>" >
 	
 	
 	<select name = "type">
