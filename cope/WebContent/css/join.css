@@ -119,4 +119,10 @@ input[type=password]::after placeholder {
     background:#9A9EC2;
     }
  
- 
+ .main{
+ 	position: relative;
+    width: 1000px;
+    margin-left: 210px;
+    padding-left: 30px;
+    padding-top: 20px;
+ }

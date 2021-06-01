@@ -12,7 +12,7 @@
     }
     
     .box{
-    width:30%;
+    width:45%;
     height:30%;
     padding-top: 25px;
     padding-bottom: 17px;
@@ -29,24 +29,27 @@
   	</style>
   	
   	<body>
-  <div class = "text-align-center mini-font">
-  		<div class = "box">
-  		<a href = "<%=request.getContextPath()%>/info.jsp" class = "border-none">
-  			<label >Info</label></a>
-  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-  			<span>Privacy Policy</span>	
-  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-  			<span>Terms Of Use</span>
-  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-  			<span>Contact Us</span>
-  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-  			 <a href = "https://github.com/swjk78/codingpeople">
-  			 <span>Git</span></a>
-  			   			 <div>
-  			<hr class = hr>
-  			</div> 
-		<div>© 2021. <strong>CODINGPEOPLE.</strong> All rights reserved.</div>
-  		</div>
+  	<div class="main">
+	  <div class = "text-align-center mini-font">
+	  		<div class = "box">
+	  		<a href = "<%=request.getContextPath()%>/info.jsp" class = "border-none">
+	  			<label >Info</label></a>
+	  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	  			<span>Privacy Policy</span>	
+	  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	  			<span>Terms Of Use</span>
+	  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	  			<span>Contact Us</span>
+	  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	  			 <a href = "https://github.com/swjk78/codingpeople">
+	  			 <span>Git</span></a>
+	  			   			 <div>
+	  			<hr class = hr>
+	  			</div> 
+			<div>© 2021. <strong>CODINGPEOPLE.</strong> All rights reserved.</div>
+	  		</div>
+	  </div>
   </div>
+
 	</body>
 </html>
