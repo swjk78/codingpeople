@@ -33,7 +33,7 @@ public class CommentsDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, commentsDto.getCommentsContents());
 		ps.setInt(2, commentsDto.getCommentsNo());
-		ps.execute();
+		ps.executeUpdate();
 		
 		con.close();
 	}
@@ -116,16 +116,13 @@ public class CommentsDao {
 		String sql;
 		if(!isBlind) { // 블라인드 된 것이 아닌 댓글이라면 -> 블라인드 처리
 			 sql= "update comments set comments_blind = 'T' where comments_no = ?";
-			 System.out.println("블라인드");
 		}
 		else { //블라인드 된 댓글이라면 -> 언블라인드 처리
 			sql = "update comments set comments_blind = 'F' where comments_no = ?";
-			System.out.println("언블라인드");
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, commentsDto.getCommentsNo());
 		ps.execute();
-		System.out.println("이상무");
 		con.close();
 }
 	//댓글 채택 기능
