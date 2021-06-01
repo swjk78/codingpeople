@@ -66,7 +66,7 @@ String root = request.getContextPath();%>
 						<ul>
 							<%List<BoardDto> boardSubList =  boardDao.showListBoardSub(boardDtoSuper.getBoardNo()); %>
 							<%for(BoardDto boardDtoSub : boardSubList){%>
-							<li class="boardSub"><a href="<%=root%>/board/postList.jsp?super=###&sub=###"><%=boardDtoSub.getBoardName()%></a></li>
+							<li class="boardSub"><a href="<%=root%>/board/postList.jsp?boardNo=<%=boardDtoSub.getBoardNo()%>"><%=boardDtoSub.getBoardName()%></a></li>
 							<%} %>
 						</ul>
 					</li>
@@ -75,7 +75,7 @@ String root = request.getContextPath();%>
 		</div>
 		
 		</div>
-		
+
 	</div>
 		</div>
 
