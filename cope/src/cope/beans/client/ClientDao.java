@@ -3,6 +3,9 @@ package cope.beans.client;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import cope.beans.utils.JdbcUtils;
 
@@ -106,5 +109,36 @@ public ClientDto login(ClientDto clientDto) throws Exception{
 		}
 		con.close();
 		return find;
-}
+	}
+
+	//회원 연령대 구하는 기능 (우리 홈페이지는 1950년생부터 가입할 수 있습니다 good)
+	public List<Integer>getAgeRange() throws Exception{//void 나중에 리스트로 바꾸기
+		
+		Connection con = JdbcUtils.getConnection();
+		
+		Calendar cal = Calendar.getInstance();
+		int currYear = cal.get(Calendar.YEAR);
+		int maxAge = currYear-1950; //최대나이 71세
+		int maxAgeRange = (maxAge/10)*10;//최대 70대
+		
+		List<Integer>ageRangeList = new ArrayList<>();
+		String sql;
+		
+		for(int i=0; i<=maxAgeRange; i+=10) {//i가 maxAgeRange까지(같아도 실행)
+			
+			sql ="select count(TEMP.AGE) age_count "
+					+ "from (select client_no 회원번호, ((EXTRACT(YEAR FROM SYSDATE)-client_birth_year)) AGE "
+					+ "from client) TEMP where TEMP.AGE >=? and TEMP.AGE <?"; //이렇게 DB를 여러번 갔다 와야할까 아니면 뷰를 만들까... 조회하는 횟수는 같을 텐데.
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, i); //보다 크거나 같다
+			ps.setInt(2, i+10); //보다 작다
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			int count = rs.getInt("age_count");
+			//System.out.println((i) +"대 조회결과..." + count + "명");
+			ageRangeList.add(count);
+		}
+		return ageRangeList;
+	}
 }

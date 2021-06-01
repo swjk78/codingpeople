@@ -145,6 +145,7 @@
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
 <div class="main manage-client">
 	<div class="container-1000 border">
+	<a href="manageCenter.jsp">관리센터로 돌아가기</a>
 		<div class="row">
 			<h2 class="text-center text-black"><a href="manageClient.jsp" class="">회원관리</a></h2>
 			

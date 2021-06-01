@@ -151,6 +151,42 @@ public class BoardDao {
 		ps.setInt(1, BoardNo);
 		ps.execute();
 	}
+	
+	//상위게시판에 속한 게시물들 세기
+	public List<Integer> countUnderPosts(List<BoardDto> boardSuperList) throws Exception {
+		
+		Connection con = JdbcUtils.getConnection();
+		//반복이 너무 많이 되어서 선언만 해놓습니다.
+		List<Integer> countUnderpostList = new ArrayList<>();// 마지막에서야... 하나씩 추가됨...
+		String sql;
+		/*
+		 * 반복문 (상위게시판)과 (하위게시판)의 개수에따라 반복합니다. (대략 곱하기)
+		 */
+		for(int i=0; i<boardSuperList.size(); i++) {//상위게시판 개수 만큼 반복
+			int boardSuperNo = boardSuperList.get(i).getBoardNo();
+			sql = "select board_no from board where board_super_no=? order by board_no asc";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, boardSuperNo);
+			ResultSet rs =ps.executeQuery();
+			
+			List<Integer> boardSubNoList = new ArrayList<>(); //하위게시판 번호를 담을 리스트
+			while(rs.next()) {//조회된 하위 게시판 만큼 반복합니다
+				boardSubNoList.add(rs.getInt("board_no"));
+			}
+			int underPostCount = 0;
+			for(int k = 0; k<boardSubNoList.size(); k++) {//방금 구한 하위 게시판 만큼 반복합니다.
+				sql = "select count(*) from post where post_board_no=?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, boardSubNoList.get(k));
+				rs = ps.executeQuery();
+				
+				rs.next();
+				underPostCount += rs.getInt("count(*)");
+			}
+			countUnderpostList.add(underPostCount);
+		}
+		return countUnderpostList;
+	}
 
 	//게시판 개수 세기
 	public int countBoardSuper() throws Exception {
