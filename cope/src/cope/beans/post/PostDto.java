@@ -1,28 +1,18 @@
 package cope.beans.post;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class PostDto {
 	private int postNo, postClientNo, postBoardNo;
 	private String postTitle, postContents;
 	private Date postDate;
-	private int postLikeCount, postViewCount;
-	private  int postCommentsCount;
-	private String postBlind;
-	
-	@Override
-	public String toString() {
-		return "PostDto [postNo=" + postNo + ", postClientNo=" + postClientNo + ", postBoardNo=" + postBoardNo
-				+ ", postTitle=" + postTitle + ", postContents=" + postContents + ", postDate=" + postDate
-				+ ", postLikeCount=" + postLikeCount + ", postViewCount=" + postViewCount + ", postCommentsCount="
-				+ postCommentsCount + ", postBlind=" + postBlind + ", getPostNo()=" + getPostNo()
-				+ ", getPostClientNo()=" + getPostClientNo() + ", getPostBoardNo()=" + getPostBoardNo()
-				+ ", getPostTitle()=" + getPostTitle() + ", getPostContents()=" + getPostContents() + ", getPostDate()="
-				+ getPostDate() + ", getPostLikeCount()=" + getPostLikeCount() + ", getPostViewCount()="
-				+ getPostViewCount() + ", getPostCommentsCount()=" + getPostCommentsCount() + ", getPostBlind()="
-				+ getPostBlind() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+	private int postLikeCount, postViewCount, postCommentsCount;
+	private char postBlind;
+
+	public PostDto() {
+		super();
 	}
+	
 	public int getPostNo() {
 		return postNo;
 	}
@@ -77,10 +67,10 @@ public class PostDto {
 	public void setPostCommentsCount(int postCommentsCount) {
 		this.postCommentsCount = postCommentsCount;
 	}
-	public String getPostBlind() {
+	public char getPostBlind() {
 		return postBlind;
 	}
-	public void setPostBlind(String postBlind) {
+	public void setPostBlind(char postBlind) {
 		this.postBlind = postBlind;
 	}
 }

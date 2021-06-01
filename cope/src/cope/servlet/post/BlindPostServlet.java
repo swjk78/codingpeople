@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.post.PostDaoTest;
-import cope.beans.post.PostDtoTest;
+import cope.beans.post.PostDao;
+import cope.beans.post.PostDto;
 
 @WebServlet(urlPatterns = "/manage/blindPost.kh")
 public class BlindPostServlet extends HttpServlet {
@@ -19,22 +19,15 @@ public class BlindPostServlet extends HttpServlet {
 			req.setCharacterEncoding("UTF-8");
 			
 			int postNo = Integer.parseInt(req.getParameter("postNo"));
-			String clientGrade = req.getParameter("clientGrade");
 			char clientBlind = req.getParameter("clientBlind").charAt(0);
 
-			PostDtoTest postDto = new PostDtoTest();
+			PostDto postDto = new PostDto();
 			postDto.setPostNo(postNo);
-			postDto.setClientGrade(clientGrade);
-			PostDaoTest postDao = new PostDaoTest();
-			boolean result;
+			postDto.setPostBlind(clientBlind);
+			PostDao postDao = new PostDao();
 			
-			// 블라인드 속성값 파악 후 블라인드/언블라인드 처리
-			if (Character.compare(clientBlind, 'T') == 0) {
-				result = postDao.blindPost(postDto);
-			}
-			else {
-				result = postDao.unblindPost(postDto);
-			}
+			// 블라인드/언블라인드 처리
+			boolean result = postDao.blindPost(postDto);
 			
 			// 블라인드 처리 후 페이지 이동
 			if (result) {
