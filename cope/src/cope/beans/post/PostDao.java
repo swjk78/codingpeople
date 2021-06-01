@@ -67,4 +67,27 @@ public class PostDao {
 		
 		con.close();
 	}
+	
+	// 게시글 블라인드/블라인드 해제 기능
+		public boolean blindPost(PostDto postDto) throws Exception {
+			char postBlind = postDto.getPostBlind();
+			
+			String sql;
+			if (postBlind == 'F') {
+				sql = "update post_list set post_blind = 'T' where post_no = ?";
+			}
+			else {
+				sql = "update post_list set post_blind = 'F' where post_no = ?";
+			}
+
+			Connection con = JdbcUtils.getConnection();
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, postDto.getPostNo());
+			int result = ps.executeUpdate();
+			
+			con.close();
+			
+			return result > 0;
+		}
 }

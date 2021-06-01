@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.post.PostDaoTest;
-import cope.beans.post.PostDtoTest;
+import cope.beans.post.PostDao;
+import cope.beans.post.PostDto;
 
 @WebServlet(urlPatterns = "/manage/blindPost.kh")
 public class BlindPostServlet extends HttpServlet {
@@ -21,10 +21,10 @@ public class BlindPostServlet extends HttpServlet {
 			int postNo = Integer.parseInt(req.getParameter("postNo"));
 			char clientBlind = req.getParameter("clientBlind").charAt(0);
 
-			PostDtoTest postDto = new PostDtoTest();
+			PostDto postDto = new PostDto();
 			postDto.setPostNo(postNo);
 			postDto.setPostBlind(clientBlind);
-			PostDaoTest postDao = new PostDaoTest();
+			PostDao postDao = new PostDao();
 			
 			// 블라인드/언블라인드 처리
 			boolean result = postDao.blindPost(postDto);
