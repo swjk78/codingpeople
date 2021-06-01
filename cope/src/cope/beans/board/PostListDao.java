@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cope.beans.client.JdbcUtils;
+import cope.beans.comments.CommentsDto;
 
 public class PostListDao {
 	//글목록
@@ -44,6 +45,8 @@ public class PostListDao {
 			
 			//닉네임표시
 			postListDto.setClientNick(rs.getString("client_nick"));
+			
+			postListDto.setBlind(rs.getString("post_blind").charAt(0));
 			
 						
 			list.add(postListDto);
@@ -120,5 +123,31 @@ public class PostListDao {
 		int count = rs.getInt(1);
 		con.close();
 		return count;
+	}
+	
+	//블라인드
+	
+	public boolean blind(PostListDto postListDto) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		char postBlind = postListDto.getBlind();
+		
+		String sql;
+		if (postBlind == 'F') {
+			sql = "update post_list set post_blind = 'T' where post_no = ?";
+		}
+		else {
+			sql = "update post_list set post_blind = 'F' where post_no = ?";
+		}
+
+		
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, postListDto.getPostNo());
+		int result = ps.executeUpdate();
+		
+		con.close();
+		
+		return result > 0;
 	}
 }
