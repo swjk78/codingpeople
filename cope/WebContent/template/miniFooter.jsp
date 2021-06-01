@@ -4,6 +4,15 @@
     <html>
 		<link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/join.css">
     <style>
+    .inline-block{
+    border: solid black;
+    margin-left:auto;
+        margin-right :auto;}
+    
+    .width-auto{
+    width:auto;
+    }
+    
    .mini-font{
    font-size: 14px;
    }
@@ -12,8 +21,6 @@
     }
     
     .box{
-    width:45%;
-    height:30%;
     padding-top: 25px;
     padding-bottom: 17px;
     display: inline-block;	
@@ -21,7 +28,7 @@
     
     .hr{
     border: 0px;
-    width: 400px;
+    width: 500px;
     height:2px;
     background:#9A9EC2;
     }
@@ -30,17 +37,25 @@
   	
   	<body>
   	<div class="main">
-	  <div class = "text-align-center mini-font">
-	  		<div class = "box">
+	  <div class = "inline-block mini-font">
+	  		<div class = "text-align-center box width-auto">
 	  		<a href = "<%=request.getContextPath()%>/info.jsp" class = "border-none">
 	  			<label >Info</label></a>
-	  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	  			<span>&nbsp;&nbsp;</span>
+	  				  			<span>·</span>
+	  			<span>&nbsp;&nbsp;</span>
 	  			<span>Privacy Policy</span>	
-	  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	  			<span>&nbsp;&nbsp;</span>
+	  			<span>·</span>
+	  			<span>&nbsp;&nbsp;</span>
 	  			<span>Terms Of Use</span>
-	  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	  			<span>&nbsp;&nbsp;</span>
+	  				  			<span>·</span>
+	  			<span>&nbsp;&nbsp;</span>
 	  			<span>Contact Us</span>
-	  			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	  			<span>&nbsp;&nbsp;</span>
+	  				  			<span>·</span>
+	  				  				  			<span>&nbsp;&nbsp;</span>
 	  			 <a href = "https://github.com/swjk78/codingpeople">
 	  			 <span>Git</span></a>
 	  			   			 <div>

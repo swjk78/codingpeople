@@ -8,6 +8,6 @@
 <link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/join.css">
 </head>
 <div class = text-center>
-메인 템플릿 footer입니다.
+<img src ="<%=request.getContextPath()%>/image/footer.png">
 </div>
 </html>
