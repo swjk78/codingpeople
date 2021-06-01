@@ -7,16 +7,7 @@
 <!DOCTYPE html>
 <html>
 <style>
-.division{
-float:left;
-margin-left: auto;
-margin-right: auto;		   
-width : auto;
-height : 800px;
-display : block;
-border : solid black;
-position : static;
-}
+
 </style>
 <head>
 <%
@@ -45,41 +36,47 @@ String root = request.getContextPath();%>
 			</div>
 		<hr>
 		<div class="login-box">
-		<%if(isLogin){ %>
-			<span><a href="<%=root%>/client/profile.jsp?clientNo=세션no"><img class ="v-align-center"  src ="https://via.placeholder.com/25/FFFF00/000000?Text=ProfileImage" ></a></span>
-			<span class ="v-align-center">아이디...</span>
-			<span><img class ="v-align-center" src="<%=root %>/image/alertBell.png"  height="25px" ></span>
+			<%if(isLogin){ %>
+				<span><a href="<%=root%>/client/profile.jsp?clientNo=세션no"><img class ="v-align-center"  src ="https://via.placeholder.com/25/FFFF00/000000?Text=ProfileImage" ></a></span>
+				<span class ="v-align-center">아이디...</span>
+				<span><img class ="v-align-center" src="<%=root %>/image/alertBell.png"  height="25px" ></span>
+				
+					<%if(isAdmin){%>
+					<span><a href = "<%=root%>/manage/reportList.jsp">관리페이지</a></span>
+					<%}else{}%>
+			<%}else{ %>
+			<span><a class ="v-align-center" href = "<%=root%>/client/login.jsp" >로그인</a></span>
+			<span><a class ="v-align-center" href = "<%=root%>/client/join.jsp">회원가입</a></span>
+			<%} %>
+			<hr>
 			
-				<%if(isAdmin){%>
-				<span><a href = "<%=root%>/manage/reportList.jsp">관리페이지</a></span>
-				<%}else{}%>
-		<%}else{ %>
-		<span><a class ="v-align-center" href = "<%=root%>/client/login.jsp" >로그인</a></span>
-		<span><a class ="v-align-center" href = "<%=root%>/client/join.jsp">회원가입</a></span>
-		<%} %>
+<!-- 			메뉴를 띄울 곳입니다. -->
+		
+		<div class="menu">
+		<span class="menu title">- 게시판 메뉴 - </span>
+		<br><br><br>
+			<%
+			BoardDao boardDao = new  BoardDao();
+			BoardDto boardDto = new BoardDto();
+			List<BoardDto> boardSuperList =  boardDao.showListBoardSuper();%>
+			
+			<%for(BoardDto boardDtoSuper : boardSuperList){%>
+				<ul>
+					<li class="boardSuper"><%=boardDtoSuper.getBoardName()%>
+						<ul>
+							<%List<BoardDto> boardSubList =  boardDao.showListBoardSub(boardDtoSuper.getBoardNo()); %>
+							<%for(BoardDto boardDtoSub : boardSubList){%>
+							<li class="boardSub"><a href="<%=root%>/board/postList.jsp?super=###&sub=###"><%=boardDtoSub.getBoardName()%></a></li>
+							<%} %>
+						</ul>
+					</li>
+				</ul>
+			<%} %>
 		</div>
-				</div>
+		
+		</div>
+		
+	</div>
 		</div>
 
 </html>
-
-<!-- <div class=menu> -->
-<%-- 	<%BoardDao boardDao = new BoardDao(); %> --%>
-<%-- 	<%List<BoardDto>boardSuperList = boardDao.showListBoardSuper();%> --%>
-<%-- 	<%for(BoardDto boardDtoSuper : boardSuperList){ %> --%>
-<!-- 	<ul> -->
-<%-- 		<li class="menu-btn boardSuper"><%=boardDtoSuper.getBoardName() %> --%>
-<!-- 		<ul> -->
-<%-- 			<%List<BoardDto>boardSubList = boardDao.showListBoardSub(boardDtoSuper.getBoardNo()); %> --%>
-<%-- 			<%for(BoardDto boardDtoSub : boardSubList){%> --%>
-<!-- 				<li class="menu-btn boardSub"> -->
-<%-- 					<a href="<%=root %>board/boardList.jsp?boardSuperNo=<%=boardDtoSub.getBoardSuperNo()%>&boardNo<%=boardDtoSub.getBoardNo() %>"> --%>
-<%-- 					<%=boardDtoSub.getBoardName()%> --%>
-<!-- 					</a> -->
-<!-- 				</li> -->
-<%-- 			<%} %> --%>
-<!-- 		</ul> -->
-<!-- 		</li> -->
-<!-- 	</ul> -->
-<!-- </div> -->
-<%-- <%} %> --%>
