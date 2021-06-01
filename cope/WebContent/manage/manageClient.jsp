@@ -84,8 +84,6 @@
 	if (endBlock > lastBlock) endBlock = lastBlock;
 %>
 
-<link rel="stylesheet" type="text/css" href="<%=root%>/css/common.css">
-
 <%if (isSearch) {%>
 <script>
 	window.addEventListener('load', function() {
@@ -143,158 +141,162 @@
 	});
 </script>
 
-<div class="container-1000">
-	<div class="row">
-		<h2><a href="manageClient.jsp">회원관리</a></h2>
-	</div>
-	<!-- 정렬 링크 -->
-	<div class="row">
-	<%if (isSearch) {%>
-		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_no")) {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">가입순</a>
-		<%}  else {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">가입순</a>
-		<%} %>
-		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_id")) {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">아이디순</a>
-		<%}  else {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">아이디순</a>
-		<%} %>
-		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_nick")) {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">닉네임순</a>
-		<%}  else {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>">닉네임순</a>
-		<%} %>
-	<%} else {%>
-		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_no")) {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=desc">가입순</a>
-		<%}  else {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=asc">가입순</a>
-		<%} %>
-		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_id")) {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=desc">아이디순</a>
-		<%}  else {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=asc">아이디순</a>
-		<%} %>
-		<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_nick")) {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=desc">닉네임순</a>
-		<%}  else {%>
-			<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=asc">닉네임순</a>
-		<%} %>
-	<%} %>
-	</div>
-	<!-- 페이지 크기 조절 -->
-	<div class="row">
-		<form action="manageClient.jsp" method="get" class="pageSize-form">
-			<select name="pageSize" onchange="this.form.submit()">
-				<option>10</option>
-				<option>20</option>
-				<option>30</option>
-			</select>
-			<%if (searchType != null && searchKeyword != null) {%>
-				<input type="hidden" name="searchType" value="<%=searchType%>">
-				<input type="hidden" name="searchKeyword" value="<%=searchKeyword%>">
-			<%} %>
-		</form>
-	</div>
-	<!-- 회원 목록 -->
-	<div class="row">
-		<table class="table table-border table-hover text-center">
-			<thead>
-				<tr>
-					<th>회원번호</th>
-					<th>아이디</th>
-					<th>닉네임</th>
-					<th>이메일</th>
-					<th>출생연도</th>
-					<th>등급</th>
-					<th>정지해제날짜</th>
-					<th>활동정지</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% for (ClientDtoTest clientDto : clientList) {%>
-				<tr>
-					<td><%=clientDto.getClientNo()%></td>
-					<td><%=clientDto.getClientId()%></td>
-					<td><a href=""><%=clientDto.getClientNick()%></a></td>
-					<td><%=clientDto.getClientEmail()%></td>
-					<td>
-						<%if (clientDto.getClientBirthYear() == 0) {%>
-						미입력
-						<%} else {%>
-							<%=clientDto.getClientBirthYear()%>
-						<%} %>
-					</td>
-					<td><%=clientDto.getClientGradeKorean()%></td>
-					<td>
-					<%if (clientDto.getClientUnlockDate() == null) {%>
-					미정지
-					<%} else {%>
-					<%=clientDto.getClientUnlockDateString()%>
-					<%} %>
-					</td>
-					<td>
-						<%if (clientDto.getClientGrade().equals("normal")) {%>
-							<form action="lockClient.kh" method="POST" class="lock-client-form">
-								<input type="hidden" name="clientNo" value="<%=clientDto.getClientNo()%>">
-								<%if (clientDto.getClientUnlockDate() == null) {%>
-								<select name="lockHour">
-									<option value="0">10초(시연용)</option>
-									<option value="<%=1%>">1시간</option>
-									<option value="<%=24%>">1일</option>
-									<option value="<%=24 * 3%>">3일</option>
-									<option value="<%=24 * 7%>">7일</option>
-									<option value="<%=24 * 30%>">30일</option>
-									<option value="<%=24 * 365%>">1년</option>
-									<option value="<%=24 * 365 * 1000%>">1000년</option>
-								</select>
-								<input type="submit" value="활동정지">
-								<%} else {%>
-								<input type="hidden" name="lockHour" value="-1">
-								<input type="submit" value="정지해제">
-								<%} %>
-							</form>
-						<%} else {%>
-							<%=clientDto.getClientGradeKorean()%>
-						<%} %>
-					</td>
-				</tr>
-				<%} %>
-			</tbody>
-		</table>
+<jsp:include page="/template/aside.jsp"></jsp:include>
+<link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
+<div class="main manage-client">
+	<div class="container-1000 border">
 		<div class="row">
-			<div class="pagination">
-				<% if (startBlock > 1) {%>
-				<a class="move-link">&lt;&lt;</a>
-				<a class="move-link">&lt;</a>
-				<%} %>
-				<% for (int i = startBlock; i <= endBlock; i++) {%>
-					<% if (i == pageNo) {%>
-						<a class="on"><%=i%></a>
-					<% } else {%>
-						<a><%=i%></a>
-					<%} %>
-				<%} %>
-				<% if (endBlock < lastBlock) {%>
-				<a class="move-link">&gt;</a>
-				<a class="move-link">&gt;&gt;</a>
-				<%} %>
-			</div>
+			<h2 class="text-center text-black"><a href="manageClient.jsp" class="">회원관리</a></h2>
+			
 		</div>
+		<!-- 정렬 링크 -->
 		<div class="row">
-			<form action="manageClient.jsp" method="get" class="search-form">
-				<input type="hidden" name="pageNo">
-				<input type="hidden" name="pageSize" value="<%=pageSize%>">
-				<select class="form-input form-input-inline" name="searchType">
-					<option value="client_id">아이디</option>
-					<option value="client_nick">닉네임</option>
+		<%if (isSearch) {%>
+			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_no")) {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">가입순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%}  else {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">가입순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%} %>
+			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_id")) {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">아이디순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%}  else {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">아이디순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%} %>
+			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_nick")) {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">닉네임순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%}  else {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">닉네임순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%} %>
+		<%} else {%>
+			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_no")) {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=desc" class="order">가입순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%}  else {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=asc" class="order">가입순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%} %>
+			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_id")) {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=desc" class="order">아이디순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%}  else {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=asc" class="order">아이디순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%} %>
+			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_nick")) {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=desc" class="order">닉네임순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%}  else {%>
+				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=asc" class="order">닉네임순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
+			<%} %>
+		<%} %>
+		</div>
+		<!-- 페이지 크기 조절 -->
+		<div class="row">
+			<form action="manageClient.jsp" method="get" class="pageSize-form">
+				<select class="select-form" name="pageSize" onchange="this.form.submit()">
+					<option value="10">10명씩 보기</option>
+					<option value="20">20명씩 보기</option>
+					<option value="30">30명씩 보기</option>
 				</select>
-				<input type="text" name="searchKeyword" class="searchKeywordMain" placeholder="검색어" class="form-input form-input-inline">
-				<input type="submit" value="검색" class="form-btn form-btn-positive form-btn-inline">
+				<%if (searchType != null && searchKeyword != null) {%>
+					<input type="hidden" name="searchType" value="<%=searchType%>">
+					<input type="hidden" name="searchKeyword" value="<%=searchKeyword%>">
+				<%} %>
 			</form>
+		</div>
+		<!-- 회원 목록 -->
+		<div class="row">
+			<table class="table table-border table-hover text-center">
+				<thead>
+					<tr>
+						<th>회원번호</th>
+						<th>아이디</th>
+						<th>닉네임</th>
+						<th>이메일</th>
+						<th>출생연도</th>
+						<th>등급</th>
+						<th>정지해제날짜</th>
+						<th>활동정지</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (ClientDtoTest clientDto : clientList) {%>
+					<tr>
+						<td><%=clientDto.getClientNo()%></td>
+						<td><%=clientDto.getClientId()%></td>
+						<td><a href=""><%=clientDto.getClientNick()%></a></td>
+						<td><%=clientDto.getClientEmail()%></td>
+						<td>
+							<%if (clientDto.getClientBirthYear() == 0) {%>
+							미입력
+							<%} else {%>
+								<%=clientDto.getClientBirthYear()%>
+							<%} %>
+						</td>
+						<td><%=clientDto.getClientGradeKorean()%></td>
+						<td>
+						<%if (clientDto.getClientUnlockDate() == null) {%>
+						미정지
+						<%} else {%>
+						<%=clientDto.getClientUnlockDateString()%>
+						<%} %>
+						</td>
+						<td>
+							<%if (clientDto.getClientGrade().equals("normal")) {%>
+								<form action="lockClient.kh" method="POST" class="lock-client-form vertical-center">
+									<input type="hidden" name="clientNo" value="<%=clientDto.getClientNo()%>">
+									<%if (clientDto.getClientUnlockDate() == null) {%>
+									<select class="select-form vertical-5px" name="lockHour">
+										<option value="0">10초(시연용)</option>
+										<option value="<%=1%>">1시간</option>
+										<option value="<%=24%>">1일</option>
+										<option value="<%=24 * 3%>">3일</option>
+										<option value="<%=24 * 7%>">7일</option>
+										<option value="<%=24 * 30%>">30일</option>
+										<option value="<%=24 * 365%>">1년</option>
+										<option value="<%=24 * 365 * 1000%>">1000년</option>
+									</select>
+									<input class="form-btn form-btn-lock vertical-5px" type="submit" value="활동정지">
+									<%} else {%>
+									<input type="hidden" name="lockHour" value="-1">
+									<input class="form-btn form-btn-unlock vertical-5px "  type="submit" value="정지해제">
+									<%} %>
+								</form>
+							<%} else {%>
+								<%=clientDto.getClientGradeKorean()%>
+							<%} %>
+						</td>
+					</tr>
+					<%} %>
+				</tbody>
+			</table>
+			<div class="row">
+				<div class="pagination">
+					<% if (startBlock > 1) {%>
+					<a class="move-link">&lt;&lt;</a>
+					<a class="move-link">&lt;</a>
+					<%} %>
+					<% for (int i = startBlock; i <= endBlock; i++) {%>
+						<% if (i == pageNo) {%>
+							<a class="on"><%=i%></a>
+						<% } else {%>
+							<a><%=i%></a>
+						<%} %>
+					<%} %>
+					<% if (endBlock < lastBlock) {%>
+					<a class="move-link">&gt;</a>
+					<a class="move-link">&gt;&gt;</a>
+					<%} %>
+				</div>
+			</div>
+			<div class="row">
+				<form action="manageClient.jsp" method="get" class="search-form">
+					<input type="hidden" name="pageNo">
+					<input type="hidden" name="pageSize" value="<%=pageSize%>">
+					<select class="form-input-inline select-form" name="searchType">
+						<option value="client_id">아이디</option>
+						<option value="client_nick">닉네임</option>
+					</select>
+					<input type="text" name="searchKeyword" class="searchKeywordMain input-text form-input form-input-inline" placeholder="검색어" class="form-input form-input-inline">
+					<input type="submit" value="검색" class="form-btn form-btn-inline form-btn-normal">
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
-
 <jsp:include page="/template/sessionView.jsp"></jsp:include>

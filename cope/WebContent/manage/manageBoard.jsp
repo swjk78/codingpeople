@@ -274,6 +274,7 @@ function underline(id){
 		<input type="text" class="boardName" hidden required>
 		<input type="submit" class="form-btn form-btn-normal"  value="삭제">
 	</form>
+	<br><br>
 
 <form action="editBoard.kh" method="get"  onsubmit="checkName();">
 	<input type="text" class="boardNo"  name = "boardNo" hidden>
