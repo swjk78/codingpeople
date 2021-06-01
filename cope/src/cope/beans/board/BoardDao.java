@@ -39,7 +39,7 @@ public class BoardDao {
 				int boardNo = rs.getInt("board_no");
 				
 				//3. 가져온 번호로 기본 게시판 추가
-				String [] BoardSub = {"질문게시판","팁게시판", "아무거나"}; // 자동 추가 될 하위 게시판들
+				String [] BoardSub = {"질문게시판","팁게시판"}; // 자동 추가 될 하위 게시판들
 				
 				for(int i =0; i<BoardSub.length; i++) {
 					sql = "insert into board values(board_seq.nextval, ?, ?, ?)";
