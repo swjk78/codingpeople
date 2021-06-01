@@ -139,7 +139,7 @@ public class BoardDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, boardDto.getBoardName());
 		ps.setInt(2, boardDto.getBoardNo());
-		ps.execute();
+		ps.executeUpdate();
 	}
 	
 	// 게시판 삭제 기능
