@@ -17,7 +17,7 @@
 <!-- <head> -->
 <!-- <meta charset="UTF-8"> -->
 <!-- <title>Insert title here</title> -->
-
+<link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <script>
@@ -88,127 +88,14 @@ function underline(id){
 }
 </script>
 
-<style>
-* {
- 	font-family: 'NanumSquare', sans-serif;
-	box-sizing: border-box;
-}
-	
-.main{
-	position: relative;
-    width: 1000px;
-    margin-left: 210px;
-    padding-left: 30px;
-    padding-top: 20px;
-}
 
-
-
-.border{			
-	width: 100%;
-	border: 2px solid #B8BAD4;
-	padding-top: 15px;
-	padding-left : 30px;
-	padding-right : 30px;
-}
-.row{
-	width:100%;
-	margin-top: 30px;
-	margin-bottom : 30px;
-}
-.rowInput{
-	width: 80%;
-	margin-top: 30px;
-	margin-bottom : 30px;
-}
-.rowBtn{
-	width: auto;
-}
-.text-center{
-			text-align:center;
-}
-.text-left{
-			text-align:left;
-			}
-.container{ 
-	width:600px;
-	margin-left:auto;
-	margin-right:auto;
-}
-.form-input{
-	width : 100%;
-	padding : 1;
-	margin-top: 10px;
-	outline: none;
-}
-
-.form-input.form-input-underline {
-	border:none;
-	border-bottom: 2px solid #E2E3ED;
-}
-.form-input.form-input-underline:focus {
-	border-bottom-color: #9A9EC2;		
-}
-
-.form-input.form-input-inline,
-.form-btn.form-btn-inline {
-	width:auto;
-}
-
-.selectbox{
-    width: 220px; /* 원하는 너비설정 */
-    padding: .25em .25em; /* 여백으로 높이 설정 */
-/*     background: url('이미지 경로') no-repeat 95% 50%; */
-    border: 1px solid #999;
-    border-radius: 0px; 
-/*     -webkit-appearance: none; /* 네이티브 외형 감추기 */ */
-/*     -moz-appearance: none; */
-/*     appearance: none; */
-}
-
-.form-btn {
-	border:none;
-	float: right;
-}
-.form-btn.form-btn-normal {
-	background-color: #9A9EC2;
-	font-size: 15px;
-	color:white;
-	padding : 5px 20px 5px 20px;
-}
-.text-center{
-	text-align: center;
-}
-.hr{
-	border: 0px;
-	height:2px;
-	background:#9A9EC2;
-}
-.display-none{
-	display: none;
-}
-.inline{
-	display: inline;
-}
-#boardDeleteList{
-	-webkit-appearance: none; /* 화살표 없애기 for chrome*/
-	-moz-appearance: none; /* 화살표 없애기 for firefox*/
-	border: 1px solid #B8BAD4;
-}
-
-
-.boardSubList, .fail{
-	display: none;
-}
-
-
-</style>
 
 
 <!-- </head> -->
 <!-- <body> -->
 <div class="main">
-	<div class="container border">
+	<div class="container-600 border">
+	<a href="manageCenter.jsp">관리센터로 돌아가기</a>
 <h2 class="text-center">게시판관리</h2>
 	<br><br><br>
 
