@@ -38,27 +38,49 @@
 </head>
 		
 <%
-	 String boardName = request.getParameter("boardName");
+	BoardDao boardDao = new BoardDao();
+	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
+	String boardGroupName = boardDao.findBoardName(boardGroup);
+	
+	List<BoardDto> subBoardList = boardDao.showListBoardSub(boardGroup);
  %>
 
 <div class = "display-inline-block text-center">
-	<h2><%=boardName%></h2>
+	<h2><%=boardGroupName%></h2>
 	<hr>
 	<div class="display-inline-block">
 		<%if (request.getParameter("write") != null) {%>
 		<h3>글 작성</h3>
-		<form action="postForm.kh" method="post" class="layout">
-			<div>
-				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="box-title">
+		<form action="postInsert.kh" method="post" class="layout">
+			<input type="hidden" name="boardGroup" value="<%=boardGroup%>">
+			<div class="row text-left">
+				<select name="postBoardNo">
+					<%for (BoardDto boardDto : subBoardList) {%>
+						<option value="<%=boardDto.getBoardNo()%>"><%=boardDto.getBoardName()%></option>
+					<%} %>
+				</select>
 			</div>
-			<div>
-				<textarea name="postContents" placeholder="내용을 입력하세요" class="box-contents"></textarea>
+			<div class="row text-left">
+				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="box-title" required>
 			</div>
-			<input type="submit" value="작성완료">
+			<div class="row text-left">
+				<textarea name="postContents" placeholder="내용을 입력하세요" class="box-contents" required>
+				</textarea>
+			</div>
+			<div class="row">
+				<input type="submit" value="작성완료">
+			</div>
 		</form>
 		<%} else {%>
 		<h3>글 수정</h3>
-		<form action="postForm.kh" method="post" class="layout">
+		<form action="postEdit.kh" method="post" class="layout">
+			<div class="row text-left">
+				<select name="postBoardNo">
+					<%for (BoardDto boardDto : subBoardList) {%>
+						<option value="<%=boardDto.getBoardNo()%>"><%=boardDto.getBoardName()%></option>
+					<%} %>
+				</select>
+			</div>
 			<div>
 				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="box-title">
 			</div>

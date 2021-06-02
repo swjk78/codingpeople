@@ -106,6 +106,22 @@ public class BoardDao {
 		return boardSuperList;
 	}
 
+	// 게시판 이름 조회 기능
+	public String findBoardName(int boardNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select board_name from board where board_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, boardNo);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		String boardName = rs.getString(1);
+		
+		con.close();
+		
+		return boardName;
+	}
+	
 	// 하위 게시판 조회 기능
 	public List<BoardDto> showListBoardSub(int boardSuperNo) throws Exception {
 		

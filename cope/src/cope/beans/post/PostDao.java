@@ -7,28 +7,25 @@ import java.sql.ResultSet;
 import cope.beans.utils.JdbcUtils;
 
 public class PostDao {
-
-	//게시글 시퀀스 번호 자동생성
+	// 게시글 시퀀스 번호 자동생성
 	public int getSequence() throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		
+
 		String sql = "select post_seq.nextval from dual";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int no = rs.getInt(1);
-		
+
 		con.close();
 		return no;
 	}
-	
+
 	// 게시글 등록
-	public void registPost(PostDto postDto)throws Exception{
-		
+	public void registPost(PostDto postDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		
-		String sql = "insert into post(post_no, post_client_no, post_board_no,"
-				+ "post_title, post_contents) values(?,?,?,?,?)";
+
+		String sql = "insert into post(post_no, post_client_no, post_board_no, post_title, post_contents) values(?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, postDto.getPostNo());
 		ps.setInt(2, postDto.getPostClientNo());
@@ -36,58 +33,86 @@ public class PostDao {
 		ps.setString(4, postDto.getPostTitle());
 		ps.setString(5, postDto.getPostContents());
 		ps.execute();
-		
-		con.close();		
+
+		con.close();
 	}
-	
-	//게시글 수정 (게시판 no 조회 -> 제목, 내용을 수정)
-	public void editPost(PostDto postDto)throws Exception{
-		
+
+	// 게시글 수정 (게시판 no 조회 -> 제목, 내용을 수정)
+	public void editPost(PostDto postDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		
-		String sql = "update post set post_title = ?, set post_contents "
-				+ "where post_no = ? ";
+
+		String sql = "update post set post_title = ?, set post_contents " + "where post_no = ? ";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, postDto.getPostTitle());
 		ps.setString(2, postDto.getPostContents());
 		ps.execute();
-		
+
 		con.close();
 	}
-	
-	//게시글 삭제 (게시판 no 조회 -> 모두 삭제)
-	public void deletePost(int postNo)throws Exception{
-		
+
+	// 게시글 삭제 (게시판 no 조회 -> 모두 삭제)
+	public void deletePost(int postNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
-		
+
 		String sql = "delete post where post_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, postNo);
 		ps.execute();
-		
+
 		con.close();
 	}
-	
+
 	// 게시글 블라인드/블라인드 해제 기능
 	public boolean blindPost(PostDto postDto) throws Exception {
 		char postBlind = postDto.getPostBlind();
-		
+
 		String sql;
 		if (postBlind == 'F') {
 			sql = "update post_list set post_blind = 'T' where post_no = ?";
-		}
-		else {
+		} else {
 			sql = "update post_list set post_blind = 'F' where post_no = ?";
 		}
 
 		Connection con = JdbcUtils.getConnection();
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, postDto.getPostNo());
 		int result = ps.executeUpdate();
+
+		con.close();
+
+		return result > 0;
+	}
+	
+	// 게시글 조회 기능
+	public PostDto find(int postNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from post where post_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, postNo);
+		ResultSet rs = ps.executeQuery();
+		
+		PostDto postDto;
+		if (rs.next()) {
+			postDto = new PostDto();
+			postDto.setPostNo(rs.getInt("post_no"));
+			postDto.setPostClientNo(rs.getInt("post_client_no"));
+			postDto.setPostBoardNo(rs.getInt("post_board_no"));
+			postDto.setPostTitle(rs.getString("post_title"));
+			postDto.setPostContents(rs.getString("post_contents"));
+			postDto.setPostDate(rs.getDate("post_date"));
+			postDto.setPostLikeCount(rs.getInt("post_like_count"));
+			postDto.setPostViewCount(rs.getInt("post_view_count"));
+			postDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+			postDto.setPostBlind(rs.getString("post_blind").charAt(0));
+		}
+		else {
+			postDto = null;
+		}
 		
 		con.close();
 		
-		return result > 0;
+		return postDto;
 	}
 }
