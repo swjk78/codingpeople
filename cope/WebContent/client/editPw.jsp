@@ -84,23 +84,23 @@
 	<form action="editPw.kh" method="post" class="form-input form">
 	
 	<div class="row">	
-	<input  type="password" placeholder="현재비밀번호를입력하세요" name="originPw" class="form-input form-input-underline">
+	<input  type="password" placeholder="현재 비밀번호를 입력하세요" name="originPw" class="form-input form-input-underline">
 	<span></span>
 	</div>
 	
 	<div class="row">
-	<input  type="password" placeholder="바꿀비밀번호를입력하세요" name="chgPw" class="form-input form-input-underline">
+	<input  type="password" placeholder="바꿀 비밀번호를 입력하세요" name="chgPw" class="form-input form-input-underline">
 	<span></span>
 	</div>
 	
 	<div class="row">
-	<input  type="password" placeholder="바꿀비밀번호를입력하세요" name="checkPw" class="form-input form-input-underline">
+	<input  type="password" placeholder="바꿀 비밀번호를 입력하세요" name="checkPw" class="form-input form-input-underline">
 	<span></span>
 	</div>
 	<div>
 		<%if(request.getParameter("error") != null){%>
 			<div>
-				<span class="error">비밀번호가 일치하지않습니다</span>
+				<span class="error">현재 비밀번호가 일치하지않습니다</span>
 			</div>
 		<%} %>
 	</div>
