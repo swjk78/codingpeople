@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.client.ClientDaoTest;
+import cope.beans.client.ClientDao;
 import cope.beans.utils.SendEmail;
 
 // 비밀번호 재설정을 위해 입력된 이메일로 인증번호를 전송하는 서블릿
@@ -23,7 +23,7 @@ public class FindPwServlet extends HttpServlet {
 			req.setCharacterEncoding("UTF-8");
 			
 			String inputEmail = req.getParameter("inputEmail");
-			ClientDaoTest clientDao = new ClientDaoTest();
+			ClientDao clientDao = new ClientDao();
 			String clientId = clientDao.findId(inputEmail);
 			
 			// 메일 전송
