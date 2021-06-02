@@ -16,7 +16,7 @@ public class ClientLogoutServlet extends HttpServlet{
 	try {
 		req.setCharacterEncoding("UTF-8");
 		req.getSession().removeAttribute("clientNo");
-		resp.sendRedirect("login.jsp");
+		resp.sendRedirect("index.jsp");
 	}
 	catch(Exception e) {
 		e.printStackTrace();
