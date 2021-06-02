@@ -189,9 +189,9 @@ String root = request.getContextPath();
 </div>
 </div>
 		
-<!-- 		테스트세션 -->
+<div class="main">
 		세션번호<%=session.getAttribute("clientNo") %> 
-		
+</div>
 
 </body>
 </html>
