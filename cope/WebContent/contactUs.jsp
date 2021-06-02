@@ -41,44 +41,21 @@ width : 100%
   		  			<span>&nbsp;</span>
   		  			<div class = " text-center ">
   		  			<div class = padding-left>
-  		  			<div class = "title-border ">팀원 소개</div>
+  		  			<div class = "title-border ">방문 및 연락</div>
   		  			</div>
 <div class = " display-inline-block border">
-        <div  >
-<pre class = "text-left border-inner">
-방문해주셔서 감사합니다.
-
-저희는 개발자들 간의 고민을 해결하는 커뮤니티 사이트를 목표로 개발하고 있는 코딩피플입니다. 현재 KH에서 웹을 만들고 있습니다. 
-팀 구성원은 조장 김진규를 비롯하여 이석현, 윤준혁, 이창엽, 소경수로 이루어져 있습니다. 
-
-
-
-
-
-
-
-
-
-
-이미지 넣을까요?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-</pre>
-</div>
+        <p class = "text-left border-inner">
+        
+        <strong>주 소</strong> (07212) 서울특별시 영등포구 선유동2로 57 이레빌딩(구관) 19F,20F<br><br>
+        
+        <strong>TEL</strong> 02)1544-9970 | FAX. 02)2163-8560 | 사업자등록번호 : 876-85-00632 | 기관명 : KH정보교육원 당산지원 | 대표자 : 양진선<br><br>
+        
+        <strong>오시는 길</strong> 지하철 2, 9호선 당산역 12번 출구 400m
+        <br><br>
+        
+        <img src = "<%=request.getContextPath()%>/image/map.png" class = "text-center" width = 100%>
+      
+</p>
 </div>
 </div>
 </body>

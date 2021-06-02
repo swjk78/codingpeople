@@ -1,5 +1,5 @@
-<%@page import="cope.beans.client.ClientDtoTest"%>
-<%@page import="cope.beans.client.ClientDaoTest"%>
+<%@page import="cope.beans.client.ClientDto"%>
+<%@page import="cope.beans.client.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 

@@ -5,15 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>cope로그인기능</title>
-<script>
-function password(){
-	var target = document.querySelector("input[name=ClientPw]");
-	target.type = "password";
-}
-
-</script>
 <style>
+
+*{
+font-family : monospace,sans-serif;
+}
 /* 아이디,비밀번호입력창 회원가입 로그인버튼 */
+
 .row{
 		width:100%;
 		margin-top: 10px;
@@ -32,23 +30,23 @@ border-width:1px;
 border-color:grey;
 border-style:"";
 }
-/* 로그인입력창 */
+/* 로그인 비밀번호입력창 */
 .form-input{
 width:100%;
 box-sizing: border-box;
-margin-top:10px;
-margin-bottom:10px;
+margin-top:5px;
+margin-bottom:5px;
 font-size: 15px;
-padding:1rem;
+padding:0.8rem;
 }
 /* 로그인 회원가입 버튼 */
 .form-btn{
 width:100%;
 box-sizing: border-box;
-margin-top:10px;
-margin-bottom:10px;
+margin-top:5px;
+margin-bottom:5px;
 font-size: 15px;
-padding:2rem;
+padding:0.8rem;
 }
 /* 아이디입력창 */
 .id-input{
@@ -60,24 +58,64 @@ padding:2rem;
 }
 /* 회원가입 버튼 */
 .btn-noraml{
-background-color: rgb(0, 116, 233);
 color:white;
 }
 /* 로그인 버튼 */
 .btn-submit{
 border-style: solid;
-border-color: #2bd400;
+border-color: #B8BAD4;
+background-color : #B8BAD4;
+}
+/*COPE로고*/
+.cope-logo{
+font-family : Neo Sans Pro, sans-serif;
+font-size:50px;
+}
+/*cope<로고를 설정*/
+.cope-logo > span{
+
+}
+.cope-login{
+text-align:center;
+width:400px;
+margin : 0 auto;
+}
+.id-find, .pw-find{
+font-family : Neo Sans Pro, sans-serif;
+font-size:10px;
+padding:0.6rem;
+
+}
+.id-find,.pw-find{
+display:inline-block;
+width:49%;
 }
 </style>
+
+<script>
+//function password(){
+//var target = document.querySelector("input[name=ClientPw]");
+// 		target.type = "password";
+// 	}
+	window.addEventListener('load', function() {
+		var errorCheck = '<%=request.getSession().getAttribute("errorCheck")%>';
+		if (errorCheck == 'notFound' ) {
+			alert('존재하지 않는 계정입니다');
+			<%request.getSession().removeAttribute("errorCheck");%>
+		}
+	});
+</script>
+
 </head>
 <body>
+<div class= "cope-login">
 <div class="container-400">
 	<div class="row text-center">
 		<div class="cope-logo">
-			<span>cope로그인화면</span>
+			<span><a onclick="location.href='<%=request.getContextPath()%>/index.jsp'"><img class="image image-logo" alt="cope" src="/cope/image/example.png" width="350" height="150"></a></span>
 </div>
 </div>
-	<form action = "/client/login.kh" method = "post">
+	<form action = "login.kh" method = "post">
 	<div class="row">
 	<input type = "text" name = "clientId" placeholder="아이디" required class="form-input id-intput">
 	</div>
@@ -85,7 +123,7 @@ border-color: #2bd400;
 	<input type = "password" name = "clientPw" placeholder="비밀번호" required class="form-input pw-input">	
 	</div>
 	<div class="row">
-	<input type = "submit" value ="로그인" class="form-btn btn-submit">
+	<input type = "submit" value ="로그인" class="form-btn btn-submit"></a>
 	</div>
 	</form>
 	<hr>
@@ -100,13 +138,12 @@ border-color: #2bd400;
 	<%} %>
 	
 	<div class="row">
-		<h4><a href="/client/findId">아이디찾기</a></h4>
+		<a href='<%=request.getContextPath()%>/client/findId'><input type= "button" value="아이디 찾기" class= "id-find"></a>
+		<a href='<%=request.getContextPath()%>/client/findPw'><input type= "button" value="비밀번호 찾기" class= "pw-find" ></a>
 	</div>
-	<div class="row">
-		<h4><a href="/client/findPw">비밀번호찾기</a></h4>
 	</div>
 </div>
-
-<jsp:include page="/template/footer.jsp"></jsp:include>
+<jsp:include page="/template/miniFooter.jsp"></jsp:include>
+</div>
 </body>
 </html>

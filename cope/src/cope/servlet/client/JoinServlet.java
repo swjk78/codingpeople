@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.client.JoinDao;
-import cope.beans.client.JoinDto;
+import cope.beans.client.ClientDao;
+import cope.beans.client.ClientDto;
 
 @WebServlet(urlPatterns = "/client/join.kh")
 public class JoinServlet extends HttpServlet{
@@ -17,15 +17,15 @@ public class JoinServlet extends HttpServlet{
 		try {
 
 			req.setCharacterEncoding("UTF-8");
-			JoinDto joinDto = new JoinDto();
-			joinDto.setClientId(req.getParameter("clientId"));
-			joinDto.setClientPw(req.getParameter("clientPw"));
-			joinDto.setClientEmail(req.getParameter("clientEmail"));			
-			joinDto.setClientNick(req.getParameter("clientNick"));
-			joinDto.setClientBirthYear(Short.parseShort(req.getParameter("clientBirthYear")));
+			ClientDto clientDto = new ClientDto();
+			clientDto.setClientId(req.getParameter("clientId"));
+			clientDto.setClientPw(req.getParameter("clientPw"));
+			clientDto.setClientEmail(req.getParameter("clientEmail"));			
+			clientDto.setClientNick(req.getParameter("clientNick"));
+			clientDto.setClientBirthYear(Short.parseShort(req.getParameter("clientBirthYear")));
 			
-			JoinDao joinDao = new JoinDao();
-			joinDao.regist(joinDto);
+			ClientDao clientDao = new ClientDao();
+			clientDao.regist(clientDto);
 			
 			resp.sendRedirect("joinSuccess.jsp");
 		}

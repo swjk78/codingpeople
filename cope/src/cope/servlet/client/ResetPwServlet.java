@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.client.ClientDaoTest;
+import cope.beans.client.ClientDao;
 
 // 비밀번호 재설정 서블릿
 @WebServlet(urlPatterns = "/client/resetPw.kh")
@@ -19,7 +19,7 @@ public class ResetPwServlet extends HttpServlet {
 			String inputPw = req.getParameter("inputPw");
 			String inputEmail = (String) req.getSession().getAttribute("inputEmail");
 			
-			ClientDaoTest clientDao = new ClientDaoTest();
+			ClientDao clientDao = new ClientDao();
 			boolean result = clientDao.resetPw(inputPw, inputEmail);
 			if (result) {
 				req.getSession().removeAttribute("inputEmail");

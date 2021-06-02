@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.client.ClientDaoTest;
+import cope.beans.client.ClientDao;
 
 @WebServlet(urlPatterns = "/manage/lockClient.kh")
 public class LockClientServlet extends HttpServlet {
@@ -19,7 +19,7 @@ public class LockClientServlet extends HttpServlet {
 			
 			int clientNo = Integer.parseInt(req.getParameter("clientNo"));
 			int lockHour = Integer.parseInt(req.getParameter("lockHour"));
-			ClientDaoTest clientDao = new ClientDaoTest();
+			ClientDao clientDao = new ClientDao();
 			boolean result = clientDao.lockClient(clientNo, lockHour);
 			
 			if (result) {

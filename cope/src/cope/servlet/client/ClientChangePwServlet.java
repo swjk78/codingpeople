@@ -1,4 +1,4 @@
-package cope.servlet.clientEdit;
+package cope.servlet.client;
 
 import java.io.IOException;
 
@@ -9,36 +9,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cope.beans.client.ClientDao;
-import cope.beans.client.ClientDto;
 
-
-
-@WebServlet(urlPatterns="/client/login.kh")
-public class LoginServlet extends HttpServlet{
+@WebServlet(urlPatterns="/client/editPw.kh")
+public class ClientChangePwServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
 			req.setCharacterEncoding("UTF-8");
-			ClientDto clientDto = new ClientDto();
 			
-			clientDto.setClientId(req.getParameter("clientId"));
-			clientDto.setClientPw(req.getParameter("clientPw"));
+			int clientNo = (int)req.getSession().getAttribute("clientNo");
+			String originPw = req.getParameter("originPw");
+			String chgPw = req.getParameter("chgPw");
 			
 			ClientDao clientDao = new ClientDao();
-			ClientDto result = clientDao.login(clientDto);
-			
-			if(result != null) {
-				req.getSession().setAttribute("clientNo", result.getClientNo());
+			boolean result = clientDao.chgPw(clientNo, originPw, chgPw);
+					
+			if(result) {
 				resp.sendRedirect("profile.jsp");
-				
+
 			}
 			else {
-				
-				resp.sendRedirect("login.jsp?error");
-				
-				
+				resp.sendRedirect("editPw.jsp?error");
 			}
+			
 			
 			
 		} catch (Exception e) {

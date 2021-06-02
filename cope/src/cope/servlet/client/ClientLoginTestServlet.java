@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.client.ClientDaoTest;
-import cope.beans.client.ClientDtoTest;
+import cope.beans.client.ClientDao;
+import cope.beans.client.ClientDto;
 
 // 활동정지된 회원의 로그인 방지를 위한 테스트 로그인 서블릿
 // create by JK
@@ -19,12 +19,12 @@ public class ClientLoginTestServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			req.setCharacterEncoding("UTF-8");
-			ClientDtoTest clientDto = new ClientDtoTest();
+			ClientDto clientDto = new ClientDto();
 			clientDto.setClientId(req.getParameter("clientId"));
 			clientDto.setClientPw(req.getParameter("clientPw"));
 			
-			ClientDaoTest clientDao = new ClientDaoTest();
-			ClientDtoTest find = clientDao.login(clientDto);
+			ClientDao clientDao = new ClientDao();
+			ClientDto find = clientDao.login(clientDto);
 			if (find == null) {
 				resp.sendRedirect("loginTest.jsp?error");
 			}
