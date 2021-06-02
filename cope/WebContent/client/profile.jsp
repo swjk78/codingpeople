@@ -15,10 +15,7 @@
 	ClientDao clientDao = new ClientDao();
 	ClientDto clientDto = clientDao.myInfo(clientNo);
 	
-//내가 쓴글
 
-
-//내가 좋아요한글
 %>
 
 </head>
@@ -39,8 +36,8 @@
 	
 		
 		
-		<div class="row"><a href="#">내글보기</a></div> 
-		<div class="row"><a href="#">내가 좋아요한 글</a></div>
+		<div class="row"><a href="<%=request.getContextPath()%>/board/myPostList.jsp">내글보기</a></div> 
+		<div class="row"><a href="<%=request.getContextPath()%>/board/myLikePost.jsp">내가 좋아요한 글</a></div>
 		<div class="row"><a href="editInfo.jsp">내정보 수정</a></div>
 		<div class="row"><a href="editPw.jsp">비밀번호 수정</a></div>
 		<div class="row"><a href="exit.jsp">탈퇴</a></div>
