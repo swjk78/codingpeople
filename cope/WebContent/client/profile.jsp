@@ -32,7 +32,7 @@ String root = request.getContextPath();
 	clientDto = clientDao.myInfo(Integer.parseInt(request.getParameter("otherNo"))); 
 	}
 
-	
+
 //(석현)
 //위는 세션으로 불러오는 경우에 자신의 정보를 보게끔하고
 //다른 사람 정보는 파라미터로 받게하겠습니다(url에서 숨길 수 있으면 더 좋을 거 같은데 구현해보겠습니다.)
