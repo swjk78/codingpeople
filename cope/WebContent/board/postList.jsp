@@ -113,22 +113,21 @@
 
 <script>
 	window.addEventListener("load",function(){
-		var pagination = document.querySelectorAll(".pagination>a");//반복문으로 받아오지않아서 SelectorAll이 a태그를못받아왔었음
+		var pagination = document.querySelectorAll(".pagination>a");
 		for(var i=0; i<pagination.length; i++){
 			pagination[i].addEventListener("click",function(){
 				var pageNo = this.textContent;
 				var moveLink = document.querySelectorAll(".pagination>a:not(.move-link)");
 				if(pageNo == "이전"){
-					pageNo = parseInt(moveLink[0].textContent) - 1; //첫페이지계산
-																	//integer.parseInt가 아닌이유는
+					pageNo = parseInt(moveLink[0].textContent) - 1; 
+															
 				}
 				else if(pageNo =="다음"){
-					pageNo = parseInt(moveLink[moveLink.length-1].textContent)+1;//마지막페이지 계산
+					pageNo = parseInt(moveLink[moveLink.length-1].textContent)+1;
 					
-				}				
-				document.querySelector("input[name=pageNo]").value = pageNo;
-				document.querySelector(".form").submit();
-				
+				}		
+					document.querySelector("input[name=pageNo]").value = pageNo;
+					document.querySelector(".form").submit();											
 			});			
 		}
 	});
@@ -173,6 +172,8 @@
 	<input type="hidden" name="keyword" value ="<%=keyword%>">
 	<%} %>
 	</form>
+	
+	<hr>
 	<table class="table table-border" >
 		<thead>
 		
@@ -192,6 +193,7 @@
 		<tbody>
 		<%for(PostListDto postListDto : list){ %>
 			<tr>
+				<div class=""></div>
 				<td><%=postListDto.getPostNo() %></td>				
 				
 				<td>
@@ -250,7 +252,7 @@
 	<a href="postList.jsp">목록</a>
 	<a href="postForm">글쓰기</a>
 	
-	<form class ="form" action="postList.jsp" method="post">
+	<form class ="form" action="postList.jsp" method="get">
 	
 	<input type="hidden" name ="pageNo">
 	<input type="hidden" name = "pageSize" value="<%=pageSize%>" >
