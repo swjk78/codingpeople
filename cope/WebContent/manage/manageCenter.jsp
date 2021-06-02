@@ -104,9 +104,9 @@
 							<canvas id="postChart" ></canvas>
 						</div>
 							<script>
-							var boardGroupNames = [];
+							var boardSuperNames = [];
 							<%for(int i=0; i<boardSuperList.size(); i++){%>
-							boardGroupNames[<%=i%>] = '<%=boardSuperList.get(i).getBoardName()%>';
+							boardSuperNames[<%=i%>] = '<%=boardSuperList.get(i).getBoardName()%>';
 							<%}%>
 							
 							var countUnderpostArray =[];
@@ -118,7 +118,7 @@
 							var myChart = new Chart(ctx, {
 							    type: 'pie',
 							    data: {
-							    	labels: boardGroupNames,
+							    	labels: boardSuperNames,
 // 							        labels: ['10대이하', '10대', '20대', '30대', '40대'],
 							        datasets: [{
 							            label: '# of Votes',
