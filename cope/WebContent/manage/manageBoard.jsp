@@ -62,7 +62,7 @@ function checkNameSuper(){
 	var regex = /^[a-zA-Z\d가-힣+#/\-\(\)\*@!éö.:π′]{1,10}$/; //현존하는 모든 프로그래밍 언어
 	
 	if(!regex.test(inputNameValue)){
-		alert("올바른 문장이 아닙니다.");
+		alert("올바른 형식이 아닙니다. 프로그래밍 언어 이름을 10글자 이내로 적어주세요");
 		event.preventDefault();
 	}
 }
@@ -74,16 +74,27 @@ function checkNameSub(){
 	var regex = /^[a-zA-Z\d가-힣+#/\-\(\)\*@!éö.:π′]{1,10}$/; //현존하는 모든 언어
 	
 	if(!regex.test(inputNameValue)){
-		alert("올바른 문장이 아닙니다.");
+		alert("올바른 형식이 아닙니다. 프로그래밍 언어 이름을 10글자 이내로 적어주세요");
         event.preventDefault();	
 	}
 }
+
+function checkDelete(){
+msg = "정말로 삭제하시겠습니까?";
+	if (confirm(msg)!=0) {
+		//실행!     
+	} else {
+		event.preventDefault();	
+	}
+}
+
+
 
 //언더라인
 function underline(id){
 	var target = document.querySelector("#"+id);
 	
-	
+
 	
 }
 </script>
@@ -95,7 +106,7 @@ function underline(id){
 <!-- <body> -->
 <div class="main">
 	<div class="container-600 border">
-	<a href="manageCenter.jsp">관리센터로 돌아가기</a>
+	<a href="manageCenter.jsp" class="backToCenter"><img class="backArrow" src="<%=root %>/image/backArrow.png">관리센터로 돌아가기</a>
 <h2 class="text-center">게시판관리</h2>
 	<br><br><br>
 
@@ -105,7 +116,7 @@ function underline(id){
 					<label for="superInput">상위게시판 등록</label>
 						<input type="text" id="superInput"  class ="form-input form-input-underline" name="boardName"  required>
 						<input type="text" name="boardSuperNo"  value=0  hidden>
-						<input type="submit" class="form-btn form-btn-normal" value="등록">
+						<input type="submit" class="form-btn form-btn-normal float-right" value="등록">
 				</div>
 			</form>
 			
@@ -123,7 +134,7 @@ function underline(id){
 							</select>
 						</div>
 						<input type="text" id="subInput"  name="boardName"  class ="form-input form-input-underline"  required>
-						<input type="submit" class="form-btn form-btn-normal" value="등록">
+						<input type="submit" class="form-btn form-btn-normal float-right" value="등록">
 				
 				
 				</div>
@@ -146,7 +157,7 @@ function underline(id){
 				<select id="boardSubList<%=boardDtoSuper.getBoardNo() %>" size="<%=countSuper+1 %>" name="boardNo"  class="boardSubList selectbox">
 				<option onclick="returnBoardInfo(-1, 0, 0)">(하위게시판)</option>
 					<%for(BoardDto boardDtoSub : boardSubList){ %>
-					<option onclick="returnBoardInfo(<%=boardDtoSub.getBoardNo() %>, '<%=boardDtoSub.getBoardName() %>', 2);">
+					<option onclick="returnBoardInfo(<%=boardDtoSub.getBoardNo() %>, '<%=boardDtoSub.getBoardName() %>', 2);" >
 					<%=boardDtoSub.getBoardName() %>
 					</option>
 				<%} %>
@@ -156,17 +167,17 @@ function underline(id){
 	
 	
 	
-	<form action="deleteBoard.kh" method="get"  class="inline" >
+	<form action="deleteBoard.kh" method="get"  class="inline"  onsubmit="checkDelete()">
 		<input type="text" class="boardNo"  name ="boardNo"  hidden>
 		<input type="text" class="boardName" hidden required>
-		<input type="submit" class="form-btn form-btn-normal"  value="삭제">
+		<input type="submit" class="form-btn form-btn-normal"   value="삭제" >
 	</form>
 	<br><br>
 
 <form action="editBoard.kh" method="get"  onsubmit="checkName();">
 	<input type="text" class="boardNo"  name = "boardNo" hidden>
 	<input type="text" class="boardName form-input form-input-underline"   name = "boardName" required>
-	<input type="submit" class="form-btn form-btn-normal"  value="수정">
+	<input type="submit" class="form-btn form-btn-normal float-right"  value="수정">
 </form>
 
 <br><br><br>

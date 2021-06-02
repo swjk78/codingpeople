@@ -33,9 +33,13 @@
 .rowBtn{
 	width: auto;
 }
-.float{
+.float-left{
 	float: left;
 }
+.float-right{
+	float: right;
+}
+
 
 .text-center{
 			text-align:center;
@@ -92,7 +96,6 @@
 
 .form-btn {
 	border:none;
-	float: right;
 }
 .form-btn.form-btn-normal {
 	background-color: #9A9EC2;
@@ -133,6 +136,16 @@
 .boardSubList{
 	display: none;
 }
+
+.backToCenter{
+	text-decoration: none;
+	color : black;
+}
+
+.backArrow{
+	width: 15px;
+}
+
 .UDarrow{
 	height: 15px;
 }
@@ -174,7 +187,10 @@
 
 .vertical-center{
 	margin-top: auto;
-	margin-bottom: auto;;
+	margin-bottom: auto;
+}
+.table-client tr{
+	min-height: 38.65;	
 }
 
 .input-text {

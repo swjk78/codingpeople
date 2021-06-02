@@ -31,6 +31,9 @@
    width: 450px;;
    height: 450px;
    }
+   .underBtn{
+   
+   }
   </style>
   
 </head>
@@ -159,8 +162,8 @@
 					</tr>
 					
 					<tr>
-						<td><a href="manageClient.jsp">회원관리</a></td>
-						<td><a href="manageBoard.jsp">게시판관리</a></td>
+						<td class="underBtn"><a href="manageClient.jsp">회원관리</a></td>
+						<td class="underBtn"><a href="manageBoard.jsp">게시판관리</a></td>
 						<td>게시글관리</td>
 					</tr>
 				
