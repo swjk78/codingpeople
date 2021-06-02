@@ -325,4 +325,25 @@ public class ClientDao {
 		}
 		return ageRangeList;
 	}
+	
+	//회원이 super인지 int 반환하는 기능 (boolean이 어렵네요)
+	public boolean isSuper(int clientNo) throws Exception {
+	
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select client_grade from client where client_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		//System.out.println("등급" + rs.getString("client_grade"));
+		boolean isSuper = rs.getString("client_grade").equals("super");
+		//System.out.println("불린" + isSuper);
+		if(isSuper) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

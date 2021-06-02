@@ -35,7 +35,7 @@ String root = request.getContextPath();%>
 		</div>
 		<div class = "row text-center">
 			<button type = "submit" style= 'cursor:pointer' class = "form-input form-btn form-btn-home" 
-						onclick = "location.href = '<%=root %>index.jsp'">홈으로 돌아가기</button>
+						onclick = "location.href = '<%=root %>/index.jsp'">홈으로 돌아가기</button>
 		</div>
 	</div>
 </div>
