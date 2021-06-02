@@ -82,13 +82,12 @@ public class PostListDao {
 			
 			postListDto.setPostNo(rs.getInt("post_no"));
 			postListDto.setPostTitle(rs.getString("post_title"));					
-			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));						
+			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));//내용검색을위한						
 			postListDto.setPostViewCount(rs.getInt("post_view_count"));
 			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-			postListDto.setPostDate(rs.getDate("post_date"));
-			//내용검색을위한
+			postListDto.setPostDate(rs.getDate("post_date"));			
 			postListDto.setPostContents(rs.getString("post_contents"));
-			
+			postListDto.setBlind(rs.getString("post_blind").charAt(0));
 					
 			//닉네임표시
 			postListDto.setClientNick(rs.getString("client_nick"));
@@ -97,7 +96,7 @@ public class PostListDao {
 		con.close();
 		return search;
 	}
-	//페이지블럭 계산을위한 카운트(개수) 
+	//페이지블럭 계산을위한 카운트(개수) 검색블럭
 	public int getCount(String type, String keyword) throws Exception{
 		Connection con = JdbcUtils.getConnection();
 		
@@ -112,12 +111,27 @@ public class PostListDao {
 		con.close();
 		return count;
 	}
+	//전체포스트리스트블럭
 	public int getCount() throws Exception{
 		Connection con = JdbcUtils.getConnection();
 		
 		String sql = "select count(*) from post_list";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		con.close();
+		return count;
+	}
+	//내글목록 리스트블럭
+	public int getCount(int clientNo) throws Exception{
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select count(*) from post_list where client_no=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
@@ -149,5 +163,75 @@ public class PostListDao {
 		con.close();
 		
 		return result > 0;
+	}
+	
+	//내가 쓴 게시글 불러오기
+	
+	public List<PostListDto> searchWriter(int clientNo, int startRow, int endRow) throws Exception{
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select * from("
+				+ "select tmp.*,rownum rn from( "
+				+ 		"select * from post_list where client_no = ? order by post_no desc "
+				+ ")tmp "
+				+ ") where rn between ? and ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.setInt(2, startRow);
+		ps.setInt(3, endRow);
+		
+		ResultSet rs = ps.executeQuery();
+		List<PostListDto> myPost = new ArrayList<>();
+		while(rs.next()) {
+			PostListDto postListDto = new PostListDto();
+						
+			postListDto.setPostNo(rs.getInt("post_no"));
+			postListDto.setPostTitle(rs.getString("post_title"));					
+			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));					
+			postListDto.setPostViewCount(rs.getInt("post_view_count"));
+			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+			postListDto.setPostDate(rs.getDate("post_date"));			
+			postListDto.setPostContents(rs.getString("post_contents"));
+			postListDto.setBlind(rs.getString("post_blind").charAt(0));
+					
+			
+			postListDto.setClientNick(rs.getString("client_nick"));
+			myPost.add(postListDto);
+		}
+		con.close();
+		return myPost;		
+	}
+	//내가좋아요한글
+	public List<PostListDto> myLike(int clientNo, int startRow, int endRow) throws Exception{
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select * from( "
+						+ "select tmp.*,rownum rn from( "
+						+ 		"select * from my_like where client_no = ? order by post_no desc "
+						+ ")tmp "
+					 + ") where rn between ? and ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.setInt(2, startRow);
+		ps.setInt(3, endRow);
+		
+		ResultSet rs = ps.executeQuery();
+		List<PostListDto> likeList = new ArrayList<>();
+		while(rs.next()) {
+			PostListDto postListDto = new PostListDto();
+						
+			postListDto.setPostNo(rs.getInt("post_no"));
+			postListDto.setPostTitle(rs.getString("post_title"));					
+			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));			
+			postListDto.setPostViewCount(rs.getInt("post_view_count"));
+			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+			postListDto.setPostDate(rs.getDate("post_date"));						
+			postListDto.setBlind(rs.getString("post_blind").charAt(0));
+			//검색창 보통 안쓰길래 myLike 뷰로 만들어서 contents뺌 내가쓴글은 post_list로 검색하기에 넣을수밖에없었구여		
+			
+			postListDto.setClientNick(rs.getString("client_nick"));
+			likeList.add(postListDto);
+		}
+		con.close();
+		return likeList;
+		
 	}
 }
