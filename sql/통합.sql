@@ -48,9 +48,9 @@ post_blind char(1) default 'F' not null check(post_blind in ('T', 'F'))
 );
 create sequence post_seq;
 create or replace view post_list as
-select post_no, post_client_no, post_title, post_contents, post_date,
-post_like_count, post_comments_count, post_view_count, post_blind, client_nick
-from post left outer join client on post_client_no = client_no;
+select post.*, client_nick, board_group from post
+left outer join client on post_client_no = client_no
+left outer join board on post_board_no = board_no;
 
 -- 게시글 추천 테이블
 create table post_like(

@@ -21,6 +21,6 @@ create sequence post_seq;
 
 -- 게시글 목록 나열 시 필요한 뷰
 create or replace view post_list as
-select post_no, post_client_no, post_title, post_contents, post_date,
-post_like_count, post_comments_count, post_view_count, post_blind, client_nick
-from post left outer join client on post_client_no = client_no;
+select post.*, client_nick, board_group from post
+left outer join client on post_client_no = client_no
+left outer join board on post_board_no = board_no;

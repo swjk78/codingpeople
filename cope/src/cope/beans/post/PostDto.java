@@ -1,6 +1,7 @@
 package cope.beans.post;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class PostDto {
 	private int postNo, postClientNo, postBoardNo;
@@ -45,6 +46,10 @@ public class PostDto {
 	}
 	public Date getPostDate() {
 		return postDate;
+	}
+	public String getPostDateString() {
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");				
+		return simpleDateformat.format(postDate);
 	}
 	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
