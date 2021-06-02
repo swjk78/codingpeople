@@ -48,7 +48,7 @@ post_blind char(1) default 'F' not null check(post_blind in ('T', 'F'))
 );
 create sequence post_seq;
 create or replace view post_list as
-select post.*, client_nick, board_group from post
+select post.*, client_nick, board_name, board_group from post
 left outer join client on post_client_no = client_no
 left outer join board on post_board_no = board_no;
 

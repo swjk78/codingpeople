@@ -21,7 +21,7 @@ public class PostInsertServlet extends HttpServlet{
 			PostDao postDao = new PostDao();
 			PostDto postDto = new PostDto();
 			int postNo = postDao.getSequence();
-			int boardGroup = (int) req.getSession().getAttribute("boardGroup");
+			int boardGroup = Integer.parseInt(req.getParameter("boardGroup"));
 
 			postDto.setPostNo(postNo);
 			postDto.setPostClientNo((int) req.getSession().getAttribute("clientNo"));

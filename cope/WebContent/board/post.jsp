@@ -25,13 +25,14 @@
 	
 	int postNo = Integer.parseInt(request.getParameter("postNo"));
 	PostDao postDao = new PostDao();
+	postDao.increaseViewCount(postNo);
 	PostDto postDto = postDao.find(postNo);
 	
 	ClientDao clientDao = new ClientDao();
 	ClientDto clientDto = clientDao.myInfo(postDto.getPostClientNo());
 %>
 
-<jsp:include page="/template/aside.jsp"></jsp:include>
+<%-- <jsp:include page="/template/aside.jsp"></jsp:include> --%>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/common.css">
@@ -54,14 +55,30 @@
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
+
+<script>
+	window.addEventListener('load', function() {
+		document.querySelector('.delete-btn').addEventListener('click', function(e) {
+			var check = confirm('정말 삭제하시겠습니까?');
+			if (!check) {
+				e.preventDefault();
+			}
+		});
+	});
+</script>
+
 </head>
 <body>
 <div class="container-900">
 	<div class="row text-left">
-		<h2><%=boardGroupName%></h2>
+		<h2><a href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
+	<%=boardGroupName%></a></h2>
 	</div>
 	<div class="row text-left">
-		<%=boardDao.findBoardName(postDto.getPostBoardNo())%>
+		<a href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
+				&boardNo=<%=postDto.getPostBoardNo()%>">
+				<%=boardDao.findBoardName(postDto.getPostBoardNo())%>
+		</a>
 	</div>
 	<div class="row text-left">
 		<%=postDto.getPostTitle()%>
@@ -144,8 +161,8 @@
 
 	<!-- 버튼 영역 -->
 	<div class="row text-right">
-		<a href="postEdit.jsp?postNo=<%=postNo%>" class="link-btn">수정</a>
-		<a href="postDelete.kh?postNo=<%=postNo%>" class="link-btn">삭제</a>
+		<a href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn">수정</a>
+		<a href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn delete-btn">삭제</a>
 		<a href="postForm.jsp?boardGroup=<%=boardGroup%>&write" class="link-btn">글쓰기</a>
 		<a href="postListTest.jsp?boardGroup=<%=boardGroup%>" class="link-btn">목록</a>
 	</div>
