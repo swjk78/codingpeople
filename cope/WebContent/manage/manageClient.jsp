@@ -220,7 +220,7 @@
 					<tr>
 						<td><%=clientDto.getClientNo()%></td>
 						<td><%=clientDto.getClientId()%></td>
-						<td><a href=""><%=clientDto.getClientNick()%></a></td>
+						<td><a href="<%=root%>/client.jsp?clientNo=<%=clientDto.getClientNo()%>"><%=clientDto.getClientNick()%></a></td>
 						<td><%=clientDto.getClientEmail()%></td>
 						<td>
 							<%if (clientDto.getClientBirthYear() == 0) {%>
