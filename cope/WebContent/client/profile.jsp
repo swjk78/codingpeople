@@ -83,7 +83,11 @@ String root = request.getContextPath();
 					<span class="grade"><%=clientDto.getClientGradeKorean()%></span>
 					<img class="imgRound" src="https://dummyimage.com/200/<%=randomInt %>/ffffff&text=<%=ch %>" >
 					<h3><%=clientDto.getClientNick() %></h3>
+					<%if (request.getParameter("otherNo") == null || Integer.parseInt(request.getParameter("otherNo"))==clientNo){%>
 					<h4><%=clientDto.getClientEmail() %></h4>
+					<%}else{%>
+					<h4><%=clientDto.getClientEmail().substring(1,3) %>********</h4>
+					<%} %>
 					<p>okky 회원</p>
 				</div>
 				
