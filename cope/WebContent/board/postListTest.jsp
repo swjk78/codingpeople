@@ -163,6 +163,7 @@
 	<h1><a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
 	<%=boardGroupName%></a></h1>
 	<form action="postListTest.jsp" method="post" class="form-size">
+		<input type="hidden" name="boardGroup" value="<%=boardGroup%>">
 		<select name="pageSize">
 			<option value="10">10개씩</option>
 			<option value="20">20개씩</option>
