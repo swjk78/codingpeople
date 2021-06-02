@@ -220,7 +220,7 @@
 					<tr>
 						<td><%=clientDto.getClientNo()%></td>
 						<td><%=clientDto.getClientId()%></td>
-						<td><a href="<%root%>/client/profile.jsp?"><%=clientDto.getClientNick()%></a></td>
+						<td><a href=""><%=clientDto.getClientNick()%></a></td>
 						<td><%=clientDto.getClientEmail()%></td>
 						<td>
 							<%if (clientDto.getClientBirthYear() == 0) {%>
@@ -288,7 +288,7 @@
 			<div class="row">
 				<form action="manageClient.jsp" method="get" class="search-form">
 					<input type="hidden" name="pageNo">
-					<input type="hidden" name="pageSize" value="<%=pageSize%>">
+					<input type="hidden" name="pageSize" value="<%=pageSize %>">
 					<select class="form-input-inline select-form" name="searchType">
 						<option value="client_id">아이디</option>
 						<option value="client_nick">닉네임</option>
