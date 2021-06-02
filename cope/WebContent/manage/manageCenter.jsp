@@ -18,10 +18,12 @@
 <!-- 차트.js를 가져오는 코드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
 
- <% //나이를 List에 담기
+ <% 
+ 	//나이를 List에 담기
     ClientDao clientDao = new ClientDao();
     List<Integer>ageRangeList = clientDao.getAgeRange();
     BoardDao boardDao = new BoardDao();
+    //게시글 개수 List에 담기
     List<BoardDto>boardSuperList = boardDao.showListBoardSuper();
     List<Integer>countUnderpostList = boardDao.countUnderPosts(boardSuperList);
  %>

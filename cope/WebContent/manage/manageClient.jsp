@@ -300,6 +300,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="main">
 <jsp:include page="/template/sessionView.jsp"></jsp:include>
 </div>

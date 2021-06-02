@@ -21,6 +21,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <script>
+
 //하위게시판 보이는 기능(나머지는 숨기고)
 function returnBoardInfo(boardNo, boardName, isSuper){
 			var inputBoardNo = document.getElementsByClassName("boardNo");
