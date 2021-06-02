@@ -30,12 +30,12 @@ public class LoginServlet extends HttpServlet{
 			
 			if(result != null) {
 				req.getSession().setAttribute("clientNo", result.getClientNo());
-				resp.sendRedirect("profile.jsp");
+				resp.sendRedirect(req.getContextPath());
 				
 			}
 			else {
-				
-				resp.sendRedirect("login.jsp?error");
+				req.getSession().setAttribute("errorCheck", "notFound");
+				resp.sendRedirect("Loginso.jsp");
 				
 				
 			}

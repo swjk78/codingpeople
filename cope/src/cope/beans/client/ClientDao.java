@@ -98,7 +98,6 @@ public ClientDto login(ClientDto clientDto) throws Exception{
 			
 			find.setClientNo(rs.getInt("client_no"));
 			find.setClientId(rs.getString("client_id"));
-			find.setClientNick(rs.getString("client_nick"));
 	
 		}
 		else {
