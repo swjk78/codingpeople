@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.client.ClientDaoTest;
+import cope.beans.client.ClientDao;
 import cope.beans.utils.SendEmail;
 
 // 입력된 이메일로 회원 아이디를 찾아서 이메일로 전송하는 서블릿
@@ -21,7 +21,7 @@ public class FindIdServlet extends HttpServlet {
 		try {
 			req.setCharacterEncoding("UTF-8");
 			String inputEmail = req.getParameter("inputEmail");
-			ClientDaoTest clientDao = new ClientDaoTest();
+			ClientDao clientDao = new ClientDao();
 			String clientId = clientDao.findId(inputEmail);
 			
 			// 메일 전송
