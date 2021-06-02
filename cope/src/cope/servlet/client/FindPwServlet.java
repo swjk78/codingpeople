@@ -41,11 +41,11 @@ public class FindPwServlet extends HttpServlet {
 				
 				sendEmail.send();
 				
-				resp.sendRedirect("resetPw.jsp");
+				resp.sendRedirect("resetPw.jsp?success");
 			}
 			// 일치하는 이메일이 없는 경우
 			else {
-				resp.sendRedirect("findPw.jsp?error");
+				resp.sendRedirect("findPw.jsp?fail");
 			}
 		}
 		catch (Exception e) {

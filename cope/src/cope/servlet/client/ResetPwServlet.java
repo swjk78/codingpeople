@@ -26,7 +26,7 @@ public class ResetPwServlet extends HttpServlet {
 				resp.sendRedirect("login.jsp");
 			}
 			else {
-				resp.sendRedirect("resetPw.jsp?error");
+				resp.sendRedirect("resetPw.jsp?fail");
 			}
 		}
 		catch (Exception e) {
