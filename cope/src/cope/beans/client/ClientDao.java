@@ -122,7 +122,7 @@ public class ClientDao {
 	public List<ClientDto> list(ListParameter listParameter) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select * from(" + "select rownum rn, tmp.* from("
+		String sql = "select * from(select rownum rn, tmp.* from("
 						+ "select client_no, client_id, client_nick, client_email, client_birth_year,"
 						+ "client_grade, client_unlock_date from client order by #1 #2, client_no desc) tmp"
 					+ ") where rn between ? and ?";
@@ -155,7 +155,7 @@ public class ClientDao {
 	public List<ClientDto> search(ListParameter listParameter) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "select * from(" + "select rownum rn, tmp.* from("
+		String sql = "select * from(select rownum rn, tmp.* from("
 						+ "select client_no, client_id, client_nick, client_email, client_birth_year, client_grade,"
 						+ "client_unlock_date from client where instr(#1, ?) > 0 order by #2 #3, client_no desc) tmp"
 					+ ") where rn between ? and ?";
@@ -325,7 +325,7 @@ public class ClientDao {
 		}
 		return ageRangeList;
 	}
-	
+
 	//회원이 super인지 int 반환하는 기능 (boolean이 어렵네요)
 	public boolean isSuper(int clientNo) throws Exception {
 	

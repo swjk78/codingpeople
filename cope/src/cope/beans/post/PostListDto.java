@@ -9,8 +9,8 @@ public class PostListDto {
 	private Date postDate;
 	private int postLikeCount, postViewCount, postCommentsCount;
 	private char postBlind;
-	private String clientNick;
-	private int groupNo;
+	private String clientNick, boardName;
+	private int boardGroup;
 	
 	public PostListDto() {
 		super();
@@ -86,10 +86,16 @@ public class PostListDto {
 	public void setClientNick(String clientNick) {
 		this.clientNick = clientNick;
 	}
-	public int getGroupNo() {
-		return groupNo;
+	public String getBoardName() {
+		return boardName;
 	}
-	public void setGroupNo(int groupNo) {
-		this.groupNo = groupNo;
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
+	public int getBoardGroup() {
+		return boardGroup;
+	}
+	public void setBoardGroup(int boardGroup) {
+		this.boardGroup = boardGroup;
 	}
 }

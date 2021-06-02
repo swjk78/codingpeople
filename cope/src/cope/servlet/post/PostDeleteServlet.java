@@ -14,21 +14,22 @@ import cope.beans.post.PostDao;
 public class PostDeleteServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-try {
-	// 게시글 번호 호출
-	int postNo = Integer.parseInt(req.getParameter("postNo"));
-	
-	//처리
-	PostDao postDao = new PostDao();
-	postDao.deletePost(postNo);
-	
-	//출력
-	resp.sendRedirect("post.jsp");
-}
-	catch(Exception e) {
-		e.printStackTrace();
-		resp.sendError(500);
+		try {
+			int postNo = Integer.parseInt(req.getParameter("postNo"));
+			
+			PostDao postDao = new PostDao();
+			boolean result = postDao.deletePost(postNo);
+			
+			if (result) {
+				resp.sendRedirect("postListTest.jsp?boardGroup=" + req.getParameter("boardGroup"));
+			}
+			else {
+				// 미정
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			resp.sendError(500);
+		}
 	}
 }
-	
-	}

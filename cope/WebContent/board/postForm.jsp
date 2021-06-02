@@ -1,10 +1,12 @@
+<%@page import="cope.beans.post.PostDto"%>
+<%@page import="cope.beans.post.PostDao"%>
 <%@page import="cope.beans.board.BoardDto"%>
 <%@page import="java.util.List"%>
 <%@page import="cope.beans.board.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:include page="/template/aside.jsp"></jsp:include>
+<%-- <jsp:include page="/template/aside.jsp"></jsp:include> --%>
 <html>
 <link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/join.css">
 <head>
@@ -42,14 +44,32 @@
 	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
 	String boardGroupName = boardDao.findBoardName(boardGroup);
 	
+	boolean isWrite = request.getParameter("write") != null;
+	PostDto postDto = new PostDto();
+	if (!isWrite) {
+		PostDao postDao = new PostDao();
+		int postNo = Integer.parseInt(request.getParameter("postNo"));
+		postDto = postDao.find(postNo);
+	}
+	
 	List<BoardDto> subBoardList = boardDao.showListBoardSub(boardGroup);
  %>
+ 
+ <script>
+ 	window.addEventListener('load', function () {
+	 	if (<%=!isWrite%>) {
+	 		var selectBoardNo = document.querySelector('select[name=postBoardNo]');
+	 		selectBoardNo.value = '<%=postDto.getPostBoardNo()%>';
+	 	}
+ 	});
+ </script>
 
 <div class = "display-inline-block text-center">
-	<h2><%=boardGroupName%></h2>
+	<h2><a href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
+	<%=boardGroupName%></a></h2>
 	<hr>
 	<div class="display-inline-block">
-		<%if (request.getParameter("write") != null) {%>
+		<%if (isWrite) {%>
 		<h3>글 작성</h3>
 		<form action="postInsert.kh" method="post" class="layout">
 			<input type="hidden" name="boardGroup" value="<%=boardGroup%>">
@@ -74,6 +94,8 @@
 		<%} else {%>
 		<h3>글 수정</h3>
 		<form action="postEdit.kh" method="post" class="layout">
+			<input type="hidden" name="postNo" value="<%=request.getParameter("postNo")%>">
+			<input type="hidden" name="boardGroup" value="<%=boardGroup%>">
 			<div class="row text-left">
 				<select name="postBoardNo">
 					<%for (BoardDto boardDto : subBoardList) {%>
@@ -82,10 +104,12 @@
 				</select>
 			</div>
 			<div>
-				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="box-title">
+				<input type="text" name="postTitle" placeholder="제목을 입력하세요"
+				class="box-title" value="<%=postDto.getPostTitle()%>">
 			</div>
 			<div>
-				<textarea name="postContents" placeholder="내용을 입력하세요" class="box-contents"></textarea>
+				<textarea name="postContents" placeholder="내용을 입력하세요"
+				class="box-contents"><%=postDto.getPostContents()%></textarea>
 			</div>
 			<input type="submit" value="작성완료">
 		</form>

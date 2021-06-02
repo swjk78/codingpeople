@@ -37,29 +37,35 @@ public class PostDao {
 		con.close();
 	}
 
-	// 게시글 수정 (게시판 no 조회 -> 제목, 내용을 수정)
-	public void editPost(PostDto postDto) throws Exception {
+	// 게시글 수정
+	public boolean editPost(PostDto postDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "update post set post_title = ?, set post_contents " + "where post_no = ? ";
+		String sql = "update post set post_board_no = ?, post_title = ?, post_contents = ? where post_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, postDto.getPostTitle());
-		ps.setString(2, postDto.getPostContents());
-		ps.execute();
+		ps.setInt(1, postDto.getPostBoardNo());
+		ps.setString(2, postDto.getPostTitle());
+		ps.setString(3, postDto.getPostContents());
+		ps.setInt(4, postDto.getPostNo());
+		int count = ps.executeUpdate();
 
 		con.close();
+		
+		return count == 1;
 	}
 
-	// 게시글 삭제 (게시판 no 조회 -> 모두 삭제)
-	public void deletePost(int postNo) throws Exception {
+	// 게시글 삭제
+	public boolean deletePost(int postNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
 		String sql = "delete post where post_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, postNo);
-		ps.execute();
+		int count = ps.executeUpdate();
 
 		con.close();
+		
+		return count == 1;
 	}
 
 	// 게시글 블라인드/블라인드 해제 기능
@@ -114,5 +120,17 @@ public class PostDao {
 		con.close();
 		
 		return postDto;
+	}
+	
+	// 조회수 증가 기능
+	public void increaseViewCount(int postNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update post set post_view_count = post_view_count + 1 where post_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, postNo);
+		ps.executeUpdate();
+		
+		con.close();
 	}
 }
