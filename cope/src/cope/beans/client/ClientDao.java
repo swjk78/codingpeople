@@ -123,9 +123,9 @@ public class ClientDao {
 		Connection con = JdbcUtils.getConnection();
 
 		String sql = "select * from(" + "select rownum rn, tmp.* from("
-				+ "select client_no, client_id, client_nick, client_email, client_birth_year,"
-				+ "client_grade, client_unlock_date from client order by #1 #2" + ") tmp"
-				+ ") where rn between ? and ?";
+						+ "select client_no, client_id, client_nick, client_email, client_birth_year,"
+						+ "client_grade, client_unlock_date from client order by #1 #2, client_no desc) tmp"
+					+ ") where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getOrderType());
 		sql = sql.replace("#2", listParameter.getOrderDirection());
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -156,9 +156,9 @@ public class ClientDao {
 		Connection con = JdbcUtils.getConnection();
 
 		String sql = "select * from(" + "select rownum rn, tmp.* from("
-				+ "select client_no, client_id, client_nick, client_email, client_birth_year,"
-				+ "client_grade, client_unlock_date from client where instr(#1, ?) > 0 " + "order by #2 #3" + ") tmp"
-				+ ") where rn between ? and ?";
+						+ "select client_no, client_id, client_nick, client_email, client_birth_year, client_grade,"
+						+ "client_unlock_date from client where instr(#1, ?) > 0 order by #2 #3, client_no desc) tmp"
+					+ ") where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 		sql = sql.replace("#2", listParameter.getOrderType());
 		sql = sql.replace("#3", listParameter.getOrderDirection());
