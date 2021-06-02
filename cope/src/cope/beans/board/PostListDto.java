@@ -13,6 +13,7 @@ public class PostListDto {
 	private int postViewCount;
 	private int postLikeCount;
 	private String postContents;
+	private char blind;
 	public PostListDto() {
 		super();
 	}
@@ -68,6 +69,12 @@ public class PostListDto {
 	}
 	public void setPostContents(String postContents) {
 		this.postContents = postContents;
+	}
+	public char getBlind() {
+		return blind;
+	}
+	public void setBlind(char blind) {
+		this.blind = blind;
 	}
 	
 	
