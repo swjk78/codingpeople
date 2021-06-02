@@ -8,12 +8,12 @@
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
 
 <body>
-<div class="main">
-	<div class = "text-center">
-	<a href= "<%=request.getContextPath()%>/index.jsp">
-	<img src="<%=request.getContextPath()%>/image/example.png" class = "containerimg">
+<div class="text-center width-auto">
+	<a href= "<%=request.getContextPath()%>/index.jsp" class = "padding-img">
+	<img src="<%=request.getContextPath()%>/image/example.png" class = "containerimg" max-width = 500px;>
 	</a>
-	</div>
+		</div>
+		
 	<div class = "container border">
 		<div class = "row text-center">
 			<h2>회원 가입</h2>
@@ -23,6 +23,7 @@
 			<div class = "row text-left">
 				<label for = "clientId">아이디</label>
 				<input type = "text" name="clientId" id = "clientId" required class = "form-input form-input-underline" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
+				<button class = "form-btn form-btn-normal " onclick = "">ID중복확인</button>
 					<span class = "fail">아이디 형식이 올바르지 않습니다</span>
 					<span class = "success">올바른 형식의 아이디입니다</span>
 			</div>
@@ -64,7 +65,7 @@
 			</div>
 		</form>
 	</div>
-</div>
+
 </body>
 </html>
 <jsp:include page="/template/miniFooter.jsp"></jsp:include>
