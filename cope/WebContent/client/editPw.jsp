@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/client.css">
 <style>
 	.error{
 		color:red;
@@ -76,39 +76,42 @@
 	</script>
 </head>
 <body>
-	<div class="container-1000">
-	<div class=row><span>비밀번호 변경</span></div>
+<jsp:include page="/template/aside.jsp"></jsp:include>
+<div class="main">
+	<div class="container-600 border">
+	<div class=row><h2 class="text-center">비밀번호 변경</h2></div>
 	
 	<form action="editPw.kh" method="post" class="form-input form">
 	
 	<div class="row">	
-	<input  type="password" placeholder="현재비밀번호를입력하세요" name="originPw" class="form-input form-input-underline">
+	<input  type="password" placeholder="현재 비밀번호를 입력하세요" name="originPw" class="form-input form-input-underline">
 	<span></span>
 	</div>
 	
 	<div class="row">
-	<input  type="password" placeholder="바꿀비밀번호를입력하세요" name="chgPw" class="form-input form-input-underline">
+	<input  type="password" placeholder="바꿀 비밀번호를 입력하세요" name="chgPw" class="form-input form-input-underline">
 	<span></span>
 	</div>
 	
 	<div class="row">
-	<input  type="password" placeholder="바꿀비밀번호를입력하세요" name="checkPw" class="form-input form-input-underline">
+	<input  type="password" placeholder="바꿀 비밀번호를 입력하세요" name="checkPw" class="form-input form-input-underline">
 	<span></span>
 	</div>
 	<div>
 		<%if(request.getParameter("error") != null){%>
 			<div>
-				<span class="error">비밀번호가 일치하지않습니다</span>
+				<span class="error">현재 비밀번호가 일치하지않습니다</span>
 			</div>
 		<%} %>
 	</div>
 	
 	
 	<div class="row">
-	<input type="submit" value="변경" class="form-btn form-btn-normal">
+	<input type="submit" value="변경" class="form-btn form-btn-normal float-right">
 	</div>
-	
 	</form>
+	<br><br><br>
 	</div>
+</div>
 </body>
 </html>

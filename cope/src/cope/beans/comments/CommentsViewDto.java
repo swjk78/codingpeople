@@ -1,6 +1,7 @@
 package cope.beans.comments;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class CommentsViewDto { //client와 조인하여 사용될 Dto
 	private int commentsNo;
@@ -36,6 +37,10 @@ public class CommentsViewDto { //client와 조인하여 사용될 Dto
 	}
 	public Date getCommentsDate() {
 		return commentsDate;
+	}
+	public String getCommentsDateToday() {
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat("HH:mm:ss");				
+		return simpleDateformat.format(commentsDate);
 	}
 	public void setCommentsDate(Date commentsDate) {
 		this.commentsDate = commentsDate;
