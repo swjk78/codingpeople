@@ -1,7 +1,7 @@
 <%@page import="cope.beans.utils.ListParameter"%>
-<%@page import="cope.beans.client.ClientDtoTest"%>
+<%@page import="cope.beans.client.ClientDto"%>
 <%@page import="java.util.List"%>
-<%@page import="cope.beans.client.ClientDaoTest"%>
+<%@page import="cope.beans.client.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -49,8 +49,8 @@
 	int startRow = pageNo * pageSize - (pageSize - 1);
 	int endRow = pageNo * pageSize; 
 	
-	ClientDaoTest clientDao = new ClientDaoTest();
-	List<ClientDtoTest> clientList;
+	ClientDao clientDao = new ClientDao();
+	List<ClientDto> clientList;
 	ListParameter listParameter = new ListParameter();
 	
 	listParameter.setStartRow(startRow);
@@ -145,7 +145,7 @@
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
 <div class="main manage-client">
 	<div class="container-1000 border">
-	<a href="manageCenter.jsp">관리센터로 돌아가기</a>
+	<a href="manageCenter.jsp" class="backToCenter"><img class="backArrow" src="<%=root %>/image/backArrow.png">관리센터로 돌아가기</a>
 		<div class="row">
 			<h2 class="text-center text-black"><a href="manageClient.jsp" class="">회원관리</a></h2>
 			
@@ -216,11 +216,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% for (ClientDtoTest clientDto : clientList) {%>
+					<% for (ClientDto clientDto : clientList) {%>
 					<tr>
 						<td><%=clientDto.getClientNo()%></td>
 						<td><%=clientDto.getClientId()%></td>
-						<td><a href=""><%=clientDto.getClientNick()%></a></td>
+						<td><a href="<%root%>/client/profile.jsp?"><%=clientDto.getClientNick()%></a></td>
 						<td><%=clientDto.getClientEmail()%></td>
 						<td>
 							<%if (clientDto.getClientBirthYear() == 0) {%>
@@ -300,4 +300,6 @@
 		</div>
 	</div>
 </div>
+<div class="main">
 <jsp:include page="/template/sessionView.jsp"></jsp:include>
+</div>
