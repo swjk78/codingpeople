@@ -30,7 +30,7 @@
 	BoardDao boardDao = new BoardDao();
 	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
 	request.getSession().setAttribute("boardGroup", boardGroup);
-	String boardSuperName = boardDao.findBoardName(boardGroup);
+	String boardGroupName = boardDao.findBoardName(boardGroup);
 	
 	// 페이지 번호
 	int pageNo;
@@ -161,7 +161,7 @@
 </head>
 <body>
 	<h1><a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
-	<%=boardSuperName%></a></h1>
+	<%=boardGroupName%></a></h1>
 	<form action="postListTest.jsp" method="post" class="form-size">
 		<select name="pageSize">
 			<option value="10">10개씩</option>

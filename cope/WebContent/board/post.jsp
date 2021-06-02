@@ -7,21 +7,21 @@
 
 <%
 	// +기호를 파라미터로 인식할 수 있게 처리
-// 	String boardSuperName;
+// 	String boardGroupName;
 // 	int valueLen = 15;
 // 	if (request.getQueryString().substring(valueLen).contains("+")) {
-// 		boardSuperName = request.getQueryString().substring(valueLen);
-// 		int separator = boardSuperName.indexOf("&");
-// 		boardSuperName = boardSuperName.substring(0, separator);
+// 		boardGroupName = request.getQueryString().substring(valueLen);
+// 		int separator = boardGroupName.indexOf("&");
+// 		boardGroupName = boardGroupName.substring(0, separator);
 // 	}
 // 	else {
-// 		boardSuperName = request.getParameter("boardSuperName");
+// 		boardGroupName = request.getParameter("boardGroupName");
 // 	}
 
 	BoardDao boardDao = new BoardDao();
 	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
 	request.getSession().setAttribute("boardGroup", boardGroup);
-	String boardSuperName = boardDao.findBoardName(boardGroup);
+	String boardGroupName = boardDao.findBoardName(boardGroup);
 	
 	int postNo = Integer.parseInt(request.getParameter("postNo"));
 	PostDao postDao = new PostDao();
@@ -58,7 +58,7 @@
 <body>
 <div class="container-900">
 	<div class="row text-left">
-		<h2><%=boardSuperName%></h2>
+		<h2><%=boardGroupName%></h2>
 	</div>
 	<div class="row text-left">
 		<%=boardDao.findBoardName(postDto.getPostBoardNo())%>

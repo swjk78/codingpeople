@@ -40,13 +40,13 @@
 <%
 	BoardDao boardDao = new BoardDao();
 	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
-	String boardSuperName = boardDao.findBoardName(boardGroup);
+	String boardGroupName = boardDao.findBoardName(boardGroup);
 	
 	List<BoardDto> subBoardList = boardDao.showListBoardSub(boardGroup);
  %>
 
 <div class = "display-inline-block text-center">
-	<h2><%=boardSuperName%></h2>
+	<h2><%=boardGroupName%></h2>
 	<hr>
 	<div class="display-inline-block">
 		<%if (request.getParameter("write") != null) {%>
