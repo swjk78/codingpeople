@@ -197,6 +197,7 @@
 					orderDirection = 'desc';	
 				}
 
+				document.querySelector('input[name=pageSize]').value = <%=pageSize%>;
 				document.querySelector('input[name=orderType]').value = orderType;
 				document.querySelector('input[name=orderDirection]').value = orderDirection;
 				document.querySelector('.search-form').submit();
@@ -273,7 +274,7 @@
 				<%} %>
 				</td>
 				<td>
-					<a href="<%=request.getContextPath()%>/client/profile.jsp?clientNo=
+					<a href="<%=request.getContextPath()%>/client/profile.jsp?otherNo=
 					<%=postListDto.getPostClientNo()%>"><%=postListDto.getClientNick() %>
 					</a>
 				</td>

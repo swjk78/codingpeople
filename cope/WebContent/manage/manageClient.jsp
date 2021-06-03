@@ -159,6 +159,7 @@
 					orderDirection = 'desc';	
 				}
 
+				document.querySelector('input[name=pageSize]').value = <%=pageSize%>;
 				document.querySelector('input[name=orderType]').value = orderType;
 				document.querySelector('input[name=orderDirection]').value = orderDirection;
 				document.querySelector('.search-form').submit();
@@ -167,7 +168,7 @@
 	});
 </script>
 
-<jsp:include page="/template/aside.jsp"></jsp:include>
+<%-- <jsp:include page="/template/aside.jsp"></jsp:include> --%>
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
 <div class="main manage-client">
 	<div class="container-1000 border">
