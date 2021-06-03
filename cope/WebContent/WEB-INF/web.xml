@@ -9,4 +9,27 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+<!--   로그인 안할경우 에러 -->
+  <error-page>
+  	<error-code>401</error-code>
+  	<location>/error/401.jsp</location>
+  </error-page>
+  
+<!--   잘못된 페이지 접속할경우 에러 -->
+   <error-page>
+  	<error-code>404</error-code>
+  	<location>/error/404.jsp</location>
+  </error-page>
+  
+<!--   등급에 맞지않는 게시판에 들어갔을때 생긴에러 -->
+   <error-page>
+  	<error-code>403</error-code>
+  	<location>/error/403.jsp</location>
+  </error-page>
+<!--   서버오류 에러 -->
+   <error-page>
+  	<error-code>500</error-code>
+  	<location>/error/500.jsp</location>
+  </error-page>
 </web-app>
