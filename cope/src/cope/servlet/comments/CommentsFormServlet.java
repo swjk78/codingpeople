@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cope.beans.comments.CommentsDao;
 import cope.beans.comments.CommentsDto;
+import cope.beans.post.PostDao;
 
 @WebServlet (urlPatterns = "/board/commentsForm.kh")//패키지는 comments이지만 post.jsp에서 쓰이므로 "/board/"
 public class CommentsFormServlet extends HttpServlet{
@@ -42,6 +43,8 @@ public class CommentsFormServlet extends HttpServlet{
 					//처리
 					CommentsDao commentsDao = new CommentsDao();
 					commentsDao.insert(commentsDto);
+					PostDao postDao = new PostDao();
+					postDao.refreshCommentsCount(PostNo);
 					System.out.println("Dao");
 					
 					//출력
