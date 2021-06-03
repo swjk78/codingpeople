@@ -18,17 +18,23 @@ public class CommentsFormServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
 				req.setCharacterEncoding("UTF-8");
-				
+				System.out.println("일단 들어옴");
 				//판별 새글 or 수정
 				boolean isNew = req.getParameter("isNew").equals("T");
-				
+				System.out.println("뉴판별");
+				//돌아가기 위한 좌표
+				int boardGroup = Integer.parseInt(req.getParameter("boardGroup"));
+				System.out.println("그룹!");
+				int PostNo = Integer.parseInt(req.getParameter("postNo"));
+				System.out.println("넘버");
 				if(isNew) { //새 댓글
 					//준비 - 파라미터에서2개, 세션에서 1개
 
 					CommentsDto commentsDto = new CommentsDto();
-					
-					commentsDto.setCommentsPostNo(Integer.parseInt(req.getParameter("commentsPostNo")));
+					System.out.println("Dto");
+					commentsDto.setCommentsPostNo(Integer.parseInt(req.getParameter("postNo")));
 					commentsDto.setCommentsContents(req.getParameter("commentsContents"));
+					System.out.println("컨텐츠");
 					
 					int CommentsClientNo = (int)req.getSession().getAttribute("clientNo");
 					commentsDto.setCommentsClientNo(CommentsClientNo);
@@ -36,9 +42,11 @@ public class CommentsFormServlet extends HttpServlet{
 					//처리
 					CommentsDao commentsDao = new CommentsDao();
 					commentsDao.insert(commentsDto);
+					System.out.println("Dao");
 					
 					//출력
-					resp.sendRedirect("post.jsp?postNo="+commentsDto.getCommentsPostNo());//다시 가져오는 군요
+					resp.sendRedirect("post.jsp?boardGroup="+ boardGroup +"&postNo="+ PostNo);
+
 				}
 				
 				else { //댓글 수정
@@ -56,7 +64,7 @@ public class CommentsFormServlet extends HttpServlet{
 					commentsDao.update(commentsDto);
 						
 					//출력
-					resp.sendRedirect("post.jsp?postNo="+commentsDto.getCommentsPostNo());
+					resp.sendRedirect("post.jsp?boardGroup="+ boardGroup +"&postNo="+ PostNo);
 				}
 				
 
