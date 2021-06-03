@@ -1,0 +1,146 @@
+@charset "UTF-8";
+* {
+ 	font-family: 'NanumSquare', sans-serif;
+	box-sizing: border-box;
+	}
+input[type=password] {
+	font-family:'Malgun gothic', dotum, sans-serif;}
+	
+input[type=password]::after placeholder {
+        	font-family: "NanumSquare";
+    } 
+     .text-decoration-none{
+    text-decoration:none;
+    }
+    
+ .blank-top{ 
+    padding-top : 80px;
+    }
+.blank-bottom{
+    padding-top: 80px;
+    }
+
+.border{			
+			width: 75%;
+			border: 3px solid #B8BAD4;
+			padding-top: 15px;
+			padding-left : 30px;
+			padding-right : 30px;
+}
+.padding-t{
+	padding-top:10px
+}
+.row{
+			width:100%;
+			margin-top: 30px;
+			margin-bottom : 30px;
+			}
+			
+.text-center{
+			text-align:center;
+}
+.text-left{
+			text-align:left;
+			}
+
+.container{
+			width : 500px;
+			margin-left:auto;
+			margin-right:auto;
+}
+
+.containerimg{
+	width : 30%;
+	height: 30%;
+}
+
+.form-input, .form-btn {
+			width : 100%;
+			padding : 1;
+			margin-top: 10px;
+			outline: none;
+}
+
+.form-input.form-input-underline {
+			border:none;
+			border-bottom: 2px solid #E2E3ED;
+}
+
+.form-input.form-input-underline:focus {
+			border-bottom-color: #9A9EC2;		
+}
+
+.form-input.form-input-inline,
+.form-btn.form-btn-inline {
+			width:auto;
+}
+	
+.form-btn {
+			border:none;
+}
+.form-btn.form-btn-normal {
+			background-color: #9A9EC2;
+			font-size: 15px;
+			color:white;
+			padding : 18px
+}
+
+.fail, .success{
+	display:none;
+	font-size: 15px;
+}
+.fail{
+	color : red;
+}
+
+.a{
+	text-decoration: underline;
+}
+
+ .decoration-none{
+ text-decoration: none;
+ }
+     .text-center{
+    text-align: center; 
+    }
+    
+    .box{
+    width:30%;
+    height:30%;
+    padding-top: auto;
+    padding-bottom: auto;
+    display: inline-block;	
+    }
+    
+    .hr{
+    border: 0px;
+    height:2px;
+    background:#9A9EC2;
+    }
+ 
+ .main{
+ 	position: absolute;
+    width: 80%;
+    margin: auto;
+    
+ }
+ 
+    .inline-block{
+    position: relative;
+	width: 100%;
+}
+
+    .width-auto{
+    width:100%;
+    }
+    
+    .padding-img{
+    max-width : 500px;
+    position : relative;
+    padding-right: 200px;
+    padding-top: 300px;
+    }
+    
+    .display-inline-block{
+    display:inline-block
+    }
