@@ -20,7 +20,7 @@ input[type=password]::after placeholder {
     padding-top: 80px;
     }
 
-.border{			
+.joinBorder{			
 			width: 100%;
 			border: 2px solid #B8BAD4;
 			padding-top: 15px;
@@ -100,9 +100,6 @@ input[type=password]::after placeholder {
  .decoration-none{
  text-decoration: none;
  }
-     .text-center{
-    text-align: center; 
-    }
     
     .box{
     width:30%;
@@ -129,6 +126,11 @@ input[type=password]::after placeholder {
     position: relative;
 	width: 100%;
 }
+.width-100{
+	width:5%;
+	padding-left:50%;
+	
+}
 
     .width-auto{
     width:100%;
@@ -137,6 +139,5 @@ input[type=password]::after placeholder {
     .padding-img{
     max-width : 500px;
     position : relative;
-    padding-right: 200px;
     padding-top: 300px;
     }

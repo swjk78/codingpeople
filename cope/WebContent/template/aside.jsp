@@ -26,23 +26,23 @@ String root = request.getContextPath();%>
 * {
  	font-family: 'NanumSquare', sans-serif;
 	box-sizing: border-box;
-	color:white;
 	}
 
+.white{
+color:white;
+
+}
 .border{
-border: 3px solid #5858A4;
+border: 3px solid red;
 }
 
 .imgdiv{
 padding-top: 5px;
 	background-color: white;
 	width: 100%;
-	padding : none;
-	margin : none;
-
 }
 .division{
-	position: relative;
+	position: absolute;
 	float: left;
 }
 
@@ -56,23 +56,34 @@ font-size : 15px;
 width: 100%;
 background-color : #5858A4
 }
+
+.loginButton{
+width:auto;
+			border:none;
+						background-color: #9A9EC2;
+			font-size: 15px;
+			color:white;
+			padding : 18px
+}
+
 </style>
 
 <!-- 왼쪽 화면 구현 -->
 
-	<div class = "division">
-		<div class="sidemenu border">
-			<div id="mainlogo">
-			<div class = "text-center imgcontainer imgdiv border">
+		<div class="sidemenu border white">
+			<div class = "text-center imgcontainer imgdiv">
 			<a href= "<%=request.getContextPath()%>/index.jsp" >
 				<img src ="<%=root %>/image/example.png" width= 200;>
 				</a>
 				</div>
-				</div>
 				<a href = "<%=request.getContextPath()%>/client/login.jsp" >
-				<button id = button value = "login">로그인</button>
-				</a>
-		<div class="login-box border">
+				<button id = loginButton value = "login" class = "loginButton">로그인</button></a>
+				<a href = "<%=request.getContextPath()%>/client/join.jsp" >
+				<button id = loginButton value = "login" class = "loginButton">회원가입</button></a>
+				
+								<button id = logoutButton value = "logout"  class= "loginButton">로그아웃</button>
+				<KH>
+		<div class="login-box border white">
 			<%if(isLogin){ %>
 				<span><a href="<%=root%>/client/profile.jsp?clientNo=세션no"><img class ="v-align-center"  src ="https://via.placeholder.com/25/FFFF00/000000?Text=ProfileImage" ></a></span>
 				<span class ="v-align-center">아이디...</span>
@@ -113,7 +124,6 @@ background-color : #5858A4
 		</div>
 		
 		</div>
-
-	</div>
+</KH>
 
 </html>
