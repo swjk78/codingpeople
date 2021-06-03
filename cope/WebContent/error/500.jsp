@@ -50,7 +50,7 @@
 		</div>
 		<div class="container border">
 			<h2>죄송합니다.</h2>
-			<h2>예기치못한 서버 문제로 인해 오류가 발생했습니다</h2>
+			<h2>예기치 못한 서버 문제로 인해 오류가 발생했습니다</h2>
 			<div class="content">
 				<p>	매우 이례적인 오류로 인해,
 				<br>
