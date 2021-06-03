@@ -41,15 +41,14 @@ li.boardSub{
 }
 
 .sidemenu{
+	top:0;
+	left:0;
 	position: fixed;
 	float: left;
-    top: 0;
-    left: 0;
-    bottom: 0;
     z-index: 1000;
 	background-color: #9A9EC2;
-    width: 200;
-    height: auto;
+    width: auto;
+    height: 100%;
 }
 
 .center{
@@ -71,3 +70,11 @@ li.boardSub{
     text-decoration: none;
     display: inline;
 }
+
+.KH > * {
+	position:relative;
+}
+
+
+
+

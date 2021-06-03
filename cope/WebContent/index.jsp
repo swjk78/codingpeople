@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <title>홈화면</title>
 </head>
-<body>
+
 <div>
 홈화면입니다.111111111111111112222222222222222222333333333333
 </div>
-</body>
+
 </html>
 <jsp:include page="/template/footer.jsp"></jsp:include>

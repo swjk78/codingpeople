@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/join.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
 
 <body>
-<div class="text-center width-auto">
-	<a href= "<%=request.getContextPath()%>/index.jsp" class = "padding-img">
-	<img src="<%=request.getContextPath()%>/image/example.png" class = "containerimg" max-width = 500px;>
+<div class="container">
+	<a href= "<%=request.getContextPath()%>/index.jsp" >
+	<img src="<%=request.getContextPath()%>/image/example.png" class = inline-block>
 	</a>
 		</div>
 		
-	<div class = "container border">
+	<div class = "container joinBorder">
 		<div class = "row text-center">
 			<h2>회원 가입</h2>
 		</div>
