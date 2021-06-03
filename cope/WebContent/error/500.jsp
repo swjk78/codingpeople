@@ -48,7 +48,7 @@
 			<img src="<%=request.getContextPath()%>/image/example.png" class = "containerimg" max-width = 500px;>
 			</a>
 		</div>
-		<div class="container border">
+		<div class="container joinBorder">
 			<h2>죄송합니다.</h2>
 			<h2>예기치못한 서버 문제로 인해 오류가 발생했습니다</h2>
 			<div class="content">

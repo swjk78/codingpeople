@@ -45,10 +45,10 @@
 	<div class="text-center width-auto">
 		<div class="img-center">
 			<a href= "<%=request.getContextPath()%>/index.jsp" class = "padding-img">
-			<img src="<%=request.getContextPath()%>/image/example.png" class = "containerimg" max-width = 500px;>
+			<img src="<%=request.getContextPath()%>/image/example.png" class = "containerimg">
 			</a>
 		</div>
-		<div class="container border">
+		<div class="container joinBorder">
 			<h2>죄송합니다.</h2>
 			<h2>페이지를 볼수있는 권한이 없습니다</h2>
 			<div class="content">
