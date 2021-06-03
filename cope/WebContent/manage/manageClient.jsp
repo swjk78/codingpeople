@@ -90,10 +90,8 @@
 	window.addEventListener('load', function() {
 		var selectSearchType = document.querySelector('select[name=searchType]');
 		var inputSearchKeyword = document.querySelector('input[name=searchKeyword]');
-		var inputPageSize = document.querySelector('input[name=pageSize]');
 		selectSearchType.value = '<%=searchType%>';
 		inputSearchKeyword.value = '<%=searchKeyword%>';
-		inputPageSize.value = '<%=pageSize%>';
 	});
 </script>
 <%} %>
@@ -159,7 +157,6 @@
 					orderDirection = 'desc';	
 				}
 
-				document.querySelector('input[name=pageSize]').value = <%=pageSize%>;
 				document.querySelector('input[name=orderType]').value = orderType;
 				document.querySelector('input[name=orderDirection]').value = orderDirection;
 				document.querySelector('.search-form').submit();
@@ -285,7 +282,7 @@
 			<div class="row">
 				<form action="manageClient.jsp" method="get" class="search-form">
 					<input type="hidden" name="pageNo">
-					<input type="hidden" name="pageSize">
+					<input type="hidden" name="pageSize" value="<%=pageSize%>">
 					<input type="hidden" name="orderType">
 					<input type="hidden" name="orderDirection">
 					<select class="form-input-inline select-form" name="searchType">

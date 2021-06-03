@@ -262,4 +262,265 @@ public class PostListDao {
 
 		return postListDto;
 	}
+	
+	// 특정 회원이 작성한 글 목록
+	public List<PostListDto> clientPostList(ListParameter listParameter, int clientNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from(select rownum rn, tmp.* from("
+					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
+						+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
+					 + "from post_list where post_client_no = ? order by #1 #2, post_no desc) tmp)"
+					 + "where rn between ? and ?";
+		sql = sql.replace("#1", listParameter.getOrderType());
+		sql = sql.replace("#2", listParameter.getOrderDirection());
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.setInt(2, listParameter.getStartRow());
+		ps.setInt(3, listParameter.getEndRow());
+		ResultSet rs = ps.executeQuery();
+		
+		List<PostListDto> clientPostList = new ArrayList<>();
+		while (rs.next()) {
+			PostListDto postListDto = new PostListDto();
+			postListDto.setPostNo(rs.getInt("post_no"));
+			postListDto.setPostClientNo(rs.getInt("post_client_no"));
+			postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+			postListDto.setPostTitle(rs.getString("post_title"));
+			postListDto.setPostContents(rs.getString("post_contents"));
+			postListDto.setPostDate(rs.getDate("post_date"));
+			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+			postListDto.setPostViewCount(rs.getInt("post_view_count"));
+			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+			postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+			postListDto.setClientNick(rs.getString("client_nick"));
+			postListDto.setBoardName(rs.getString("board_name"));
+			postListDto.setBoardGroup(rs.getInt("board_group"));
+			clientPostList.add(postListDto);
+		}
+		
+		con.close();
+		
+		return clientPostList;
+	}
+
+	// 특정 회원이 작성한 글 목록(상위 게시판 선택)
+	public List<PostListDto> clientPostList(ListParameter listParameter, int clientNo, int boardGroup) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from(select rownum rn, tmp.* from("
+				+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
+				+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
+				+ "from post_list where post_client_no = ? and board_group = ? order by #1 #2, post_no desc) tmp)"
+				+ "where rn between ? and ?";
+		sql = sql.replace("#1", listParameter.getOrderType());
+		sql = sql.replace("#2", listParameter.getOrderDirection());
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.setInt(2, boardGroup);
+		ps.setInt(3, listParameter.getStartRow());
+		ps.setInt(4, listParameter.getEndRow());
+		ResultSet rs = ps.executeQuery();
+		
+		List<PostListDto> clientPostList = new ArrayList<>();
+		while (rs.next()) {
+			PostListDto postListDto = new PostListDto();
+			postListDto.setPostNo(rs.getInt("post_no"));
+			postListDto.setPostClientNo(rs.getInt("post_client_no"));
+			postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+			postListDto.setPostTitle(rs.getString("post_title"));
+			postListDto.setPostContents(rs.getString("post_contents"));
+			postListDto.setPostDate(rs.getDate("post_date"));
+			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+			postListDto.setPostViewCount(rs.getInt("post_view_count"));
+			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+			postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+			postListDto.setClientNick(rs.getString("client_nick"));
+			postListDto.setBoardName(rs.getString("board_name"));
+			postListDto.setBoardGroup(rs.getInt("board_group"));
+			clientPostList.add(postListDto);
+		}
+		
+		con.close();
+		
+		return clientPostList;
+	}
+
+	// 특정 회원이 작성한 글 목록(상위 게시판의 하위 게시판 선택)
+	public List<PostListDto> clientPostList(ListParameter listParameter, int clientNo, int boardGroup, int boardNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from(select rownum rn, tmp.* from("
+				+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
+				+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
+				+ "from post_list where post_client_no = ? and board_group = ? and post_board_no = ? "
+				+ "order by #1 #2, post_no desc) tmp)"
+				+ "where rn between ? and ?";
+		sql = sql.replace("#1", listParameter.getOrderType());
+		sql = sql.replace("#2", listParameter.getOrderDirection());
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.setInt(2, boardGroup);
+		ps.setInt(3, boardNo);
+		ps.setInt(4, listParameter.getStartRow());
+		ps.setInt(5, listParameter.getEndRow());
+		ResultSet rs = ps.executeQuery();
+		
+		List<PostListDto> clientPostList = new ArrayList<>();
+		while (rs.next()) {
+			PostListDto postListDto = new PostListDto();
+			postListDto.setPostNo(rs.getInt("post_no"));
+			postListDto.setPostClientNo(rs.getInt("post_client_no"));
+			postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+			postListDto.setPostTitle(rs.getString("post_title"));
+			postListDto.setPostContents(rs.getString("post_contents"));
+			postListDto.setPostDate(rs.getDate("post_date"));
+			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+			postListDto.setPostViewCount(rs.getInt("post_view_count"));
+			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+			postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+			postListDto.setClientNick(rs.getString("client_nick"));
+			postListDto.setBoardName(rs.getString("board_name"));
+			postListDto.setBoardGroup(rs.getInt("board_group"));
+			clientPostList.add(postListDto);
+		}
+		
+		con.close();
+		
+		return clientPostList;
+	}
+
+	// 특정 회원이 작성한 글 목록(검색할 경우)
+	public List<PostListDto> clientPostListSearch(ListParameter listParameter, int clientNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from(select rownum rn, tmp.* from("
+						+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
+						+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
+					+ "from post_list where post_client_no = ? and instr(#1, ?) > 0 order by #2 #3, post_no desc) tmp)"
+					+ "where rn between ? and ?";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		sql = sql.replace("#2", listParameter.getOrderType());
+		sql = sql.replace("#3", listParameter.getOrderDirection());
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.setString(2, listParameter.getSearchKeyword());
+		ps.setInt(3, listParameter.getStartRow());
+		ps.setInt(4, listParameter.getEndRow());
+		ResultSet rs = ps.executeQuery();
+		
+		List<PostListDto> clientPostList = new ArrayList<>();
+		while (rs.next()) {
+			PostListDto postListDto = new PostListDto();
+			postListDto.setPostNo(rs.getInt("post_no"));
+			postListDto.setPostClientNo(rs.getInt("post_client_no"));
+			postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+			postListDto.setPostTitle(rs.getString("post_title"));
+			postListDto.setPostContents(rs.getString("post_contents"));
+			postListDto.setPostDate(rs.getDate("post_date"));
+			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+			postListDto.setPostViewCount(rs.getInt("post_view_count"));
+			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+			postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+			postListDto.setClientNick(rs.getString("client_nick"));
+			postListDto.setBoardName(rs.getString("board_name"));
+			postListDto.setBoardGroup(rs.getInt("board_group"));
+			clientPostList.add(postListDto);
+		}
+		
+		con.close();
+		
+		return clientPostList;
+	}
+
+	// 특정 회원이 작성한 글 목록(검색할 경우, 상위 게시판 선택)
+	public List<PostListDto> clientPostListSearch(ListParameter listParameter, int clientNo, int boardGroup) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from(select rownum rn, tmp.* from("
+				+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
+				+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
+				+ "from post_list where post_client_no = ? and instr(#1, ?) > 0 and board_group = ? "
+				+ "order by #2 #3, post_no desc) tmp)"
+				+ "where rn between ? and ?";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		sql = sql.replace("#2", listParameter.getOrderType());
+		sql = sql.replace("#3", listParameter.getOrderDirection());
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.setString(2, listParameter.getSearchKeyword());
+		ps.setInt(3, boardGroup);
+		ps.setInt(4, listParameter.getStartRow());
+		ps.setInt(5, listParameter.getEndRow());
+		ResultSet rs = ps.executeQuery();
+		
+		List<PostListDto> clientPostList = new ArrayList<>();
+		while (rs.next()) {
+			PostListDto postListDto = new PostListDto();
+			postListDto.setPostNo(rs.getInt("post_no"));
+			postListDto.setPostClientNo(rs.getInt("post_client_no"));
+			postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+			postListDto.setPostTitle(rs.getString("post_title"));
+			postListDto.setPostContents(rs.getString("post_contents"));
+			postListDto.setPostDate(rs.getDate("post_date"));
+			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+			postListDto.setPostViewCount(rs.getInt("post_view_count"));
+			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+			postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+			postListDto.setClientNick(rs.getString("client_nick"));
+			postListDto.setBoardName(rs.getString("board_name"));
+			postListDto.setBoardGroup(rs.getInt("board_group"));
+			clientPostList.add(postListDto);
+		}
+		
+		con.close();
+		
+		return clientPostList;
+	}
+
+	// 특정 회원이 작성한 글 목록(검색할 경우, 상위 게시판의 하위 게시판 선택)
+	public List<PostListDto> clientPostListSearch(ListParameter listParameter, int clientNo, int boardGroup, int boardNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "select * from(select rownum rn, tmp.* from("
+				+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
+				+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
+				+ "from post_list where post_client_no = ? and instr(#1, ?) > 0 and board_group = ? and post_board_no = ? "
+				+ "order by #2 #3, post_no desc) tmp)"
+				+ "where rn between ? and ?";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		sql = sql.replace("#2", listParameter.getOrderType());
+		sql = sql.replace("#3", listParameter.getOrderDirection());
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clientNo);
+		ps.setString(2, listParameter.getSearchKeyword());
+		ps.setInt(3, boardGroup);
+		ps.setInt(4, boardNo);
+		ps.setInt(5, listParameter.getStartRow());
+		ps.setInt(6, listParameter.getEndRow());
+		ResultSet rs = ps.executeQuery();
+		
+		List<PostListDto> clientPostList = new ArrayList<>();
+		while (rs.next()) {
+			PostListDto postListDto = new PostListDto();
+			postListDto.setPostNo(rs.getInt("post_no"));
+			postListDto.setPostClientNo(rs.getInt("post_client_no"));
+			postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+			postListDto.setPostTitle(rs.getString("post_title"));
+			postListDto.setPostContents(rs.getString("post_contents"));
+			postListDto.setPostDate(rs.getDate("post_date"));
+			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+			postListDto.setPostViewCount(rs.getInt("post_view_count"));
+			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+			postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+			postListDto.setClientNick(rs.getString("client_nick"));
+			postListDto.setBoardName(rs.getString("board_name"));
+			postListDto.setBoardGroup(rs.getInt("board_group"));
+			clientPostList.add(postListDto);
+		}
+		
+		con.close();
+		
+		return clientPostList;
+	}
 }

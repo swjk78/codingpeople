@@ -1,4 +1,6 @@
 -- 삭제 구문
+drop table choose;
+drop sequence choose_seq;
 drop table comments;
 drop sequence comments_seq;
 drop table post_like;
