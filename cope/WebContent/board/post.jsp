@@ -150,6 +150,10 @@ li{
 	overflow:auto;
 	width:100%;
 }
+
+.choose{
+	background-color: #b3ffff;
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
@@ -239,11 +243,11 @@ function copytextEdit(commentsNo){
 		int commentsNo =commentsViewDto.getCommentsNo(); // 자주 쓰여서 변수로 담아 둡니다.%>
 
 			<!-- 			각 댓글을 감싸고 있는 div는 서로 다른 id를 지니게 합니다.  -->
-				<div id="commentsOriginNo-<%=commentsNo%>" class="comments comments-box">
+				<div id="commentsOriginNo-<%=commentsNo%>" class="comments comments-box>">
 
 					<div class=writer-info>
-						<!-- 			이미지 -->
-					<a href="<%=root %>/client/profile.jsp?otherNo=<%=commentsNo %>"><%=commentsViewDto.getClientNick() %></a><br>
+					
+					<a href="<%=root %>/client/profile.jsp?otherNo=<%=commentsViewDto.getCommentsClientNo()%>"><%=commentsViewDto.getClientNick() %></a><br>
 					</div>
 					
 					<div class=write-time>
@@ -258,6 +262,9 @@ function copytextEdit(commentsNo){
 					<div class="writen-contents">
 						<%if(commentsViewDto.getCommentsBlind().equals("F")){ //깨끗한 글%>
 						<div><%=commentsViewDto.getCommentsContents() %></div>
+							<%if(commentsNo==chooseNo){%>
+								<img src="<%=root %>/image/choose.png" width="100">
+							 <%}%>
 						<%}else{//블라인드가 T라면%>
 						<div class=blind-contents>(블라인드된 댓글입니다.)</div>
 						<%} %>
@@ -272,8 +279,8 @@ function copytextEdit(commentsNo){
 						<input type="button" value="수정" onclick="ShowCommentsEditArea(<%=commentsViewDto.getCommentsNo()%>);">
 						<%} %>
 						
-<!-- 						//본인이 작성한 댓글이거나 || 관리자라면 삭제가 보이게 -->
-						<%if(clientNo==commentsViewDto.getCommentsClientNo() || isSuper){%>		
+<!-- 						//본인이 작성한 댓글이면 삭제가 보이게 -->
+						<%if(clientNo==commentsViewDto.getCommentsClientNo()){%>		
 							<form action="commentsDelete.kh" method="get">
 								<input type="text"  name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>" hidden>
 								<input type="text"  name="boardGroup" value=<%=boardGroup %> hidden>
