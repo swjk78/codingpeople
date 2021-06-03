@@ -22,7 +22,6 @@ public class CommentsFormServlet extends HttpServlet{
 				//판별 새글 or 수정
 				boolean isNew = req.getParameter("isNew").equals("T");
 				
-				
 				if(isNew) { //새 댓글
 					//준비 - 파라미터에서2개, 세션에서 1개
 
@@ -54,7 +53,6 @@ public class CommentsFormServlet extends HttpServlet{
 					
 					//처리
 					CommentsDao commentsDao = new CommentsDao();
-					System.out.println("이상무");
 					commentsDao.update(commentsDto);
 						
 					//출력

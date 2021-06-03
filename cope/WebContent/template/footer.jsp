@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/join.css">
 </head>
-<body>
-메인 템플릿 footer입니다.
-</body>
+<div class = text-center>
+<img src ="<%=request.getContextPath()%>/image/footer.png">
+</div>
 </html>

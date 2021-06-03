@@ -30,7 +30,6 @@ public class BoardInsertServlet extends HttpServlet{
 			//처리1 상위게시판
 			if(Integer.parseInt(req.getParameter("boardSuperNo"))==0) {
 				boardDao.insertBoardSuper(boardDto);
-				System.out.println("이상무");
 			}
 			else {
 				boardDao.insertBoardSub(boardDto);

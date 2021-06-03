@@ -1,24 +1,18 @@
 package cope.beans.post;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
-// 게시글 블라인드 기능 구현을 위한 테스트 PostDto
-
-// create or replace view post_list as
-// select post.*, client_nick, client_grade from post
-// left outer join client on post_client_no = client_no;
-// 일반 회원의 게시글만 블라인드하기 위해 post_list view 이용
-
-//create by JK
-public class PostDtoTest {
+public class PostListDto {
 	private int postNo, postClientNo, postBoardNo;
 	private String postTitle, postContents;
 	private Date postDate;
 	private int postLikeCount, postViewCount, postCommentsCount;
 	private char postBlind;
-	private String clientNick, clientGrade;
-
-	public PostDtoTest() {
+	private String clientNick;
+	private int groupNo;
+	
+	public PostListDto() {
 		super();
 	}
 	
@@ -55,6 +49,10 @@ public class PostDtoTest {
 	public Date getPostDate() {
 		return postDate;
 	}
+	public String getPostDateToday() {
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat("HH:mm");				
+		return simpleDateformat.format(postDate);
+	}
 	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
 	}
@@ -88,10 +86,10 @@ public class PostDtoTest {
 	public void setClientNick(String clientNick) {
 		this.clientNick = clientNick;
 	}
-	public String getClientGrade() {
-		return clientGrade;
+	public int getGroupNo() {
+		return groupNo;
 	}
-	public void setClientGrade(String clientGrade) {
-		this.clientGrade = clientGrade;
+	public void setGroupNo(int groupNo) {
+		this.groupNo = groupNo;
 	}
 }

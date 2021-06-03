@@ -2,9 +2,24 @@
 ul, li{
 	outline-width: 0px;
 	margin:0;
-	padding:0.5rem 0rem 0.5rem 0rem;
+	padding:0.2rem 0rem 0.2rem 0rem;
 	list-style: none;
 	font-size: 18px;
+}
+
+li.boardSuper{
+	font-weight: bold;
+}
+
+li.boardSub{
+	font-weight: normal;
+}
+
+.menu.title{
+	font-weight: bold;
+}
+.menu li:hover {
+	background-color:#858AB6;
 }
 .menu-btn.boardSuper{
 	color:green;
@@ -16,9 +31,18 @@ ul, li{
 	text-decoration: none;
 	display:none; 
 }
+.menu li>ul{
+	display:none;
+	transition: display 1s;
+}
+.menu li:hover > ul {
+	display:block;
+	transition: display 1s;
+}
 
 .sidemenu{
-    position: fixed;
+	position: fixed;
+	float: left;
     top: 0;
     left: 0;
     bottom: 0;

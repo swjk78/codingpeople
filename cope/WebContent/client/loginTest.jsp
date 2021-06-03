@@ -10,6 +10,10 @@
 
 <script>
 	window.addEventListener('load', function() {
+		if (<%=request.getParameter("success") != null%>) {
+			alert('이메일 전송을 성공했습니다');
+			history.replaceState({}, null, location.pathname);
+		}
 		var unlockDate = '<%=request.getSession().getAttribute("unlockDate")%>';
 		if (unlockDate != 'null') {
 			alert('활동정지당한 계정입니다\n' + '정지해제 날짜: ' + unlockDate);

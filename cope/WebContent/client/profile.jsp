@@ -15,43 +15,37 @@
 	ClientDao clientDao = new ClientDao();
 	ClientDto clientDto = clientDao.myInfo(clientNo);
 	
-//내가 쓴글
 
-
-//내가 좋아요한글
 %>
 
 </head>
 <body>
-	<table class="table table-border">
-		<thead>
-			<tr>
-				<th>아이디</th>
-				<th>닉네임</th>
-				<th>이메일</th>
-				<th>생년</th>
-				<th>등급</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><%=clientDto.getClientId() %></td>
-				<td><%=clientDto.getClientNick() %></td>
-				<td><%=clientDto.getClientEmail() %></td>
-				<td><%=clientDto.getClientBirthYear() %></td>
-				<td><%=clientDto.getClientGrade() %></td>
-			</tr>
-		</tbody>
 	
+		<div class="row">
+			<span>아이디 : <%=clientDto.getClientId() %></span>
+		</div>		
+		
+		<div class="row"><span>닉네임 : <%=clientDto.getClientNick() %></span></div>
+		<div class="row"><span>이메일 : <%=clientDto.getClientEmail() %></span></div>
+		<div class="row"><span>생년 : <%=clientDto.getClientBirthYear() %></span></div>
+		<div class="row"><span>등급 : <%=clientDto.getClientGrade() %></span></div>		
+			
+				
+				
+				
 	
-	</table>
 		
 		
-		<a href="#">내글보기</a>
-		<a href="#">내가 좋아요한 글</a>
-		<a href="editInfo.jsp">내정보 수정</a>
-		<a href="editPw.jsp">비밀번호 수정</a>
-		<a href="exit.jsp">탈퇴</a>
+		<div class="row"><a href="<%=request.getContextPath()%>/board/myPostList.jsp">내글보기</a></div> 
+		<div class="row"><a href="<%=request.getContextPath()%>/board/myLikePost.jsp">내가 좋아요한 글</a></div>
+		<div class="row"><a href="editInfo.jsp">내정보 수정</a></div>
+		<div class="row"><a href="editPw.jsp">비밀번호 수정</a></div>
+		<div class="row"><a href="exit.jsp">탈퇴</a></div>
+		
+		
+		
+		
+		
 		
 <!-- 		테스트세션 -->
 		세션번호<%=session.getAttribute("clientNo") %> 

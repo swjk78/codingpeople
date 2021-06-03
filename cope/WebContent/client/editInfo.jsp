@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/common.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/client.css">
 	
 	<style>
 		.error{
@@ -60,8 +60,10 @@
 	
 </head>
 <body>
-	<div class="container-1000">
-	<div class="row"><span>회원정보 수정</span></div>
+<jsp:include page="/template/aside.jsp"></jsp:include>
+<div class="main">
+	<div class="container-600 border">
+	<div class="row"><h2 class="text-center">회원정보 수정</h2></div>
 	
 	<form action="editInfo.kh" method="post" class="form">
 	<div class="row">
@@ -86,9 +88,11 @@
 		<%} %>
 	</div>
 	<div>
-		<input type="submit" value="수정" class="form-btn form-btn-normal">
+		<input type="submit" value="수정" class="form-btn form-btn-normal float-right">
+		<br><br>
 	</div>
 	</form>
 	</div>
+</div>
 </body>
 </html>
