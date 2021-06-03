@@ -22,14 +22,16 @@ public class CommentsChooseServlet extends HttpServlet {
 			commentsChooseDto.setChoosePostNo(Integer.parseInt(req.getParameter("postNo")));
 			commentsChooseDto.setChooseCommentsNo(Integer.parseInt(req.getParameter("commentsNo")));
 			
-			int PostNo = Integer.parseInt(req.getParameter("postNo"));// 이건 돌아가기 위한 용도
+			//돌아가기 위한 좌표
+			int boardGroup = Integer.parseInt(req.getParameter("boardGroup"));
+			int PostNo = Integer.parseInt(req.getParameter("postNo"));
 			
 			//처리
 			CommentsDao commentsDao = new CommentsDao();
 			commentsDao.choose(commentsChooseDto);
 			
 			//출럭
-			resp.sendRedirect("post.jsp?postNo="+PostNo);//
+			resp.sendRedirect("post.jsp?boardGroup="+ boardGroup +"&postNo="+ PostNo);
 			
 			
 		} catch (Exception e) {
