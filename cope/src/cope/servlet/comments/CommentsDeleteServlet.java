@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cope.beans.comments.CommentsDao;
+import cope.beans.post.PostDao;
 
 @WebServlet(urlPatterns = "/board/commentsDelete.kh")
 public class CommentsDeleteServlet extends HttpServlet {
@@ -25,6 +26,8 @@ public class CommentsDeleteServlet extends HttpServlet {
 			//처리
 			CommentsDao commentsDao = new CommentsDao();
 			commentsDao.delete(commentsNo);
+			PostDao postDao = new PostDao();
+			postDao.refreshCommentsCount(PostNo);
 			
 			//출력
 			resp.sendRedirect("post.jsp?boardGroup="+ boardGroup +"&postNo="+ PostNo);

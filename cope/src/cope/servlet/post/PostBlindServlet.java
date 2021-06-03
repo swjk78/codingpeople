@@ -12,7 +12,7 @@ import cope.beans.post.PostDao;
 import cope.beans.post.PostDto;
 
 @WebServlet(urlPatterns = "/manage/blindPost.kh")
-public class BlindPostServlet extends HttpServlet {
+public class PostBlindServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

@@ -42,7 +42,7 @@ public class CommentsDao {
 //	public List<CommentsViewDto> showList (int postNo) throws Exception {
 //		Connection con = JdbcUtils.getConnection();
 //		
-//		String sql = "select comments_no, comments_client_no, comments_post_no, comments_contents, comments_date, comments_blind, client_nick \r\n"
+//		String sql = "select comments_no, comments_client_no, comments_post_no, comments_contents, comments_date, comments_blind, client_nick "
 //				+ "    from comments_view where comments_post_no=? and comments_blind='F' order by comments_no asc"; //대댓글이 있었다면 TopN쿼리 사용
 //		PreparedStatement ps = con.prepareStatement(sql);
 //		ps.setInt(1, postNo);
@@ -71,8 +71,8 @@ public class CommentsDao {
 	public List<CommentsViewDto> showList (int postNo) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 		
-		String sql = "select comments_no, comments_client_no, comments_post_no, comments_contents, comments_date, comments_blind, client_nick \r\n"
-				+ "    from comments_view where comments_post_no=? order by comments_no asc"; 
+		String sql = "select comments_no, comments_client_no, comments_post_no, comments_contents, comments_date, comments_blind, client_nick "
+				+ "from comments_view where comments_post_no=? order by comments_no asc"; 
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, postNo);
 		ResultSet rs = ps.executeQuery();
