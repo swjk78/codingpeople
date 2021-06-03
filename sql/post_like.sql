@@ -5,5 +5,6 @@ drop table post_like;
 create table post_like(
 post_like_client_no number(19) references client(client_no) on delete set null,
 post_like_post_no number(19) references post(post_no) on delete cascade,
+post_like_date date default sysdate not null,
 primary key(post_like_client_no, post_like_post_no)
 );
