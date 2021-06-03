@@ -17,14 +17,17 @@ public class CommentsDeleteServlet extends HttpServlet {
 		try {
 			//준비 - 두개 commentsNo
 			int commentsNo = Integer.parseInt(req.getParameter("commentsNo"));//이것만 DAO로 가고
-			int PostNo = Integer.parseInt(req.getParameter("postNo"));// 이건 돌아가기 위한 용도
+			
+			//돌아가기 위한 좌표
+			int boardGroup = Integer.parseInt(req.getParameter("boardGroup"));
+			int PostNo = Integer.parseInt(req.getParameter("postNo"));
 			
 			//처리
 			CommentsDao commentsDao = new CommentsDao();
 			commentsDao.delete(commentsNo);
 			
 			//출력
-			resp.sendRedirect("post.jsp?postNo="+PostNo);
+			resp.sendRedirect("post.jsp?boardGroup="+ boardGroup +"&postNo="+ PostNo);
 			
 			
 		} catch (Exception e) {

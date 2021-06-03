@@ -12,7 +12,8 @@
 	String searchKeyword = request.getParameter("searchKeyword");
 	String orderType = request.getParameter("orderType");
 	String orderDirection = request.getParameter("orderDirection");
-	boolean isOrder = orderType != null && orderDirection != null; 
+	boolean isOrder = orderType != null && orderDirection != null &&
+			!orderType.trim().equals("") && !orderDirection.trim().equals(""); 
 	boolean isSearch = searchType != null && searchKeyword != null && !searchKeyword.trim().equals("");
 	
 	// 정렬 기능을 사용하지 않을 시의 기본값
@@ -88,7 +89,7 @@
 <script>
 	window.addEventListener('load', function() {
 		var selectSearchType = document.querySelector('select[name=searchType]');
-		var inputSearchKeyword = document.querySelector('.searchKeywordMain');
+		var inputSearchKeyword = document.querySelector('input[name=searchKeyword]');
 		var inputPageSize = document.querySelector('input[name=pageSize]');
 		selectSearchType.value = '<%=searchType%>';
 		inputSearchKeyword.value = '<%=searchKeyword%>';
@@ -99,11 +100,6 @@
 
 <script>
 	window.addEventListener('load', function() {
-		// 페이지 사이즈 변경 시 form 전송
-		document.querySelector('.pageSize-form').addEventListener('change', function() {
-			this.submit();
-		})
-		
 		var errorCheck = '<%=request.getParameter("error")%>';
 		if (errorCheck == 'lockFail') {
 			alert('관리자는 정지시킬 수 없습니다');
@@ -121,6 +117,7 @@
 		for (var i = 0; i < pageBtn.length; i++) {
 			pageBtn[i].addEventListener('click', function() {
 				var pageNo = this.textContent;
+
 				var pageMoveBtn = document.querySelectorAll('.pagination > a:not(.move-link)');
 				if (pageNo === '<') {
 					pageNo = parseInt(pageMoveBtn[0].textContent) - 1;
@@ -138,6 +135,35 @@
 				document.querySelector('.search-form').submit();
 			});
 		}
+		
+		// 페이지 사이즈 조절 구현
+		var selectPageSize = document.querySelector('.select-page-size');
+		selectPageSize.addEventListener('change', function() {
+			var pageSize = this.value;
+			
+			document.querySelector('input[name=pageSize]').value = pageSize;
+			document.querySelector('.search-form').submit();
+		})
+		
+		// 정렬 기능 구현
+		var sortBtn = document.querySelectorAll('.order');
+		for (var i = 0; i < sortBtn.length; i++) {
+			sortBtn[i].addEventListener('click', function() {
+				var orderType = this.id;
+				var orderDirection = '<%=orderDirection%>';
+				
+				if (orderDirection == 'desc') {
+					orderDirection = 'asc';
+				}
+				else {
+					orderDirection = 'desc';	
+				}
+
+				document.querySelector('input[name=orderType]').value = orderType;
+				document.querySelector('input[name=orderDirection]').value = orderDirection;
+				document.querySelector('.search-form').submit();
+			});
+		}
 	});
 </script>
 
@@ -148,57 +174,27 @@
 	<a href="manageCenter.jsp" class="backToCenter"><img class="backArrow" src="<%=root %>/image/backArrow.png">관리센터로 돌아가기</a>
 		<div class="row">
 			<h2 class="text-center text-black"><a href="manageClient.jsp" class="">회원관리</a></h2>
-			
 		</div>
 		<!-- 정렬 링크 -->
 		<div class="row">
-		<%if (isSearch) {%>
-			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_no")) {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">가입순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%}  else {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">가입순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%} %>
-			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_id")) {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">아이디순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%}  else {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">아이디순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%} %>
-			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_nick")) {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=desc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">닉네임순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%}  else {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=asc&searchType=<%=searchType%>&searchKeyword=<%=searchKeyword%>&pageSize=<%=pageSize%>" class="order">닉네임순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%} %>
-		<%} else {%>
-			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_no")) {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=desc" class="order">가입순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%}  else {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_no&orderDirection=asc" class="order">가입순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%} %>
-			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_id")) {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=desc" class="order">아이디순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%}  else {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_id&orderDirection=asc" class="order">아이디순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%} %>
-			<%if (listParameter.getOrderDirection().equals("asc") && listParameter.getOrderType().equals("client_nick")) {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=desc" class="order">닉네임순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%}  else {%>
-				<a href="<%=root%>/manage/manageClient.jsp?orderType=client_nick&orderDirection=asc" class="order">닉네임순<img class="UDarrow" src="<%=root %>/image/UDarrow.png"></a>
-			<%} %>
-		<%} %>
+			<a class="order" id="client_no">
+			가입순<img class="UDarrow" src="<%=root %>/image/UDarrow.png">
+			</a>
+			<a class="order" id="client_id">
+			아이디순<img class="UDarrow" src="<%=root %>/image/UDarrow.png">
+			</a>
+			<a class="order" id="client_nick">
+			닉네임순<img class="UDarrow" src="<%=root %>/image/UDarrow.png">
+			</a>
 		</div>
+		
 		<!-- 페이지 크기 조절 -->
 		<div class="row">
-			<form action="manageClient.jsp" method="get" class="pageSize-form">
-				<select class="select-form" name="pageSize" onchange="this.form.submit()">
-					<option value="10">10명씩 보기</option>
-					<option value="20">20명씩 보기</option>
-					<option value="30">30명씩 보기</option>
-				</select>
-				<%if (searchType != null && searchKeyword != null) {%>
-					<input type="hidden" name="searchType" value="<%=searchType%>">
-					<input type="hidden" name="searchKeyword" value="<%=searchKeyword%>">
-				<%} %>
-			</form>
+			<select class="select-page-size" name="pageSize">
+				<option value="10">10명씩 보기</option>
+				<option value="20">20명씩 보기</option>
+				<option value="30">30명씩 보기</option>
+			</select>
 		</div>
 		<!-- 회원 목록 -->
 		<div class="row">
@@ -220,7 +216,7 @@
 					<tr>
 						<td><%=clientDto.getClientNo()%></td>
 						<td><%=clientDto.getClientId()%></td>
-						<td><a href=""><%=clientDto.getClientNick()%></a></td>
+						<td><a href="<%=root%>/client.jsp?clientNo=<%=clientDto.getClientNo()%>"><%=clientDto.getClientNick()%></a></td>
 						<td><%=clientDto.getClientEmail()%></td>
 						<td>
 							<%if (clientDto.getClientBirthYear() == 0) {%>
@@ -288,12 +284,15 @@
 			<div class="row">
 				<form action="manageClient.jsp" method="get" class="search-form">
 					<input type="hidden" name="pageNo">
-					<input type="hidden" name="pageSize" value="<%=pageSize %>">
+					<input type="hidden" name="pageSize">
+					<input type="hidden" name="orderType">
+					<input type="hidden" name="orderDirection">
 					<select class="form-input-inline select-form" name="searchType">
 						<option value="client_id">아이디</option>
 						<option value="client_nick">닉네임</option>
 					</select>
-					<input type="text" name="searchKeyword" class="searchKeywordMain input-text form-input form-input-inline" placeholder="검색어" class="form-input form-input-inline">
+					<input type="text" name="searchKeyword" class="input-text form-input form-input-inline"
+					placeholder="검색어" class="form-input form-input-inline">
 					<input type="submit" value="검색" class="form-btn form-btn-inline form-btn-normal">
 				</form>
 			</div>

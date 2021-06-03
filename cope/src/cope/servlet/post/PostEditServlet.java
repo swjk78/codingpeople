@@ -15,37 +15,32 @@ import cope.beans.post.PostDto;
 
 @WebServlet(urlPatterns = "/board/postEdit.kh")
 public class PostEditServlet extends HttpServlet{
-	
-//게시물 수정
+	// 게시물 수정
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	try {
-
-		req.setCharacterEncoding("UTF-8");
-		PostDto postDto = new PostDto();
-
-		postDto.setPostNo(Integer.parseInt(req.getParameter("postNo")));
-		postDto.setPostTitle(req.getParameter("postTitle"));
-		postDto.setPostContents(req.getParameter("postContents"));
-		
-		//처리
-		PostDao postDao = new PostDao();
-		
-		//작성글 확인페이지로 이동을 위해 값 파라미터 불러오기
-
-		int postNo = postDao.getSequence();
-		postDto.setPostNo(postNo);
-		
-		//등록// 게시글 등록
-		postDao.registPost(postDto);
-		
-		//출력
-		resp.sendRedirect("post.jsp?postNo="+postNo);
-	}
-	catch(Exception e) {
-		e.printStackTrace();
-		resp.sendError(500);
-	}
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			req.setCharacterEncoding("UTF-8");
+			PostDto postDto = new PostDto();
 	
+			postDto.setPostNo(Integer.parseInt(req.getParameter("postNo")));
+			postDto.setPostBoardNo(Integer.parseInt(req.getParameter("postBoardNo")));
+			postDto.setPostTitle(req.getParameter("postTitle"));
+			postDto.setPostContents(req.getParameter("postContents"));
+			
+			PostDao postDao = new PostDao();
+			boolean result = postDao.editPost(postDto);
+			
+			if (result) {
+				resp.sendRedirect("post.jsp?boardGroup=" + req.getParameter("boardGroup")
+				+ "&postNo=" + postDto.getPostNo());
+			}
+			else {
+				// 미정
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			resp.sendError(500);
+		}
 	}	
 }

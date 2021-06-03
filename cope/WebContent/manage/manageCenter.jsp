@@ -18,10 +18,12 @@
 <!-- 차트.js를 가져오는 코드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
 
- <% //나이를 List에 담기
+ <% 
+ 	//나이를 List에 담기
     ClientDao clientDao = new ClientDao();
     List<Integer>ageRangeList = clientDao.getAgeRange();
     BoardDao boardDao = new BoardDao();
+    //게시글 개수 List에 담기
     List<BoardDto>boardSuperList = boardDao.showListBoardSuper();
     List<Integer>countUnderpostList = boardDao.countUnderPosts(boardSuperList);
  %>
@@ -63,8 +65,7 @@
 							    data: {
 							        labels: ['10대이하', '10대', '20대', '30대', '40대', '50대', '60대', '70대'],
 							        datasets: [{
-							            label: '# of Votes',
-							//             data: [12, 19, 3, 5, 2, 3],
+							            label: '연령분포',
 							            data: ageRangeArray,
 							            backgroundColor: [
 							                'rgba(255, 255, 153, 0.2)',
@@ -119,10 +120,8 @@
 							    type: 'pie',
 							    data: {
 							    	labels: boardSuperNames,
-// 							        labels: ['10대이하', '10대', '20대', '30대', '40대'],
 							        datasets: [{
-							            label: '# of Votes',
-// 							            data: [12, 19, 3, 5, 2, 3],
+							            label: '게시판 비율',
 							            data: countUnderpostArray,
 							            backgroundColor: [
 							                'rgba(255, 255, 153, 0.2)',
