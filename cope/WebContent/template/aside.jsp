@@ -1,23 +1,60 @@
-
+<%@page import="cope.beans.client.ClientDao"%>
+<%@page import="cope.beans.client.ClientDto"%>
 <%@page import="cope.beans.board.BoardDto"%>
 <%@page import="cope.beans.board.BoardDao"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
+<%
+Integer clientNo = (Integer) request.getSession().getAttribute("clientNo");
+boolean isLogin = clientNo!=null;
+System.out.println("isLogin" + isLogin);
+boolean isSuper=false;
+	if(isLogin){
+		ClientDao clientDao = new  ClientDao();
+		isSuper =  clientDao.isSuper(clientNo)==true;
+		System.out.println("isSuper" + isSuper);
+	}
+%>
+
+<%
+String root = request.getContextPath();
+request.setCharacterEncoding("UTF-8");
+//int clientNoPro = (int)session.getAttribute("clientNo");
+ClientDao clientDao = new ClientDao();
+ClientDto clientDto = new ClientDto();
+
+if(clientNo!=null){	
+clientDto = clientDao.myInfo(clientNo);
+
+String clientId = clientDto.getClientId();
+char ch =  clientId.charAt(0);
+int no = (int)ch;
+	
+int seed = 216823123;
+int randomInt= (seed/no)%1000000;
+}
+%>
+
+
 <html>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+
+function logout(){
+	location.href="/client/logout.kh"
+}
+	});
+	
+</script>
 
 <head>
-<%
-boolean isLogin = 1==1;
-boolean isAdmin = 1==0;
-%>
+
 <meta charset="UTF-8">
 <title>코딩 피플</title>
 
-<%
-//root
-String root = request.getContextPath();%>
 	<link rel="stylesheet" type="text/css" href="<%=root%>/css/aside.css">
 
 
@@ -27,6 +64,10 @@ String root = request.getContextPath();%>
  	font-family: 'NanumSquare', sans-serif;
 	box-sizing: border-box;
 	}
+
+.text-left{
+			text-align:left;
+			}
 
 .white{
 color:white;
@@ -59,12 +100,17 @@ background-color : #5858A4
 
 .loginButton{
 width:auto;
-			border:none;
-						background-color: #9A9EC2;
+border:red;
+background-color: #9A9EC2;
 			font-size: 15px;
 			color:white;
 			padding : 18px
 }
+
+.imgRound {
+	border: 1.5px solid #ffffff;
+	border-radius: 50%;
+	padding: 5px;
 
 </style>
 
@@ -76,26 +122,30 @@ width:auto;
 				<img src ="<%=root %>/image/example.png" width= 200;>
 				</a>
 				</div>
+				
+				<div class = "text-center">
 				<a href = "<%=request.getContextPath()%>/client/login.jsp" >
-				<button id = loginButton value = "login" class = "loginButton">로그인</button></a>
-				<a href = "<%=request.getContextPath()%>/client/join.jsp" >
-				<button id = loginButton value = "login" class = "loginButton">회원가입</button></a>
-				
-								<button id = logoutButton value = "logout"  class= "loginButton">로그아웃</button>
-				<KH>
-		<div class="login-box border white">
-			<%if(isLogin){ %>
-				<span><a href="<%=root%>/client/profile.jsp?clientNo=세션no"><img class ="v-align-center"  src ="https://via.placeholder.com/25/FFFF00/000000?Text=ProfileImage" ></a></span>
-				<span class ="v-align-center">아이디...</span>
-				<span><img class ="v-align-center" src="<%=root %>/image/alertBell.png"  height="25px" ></span>
-				
-					<%if(isAdmin){%>
-					<span><a href = "<%=root%>/manage/reportList.jsp">관리페이지</a></span>
-					<%}else{}%>
-			<%}else{ %>
-			<span><a class ="v-align-center" href = "<%=root%>/client/login.jsp" >로그인</a></span>
-			<span><a class ="v-align-center" href = "<%=root%>/client/join.jsp">회원가입</a></span>
-			<%} %>
+					<%if(!isLogin){//로그아웃 상태 %>
+				<button id = loginButton value = "login" class = "loginButton border" style = cursor:pointer  >로그인을 해주세요.</button></a><br>
+				<a href = "<%=request.getContextPath()%>/client/join.jsp" >회원가입</a><br>
+					<%}else{//로그인 상태
+						if(isSuper){//관리자 로그인%>
+		관리자님 환영합니다.
+				<form action = "<%=root%>/client/logout.kh" method = post>
+		<button id = AdminloginButton value = "adminLogin" class = "loginButton bordr" style = cursor:pointer>관리메뉴</button><br>
+					    <input type = submit  id = logoutButton value = "logout"  class= "loginButton" style = cursor:pointer >로그아웃<br>
+		<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" >
+		</form>
+		
+				<%}else{//로그인 상태면서 관리자가 아닌경우, 즉 일반 회원 일 때 %>
+		넌일반
+		<form action = "<%=root%>/client/logout.kh" method = post>
+				<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" >
+			    <input type = submit  id = logoutButton value = "logout"  class= "loginButton" style = cursor:pointer >로그아웃
+</form>
+			    		<%} %>
+	<%} %>
+	
 </div>
 			
 <!-- 			메뉴를 띄울 곳입니다. -->
@@ -110,7 +160,7 @@ width:auto;
 			
 			<%for(BoardDto boardDtoSuper : boardSuperList){%>
 				<ul>
-<li class="boardSuper"><a href="board/postListTest.jsp?boardGroup=<%=boardDtoSuper.getBoardNo() %>"><%=boardDtoSuper.getBoardName()%></a>
+				<li class="boardSuper"><a href="board/postListTest.jsp?boardGroup=<%=boardDtoSuper.getBoardNo() %>"><%=boardDtoSuper.getBoardName()%></a>
 
 						<ul>
 							<%List<BoardDto> boardSubList =  boardDao.showListBoardSub(boardDtoSuper.getBoardNo()); %>
@@ -124,6 +174,5 @@ width:auto;
 		</div>
 		
 		</div>
-</KH>
 
 </html>
