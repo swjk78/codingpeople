@@ -123,12 +123,12 @@ width:49%;
 	<input type = "password" name = "clientPw" placeholder="비밀번호" required class="form-input pw-input">	
 	</div>
 	<div class="row">
-	<input type = "submit" value ="로그인" class="form-btn btn-submit"></a>
+	<input type = "submit" value ="로그인" class="form-btn btn-submit">
 	</div>
 	</form>
 	<hr>
 	<div class="row">
-	<input type="button" value="회원가입" class="form-btn btn-normal" onclick="location.href='<%=request.getContextPath()%>/index.jsp'">
+	<input type="button" value="회원가입" class="form-btn btn-normal" onclick="location.href='<%=request.getContextPath()%>/join.jsp'">
 	</div>
 		</div>
 			<%if(request.getParameter("error") != null){ %>
@@ -138,12 +138,12 @@ width:49%;
 	<%} %>
 	
 	<div class="row">
-		<a href='<%=request.getContextPath()%>/client/findId'><input type= "button" value="아이디 찾기" class= "id-find"></a>
-		<a href='<%=request.getContextPath()%>/client/findPw'><input type= "button" value="비밀번호 찾기" class= "pw-find" ></a>
+		<a href="<%=request.getContextPath()%>/client/findId.jsp"><input type= "button" value="아이디 찾기" class= "id-find"></a>
+		<a href="<%=request.getContextPath()%>/client/findPw.jsp"><input type= "button" value="비밀번호 찾기" class= "pw-find" ></a>
 	</div>
 	</div>
-</div>
+
 <jsp:include page="/template/miniFooter.jsp"></jsp:include>
-</div>
+
 </body>
 </html>
