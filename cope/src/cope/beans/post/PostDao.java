@@ -133,4 +133,34 @@ public class PostDao {
 		
 		con.close();
 	}
+	
+	// 게시글 추천수 갱신 기능
+	public void refreshLikeCount(int postNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update post "
+					 + "set post_like_count = (select count(*) from post_like where post_like_post_no = ?)"
+					 + "where post_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, postNo);
+		ps.setInt(2, postNo);
+		ps.executeUpdate();
+		
+		con.close();
+	}
+	
+	// 게시글 댓글수 갱신 기능
+	public void refreshCommentsCount(int postNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		
+		String sql = "update post "
+					 + "set post_comments_count = (select count(*) from comments where comments_post_no = ?)"
+					 + "where post_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, postNo);
+		ps.setInt(2, postNo);
+		ps.executeUpdate();
+		
+		con.close();
+	}
 }

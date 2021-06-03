@@ -83,83 +83,87 @@
 	* {
 	font-family: Neo Sans Pro , sans-serif;
 	box-sizing: border-box;
-}
-
-.row {
-	width:100%;
-}
-
-.inline{
-	display: inline;
-}
-
-ul{
-    display: block;
-    list-style-type: none;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 0px;
-}
-li{
-	list-style: none;
-} 
-
-.comments{
-	display : table;
-	width:600px;
-	border: 1px dotted black;
-}
-
-.comments .comments-title{
-	background-color: #9A9EC2;
-	padding: 5px;
-}
-
-.comments-blind{
-	color: red;
-}
-
-.comments-choose{
-	color: green;
-}
-
-.commentsNewBox{
-	border:1px solid purple;
-}
-.commentsEditBox{
-	border:1px solid red;
-}
-
-.commentsNew-border{
-	border:1px solid purple;
-}
-.commentsEdit-border{
-	border:1px solid red;
-}
-
-.commentsNewDiv{
-	height:150px;
-	overflow:auto;
-	width:100%;
-}
-
-.commentsEditDiv{
-	height:150px;
-	overflow:auto;
-	width:100%;
-}
-
-.choose{
-	background-color: #b3ffff;
-}
+	}
+	
+	.row {
+		width:100%;
+	}
+	
+	.inline{
+		display: inline;
+	}
+	
+	ul{
+	    display: block;
+	    list-style-type: none;
+	    margin-block-start: 0em;
+	    margin-block-end: 0em;
+	    margin-inline-start: 0px;
+	    margin-inline-end: 0px;
+	    padding-inline-start: 0px;
+	}
+	li{
+		list-style: none;
+	} 
+	
+	.comments{
+		display : table;
+		width:600px;
+		border: 1px dotted black;
+	}
+	
+	.comments .comments-title{
+		background-color: #9A9EC2;
+		padding: 5px;
+	}
+	
+	.comments-blind{
+		color: red;
+	}
+	
+	.comments-choose{
+		color: green;
+	}
+	
+	.commentsNewBox{
+		border:1px solid purple;
+	}
+	.commentsEditBox{
+		border:1px solid red;
+	}
+	
+	.commentsNew-border{
+		border:1px solid purple;
+	}
+	.commentsEdit-border{
+		border:1px solid red;
+	}
+	
+	.commentsNewDiv{
+		height:150px;
+		overflow:auto;
+		width:100%;
+	}
+	
+	.commentsEditDiv{
+		height:150px;
+		overflow:auto;
+		width:100%;
+	}
+	
+	.choose{
+		background-color: #b3ffff;
+	}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
 
 <script>
 	window.addEventListener('load', function() {
+		if (<%=request.getParameter("alreadyLike") != null%>) {
+			alert('이미 추천하셨습니다');
+			history.replaceState({}, null, location.pathname);
+		}
 		document.querySelector('.delete-btn').addEventListener('click', function(e) {
 			var check = confirm('정말 삭제하시겠습니까?');
 			if (!check) {
@@ -170,31 +174,31 @@ li{
 </script>
 
 <script>
-//댓글관련 기능
-function ShowCommentsEditArea(targetNo){
-	console.log(targetNo+"번글을 수정합니다");
-	var originDiv = document.querySelector("#commentsOriginNo-"+targetNo);
-	var editDiv = document.querySelector("#commentsEditNo-"+targetNo);
-	console.log(editDiv);	
-	originDiv.style.display="none";
-	editDiv.style.display="block";
-}
-
-function copytextNew(){
-	var targetDiv = document.querySelector(".commentsNewDiv");
-	var targetDivVal = targetDiv.innerHTML;
-
-	var targetTextarea =  document.querySelector(".commentsNewTextarea");
-	targetTextarea.innerHTML=targetDivVal;
-}
-
-function copytextEdit(commentsNo){ 
-	var inputDiv = document.querySelector(".commentsEditDiv-"+commentsNo);
-	var inputDivVal = inputDiv.innerHTML;
-
-	var inputTextarea =  document.querySelector(".commentsEditTextarea-"+commentsNo);
-	inputTextarea.innerHTML=inputDivVal;
-}
+	//댓글관련 기능
+	function ShowCommentsEditArea(targetNo){
+		console.log(targetNo+"번글을 수정합니다");
+		var originDiv = document.querySelector("#commentsOriginNo-"+targetNo);
+		var editDiv = document.querySelector("#commentsEditNo-"+targetNo);
+		console.log(editDiv);	
+		originDiv.style.display="none";
+		editDiv.style.display="block";
+	}
+	
+	function copytextNew(){
+		var targetDiv = document.querySelector(".commentsNewDiv");
+		var targetDivVal = targetDiv.innerHTML;
+	
+		var targetTextarea =  document.querySelector(".commentsNewTextarea");
+		targetTextarea.innerHTML=targetDivVal;
+	}
+	
+	function copytextEdit(commentsNo){ 
+		var inputDiv = document.querySelector(".commentsEditDiv-"+commentsNo);
+		var inputDivVal = inputDiv.innerHTML;
+	
+		var inputTextarea =  document.querySelector(".commentsEditTextarea-"+commentsNo);
+		inputTextarea.innerHTML=inputDivVal;
+	}
 </script>
 
 </head>
@@ -215,7 +219,8 @@ function copytextEdit(commentsNo){
 	</div>
 	<div class="row float-container">
 		<div class="left">
-			<%=clientDto.getClientNick()%>
+			<a href="<%=root%>/client/profile.jsp?otherNo=<%=postDto.getPostClientNo()%>">
+			<%=clientDto.getClientNick()%></a>
 		</div>
 		<div class="right">
 			조회수 <%=postDto.getPostViewCount()%>
@@ -226,6 +231,10 @@ function copytextEdit(commentsNo){
 		</div>
 		<div class="row text-left" style="min-height:300px;">
 			<pre><%=postDto.getPostContents()%></pre>
+		</div>
+		<div class="row text-left">
+			<a href="#" class="link-btn blind-btn">블라인드</a>
+			<a href="postLike.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn like-btn">추천</a>
 		</div>
 	</div>
 	
@@ -282,9 +291,9 @@ function copytextEdit(commentsNo){
 <!-- 						//본인이 작성한 댓글이면 삭제가 보이게 -->
 						<%if(clientNo==commentsViewDto.getCommentsClientNo()){%>		
 							<form action="commentsDelete.kh" method="get">
-								<input type="text"  name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>" hidden>
-								<input type="text"  name="boardGroup" value=<%=boardGroup %> hidden>
-								<input type="text"  name="postNo" value="<%=postNo%>" hidden>
+								<input type="hidden" name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>">
+								<input type="hidden" name="boardGroup" value="<%=boardGroup %>">
+								<input type="hidden" name="postNo" value="<%=postNo%>">
 								<input type="submit" value="삭제">
 							</form>
 						<%} %>
@@ -292,9 +301,9 @@ function copytextEdit(commentsNo){
 <!-- 						//채택된 글이 아니고 && 로그인한 사람이 원본글작성자이고 && 본인이 쓴 댓글이 아닐때 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ-->
 						<%if(!commentsDao.isChoose(postNo) && clientNo==commentsDao.getPostWriter(postNo) && clientNo!=commentsViewDto.getCommentsClientNo()){%> 
 							<form action="commentsChoose.kh" method="get">
-								<input type="text"  name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>" hidden>
-								<input type="text"  name="boardGroup" value=<%=boardGroup %> hidden>
-								<input type="text"  name="postNo" value="<%=postNo%>" hidden>
+								<input type="hidden" name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>">
+								<input type="hidden" name="boardGroup" value="<%=boardGroup %>">
+								<input type="hidden" name="postNo" value="<%=postNo%>">
 								<input type="submit" value="채택">
 							</form>
 						<%} %>
@@ -302,10 +311,10 @@ function copytextEdit(commentsNo){
 <!-- 						//관리자라면 블라인드버튼이 보이게-->
 						<%if(clientNo==1){ // 작성자라면 %> 
 							<form action="commentsBlind.kh" method="get">
-								<input type="text"  name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>" hidden>
-								<input type="text"  name="postNo" value="<%=postNo%>" hidden>
-								<input type="text"  name="boardGroup" value=<%=boardGroup %> hidden>
-								<input type="text"  name="commentsBlind" value="<%=commentsViewDto.getCommentsBlind()%>" hidden>
+								<input type="hidden" name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>">
+								<input type="hidden" name="postNo" value="<%=postNo%>">
+								<input type="hidden" name="boardGroup" value="<%=boardGroup %>">
+								<input type="hidden" name="commentsBlind" value="<%=commentsViewDto.getCommentsBlind()%>">
 								<input type="submit" value="블라인드/언블라인드">
 							</form>
 						<%} %>					
@@ -323,22 +332,17 @@ function copytextEdit(commentsNo){
 						</div>
 						<div class="edit-comment">
 							<form action="commentsForm.kh" method="post">
-								<input type="text"  name=commentsNo value=<%=commentsViewDto.getCommentsNo()%> hidden>
-								<input type="text"  name="boardGroup" value=<%=boardGroup %> hidden>
-								<input type="text"  name="postNo" value="<%=postNo%>" hidden>
-								<input type="text"  name=isNew value="F" hidden>
+								<input type="hidden"  name=commentsNo value=<%=commentsViewDto.getCommentsNo()%>>
+								<input type="hidden"  name="boardGroup" value=<%=boardGroup %>>
+								<input type="hidden"  name="postNo" value="<%=postNo%>">
+								<input type="hidden"  name=isNew value="F">
 								<div class="commentsEditDiv commentsEditDiv-<%=commentsViewDto.getCommentsNo()%>" contenteditable="true"  oninput="copytextEdit(<%=commentsViewDto.getCommentsNo()%>);"></div>
-								<textarea class="commentsEditTextarea commentsEditTextarea-<%=commentsViewDto.getCommentsNo()%>" name="commentsContents"  hidden></textarea>
+								<textarea class="commentsEditTextarea commentsEditTextarea-<%=commentsViewDto.getCommentsNo()%>" name="commentsContents"  style="display: none"></textarea>
 								<input type="submit" value="수정">
 							</form>
 						</div>
 					</div>
 				</div>
-				
-				
-				
-				
-				
 		<%} %><!-- 	반복문의 끝... -->
 		</div>
 </div>
@@ -366,12 +370,12 @@ function copytextEdit(commentsNo){
 			</div>
 			<div class="commentsNew-border">
 				<form action="commentsForm.kh" method="post">
-					<input type="text"  name=postNo value=<%=postNo %> hidden>
-					<input type="text"  name=boardGroup value=<%=boardGroup %> hidden>
-					<input type="text"  name=isNew value="T" hidden>
+					<input type="hidden"  name=postNo value=<%=postNo %>>
+					<input type="hidden"  name=boardGroup value=<%=boardGroup %>>
+					<input type="hidden"  name=isNew value="T">
 					<div class="commentsNewDiv" contenteditable="true"  oninput="copytextNew();"></div>
 					<input type="submit" value="작성">
-					<textarea class="commentsNewTextarea" name="commentsContents"  hidden></textarea>
+					<textarea class="commentsNewTextarea" name="commentsContents" style="display: none;"></textarea>
 				</form>
 			</div>
 		</div>
@@ -409,6 +413,6 @@ function copytextEdit(commentsNo){
 <!-- 		</a> -->
 <%-- 		<% }%> --%>
 <!-- 	</div> -->
-</div>
+<!-- </div> -->
 </body>
 </html>
