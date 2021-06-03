@@ -215,7 +215,11 @@
 		</a>
 	</div>
 	<div class="row text-left">
-		<%=postDto.getPostTitle()%>
+		<%if (postDto.getPostBlind() == 'F') {%>
+			<%=postDto.getPostTitle()%>
+		<%} else {%>
+			블라인드된 게시글입니다.
+		<%} %>
 	</div>
 	<div class="row float-container">
 		<div class="left">
@@ -230,11 +234,18 @@
 			<%=postDto.getPostDateString()%>
 		</div>
 		<div class="row text-left" style="min-height:300px;">
-			<pre><%=postDto.getPostContents()%></pre>
+			<%if (postDto.getPostBlind() == 'F') {%>
+				<pre><%=postDto.getPostContents()%></pre>
+			<%} else {%>
+				<pre>블라인드된 게시글입니다.</pre>
+			<%} %>
 		</div>
 		<div class="row text-left">
-			<a href="#" class="link-btn blind-btn">블라인드</a>
-			<a href="postLike.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn like-btn">추천</a>
+			<a href="<%=root%>/manage/postBlind.kh?boardGroup=<%=boardGroup%>
+			&clientBlind=<%=postDto.getPostBlind()%>
+			&postNo=<%=postNo%>" class="link-btn blind-btn">블라인드</a>
+			<a href="postLike.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>"
+			class="link-btn like-btn">추천</a>
 		</div>
 	</div>
 	
@@ -345,19 +356,8 @@
 				</div>
 		<%} %><!-- 	반복문의 끝... -->
 		</div>
-</div>
+	</div>
 <!-- 코멘트s 에어리어 끝 -->
-
-			
-	
-
-
-
-
-				
-				
-				
-
 
 </div>
 <!-- 댓글 에어리어 끝				 -->
@@ -380,9 +380,6 @@
 			</div>
 		</div>
 		<%} %>
-
-	
-	
 	<!-- 댓글영역 끝 -->
 
 	<!-- 버튼 영역 -->

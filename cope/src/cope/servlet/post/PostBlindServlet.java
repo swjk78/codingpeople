@@ -11,13 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import cope.beans.post.PostDao;
 import cope.beans.post.PostDto;
 
-@WebServlet(urlPatterns = "/manage/blindPost.kh")
+@WebServlet(urlPatterns = "/manage/postBlind.kh")
 public class PostBlindServlet extends HttpServlet {
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			req.setCharacterEncoding("UTF-8");
-			
 			int postNo = Integer.parseInt(req.getParameter("postNo"));
 			char clientBlind = req.getParameter("clientBlind").charAt(0);
 
@@ -29,9 +27,10 @@ public class PostBlindServlet extends HttpServlet {
 			// 블라인드/언블라인드 처리
 			boolean result = postDao.blindPost(postDto);
 			
-			// 블라인드 처리 후 페이지 이동
+			// 블라인드/언블라인드 처리 후 페이지 이동
 			if (result) {
-				resp.sendRedirect(req.getContextPath() + "/board/post?post_no=" + postNo);
+				resp.sendRedirect(req.getContextPath() + "/board/post.jsp?boardGroup="
+				+ req.getParameter("boardGroup") + "&postNo=" + postNo);
 			}
 			else {
 				// 미정
