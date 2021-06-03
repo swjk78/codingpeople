@@ -49,7 +49,7 @@
 			</a>
 		</div>
 		<div class="container border">
-			<h2>존재하지 않는 회원의 프로필입니다.</h2>
+			<h2>존재하지 않는 회원의 프로필 페이지입니다.</h2>
 		</div>
 		<div class="home">
 			<p><a href="<%=request.getContextPath()%>/index.jsp">코딩피플 홈</a><p>
