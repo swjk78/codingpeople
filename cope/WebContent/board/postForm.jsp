@@ -84,8 +84,7 @@
 				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="box-title" required>
 			</div>
 			<div class="row text-left">
-				<textarea name="postContents" placeholder="내용을 입력하세요" class="box-contents" required>
-				</textarea>
+				<textarea name="postContents" placeholder="내용을 입력하세요" class="box-contents" required></textarea>
 			</div>
 			<div class="row">
 				<input type="submit" value="작성완료">

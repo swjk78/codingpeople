@@ -10,18 +10,6 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 
 <%
-	// +기호를 파라미터로 인식할 수 있게 처리
-// 	String boardGroupName;
-// 	int valueLen = 15;
-// 	if (request.getQueryString().substring(valueLen).contains("+")) {
-// 		boardGroupName = request.getQueryString().substring(valueLen);
-// 		int separator = boardGroupName.indexOf("&");
-// 		boardGroupName = boardGroupName.substring(0, separator);
-// 	}
-// 	else {
-// 		boardGroupName = request.getParameter("boardGroupName");
-// 	}
-
 	BoardDao boardDao = new BoardDao();
 	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
 	request.getSession().setAttribute("boardGroup", boardGroup);
@@ -102,13 +90,27 @@
 
 <script>
 	window.addEventListener('load', function() {
+		// 중복 추천 방지
 		if (<%=request.getParameter("alreadyLike") != null%>) {
 			alert('이미 추천하셨습니다');
 			history.replaceState({}, null, location.pathname);
 		}
-		document.querySelector('.delete-btn').addEventListener('click', function(e) {
-			var check = confirm('정말 삭제하시겠습니까?');
-			if (!check) {
+		
+		// 삭제 버튼 클릭 시 경고창
+		var deleteBtn = document.querySelectorAll('.btn-delete');
+		for (var i = 0; i < deleteBtn.length; i++) {
+			deleteBtn[i].addEventListener('click', function(e) {
+				var check = confirm('정말 삭제하시겠습니까?');
+				if (!check) {
+					e.preventDefault();
+				}
+			});
+		}
+		
+		// 비로그인 상태에서 추천 불가 경고창
+		document.querySelector('.btn-like').addEventListener('click', function(e) {
+			if (<%=!isLogin%>) {
+				alert('비회원은 추천이 불가합니다.');
 				e.preventDefault();
 			}
 		});
@@ -217,7 +219,7 @@
 			&postNo=<%=postNo%>" class="form-btn form-btn-normal blind-btn">블라인드</a>
 		<%} %>
 		<a href="postLike.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>"
-		class="form-btn form-btn-normal like-btn">추천</a>
+		class="form-btn form-btn-normal btn-like">추천</a>
 		</div>
 </div>
 <!-- 	게시글 영역 끝 -->
@@ -227,11 +229,13 @@
 		<div class="row text-right">
 		<!-- 	로그인한 사람이 원본글작성자일때-->
 			<%if(clientNo==postDto.getPostClientNo()){%> 
-			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn">수정</a>
-			<a class="form-btn form-btn-normal" href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn delete-btn">삭제</a>
+			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>">수정</a>
+			<a class="form-btn form-btn-normal btn-delete" href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>">삭제</a>
 			<%} %>
-			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&write" class="link-btn">글쓰기</a>
-			<a class="form-btn form-btn-normal" href="postListTest.jsp?boardGroup=<%=boardGroup%>" class="link-btn">목록</a>
+			<%if (isLogin) {%>
+			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
+			<%} %>
+			<a class="form-btn form-btn-normal" href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a>
 		</div>
 	</div>
 <!-- 버튼영역 끝 -->
@@ -309,7 +313,7 @@
 								<input type="hidden" name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>">
 								<input type="hidden" name="boardGroup" value="<%=boardGroup %>">
 								<input type="hidden" name="postNo" value="<%=postNo%>">
-								<input class="form-btn form-btn-normal" type="submit" value="삭제">
+								<input class="form-btn form-btn-normal btn-delete" type="submit" value="삭제">
 							</form>
 						<%} %>
 							
@@ -393,7 +397,7 @@
 		</div>
 	</div>
 <!-- 코멘트s 에어리어 끝 -->
-zzz
+
 <!-- 댓글 에어리어 끝				 -->
 
 <!-- 버튼 영역 -->
@@ -401,11 +405,13 @@ zzz
 		<div class="row text-right">
 		<!-- 	로그인한 사람이 원본글작성자일때-->
 			<%if(clientNo==postDto.getPostClientNo()){%> 
-			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn">수정</a>
-			<a class="form-btn form-btn-normal" href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn delete-btn">삭제</a>
+			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>">수정</a>
+			<a class="form-btn form-btn-normal btn-delete" href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>">삭제</a>
 			<%} %>
-			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&write" class="link-btn">글쓰기</a>
-			<a class="form-btn form-btn-normal" href="postListTest.jsp?boardGroup=<%=boardGroup%>" class="link-btn">목록</a>
+			<%if (isLogin) {%>
+			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
+			<%} %>
+			<a class="form-btn form-btn-normal" href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a>
 		</div>
 	</div>
 <!-- 버튼영역 끝 -->
