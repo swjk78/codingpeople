@@ -257,7 +257,7 @@ public class ClientDao {
 	public void regist(ClientDto clientDto) throws Exception {
 		Connection con = JdbcUtils.getConnection();
 
-		String sql = "insert into client(client_no, client_id, client_pw, client_nick, client_email,"
+		String sql = "insert into client(client_no, client_id, client_pw, client_email, client_nick,"
 				+ "client_birth_year) values(client_seq.nextval, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, clientDto.getClientId());

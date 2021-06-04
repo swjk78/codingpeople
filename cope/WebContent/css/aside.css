@@ -1,10 +1,11 @@
 @charset "UTF-8";
 ul, li{
+	color: white;
 	outline-width: 0px;
 	margin:0;
-	padding:0.2rem 0rem 0.2rem 0rem;
+	padding:5px 1px 2px 5px;
 	list-style: none;
-	font-size: 18px;
+	font-size: 15px;
 }
 
 li.boardSuper{
@@ -43,20 +44,16 @@ li.boardSub{
 .sidemenu{
 	top:0;
 	left:0;
-	position: fixed;
+	position: absolute;
 	float: left;
     z-index: 1000;
-	background-color: #9A9EC2;
     width: auto;
     height: 100%;
 }
 
-.center{
+.aside-center{
 	margin-left: auto;
 	margin-right: auto;
-}
-.text-center{
-	text-align: center;
 }
 
 .container-500 { width:500px; }
@@ -74,7 +71,3 @@ li.boardSub{
 .KH > * {
 	position:relative;
 }
-
-
-
-

@@ -43,7 +43,7 @@ width : 100%
   		  			<div class = padding-left>
   		  			<div class = "title-border ">팀원 소개</div>
   		  			</div>
-<div class = " display-inline-block border">
+<div class = " display-inline-block bottomBorder">
         <div  >
 <pre class = "text-left border-inner">
 방문해주셔서 감사합니다.
