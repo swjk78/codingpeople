@@ -26,15 +26,22 @@ request.setCharacterEncoding("UTF-8");
 ClientDao clientDao = new ClientDao();
 ClientDto clientDto = new ClientDto();
 
+String clientId;
+char ch='e';
+int no;
+	
+int seed;
+int randomInt=0;
+
 if(clientNo!=null){	
 clientDto = clientDao.myInfo(clientNo);
 
-String clientId = clientDto.getClientId();
-char ch =  clientId.charAt(0);
-int no = (int)ch;
+clientId = clientDto.getClientId();
+ch =  clientId.charAt(0);
+no = (int)ch;
 	
-int seed = 216823123;
-int randomInt= (seed/no)%1000000;
+seed = 216823123;
+randomInt= (seed/no)%1000000;
 }
 %>
 
@@ -112,7 +119,17 @@ background-color: #9A9EC2;
 	border-radius: 50%;
 	padding: 5px;
 
+.button-padding{
+padding-top: 300px;
+overflow: visible;
+}
+
+.login-joinbox{
+border: solid black 10px;
+
+}
 </style>
+
 
 <!-- 왼쪽 화면 구현 -->
 
@@ -124,24 +141,29 @@ background-color: #9A9EC2;
 				</div>
 				
 				<div class = "text-center">
-				<a href = "<%=request.getContextPath()%>/client/login.jsp" >
 					<%if(!isLogin){//로그아웃 상태 %>
-				<button id = loginButton value = "login" class = "loginButton border" style = cursor:pointer  >로그인을 해주세요.</button></a><br>
+												<div class = "login-joinbox">
+							<p class = button-padding>로그인을 해주세요</p>
+									<a href = "<%=request.getContextPath()%>/client/login.jsp" >
+				<button id = loginButton value = "login" class = "loginButton border" style = cursor:pointer  >로그인</button></a><br>
 				<a href = "<%=request.getContextPath()%>/client/join.jsp" >회원가입</a><br>
+				</div>
 					<%}else{//로그인 상태
 						if(isSuper){//관리자 로그인%>
-		관리자님 환영합니다.
+		<p class = button-padding>관리자님 환영합니다.<p>
 				<form action = "<%=root%>/client/logout.kh" method = post>
 		<button id = AdminloginButton value = "adminLogin" class = "loginButton bordr" style = cursor:pointer>관리메뉴</button><br>
 					    <input type = submit  id = logoutButton value = "logout"  class= "loginButton" style = cursor:pointer >로그아웃<br>
 		<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" >
 		</form>
-		
+
 				<%}else{//로그인 상태면서 관리자가 아닌경우, 즉 일반 회원 일 때 %>
-		넌일반
+						<div class = "nameOver button-padding" ><%=clientDto.getClientNick()%>님 환영합니다.</div>
 		<form action = "<%=root%>/client/logout.kh" method = post>
-				<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" >
-			    <input type = submit  id = logoutButton value = "logout"  class= "loginButton" style = cursor:pointer >로그아웃
+		<a href = "<%=root %>/client/profile.jsp">
+				<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" ><br>
+				</a>
+			    <input type = submit  id = logoutButton value = "로그아웃"  class= "loginButton" style = cursor:pointer >
 </form>
 			    		<%} %>
 	<%} %>
