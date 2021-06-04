@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import cope.beans.client.ClientDao;
 
 @WebFilter (urlPatterns = {"/manage/manageCenter.jsp", "/manage/manageClient", "/manage/manageBoard.jsp"}) //나중에 게시글 관리도 추가해야합니다. 테스트 후 "/manage/*"로 해버립시다
-public class manageFilter implements Filter{
+public class SuperFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
