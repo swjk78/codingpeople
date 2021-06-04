@@ -14,9 +14,10 @@ public class ClientLogoutServlet extends HttpServlet{
 	//로그아웃 기능
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	try {
+		System.out.println("이상무");
 		req.setCharacterEncoding("UTF-8");
 		req.getSession().removeAttribute("clientNo");
-		resp.sendRedirect("index.jsp");
+		resp.sendRedirect(req.getContextPath()+"/index.jsp");
 	}
 	catch(Exception e) {
 		e.printStackTrace();
