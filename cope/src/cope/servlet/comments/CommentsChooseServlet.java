@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import cope.beans.comments.CommentsChooseDto;
 import cope.beans.comments.CommentsDao;
-import cope.beans.comments.CommentsDto;
 
 @WebServlet (urlPatterns = "/board/commentsChoose.kh")
 public class CommentsChooseServlet extends HttpServlet {

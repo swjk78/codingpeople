@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cope.beans.utils.JdbcUtils;
-import cope.servlet.comments.CommentsChooseServlet;
 
 public class CommentsDao {
 
