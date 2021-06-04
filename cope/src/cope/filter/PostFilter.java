@@ -11,11 +11,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter (urlPatterns = {"/client/exitSuccess.jsp", "/client/findId.jsp", "/client/findPw.jsp", "/client/login.jsp", "/client/join.jsp", "/client/joinSuccess.jsp", "/client/resetPw.jsp"})
+import cope.beans.board.BoardDao;
 
-//로그인 상태에서 들어갈 수 없는 곳
-public class IfLoginFilter implements Filter{
-
+@WebFilter (urlPatterns = {"/board/post.jsp"})
+public class PostFilter implements Filter {
+	//post.jsp의 파라미터 boardGroup 값은 상위 게시판의 board_no이어야한다. 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -23,16 +23,27 @@ public class IfLoginFilter implements Filter{
 		//다운캐스팅을 해야한다.
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		
+
 		request.setCharacterEncoding("UTF-8");
-		Integer clientNo = (Integer) req.getSession().getAttribute("clientNo");
+		int groupNoPARA = Integer.parseInt(req.getParameter("boardGroup"));
+		BoardDao boardDao = new BoardDao();
+
+		try {
+			boolean isBoardSuper = boardDao.checkBoardSuper(groupNoPARA)==true;
+
+			if(isBoardSuper) {
+				chain.doFilter(req, resp);
+			}
+			else {
+				resp.sendRedirect("404");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.sendRedirect("500");
+		}
 		
-		if(clientNo!=null) {//로그인을 함!
-			resp.sendRedirect(req.getContextPath()+"/index.jsp");
-		}
-		else {
-			chain.doFilter(req, resp);
-		}
+		
 	}
 
 }
