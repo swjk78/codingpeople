@@ -72,7 +72,7 @@ comments_date date default sysdate not null,
 comments_blind char(1) default 'F' check(comments_blind in ('T', 'F'))  not null
 );
 create sequence comments_seq;
-Create view comments_view as
+Create or replace view comments_view as
 select Cmt.comments_no, Cmt.comments_client_no, Cmt.comments_post_no, Cmt.comments_contents, Cmt.comments_date, Cmt.comments_blind, Cli.client_nick
 from comments Cmt left outer join client Cli on Cmt.comments_client_no = Cli.client_no;
 
