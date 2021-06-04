@@ -197,26 +197,4 @@ public class CommentsDao {
 			
 			return clientNick;
 	}
-	
-	//게시글 쓴 사람 ClientNo만 가져오기
-	public int getPostWriter(int PostNo) throws Exception {
-			
-			Connection con = JdbcUtils.getConnection();
-			String sql = "select post_client_no from post where post_no = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, PostNo);
-			ResultSet rs = ps.executeQuery();
-			
-			int clientNo;
-			if(rs.next()) {
-				clientNo = rs.getInt("post_client_no");
-			}
-			else {
-				clientNo = 0;
-			}
-			con.close();
-			
-			return clientNo;
-	}
-	
 }

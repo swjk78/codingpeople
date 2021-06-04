@@ -216,20 +216,17 @@
 			&clientBlind=<%=postDto.getPostBlind()%>
 			&postNo=<%=postNo%>" class="form-btn form-btn-normal blind-btn">블라인드</a>
 		<%} %>
-		<%if(clientNo!=commentsDao.getPostWriter(postNo)){%> 
-			<a href="postLike.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>"
-			class="form-btn form-btn-normal like-btn">추천</a>
-		<%} %>
+		<a href="postLike.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>"
+		class="form-btn form-btn-normal like-btn">추천</a>
 		</div>
 </div>
 <!-- 	게시글 영역 끝 -->
-
 
 <!-- 버튼 영역 -->
 	<div class="container-850 post-btn-area">
 		<div class="row text-right">
 		<!-- 	로그인한 사람이 원본글작성자일때-->
-			<%if(clientNo==commentsDao.getPostWriter(postNo)){%> 
+			<%if(clientNo==postDto.getPostClientNo()){%> 
 			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn">수정</a>
 			<a class="form-btn form-btn-normal" href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn delete-btn">삭제</a>
 			<%} %>
@@ -317,7 +314,7 @@
 						<%} %>
 							
 <!-- 						//채택된 글이 아니고 && 로그인한 사람이 원본글작성자이고 && 본인이 쓴 댓글이 아닐때 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ-->
-						<%if(!commentsDao.isChoose(postNo) && clientNo==commentsDao.getPostWriter(postNo) && clientNo!=commentsViewDto.getCommentsClientNo()){%> 
+						<%if(!commentsDao.isChoose(postNo) && clientNo==postDto.getPostClientNo() && clientNo!=commentsViewDto.getCommentsClientNo()){%> 
 							<form action="commentsChoose.kh" method="get">
 								<input type="hidden" name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>">
 								<input type="hidden" name="boardGroup" value="<%=boardGroup %>">
@@ -403,7 +400,7 @@ zzz
 	<div class="container-850 post-btn-area">
 		<div class="row text-right">
 		<!-- 	로그인한 사람이 원본글작성자일때-->
-			<%if(clientNo==commentsDao.getPostWriter(postNo)){%> 
+			<%if(clientNo==postDto.getPostClientNo()){%> 
 			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn">수정</a>
 			<a class="form-btn form-btn-normal" href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn delete-btn">삭제</a>
 			<%} %>
