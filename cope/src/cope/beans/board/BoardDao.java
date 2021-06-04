@@ -21,6 +21,7 @@ public class BoardDao {
 			ps.setString(1, boardDto.getBoardName());
 			ResultSet rs = ps.executeQuery();
 			
+			boolean result;
 			if(!rs.next()){
 				//1. 상위 게시판 등록			
 				sql = "insert into board values(board_seq.nextval, ?, board_seq.currval, ?)";
@@ -51,11 +52,15 @@ public class BoardDao {
 				}
 				con.close();
 				
-				return true;
+				result = true;
 			}
 			else {
-				return false;
+				result = false;
 			}
+			
+			con.close();
+			
+			return result;
 	}
 
 
@@ -69,6 +74,7 @@ public class BoardDao {
 		ps.setInt(2, boardDto.getBoardSuperNo());
 		ResultSet rs = ps.executeQuery();
 		
+		boolean result;
 		if(!rs.next()){
 			sql = "insert into board values(board_seq.nextval, ?, ?, ?)";
 			ps = con.prepareStatement(sql);
@@ -76,12 +82,16 @@ public class BoardDao {
 			ps.setInt(2, boardDto.getBoardGroup());
 			ps.setInt(3, boardDto.getBoardSuperNo());
 			ps.execute();
-			con.close();
-			return true;
+
+			result = true;
 		}
 		else {
-			return false;
+			result = false;
 		}
+		
+		con.close();
+		
+		return result;
 	}
 	// 상위 게시판 조회 기능(게시판관리, 메인화면에서 쓰임)
 	public List<BoardDto> showListBoardSuper() throws Exception {
@@ -156,6 +166,8 @@ public class BoardDao {
 		ps.setString(1, boardDto.getBoardName());
 		ps.setInt(2, boardDto.getBoardNo());
 		ps.executeUpdate();
+		
+		con.close();
 	}
 	
 	// 게시판 삭제 기능
@@ -166,6 +178,8 @@ public class BoardDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, BoardNo);
 		ps.execute();
+		
+		con.close();
 	}
 	
 	//상위게시판에 속한 게시물들 세기
@@ -201,6 +215,8 @@ public class BoardDao {
 			}
 			countUnderpostList.add(underPostCount);
 		}
+		con.close();
+		
 		return countUnderpostList;
 	}
 	
@@ -238,6 +254,8 @@ public class BoardDao {
 			}
 			countWritenpostList.add(underPostCount);
 		}
+		con.close();
+		
 		return countWritenpostList;
 	}
 	
@@ -252,6 +270,9 @@ public class BoardDao {
 		
 		rs.next();
 		int countSuper =rs.getInt("count(*)");
+		
+		con.close();
+		
 		return countSuper;
 	}
 	
@@ -266,6 +287,8 @@ public class BoardDao {
 		
 		rs.next();
 		boolean isBoardSuper = rs.getInt("board_super_no") ==0;//상위 게시판은 board_super_no가 0 이므로
+		
+		con.close();
 		
 		return isBoardSuper;
 	}
