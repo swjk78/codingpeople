@@ -323,6 +323,8 @@ public class ClientDao {
 			//System.out.println((i) +"대 조회결과..." + count + "명");
 			ageRangeList.add(count);
 		}
+		con.close();
+		
 		return ageRangeList;
 	}
 
@@ -339,11 +341,9 @@ public class ClientDao {
 		//System.out.println("등급" + rs.getString("client_grade"));
 		boolean isSuper = rs.getString("client_grade").equals("super");
 		//System.out.println("불린" + isSuper);
-		if(isSuper) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		
+		con.close();
+		
+		return isSuper;
 	}
 }

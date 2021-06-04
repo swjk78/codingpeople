@@ -154,6 +154,8 @@ public class CommentsDao {
 		else {
 			isChoose = false;
 		}
+		con.close();
+		
 		return isChoose;
 	}
 	
@@ -173,6 +175,8 @@ public class CommentsDao {
 		else {
 			ChooseNo = 0;
 		}
+		con.close();
+		
 		return ChooseNo;
 	}
 	

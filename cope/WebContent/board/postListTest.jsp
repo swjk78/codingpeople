@@ -306,7 +306,9 @@
 	</div>
 	
 	<a href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a>
+	<%if (request.getSession().getAttribute("clientNo") != null) {%>
 	<a href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
+	<%} %>
 	
 	<form action="postListTest.jsp" method="get" class="search-form">
 		<input type="hidden" name="pageNo">
