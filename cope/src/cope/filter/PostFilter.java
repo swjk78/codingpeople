@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import cope.beans.board.BoardDao;
 
 @WebFilter (urlPatterns = {"/board/post.jsp"})
-public class BoardFilter implements Filter {
+public class PostFilter implements Filter {
 	//post.jsp의 파라미터 boardGroup 값은 상위 게시판의 board_no이어야한다. 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
