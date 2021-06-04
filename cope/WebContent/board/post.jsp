@@ -1,3 +1,5 @@
+<%@page import="cope.beans.post.PostListDao"%>
+<%@page import="cope.beans.post.PostListDto"%>
 <%@page import="cope.beans.utils.DateUtils"%>
 <%@page import="cope.beans.comments.CommentsDao"%>
 <%@page import="cope.beans.comments.CommentsViewDto"%>
@@ -34,6 +36,10 @@
 	
 	ClientDao clientDao = new ClientDao();
 	ClientDto clientDto = clientDao.myInfo(postDto.getPostClientNo());
+	
+	// 이전글, 다음글 불러오기
+	PostDto prevPostDto = postDao.getPrevious(boardGroup, postNo);
+	PostDto nextPostDto = postDao.getNext(boardGroup, postNo);
 	
 	//석현
 	String root= request.getContextPath();
@@ -458,27 +464,27 @@ zzz
 	</div>
 	<!-- 댓글작성끝-->
 	
-	
-<!-- 	<div class="row text-left"> -->
-<!-- 		다음글 :  -->
-<%-- 		<% if (nextPostDto == null) {%> --%>
-<!-- 		다음글이 없습니다. -->
-<%-- 		<% } else {%> --%>
-<%-- 		<a href="postDetail.jsp?postNo=<%=nextPostDto.getPostNo()%>"> --%>
-<%-- 			<%=nextPostDto.getPostTitle()%> --%>
-<!-- 		</a> -->
-<%-- 		<% }%> --%>
-<!-- 	</div> -->
-<!-- 	<div class="row text-left"> -->
-<!-- 		이전글 :  -->
-<%-- 		<% if (prevPostDto == null) {%> --%>
-<!-- 		이전글이 없습니다. -->
-<%-- 		<% } else {%> --%>
-<%-- 		<a href="postDetail.jsp?postNo=<%=prevPostDto.getPostNo()%>"> --%>
-<%-- 			<%=prevPostDto.getPostTitle()%> --%>
-<!-- 		</a> -->
-<%-- 		<% }%> --%>
-<!-- 	</div> -->
-<!-- </div> -->
+	<!-- 이전글/다음글 영역 -->
+	<div class="row text-left">
+		다음글 : 
+		<% if (nextPostDto == null) {%>
+		다음글이 없습니다.
+		<% } else {%>
+		<a href="post.jsp?boardGroup=<%=boardGroup%>&postNo=<%=nextPostDto.getPostNo()%>">
+			<%=nextPostDto.getPostTitle()%>
+		</a>
+		<% }%>
+	</div>
+	<div class="row text-left">
+		이전글 : 
+		<% if (prevPostDto == null) {%>
+		이전글이 없습니다.
+		<% } else {%>
+		<a href="post.jsp?boardGroup=<%=boardGroup%>&postNo=<%=prevPostDto.getPostNo()%>">
+			<%=prevPostDto.getPostTitle()%>
+		</a>
+		<% }%>
+	</div>
+	<!-- 이전글/다음글 영역 끝 -->
 </body>
 </html>
