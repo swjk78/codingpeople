@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>500 error</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/join.css">
 <style>
 	*{
