@@ -50,7 +50,7 @@
 		</div>
 		<div class="container joinBorder">
 			<h2>죄송합니다.</h2>
-			<h2>요청하신페이지는 찾을수가 없습니다</h2>
+			<h2>요청하신 페이지는 찾을 수 없습니다</h2>
 			<div class="content">
 				<p>	방문하시려는 페이지의 주소가 잘못 입력되었거나,
 					<br>

@@ -5,55 +5,53 @@
 <%@page import="cope.beans.client.ClientDto"%>
 <%@page import="cope.beans.client.ClientDao"%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+
+<%
+	String root = request.getContextPath();
+
+	request.setCharacterEncoding("UTF-8");
+	
+	int clientNo = Integer.parseInt(request.getParameter("clientNo"));
+	
+	// 프로필을 보는 사람이 본인인지 아닌지 판별
+	boolean isOwn = false;
+	if (session.getAttribute("clientNo") != null) {
+		isOwn = (int) session.getAttribute("clientNo") == clientNo;
+	}
+	
+	ClientDao clientDao = new ClientDao();
+	ClientDto clientDto = new ClientDto();
+	clientDto = clientDao.myInfo(clientNo);
+	
+	// 존재하지 않는 계정의 프로필일 경우
+	if (clientDto == null) {
+		response.sendRedirect(root + "/error/notExist.jsp");
+	}
+
+	//(석현)
+	//위는 세션으로 불러오는 경우에 자신의 정보를 보게끔하고
+	//다른 사람 정보는 파라미터로 받게하겠습니다(url에서 숨길 수 있으면 더 좋을 거 같은데 구현해보겠습니다.)
+
+	//아이디에 따라 랜덤 숫자 부여 placehodler에 사용할 예정!
+	if (clientDto != null) {
+		String clientId = clientDto.getClientId();
+		char ch =  clientId.charAt(0);
+		int no = (int)ch;
+		
+		int seed = 216823123;
+		int randomInt= (seed/no)%1000000;
+		
+		BoardDao boardDao = new BoardDao();
+		List<BoardDto>boardSuperList = boardDao.showListBoardSuper();
+		List<Integer>countWritenpostList = new ArrayList<>();
+		countWritenpostList = boardDao.countWritenPosts(clientNo, boardSuperList);
+%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/client.css">
-<%
-
-String root = request.getContextPath();
-//otherNo가 있으면 -> 다른사람 정보
-//otherNo가 없으면 -> 세션에서 clientNo를 가져와 내정보
-
-//파라미터는 남들도 내정보를볼수있으므로 세션으로 구현
-//Integer도 써도되지만 로그인후처리이므로 null값이 나올수가없어 int썻습니다
-//내정보불러오기
-	request.setCharacterEncoding("UTF-8");
-	int clientNo = (int)session.getAttribute("clientNo");
-	ClientDao clientDao = new ClientDao();
-	ClientDto clientDto = new ClientDto();
-	
-	if (request.getParameter("otherNo") == null) {
-	clientDto = clientDao.myInfo(clientNo);
-	}else if(Integer.parseInt(request.getParameter("otherNo"))==clientNo){
-	clientDto = clientDao.myInfo(clientNo);
-	}else{
-	clientDto = clientDao.myInfo(Integer.parseInt(request.getParameter("otherNo"))); 
-	}
-
-
-//(석현)
-//위는 세션으로 불러오는 경우에 자신의 정보를 보게끔하고
-//다른 사람 정보는 파라미터로 받게하겠습니다(url에서 숨길 수 있으면 더 좋을 거 같은데 구현해보겠습니다.)
-
-	//아이디에 따라 랜덤 숫자 부여 placehodler에 사용할 예정!
-	String clientId = clientDto.getClientId();
-	char ch =  clientId.charAt(0);
-	int no = (int)ch;
-	
-	int seed = 216823123;
-	int randomInt= (seed/no)%1000000;
-	
-  BoardDao boardDao = new BoardDao();
-  List<BoardDto>boardSuperList = boardDao.showListBoardSuper();
-  List<Integer>countWritenpostList = new ArrayList<>();
-  if (request.getParameter("otherNo") == null || Integer.parseInt(request.getParameter("otherNo"))==clientNo) {//otherNo가 없거나 otherNo가 본인이라면
-  	countWritenpostList = boardDao.countWritenPosts(clientNo, boardSuperList);
-  }else{
-	countWritenpostList = boardDao.countWritenPosts(Integer.parseInt(request.getParameter("otherNo")), boardSuperList); 
-  }
-%>
 
 <style>
 .chart{
@@ -61,6 +59,9 @@ String root = request.getContextPath();
 	height: 200px;
 }
 </style>
+<script>
+	
+</script>
 </head>
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
@@ -68,11 +69,7 @@ String root = request.getContextPath();
 <div class="main">
 	<div class="container-800 border">	
 
-		<%if (request.getParameter("otherNo") == null || Integer.parseInt(request.getParameter("otherNo"))==clientNo){%>
-		<div class="row"><h2 class="text-center">내 프로필카드</h2></div>
-		<%}else{%>
 		<div class="row"><h2 class="text-center">회원 프로필카드</h2></div>
-		<%} %>
 		
 <table class="table-card">
 <tbody>
@@ -83,7 +80,7 @@ String root = request.getContextPath();
 					<span class="grade"><%=clientDto.getClientGradeKorean()%></span>
 					<img class="imgRound" src="https://dummyimage.com/200/<%=randomInt %>/ffffff&text=<%=ch %>" >
 					<h3><%=clientDto.getClientNick() %></h3>
-					<%if (request.getParameter("otherNo") == null || Integer.parseInt(request.getParameter("otherNo"))==clientNo){%>
+					<%if (isOwn){%>
 					<h4><%=clientDto.getClientEmail() %></h4>
 					<%}else{%>
 					<h4><%=clientDto.getClientEmail().substring(1,3) %>********</h4>
@@ -92,14 +89,11 @@ String root = request.getContextPath();
 				</div>
 				
 				<div class="profile-card-bottom">
-						<%if (request.getParameter("otherNo") == null || Integer.parseInt(request.getParameter("otherNo"))==clientNo) {%>
+						<%if (isOwn) {%>
 							<a href="<%=root%>/client/editInfo.jsp"><button class="client-btn">내 정보 수정</button></a>
 							<a href="<%=root%>/client/resetPw.jsp"><button class="client-btn">비밀번호 재설정</button></a>
 							<a href="<%=root%>/client/exit.jsp"><button class="client-btn">회원탈퇴</button></a>
-						<%}else{%>
-							
 						<%} %>
-
 				</div>
 			</div>
 		</td>
@@ -107,14 +101,7 @@ String root = request.getContextPath();
 		<div class="profile-card-back float-left">
 			<div class="profile-card-top">
 			
-				<%if (request.getParameter("otherNo") == null || Integer.parseInt(request.getParameter("otherNo"))==clientNo){%>
-				<h2 class="text-center rid-margin">내 게시글 분석</h2>
-				<%}else{%>
 				<h2 class="text-center rid-margin">회원 게시글 분석</h2>
-				<%} %>			
-
-				
-				
 				
 					<br>
 					<div class="chart">
@@ -172,12 +159,9 @@ String root = request.getContextPath();
 					</script>
 				</div>
 				<div class="profile-card-bottom">
-					<%if (request.getParameter("otherNo") == null || Integer.parseInt(request.getParameter("otherNo"))==clientNo){%>
-					<a href="#"><button class="client-btn">내 글 보기</button></a>
-					<%}else{%>
-					<a href="#"><button class="client-btn">회원 글 보기</button></a>
-					<%} %>	
-					<a href="#"><button class="client-btn">"좋아요"한 글 보기</button></a>
+					<a href="clientPostList.jsp?clientNo=<%=clientNo%>">
+					<button class="client-btn">작성한 글 보기</button></a>
+					<a href="#"><button class="client-btn">작성한 댓글 보기</button></a>
 				</div>
 			</div>
 		</td>
@@ -194,4 +178,5 @@ String root = request.getContextPath();
 </div>
 
 </body>
+<%} %>
 </html>

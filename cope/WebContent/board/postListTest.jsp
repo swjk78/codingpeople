@@ -137,10 +137,8 @@
 	window.addEventListener('load', function() {
 		var selectSearchType = document.querySelector('select[name=searchType]');
 		var inputSearchKeyword = document.querySelector('input[name=searchKeyword]');
-		var inputPageSize = document.querySelector('input[name=pageSize]');		
 		selectSearchType.value = '<%=searchType%>';
 		inputSearchKeyword.value = '<%=searchKeyword%>';
-		inputPageSize.value = '<%=pageSize%>';
 	});	
 </script>
 <%} %>
@@ -197,7 +195,6 @@
 					orderDirection = 'desc';	
 				}
 
-				document.querySelector('input[name=pageSize]').value = <%=pageSize%>;
 				document.querySelector('input[name=orderType]').value = orderType;
 				document.querySelector('input[name=orderDirection]').value = orderDirection;
 				document.querySelector('.search-form').submit();
@@ -214,9 +211,9 @@
 	
 	<!-- 하위 게시판 선택 링크 -->
 	<%for (BoardDto boardDto : subBoardList) {%>
-	<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
-	&boardNo=<%=boardDto.getBoardNo()%>&pageSize=<%=pageSize%>"><%=boardDto.getBoardName()%>
-	</a>
+		<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
+		&boardNo=<%=boardDto.getBoardNo()%>&pageSize=<%=pageSize%>">
+		<%=boardDto.getBoardName()%></a>
 	<%} %>
 	
 	<!-- 정렬 링크 -->
@@ -259,10 +256,9 @@
 				<td><%=postListDto.getPostNo() %></td>				
 				<td>
 				<% if(postListDto.getPostBlind() == 'F') {%>
-						<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
-						&boardNo=<%=postListDto.getPostBoardNo()%>">
-						[<%=postListDto.getBoardName()%>]
-						</a>
+					<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
+					&boardNo=<%=postListDto.getPostBoardNo()%>">
+					[<%=postListDto.getBoardName()%>]</a>
 					<a href="post.jsp?boardGroup=<%=boardGroup%>
 					&postNo=<%=postListDto.getPostNo()%>">
 					<%=postListDto.getPostTitle()%></a>
@@ -274,11 +270,10 @@
 				<%} %>
 				</td>
 				<td>
-					<a href="<%=request.getContextPath()%>/client/profile.jsp?otherNo=
+					<a href="<%=request.getContextPath()%>/client/profile.jsp?clientNo=
 					<%=postListDto.getPostClientNo()%>"><%=postListDto.getClientNick() %>
 					</a>
 				</td>
-				
 				<% boolean isToday = dateUtils.isToday(postListDto.getPostDate()) == true; %>
 				<%if (isToday) {%>
 					<td><%=postListDto.getPostDate()%></td>
@@ -315,7 +310,7 @@
 	
 	<form action="postListTest.jsp" method="get" class="search-form">
 		<input type="hidden" name="pageNo">
-		<input type="hidden" name="pageSize">
+		<input type="hidden" name="pageSize" value="<%=pageSize%>">
 		<input type="hidden" name="orderType">
 		<input type="hidden" name="orderDirection">
 		<input type="hidden" name="boardGroup" value="<%=boardGroup%>">

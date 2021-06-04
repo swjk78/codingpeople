@@ -1,8 +1,11 @@
 package cope.beans.post;
 
+import java.sql.Date;
+
 public class PostLikeDto {
 	private int postLikeClientNo;
 	private int postLikePostNo;
+	private Date postLikeDate;
 	
 	public PostLikeDto() {
 		super();
@@ -19,5 +22,11 @@ public class PostLikeDto {
 	}
 	public void setPostLikePostNo(int postLikePostNo) {
 		this.postLikePostNo = postLikePostNo;
+	}
+	public Date getPostLikeDate() {
+		return postLikeDate;
+	}
+	public void setPostLikeDate(Date postLikeDate) {
+		this.postLikeDate = postLikeDate;
 	}
 }
