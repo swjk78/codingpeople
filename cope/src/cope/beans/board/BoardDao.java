@@ -254,4 +254,19 @@ public class BoardDao {
 		int countSuper =rs.getInt("count(*)");
 		return countSuper;
 	}
+	
+	//post.jps한정 파라미터의groupNo로 조회하여
+	//상위 게시판의 board_no인지 아닌지 판별(파라미터의groupNo가 매개변수)
+	public boolean checkBoardSuper(int groupNo) throws Exception{
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select board_super_no from board where board_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, groupNo);
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		boolean isBoardSuper = rs.getInt("board_super_no") ==0;//상위 게시판은 board_super_no가 0 이므로
+		
+		return isBoardSuper;
+	}
 }
