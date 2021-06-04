@@ -156,7 +156,7 @@ public class PostDao {
 	// 게시글 추천수 갱신 기능
 	public void refreshLikeCount(int postNo) {
 		String sql = "update post "
-					 	+ "set post_like_count = (select count(*) from post_like where post_like_post_no = ?)"
+					 + "set post_like_count = (select count(*) from post_like where post_like_post_no = ?)"
 					 + "where post_no = ?";
 
 		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
@@ -171,7 +171,7 @@ public class PostDao {
 	// 게시글 댓글수 갱신 기능
 	public void refreshCommentsCount(int postNo) {
 		String sql = "update post "
-					 	+ "set post_comments_count = (select count(*) from comments where comments_post_no = ?)"
+					 + "set post_comments_count = (select count(*) from comments where comments_post_no = ?)"
 					 + "where post_no = ?";
 
 		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
@@ -220,24 +220,24 @@ public class PostDao {
 	public PostDto getNext(int boardGroup, int postNo) {
 		String sql = "select * from post "
 					 + "where post_no = (select min(post_no) from post_list where board_group = ? and post_no > ?)";
-		
+
 		ResultSet rs = null;
 		PostDto postDto = null;
-		
-		try(Connection con = JdbcUtils.getConnection();PreparedStatement ps = con.prepareStatement(sql);){
-		ps.setInt(1, boardGroup);
-		ps.setInt(2, postNo);
-		rs = ps.executeQuery();
-		
-		if (rs.next()) {
-			postDto = new PostDto();
-			postDto.setPostNo(rs.getInt("post_no"));
-			postDto.setPostTitle(rs.getString("post_title"));
-		}
-		}catch(Exception e) {
+
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+			ps.setInt(1, boardGroup);
+			ps.setInt(2, postNo);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				postDto = new PostDto();
+				postDto.setPostNo(rs.getInt("post_no"));
+				postDto.setPostTitle(rs.getString("post_title"));
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if (rs!=null) {
+		} finally {
+			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException e) {
