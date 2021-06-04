@@ -1,5 +1,3 @@
-<%@page import="cope.beans.post.PostListDao"%>
-<%@page import="cope.beans.post.PostListDto"%>
 <%@page import="cope.beans.utils.DateUtils"%>
 <%@page import="cope.beans.comments.CommentsDao"%>
 <%@page import="cope.beans.comments.CommentsViewDto"%>
