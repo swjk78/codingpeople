@@ -163,4 +163,54 @@ public class PostDao {
 		
 		con.close();
 	}
+	
+	// 이전글 조회 기능
+	public PostDto getPrevious(int boardGroup, int postNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select * from post "
+					 + "where post_no = (select max(post_no) from post_list where board_group = ? and post_no < ?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, boardGroup);
+		ps.setInt(2, postNo);
+		ResultSet rs = ps.executeQuery();
+		
+		PostDto postDto;
+		if(rs.next()) {
+			postDto = new PostDto();
+			postDto.setPostNo(rs.getInt("post_no"));
+			postDto.setPostTitle(rs.getString("post_title"));
+		}
+		else {
+			postDto = null;
+		}
+
+		con.close();
+
+		return postDto;
+	}
+
+	// 다음글 조회 기능
+	public PostDto getNext(int boardGroup, int postNo) throws Exception {
+		Connection con = JdbcUtils.getConnection();
+		String sql = "select * from post "
+				  	 + "where post_no = (select min(post_no) from post_list where board_group = ? and post_no > ?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, boardGroup);
+		ps.setInt(2, postNo);
+		ResultSet rs = ps.executeQuery();
+		PostDto postDto;
+		if(rs.next()) {
+			postDto = new PostDto();
+			postDto.setPostNo(rs.getInt("post_no"));
+			postDto.setPostTitle(rs.getString("post_title"));
+		}
+		else {
+			postDto = null;
+		}
+
+		con.close();
+
+		return postDto;
+	}
+
 }
