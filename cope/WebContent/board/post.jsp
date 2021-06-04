@@ -58,102 +58,40 @@
 	 //채택된 댓글 번호 불러오기
 	 int chooseNo = commentsDao.getChooseNo(postNo);
 	List<CommentsViewDto> commentsList = commentsDao.showList(postNo);
+	
+	//프로필 사진 띄우는 구문
+	String clientId = clientDto.getClientId(); //구문이 위에 다 준비 되어 있더군요
+	char ch =  clientId.charAt(0);
+	int no = (int)ch;
+		
+	int seed = 216823123;
+	int randomInt= (seed/no)%1000000;
 %>
 
 <%-- <jsp:include page="/template/aside.jsp"></jsp:include> --%>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/common.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/post.css">
 
 <!-- 임시 테두리 -->
 <style>
-	main,
-	header,
-	nav,
-	section,
-	article,
-	aside,
-	footer,
-	div,
-	span,
-	p,
-	label {
-	    border: 1px dotted lightgray;
-	}
-	* {
-	font-family: Neo Sans Pro , sans-serif;
-	box-sizing: border-box;
-	}
-	
-	.row {
-		width:100%;
-	}
-	
-	.inline{
-		display: inline;
-	}
-	
-	ul{
-	    display: block;
-	    list-style-type: none;
-	    margin-block-start: 0em;
-	    margin-block-end: 0em;
-	    margin-inline-start: 0px;
-	    margin-inline-end: 0px;
-	    padding-inline-start: 0px;
-	}
-	li{
-		list-style: none;
-	} 
-	
-	.comments{
-		display : table;
-		width:600px;
-		border: 1px dotted black;
-	}
-	
-	.comments .comments-title{
-		background-color: #9A9EC2;
-		padding: 5px;
-	}
-	
-	.comments-blind{
-		color: red;
-	}
-	
-	.comments-choose{
-		color: green;
-	}
-	
-	.commentsNewBox{
-		border:1px solid purple;
-	}
-	.commentsEditBox{
-		border:1px solid red;
-	}
-	
-	.commentsNew-border{
-		border:1px solid purple;
-	}
-	.commentsEdit-border{
-		border:1px solid red;
-	}
-	
-	.commentsNewDiv{
-		height:150px;
-		overflow:auto;
-		width:100%;
-	}
-	
-	.commentsEditDiv{
-		height:150px;
-		overflow:auto;
-		width:100%;
-	}
-	
-	.choose{
-		background-color: #b3ffff;
-	}
+/* 	main, */
+/* 	header, */
+/* 	nav, */
+/* 	section, */
+/* 	article, */
+/* 	aside, */
+/* 	footer, */
+/* 	div, */
+/* 	span, */
+/* 	p, */
+/* 	label { */
+/* 	    border: 1px dotted lightgray; */
+/* 	} */
+	.imgRound {
+	border: 1.5px solid #ffffff;
+	border-radius: 50%;
+	padding: 5px;
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
@@ -203,100 +141,165 @@
 
 </head>
 <body>
-<div class="container-900">
-	<div class="row text-left">
-		<h2><a href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
-	<%=boardGroupName%></a></h2>
-	</div>
-	<div class="row text-left">
-		<a href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
-				&boardNo=<%=postDto.getPostBoardNo()%>">
-				<%=boardDao.findBoardName(postDto.getPostBoardNo())%>
+<!-- 게시글영역 -->
+<div class="container-900 border">
+	<div class="row text-left boardName-div">
+		<a class="boardSuperName" href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
+		<%=boardGroupName%></a>
+		<span class="dir-sign"> > </span>
+		<a class="boardSubName" href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
+		&boardNo=<%=postDto.getPostBoardNo()%>">(<%=boardDao.findBoardName(postDto.getPostBoardNo())%>)
 		</a>
+
 	</div>
-	<div class="row text-left">
+	
+	<div class="row text-left post-title-div margin-side-auto" >
 		<%if (postDto.getPostBlind() == 'F') {%>
-			<%=postDto.getPostTitle()%>
+		<div class="post-title-area">
+			<table class="post-title-box">
+				<tr>
+					<td>
+						<span class=post-title><%=postDto.getPostTitle()%></span>
+					</td>
+				</tr>
+			</table>
+		</div>
 		<%} else {%>
-			블라인드된 게시글입니다.
+			<p class="blind-text">(블라인드된 게시글입니다.)</p>
 		<%} %>
 	</div>
-	<div class="row float-container">
-		<div class="left">
-			<a href="<%=root%>/client/profile.jsp?otherNo=<%=postDto.getPostClientNo()%>">
-			<%=clientDto.getClientNick()%></a>
-		</div>
-		<div class="right">
-			조회수 <%=postDto.getPostViewCount()%>
-			좋아요 <%=postDto.getPostLikeCount()%>
-		</div>		
-		<div class="right">
-			<%=postDto.getPostDateString()%>
-		</div>
-		<div class="row text-left" style="min-height:300px;">
+	
+	<div class="float-container etc-left-div">
+		<table class="mini-profile-table writer-info post-writer left">
+			<tr>
+				<td rowspan="2">
+					<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
+				</td>
+				<td>
+					<a class="writer-name" href="<%=root%>/client/profile.jsp?otherNo=<%=postDto.getPostClientNo()%>">
+					<%=clientDto.getClientNick()%></a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class=post-time><%=postDto.getPostDateString()%></div>
+				</td>
+			</tr>
+		</table>
+
+	<div class="float-container etc-right-div">
+		<table class="post-info-table right">
+			<tbody>
+				<tr>
+					<td><div class="right like-count">좋아요 <%=postDto.getPostLikeCount()%></div></td>
+					<td><div class="right read-count">조회수 <%=postDto.getPostViewCount()%></div></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+		
+	</div>
+		<div class="row text-left post-content" style="min-height:300px;">
 			<%if (postDto.getPostBlind() == 'F') {%>
-				<pre><%=postDto.getPostContents()%></pre>
+				<pre class="post-content word-break dd-border"><%=postDto.getPostContents()%></pre>
 			<%} else {%>
-				<pre>블라인드된 게시글입니다.</pre>
+				<pre class="blind-text">(블라인드된 게시글입니다.)</pre>
 			<%} %>
 		</div>
-		<div class="row text-left">
+		<div class="row text-right">
+		<%if(isSuper){//관리자만 블라인드 버튼 %>
 			<a href="<%=root%>/manage/postBlind.kh?boardGroup=<%=boardGroup%>
 			&clientBlind=<%=postDto.getPostBlind()%>
-			&postNo=<%=postNo%>" class="link-btn blind-btn">블라인드</a>
+			&postNo=<%=postNo%>" class="form-btn form-btn-normal blind-btn">블라인드</a>
+		<%} %>
+		<%if(clientNo!=commentsDao.getPostWriter(postNo)){%> 
 			<a href="postLike.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>"
-			class="link-btn like-btn">추천</a>
+			class="form-btn form-btn-normal like-btn">추천</a>
+		<%} %>
+		</div>
+</div>
+<!-- 	게시글 영역 끝 -->
+
+
+<!-- 버튼 영역 -->
+	<div class="container-850 post-btn-area">
+		<div class="row text-right">
+		<!-- 	로그인한 사람이 원본글작성자일때-->
+			<%if(clientNo==commentsDao.getPostWriter(postNo)){%> 
+			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn">수정</a>
+			<a class="form-btn form-btn-normal" href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn delete-btn">삭제</a>
+			<%} %>
+			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&write" class="link-btn">글쓰기</a>
+			<a class="form-btn form-btn-normal" href="postListTest.jsp?boardGroup=<%=boardGroup%>" class="link-btn">목록</a>
 		</div>
 	</div>
-	
-	<!-- 댓글 영역 시작 -->
+<!-- 버튼영역 끝 -->
 
-	
-<div class="comments-area">
 
-	<div class="comments-area comments-area-title">
-		<h5 class="comments comments-title">댓글</h5>
-	</div>
+<!-- 댓글 영역 시작 -->	
+<div class="comments-title-area">
+	<p class="comments-title-area text">댓글</p>
+</div>
 	
+<div class="comments-area container-850 border">
 	<div class=comments-view>
 	<%for(CommentsViewDto commentsViewDto : commentsList){
 		int commentsNo =commentsViewDto.getCommentsNo(); // 자주 쓰여서 변수로 담아 둡니다.%>
 
 			<!-- 			각 댓글을 감싸고 있는 div는 서로 다른 id를 지니게 합니다.  -->
-				<div id="commentsOriginNo-<%=commentsNo%>" class="comments comments-box>">
-
+				<div id="commentsOriginNo-<%=commentsNo%>" class="comments comments-box comments-box-border">
+					<%
+					//공교롭게도... 다시 "randomInt"를 뽑아내야하는... 이름이 길으니 구분은 잘 갈겁니다.
+					ClientDto clientDtoUsingOnlyGetNick = clientDao.myInfo(commentsViewDto.getCommentsClientNo());
+					clientId = clientDtoUsingOnlyGetNick.getClientId(); 
+					ch =  clientId.charAt(0);
+					no = (int)ch; //재정의
+						
+					seed = 216823123;
+					randomInt= (seed/no)%1000000; //재정의
+					 %>
 					<div class=writer-info>
-					
-					<a href="<%=root %>/client/profile.jsp?otherNo=<%=commentsViewDto.getCommentsClientNo()%>"><%=commentsViewDto.getClientNick() %></a><br>
+						<table class="mini-profile-table writer-info left">
+							<tr>
+								<td rowspan="2">
+									<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
+								</td>
+								<td>
+									<a href="<%=root %>/client/profile.jsp?otherNo=<%=commentsViewDto.getCommentsClientNo()%>"><%=commentsViewDto.getClientNick() %></a><br>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<%boolean isToday = dateUtils.isToday(commentsViewDto.getCommentsDate())==true;%>
+										<%if(!isToday){ //왜 반대로 해야 제대로 될까요%>
+										<div class=post-time>(오늘)<%=commentsViewDto.getCommentsDateToday()%></div>
+										<%}else{//오늘이 아닌 것%>
+										<div class=post-time><%=commentsViewDto.getCommentsDateString()%></div>
+									<%}%>	
+								</td>
+							</tr>
+						</table>
+						
 					</div>
 					
-					<div class=write-time>
-						<%boolean isToday = dateUtils.isToday(commentsViewDto.getCommentsDate())==true;%>
-						<%if(!isToday){ //왜 반대로 해야 제대로 될까요%>
-						<span>(오늘)<%=commentsViewDto.getCommentsDateToday() %></span>
-						<%}else{//오늘이 아닌 것%>
-						<span><%=commentsViewDto.getCommentsDate()%></span><br>
-						<%}%>
-					</div>
 					
-					<div class="writen-contents">
+					<div class="form-comments float-container border margin-top-0">
 						<%if(commentsViewDto.getCommentsBlind().equals("F")){ //깨끗한 글%>
-						<div><%=commentsViewDto.getCommentsContents() %></div>
+						<div class="left"><%=commentsViewDto.getCommentsContents() %></div>
 							<%if(commentsNo==chooseNo){%>
-								<img src="<%=root %>/image/choose.png" width="100">
+								<img class="right right-75px" src="<%=root %>/image/choose.png" width="125">
 							 <%}%>
 						<%}else{//블라인드가 T라면%>
-						<div class=blind-contents>(블라인드된 댓글입니다.)</div>
-						<%} %>
-						
+						<div class=blind-text>(블라인드된 댓글입니다.)</div>
+						<%} %>				
 					</div>
 					
 					<%if(isLogin){//로그인이어야 버튼들을 보여줍니다. %>					
-					<div class="btn-area">
+					<div class="btn-area text-right">
 						
 <!-- 						//본인작성글이라면 수정이 보이게 -->
 						<%if(clientNo==commentsViewDto.getCommentsClientNo()){%>
-						<input type="button" value="수정" onclick="ShowCommentsEditArea(<%=commentsViewDto.getCommentsNo()%>);">
+						<input class="form-btn form-btn-normal"  type="button" value="수정" onclick="ShowCommentsEditArea(<%=commentsViewDto.getCommentsNo()%>);">
 						<%} %>
 						
 <!-- 						//본인이 작성한 댓글이면 삭제가 보이게 -->
@@ -305,7 +308,7 @@
 								<input type="hidden" name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>">
 								<input type="hidden" name="boardGroup" value="<%=boardGroup %>">
 								<input type="hidden" name="postNo" value="<%=postNo%>">
-								<input type="submit" value="삭제">
+								<input class="form-btn form-btn-normal" type="submit" value="삭제">
 							</form>
 						<%} %>
 							
@@ -315,7 +318,7 @@
 								<input type="hidden" name="commentsNo" value="<%=commentsViewDto.getCommentsNo()%>">
 								<input type="hidden" name="boardGroup" value="<%=boardGroup %>">
 								<input type="hidden" name="postNo" value="<%=postNo%>">
-								<input type="submit" value="채택">
+								<input class="form-btn form-btn-normal" type="submit" value="채택">
 							</form>
 						<%} %>
 						
@@ -326,7 +329,7 @@
 								<input type="hidden" name="postNo" value="<%=postNo%>">
 								<input type="hidden" name="boardGroup" value="<%=boardGroup %>">
 								<input type="hidden" name="commentsBlind" value="<%=commentsViewDto.getCommentsBlind()%>">
-								<input type="submit" value="블라인드/언블라인드">
+								<input class="form-btn form-btn-normal" type="submit" value="블라인드/언블라인드">
 							</form>
 						<%} %>					
 					</div><!-- 	버튼 영역끝 -->
@@ -335,60 +338,126 @@
 					<%} %>
 				</div> <!-- 각 댓글의 마지막 -->
 				<!-- 	댓글 수정창 -->
-				
-				<div id="commentsEditNo-<%=commentsViewDto.getCommentsNo()%>" style="display:none">
+				<div id="commentsEditNo-<%=commentsViewDto.getCommentsNo()%>" class="comments-box comments-box-border display-none">
 					<div class="commentsEditBox">
-						<div class="writer-info">
-						<%=commentsViewDto.getClientNick() %>
-						</div>
-						<div class="edit-comment">
-							<form action="commentsForm.kh" method="post">
-								<input type="hidden"  name=commentsNo value=<%=commentsViewDto.getCommentsNo()%>>
-								<input type="hidden"  name="boardGroup" value=<%=boardGroup %>>
-								<input type="hidden"  name="postNo" value="<%=postNo%>">
-								<input type="hidden"  name=isNew value="F">
-								<div class="commentsEditDiv commentsEditDiv-<%=commentsViewDto.getCommentsNo()%>" contenteditable="true"  oninput="copytextEdit(<%=commentsViewDto.getCommentsNo()%>);"></div>
-								<textarea class="commentsEditTextarea commentsEditTextarea-<%=commentsViewDto.getCommentsNo()%>" name="commentsContents"  style="display: none"></textarea>
-								<input type="submit" value="수정">
-							</form>
-						</div>
+					<table class="mini-profile-table left writer-info">
+						<tr>
+							<td>
+								<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
+							</td>
+							<td>
+								<a class="writer-name" href="<%=root%>/client/profile.jsp?otherNo=<%=postDto.getPostClientNo()%>">
+								<%=loginNick%></a>
+							</td>
+						</tr>
+						<tr>
+						</tr>					
+					</table>
+					<div class="commentsEdit-border">
+						<form action="commentsForm.kh" method="post">
+							<input type="hidden"  name=commentsNo value=<%=commentsViewDto.getCommentsNo()%>>
+							<input type="hidden"  name="boardGroup" value=<%=boardGroup %>>
+							<input type="hidden"  name="postNo" value="<%=postNo%>">
+							<input type="hidden"  name=isNew value="F">
+							<div class="commentsEditDiv form-comments dd-border commentsEditDiv-<%=commentsViewDto.getCommentsNo()%> dd-border" contenteditable="true"  oninput="copytextEdit(<%=commentsViewDto.getCommentsNo()%>);">
+							<%=commentsViewDto.getCommentsContents() %>
+							</div>
+							<textarea class="commentsEditTextarea commentsEditTextarea-<%=commentsViewDto.getCommentsNo()%>" name="commentsContents"  style="display: none">
+							<%=commentsViewDto.getCommentsContents() %>
+							</textarea>
+							<input class="form-btn form-btn-normal"  type="submit" value="수정">
+						</form>
 					</div>
 				</div>
+			</div>
+<%-- 				<div id="commentsEditNo-<%=commentsViewDto.getCommentsNo()%>" style="display:none"> --%>
+<!-- 					<div class="commentsEditBox"> -->
+<!-- 						<div class="writer-info"> -->
+<%-- 						<%=commentsViewDto.getClientNick() %> --%>
+<!-- 						</div> -->
+<!-- 						<div class="edit-comment"> -->
+<!-- 							<form action="commentsForm.kh" method="post"> -->
+<%-- 								<input type="hidden"  name=commentsNo value=<%=commentsViewDto.getCommentsNo()%>> --%>
+<%-- 								<input type="hidden"  name="boardGroup" value=<%=boardGroup %>> --%>
+<%-- 								<input type="hidden"  name="postNo" value="<%=postNo%>"> --%>
+<!-- 								<input type="hidden"  name=isNew value="F"> -->
+<%-- 								<div class="commentsEditDiv form-comments dd-border commentsEditDiv-<%=commentsViewDto.getCommentsNo()%>" contenteditable="true"  oninput="copytextEdit(<%=commentsViewDto.getCommentsNo()%>);"></div> --%>
+<%-- 								<textarea class="commentsEditTextarea commentsEditTextarea-<%=commentsViewDto.getCommentsNo()%>" name="commentsContents"  style="display: none"></textarea> --%>
+<!-- 								<input class="form-btn form-btn-normal"  type="submit" value="수정"> -->
+<!-- 							</form> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 		<%} %><!-- 	반복문의 끝... -->
 		</div>
 	</div>
 <!-- 코멘트s 에어리어 끝 -->
-
-</div>
+zzz
 <!-- 댓글 에어리어 끝				 -->
-<br><br>
-	-
-	<%if(clientNo>0){ %>
+
+<!-- 버튼 영역 -->
+	<div class="container-850 post-btn-area">
+		<div class="row text-right">
+		<!-- 	로그인한 사람이 원본글작성자일때-->
+			<%if(clientNo==commentsDao.getPostWriter(postNo)){%> 
+			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn">수정</a>
+			<a class="form-btn form-btn-normal" href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn delete-btn">삭제</a>
+			<%} %>
+			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&write" class="link-btn">글쓰기</a>
+			<a class="form-btn form-btn-normal" href="postListTest.jsp?boardGroup=<%=boardGroup%>" class="link-btn">목록</a>
+		</div>
+	</div>
+<!-- 버튼영역 끝 -->
+
+<br>
+
+<!-- 댓글 작성 -->
+	<%if(isLogin){ %>
+		<div class="comments-title-area">
+			<p class="comments-title-area text">새 댓글 작성</p>
+		</div>
+
+		<div class="comments-write container-850 border">
+
 		<div class="commentsWriteBox">
-			<div class="writer-info">
-			<%=loginNick %>
-			</div>
+			<table class="mini-profile-table left writer-info">
+				<%
+				//또 다시
+				ClientDto clientDtoGettingLoginNick = clientDao.myInfo(clientNo);
+				clientId = clientDtoGettingLoginNick.getClientId(); 
+				ch =  clientId.charAt(0);
+				no = (int)ch; //재정의
+					
+				seed = 216823123;
+				randomInt= (seed/no)%1000000; //재정의
+				 %>
+				<tr>
+					<td>
+						<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
+					</td>
+					<td>
+						<a class="writer-name" href="<%=root%>/client/profile.jsp?otherNo=<%=postDto.getPostClientNo()%>">
+						<%=loginNick%></a>
+					</td>
+				</tr>
+				<tr>
+				</tr>
+			</table>
 			<div class="commentsNew-border">
 				<form action="commentsForm.kh" method="post">
 					<input type="hidden"  name=postNo value=<%=postNo %>>
 					<input type="hidden"  name=boardGroup value=<%=boardGroup %>>
 					<input type="hidden"  name=isNew value="T">
-					<div class="commentsNewDiv" contenteditable="true"  oninput="copytextNew();"></div>
-					<input type="submit" value="작성">
+					<div class="commentsNewDiv border form-comments" contenteditable="true"  oninput="copytextNew();"></div>
+					<input class="form-btn form-btn-normal"  type="submit" value="작성">
 					<textarea class="commentsNewTextarea" name="commentsContents" style="display: none;"></textarea>
 				</form>
 			</div>
 		</div>
-		<%} %>
-	<!-- 댓글영역 끝 -->
-
-	<!-- 버튼 영역 -->
-	<div class="row text-right">
-		<a href="postForm.jsp?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn">수정</a>
-		<a href="postDelete.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>" class="link-btn delete-btn">삭제</a>
-		<a href="postForm.jsp?boardGroup=<%=boardGroup%>&write" class="link-btn">글쓰기</a>
-		<a href="postListTest.jsp?boardGroup=<%=boardGroup%>" class="link-btn">목록</a>
+<%} %>
 	</div>
+	<!-- 댓글작성끝-->
+	
 	
 <!-- 	<div class="row text-left"> -->
 <!-- 		다음글 :  -->
