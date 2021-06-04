@@ -42,6 +42,10 @@ public class CommentsViewDto { //client와 조인하여 사용될 Dto
 		SimpleDateFormat simpleDateformat = new SimpleDateFormat("HH:mm:ss");				
 		return simpleDateformat.format(commentsDate);
 	}
+	public String getCommentsDateString() {
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");				
+		return simpleDateformat.format(commentsDate);
+	}
 	public void setCommentsDate(Date commentsDate) {
 		this.commentsDate = commentsDate;
 	}
