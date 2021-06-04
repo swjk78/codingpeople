@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter (urlPatterns = {"/client/editPw.jsp", "/client/exit.jsp"})
-public class clientLogoutStatus implements Filter{
+public class IfLogoutFilter implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
