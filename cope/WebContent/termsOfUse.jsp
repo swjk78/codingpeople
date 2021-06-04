@@ -43,7 +43,7 @@ width : 100%
   		  			<div class = padding-left>
   		  			<div class = "title-border ">KH정보교육원 이용 약관</div>
   		  			</div>
-<div class = " display-inline-block border">
+<div class = " display-inline-block bottomBorder">
         <pre class = "text-left border-inner">
 KH정보교육원 개인정보 이용 약관은 다음과 같습니다.
 
