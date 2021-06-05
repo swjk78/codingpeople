@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cope.beans.board.BoardDao;
-import cope.beans.board.BoardDto;
 import cope.beans.post.PostDao;
 import cope.beans.post.PostDto;
 
