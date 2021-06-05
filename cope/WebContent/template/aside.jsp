@@ -53,7 +53,6 @@ randomInt= (seed/no)%1000000;
 function logout(){
 	location.href="/client/logout.kh"
 }
-	});
 	
 </script>
 
@@ -68,16 +67,20 @@ function logout(){
 </head>
 
 <style>
+
 * {
  	font-family: 'NanumSquare', sans-serif;
 	box-sizing: border-box;
 	}
 	
 .font-size{
-font-size: 18px;
+font-size: 17px;
 }
 .font-sizemini{
 font-size: 1px;
+}
+.font-join{
+font-size: 13px;
 }
 .text-center{
 	text-align: center;
@@ -91,8 +94,8 @@ font-size: 1px;
 color:white;
 
 }
-.border{
-border: 4px solid #5A5F94;
+.aside-border{
+border: solid 3px #5A5F94;
 }
 
 .imgdiv{
@@ -109,16 +112,9 @@ padding-top: 5px;
     padding: 0 20px;
 }
 
-#button{
-padding : 10px;
-font-size : 15px;
-width: 100%;
-background-color : #5858A4
-}
-
 .loginButton{
-width:180px;
-height: 40px;
+width:120px;
+height: 35px;
 background-color: #5A5F94;
 font-size: 15px;
 color:white;
@@ -126,10 +122,10 @@ border: none;
 }
 
 .imgRound {
-width: 100px;
-height:100px;
+width: 80px;
+height:80px;
 background: white;
-	border: 10px solid #ffffff;
+	border: 3px solid #ffffff;
 	border-radius: 100%;
 	padding: 10px;
 }
@@ -140,7 +136,7 @@ overflow: hidden;
 
 .text-align-right{
 text-align: right;
-padding-right : 10px;
+padding-right : 20px;
 }
 .a-text-decoration{
 font-size: 10px;
@@ -148,30 +144,21 @@ text-decoration: none;
 color: white;
 }
 
-A:VISITED{text-decoration:none; color:white;};
-
-A:HOVER{text-decoration:underline;};
-
-.list-padding{
-display : inline;
-padding-auto: 2px;
-}
 .padding-t{
 padding-top : 10px;
 }
 .padding-b{
-padding-bottom: 20px;
+padding-bottom: 10px;
 }
 .background{
 	background-color: #9A9EC2;
-	background-radius: 3px 5px 8px 10px;
+	background-radius: 5px 5px 5px 5px;
 }
 
 .background-board{
 	background-color: #5A5F94;
-	border:  solid #5A5F94 10px;
+	border:  solid #5A5F94 6px;
 	padding-left: 5px;
-	padding-top: 3px;
 }
 
 .pre-wrap{
@@ -179,17 +166,20 @@ overflow: hidden;
 }
 
 .test {
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 5px 5px 5px 5px;
 }
 .test1{
-border-radius: 10px 10px 0px 0px;
+border-radius: 5px 5px 0px 0px;
 }
 .test2{
-border-radius: 0px 0px 10px 10px;
+border-radius: 0px 0px 5px 5px;
 }
 .padding-left1{
 padding-left: 5px;
 padding-top: 5px;
+}
+.font-weight{
+font-weight : 700;
 }
 </style>
 
@@ -198,22 +188,22 @@ padding-top: 5px;
 
 		<div class="sidemenu white font-size padding-left1">
 		<div class = "">
-			<div class = "text-center imgcontainer imgdiv test border">
+			<div class = "text-center imgcontainer imgdiv test1 aside-border">
 			<a href= "<%=request.getContextPath()%>/index.jsp" >
-				<img src ="<%=root %>/image/example.png" width= 200;>
+				<img src ="<%=root %>/image/example.png" width = 140px;>
 				</a>
 				</div>
-						<div class = "list-padding font-sizemini">&nsbs</div>
-				<div class = "text-center border test background">
+
+				<div class = "text-center aside-border test2 background">
 					<%if(!isLogin){//로그아웃 상태 %>
 												<div>
 												<br><br>
 								<img class="profile-img imgRound" src="<%=request.getContextPath()%>/image/annonymous.png" ><br><br>
 							<p class = "button-padding">로그인을 해주세요</p>
 									<a href = "<%=request.getContextPath()%>/client/login.jsp" >
-				<button id = loginButton value = "login" class = "loginButton border" style = cursor:pointer  ><strong>CODING PEOPLE 로그인</strong></button></a><br>
-				<div class = "text-align-right padding-t padding-b">
-				<a href = "<%=request.getContextPath()%>/client/join.jsp" class = "a-text-decoration">회원가입</a>
+				<button id = loginButton value = "login" class = "loginButton test aside-border font-weight" style = cursor:pointer  >로그인</button></a><br>
+				<div class = "text-align-center padding-t padding-b ">
+				<a href = "<%=request.getContextPath()%>/client/join.jsp" class = "underline font-join">회원가입</a><br>
 				</div>
 				</div>
 					<%}else{//로그인 상태
@@ -222,23 +212,23 @@ padding-top: 5px;
 								<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" >
 								<br><br>
 		<p class = button-padding><strong>관리자님 환영합니다.</strong><p>
-				<form action = "<%=root%>/client/logout.kh" method = post>
 				<a href = "<%=root%>/manage/manageCenter.jsp">
-		<button id = AdminloginButton value = "adminLogin" class = "loginButton bordr" style = cursor:pointer>관리메뉴</button><br><br>
+		<button id = AdminloginButton value = "adminLogin" class = "loginButton test aside-border font-weight" style = cursor:pointer >관리메뉴</button>
 		</a>
-					    <input type = submit  value =" 로그아웃" id = logoutButton class= "loginButton" style = cursor:pointer ><br><br>
-
-		</form>
+						<form action = "<%=root%>/client/logout.kh" method = post>
+					    <input type = submit  value =" 로그아웃" id = logoutButton class= "loginButton test aside-border font-weight" style = cursor:pointer ><br><br>
+					    </form>
 
 				<%}else{//로그인 상태면서 관리자가 아닌경우, 즉 일반 회원 일 때 %>
 				<br><br>
 						<a href = "<%=root %>/client/profile.jsp">
-				<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" ><br><br><br>
-				</a>
+				<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" ></a>
+				<br><br><br>
+
 				<!--  일반회원 이름-->
 						<div class = "nameOver button-padding pre-wrap" ><strong><%=clientDto.getClientNick()%></strong></div>
 		<form action = "<%=root%>/client/logout.kh" method = post><br>
-			    <input type = submit  id = logoutButton value = "로그아웃"  class= "loginButton" style = cursor:pointer ><br><br>
+			    <input type = submit  id = logoutButton value = "로그아웃"  class= "loginButton test aside-border font-weight" style = cursor:pointer ><br><br>
 </form>
 			    		<%} %>
 	<%} %>
@@ -246,11 +236,9 @@ padding-top: 5px;
 </div>
 			
 <!-- 			메뉴를 띄울 곳입니다. -->
-		<div class = "list-padding font-sizemini">&nsbs</div>
+						<div class = "list-padding font-sizemini">&nsbs</div>
 				<div class ="background-board test1">게시판</div>
-		<div class="menu border background test2">
-
-		<span class="menu title"></span>
+		<div class="menu aside-border background test2">
 
 			<%
 			BoardDao boardDao = new  BoardDao();
@@ -258,13 +246,13 @@ padding-top: 5px;
 			List<BoardDto> boardSuperList =  boardDao.showListBoardSuper();%>
 			
 			<%for(BoardDto boardDtoSuper : boardSuperList){%>
-				<ul class =a-text-decoration>
-				<li class="boardSuper"><a href="board/postListTest.jsp?boardGroup=<%=boardDtoSuper.getBoardNo() %>"><%=boardDtoSuper.getBoardName()%></a>
+				<ul class ="a-text-decoration aside-board">
+				<li class="boardSuper aside-board"><a href="board/postListTest.jsp?boardGroup=<%=boardDtoSuper.getBoardNo() %>" class = underline><%=boardDtoSuper.getBoardName()%></a>
 
-						<ul class =a-text-decoration>
+						<ul class ="a-text-decoration aside-board">
 							<%List<BoardDto> boardSubList =  boardDao.showListBoardSub(boardDtoSuper.getBoardNo()); %>
 							<%for(BoardDto boardDtoSub : boardSubList){%>
-							<li class="boardSub"><a href="<%=root%>/board/postList.jsp?boardNo=<%=boardDtoSub.getBoardNo()%>"><%=boardDtoSub.getBoardName()%></a></li>
+							<li class="boardSub aside-board"><a href="<%=root%>/board/postList.jsp?boardNo=<%=boardDtoSub.getBoardNo()%>" class = "underline aside-sublist-font-size"><%=boardDtoSub.getBoardName()%></a></li>
 							<%} %>
 						</ul>
 					</li>

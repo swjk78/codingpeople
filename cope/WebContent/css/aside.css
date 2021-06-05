@@ -1,44 +1,57 @@
 @charset "UTF-8";
-ul, li{
+ul.aside-board, li.aside-board{
+		text-decoration: none;
 	color: white;
 	outline-width: 0px;
 	margin:0;
 	padding:5px 1px 2px 5px;
 	list-style: none;
 	font-size: 15px;
+	}
+
+a.ul.aide-board, a.li.aside-board{
+	text-decoration:none;
+	
 }
 
-li.boardSuper{
+li.aside-board.boardSuper{
+		text-decoration:none;
 	font-weight: bold;
 }
 
-li.boardSub{
+li.aside-board.boardSub{
+		text-decoration:none;
 	font-weight: normal;
 }
 
 .menu.title{
+		text-decoration:none;
 	font-weight: bold;
 }
-.menu li:hover {
+.menu li.aside-board:hover {
+		text-decoration:none;
 	background-color:#858AB6;
 }
+
 .menu-btn.boardSuper{
 	color:green;
 	display: inline-block;
 	position: relative;
 }
 .menu-btn.boardSub>a{
-	color: black;
+	color: white;
 	text-decoration: none;
 	display:none; 
 }
-.menu li>ul{
+.menu li.aside-board>ul.aside-board{
 	display:none;
 	transition: display 1s;
+		text-decoration: none;
 }
-.menu li:hover > ul {
+.menu li.aside-board:hover > ul.aside-board {
 	display:block;
 	transition: display 1s;
+	text-decoration: none;
 }
 
 .sidemenu{
@@ -47,7 +60,7 @@ li.boardSub{
 	position: absolute;
 	float: left;
     z-index: 1000;
-    width: auto;
+    width : 180px;
     height: 100%;
 }
 
@@ -70,4 +83,18 @@ li.boardSub{
 
 .KH > * {
 	position:relative;
+}
+
+a.underline, a.underline:VISITED{
+text-decoration:none; 
+color:white;
+cursor:pointer;
+}
+
+a.underline:hover{
+text-decoration: underline;
+}
+
+.aside-sublist-font-size{
+	font-size: 13px;
 }
