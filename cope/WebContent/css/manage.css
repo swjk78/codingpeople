@@ -265,9 +265,11 @@ a.manage, a.manage:VISITED{
 
 /*  위치 조정 값 (position -manage해당jsp)*/
 .position-center{
-	padding-left: 150px;
+	border:solid 4px;
 	padding-top: 100px;
+		padding-left: 60px;
 }
+
 .main-board{
 	position: relative;
     width: 1000px;
@@ -276,14 +278,11 @@ a.manage, a.manage:VISITED{
 	
 }
 .position-board{
-	padding-left:80px;
+	padding-left:20px;
 padding-top:50px;
 }
 
-.position-center{
-	padding-left: 150px;
-	padding-top: 100px;
-}
+
 
 .position-client{
 	padding-top: 40px;
