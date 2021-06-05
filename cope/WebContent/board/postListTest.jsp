@@ -73,15 +73,18 @@
 	listParameter.setOrderType(orderType);
 	listParameter.setOrderDirection(orderDirection);
 	
-	// 게시판 글 목록
+	int postCount;
+	// 게시판 글 목록 및 게시글 개수 계산
 	if (request.getParameter("boardNo") == null) {
 		if (isSearch) {
 			listParameter.setSearchType(searchType);
 			listParameter.setSearchKeyword(searchKeyword);
 			postList = postListDao.search(listParameter, boardGroup);
+			postCount = postListDao.getPostCount(listParameter, boardGroup);
 		}
 		else{
 			postList = postListDao.list(listParameter, boardGroup);
+			postCount = postListDao.getPostCount(boardGroup);
 		}
 	}
 	
@@ -91,33 +94,15 @@
 			listParameter.setSearchType(searchType);
 			listParameter.setSearchKeyword(searchKeyword);
 			postList = postListDao.search(listParameter, boardGroup, boardNo);
+			postCount = postListDao.getPostCount(listParameter, boardGroup, boardNo);
 		}
 		else{
 			postList = postListDao.list(listParameter, boardGroup, boardNo);
-		}
-	}
-	
-	// 페이지 네비게이션 영역 계산
-	int postCount;
-	if (request.getParameter("boardNo") == null) {
-		if (isSearch) {
-			postCount = postListDao.getPostCount(listParameter, boardGroup);
-		}
-		else {
-			postCount = postListDao.getPostCount(boardGroup);
-		}
-	}
-	
-	// 페이지 네비게이션 영역 계산(하위 게시판 선택) 
-	else {
-		if (isSearch) {
-			postCount = postListDao.getPostCount(listParameter, boardGroup, boardNo);
-		}
-		else {
 			postCount = postListDao.getPostCount(boardGroup, boardNo);
 		}
 	}
 	
+	// 페이지 네비게이션 영역 계산
 	int lastBlock = (postCount - 1) / pageSize + 1; 
 	
 	int blockSize = 10;
