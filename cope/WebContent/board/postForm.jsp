@@ -26,7 +26,7 @@
 	BoardDao boardDao = new BoardDao();
 	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
 	String boardGroupName = boardDao.findBoardName(boardGroup);
-	
+
 	boolean isWrite = request.getParameter("write") != null;
 	PostDto postDto = new PostDto();
 	if (!isWrite) {
@@ -52,7 +52,7 @@
 <div class=post-form>
 	<div class="container-900 border">
 		<div class="row text-left boardName-div">
-			<a class = "boardSuperName" href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
+			<a class = "boardSuperName" href="<%=request.getContextPath()%>/board/postList.jsp?boardGroup=<%=boardGroup%>">
 			<%=boardGroupName%></a>
 		</div>
 		<div class = "post-form-title-box">

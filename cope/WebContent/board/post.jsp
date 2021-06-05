@@ -150,10 +150,10 @@
 <!-- 게시글영역 -->
 <div class="container-900 border">
 	<div class="row text-left boardName-div">
-		<a class="boardSuperName" href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
+		<a class="boardSuperName" href="<%=request.getContextPath()%>/board/postList.jsp?boardGroup=<%=boardGroup%>">
 		<%=boardGroupName%></a>
 		<span class="dir-sign"> > </span>
-		<a class="boardSubName" href="<%=request.getContextPath()%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
+		<a class="boardSubName" href="<%=request.getContextPath()%>/board/postList.jsp?boardGroup=<%=boardGroup%>
 		&boardNo=<%=postDto.getPostBoardNo()%>">(<%=boardDao.findBoardName(postDto.getPostBoardNo())%>)
 		</a>
 
@@ -235,7 +235,7 @@
 			<%if (isLogin) {%>
 			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
 			<%} %>
-			<a class="form-btn form-btn-normal" href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a>
+			<a class="form-btn form-btn-normal" href="postList.jsp?boardGroup=<%=boardGroup%>">목록</a>
 		</div>
 	</div>
 <!-- 버튼영역 끝 -->
@@ -411,7 +411,7 @@
 			<%if (isLogin) {%>
 			<a class="form-btn form-btn-normal" href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
 			<%} %>
-			<a class="form-btn form-btn-normal" href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a>
+			<a class="form-btn form-btn-normal" href="postList.jsp?boardGroup=<%=boardGroup%>">목록</a>
 		</div>
 	</div>
 <!-- 버튼영역 끝 -->

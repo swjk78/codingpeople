@@ -21,7 +21,7 @@ public class PostDeleteServlet extends HttpServlet{
 			boolean result = postDao.deletePost(postNo);
 			
 			if (result) {
-				resp.sendRedirect("postListTest.jsp?boardGroup=" + req.getParameter("boardGroup"));
+				resp.sendRedirect("postList.jsp?boardGroup=" + req.getParameter("boardGroup"));
 			}
 			else {
 				// 미정
