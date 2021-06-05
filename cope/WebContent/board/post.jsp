@@ -182,7 +182,7 @@
 					<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
 				</td>
 				<td>
-					<a class="writer-name" href="<%=root%>/client/profile.jsp?otherNo=<%=postDto.getPostClientNo()%>">
+					<a class="writer-name" href="<%=root%>/client/profile.jsp?clientNo=<%=postDto.getPostClientNo()%>">
 					<%=clientDto.getClientNick()%></a>
 				</td>
 			</tr>
@@ -270,7 +270,7 @@
 									<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
 								</td>
 								<td>
-									<a href="<%=root %>/client/profile.jsp?otherNo=<%=commentsViewDto.getCommentsClientNo()%>"><%=commentsViewDto.getClientNick() %></a><br>
+									<a href="<%=root %>/client/profile.jsp?clientNo=<%=commentsViewDto.getCommentsClientNo()%>"><%=commentsViewDto.getClientNick() %></a><br>
 								</td>
 							</tr>
 							<tr>
@@ -351,7 +351,7 @@
 								<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
 							</td>
 							<td>
-								<a class="writer-name" href="<%=root%>/client/profile.jsp?otherNo=<%=postDto.getPostClientNo()%>">
+								<a class="writer-name" href="<%=root%>/client/profile.jsp?clientNo=<%=postDto.getPostClientNo()%>">
 								<%=loginNick%></a>
 							</td>
 						</tr>
@@ -443,7 +443,7 @@
 						<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
 					</td>
 					<td>
-						<a class="writer-name" href="<%=root%>/client/profile.jsp?otherNo=<%=postDto.getPostClientNo()%>">
+						<a class="writer-name" href="<%=root%>/client/profile.jsp?clientNo=<%=postDto.getPostClientNo()%>">
 						<%=loginNick%></a>
 					</td>
 				</tr>
