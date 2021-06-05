@@ -121,15 +121,99 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/common.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/join.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/layout.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/client.css">
 
 <!-- 임시 스타일링 -->
 <style>
+		*{ 
+		font-family:"Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
+		color:rgb(78, 78, 78);
+		font-size:13px;
+		 
+ 	} 
+	h1{
+		text-align:center;
+		margin-top:5%;
+		margin-bottom:5%;
+	}
+	h1>a{
+		font-size:28px;
+	}
+	
 	a {
 		text-decoration: none;
+		
 	}
-	.UDarrow {
-	height: 15px;
+	.top-menu{
+		
+		margin-bottom:1%;
 	}
+	
+	.table{
+		border-top:1px solid rgb(78, 78, 78);
+		margin-bottom:1.5%;
+		font-color:black;
+	}
+	.select-page-size{
+		padding:5px 5px 5px 12px;
+		border:thin;
+		
+	}
+	.order{
+		
+		background-color:#9A9EC2;
+		color:white;
+		padding:5px 5px 5px 5px;
+	}
+	
+	.th-line{
+		border-bottom:1px solid rgb(242, 242, 242);
+		color:rgb(78, 78, 78);
+		font-color:black;
+		text-align:left;		
+		
+	}
+	.td-line{
+		border-bottom:1px solid rgb(242, 242, 242);
+	}
+	.bottom-write{
+		text-align:right;
+		font-size:14px;
+		margin-top:2%;
+		
+	}
+	.bottom-write>a{
+		background-color:#9A9EC2;
+		color:white;
+		padding:5px 10px 5px 12px;
+	}
+	.pagination, .search-form{
+		text-align:center;
+		font-size:13px;
+		margin-top:3%;
+	}
+	
+	.select-search, .select-input {
+		padding:5px 36px 5px 12px;
+ 		border:none; 
+		border-bottom:1px solid rgb(78, 78, 78);
+		font-size:12px;
+	}
+	.select-btn{
+		border:none;
+		background-color:#9A9EC2;
+		padding:5px 15px 5px 12px;
+		color:white;
+		border:thin;
+		text-align:center;
+	}
+	.blind{
+		text-decoration:line-through;
+		font-style:italic;
+	}
+	
 </style>
 
 <%if (isSearch) {%>
@@ -206,126 +290,134 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1><a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
-	<%=boardGroupName%></a></h1>
-	
-	<!-- 하위 게시판 선택 링크 -->
-	<%for (BoardDto boardDto : subBoardList) {%>
-		<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
-		&boardNo=<%=boardDto.getBoardNo()%>&pageSize=<%=pageSize%>">
-		<%=boardDto.getBoardName()%></a>
-	<%} %>
-	
-	<!-- 정렬 링크 -->
-	<div class="row">
-		<a class="order" id="post_date">
-		작성순<img class="UDarrow" src="<%=root %>/image/UDarrow.png">
-		</a>
-		<a class="order" id="post_view_count">
-		조회순<img class="UDarrow" src="<%=root %>/image/UDarrow.png">
-		</a>
-		<a class="order" id="post_like_count">
-		추천순<img class="UDarrow" src="<%=root %>/image/UDarrow.png">
-		</a>
-	</div>
-	
-	<!-- 페이지 크기 선택 -->
-	<div class="row">
-		<select class="select-page-size" name="pageSize">
-			<option value="10">10개씩</option>
-			<option value="20">20개씩</option>
-			<option value="30">30개씩</option>
-		</select>
-	</div>
-	
-	<!-- 게시글 목록 -->
-	<table class="table table-border" >
-		<thead>
-			<tr>
-				<th>글번호</th>
-				<th width="50%">제목</th>							
-				<th>글쓴이</th>
-				<th>작성일</th>
-				<th>조회수</th>
-				<th>좋아요</th>
-			</tr>
-		</thead>
-		<tbody>
-		<%for (PostListDto postListDto : postList) {%>
-			<tr>
-				<td><%=postListDto.getPostNo() %></td>				
-				<td>
-				<% if(postListDto.getPostBlind() == 'F') {%>
-					<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
-					&boardNo=<%=postListDto.getPostBoardNo()%>">
-					[<%=postListDto.getBoardName()%>]</a>
-					<a href="post.jsp?boardGroup=<%=boardGroup%>
-					&postNo=<%=postListDto.getPostNo()%>">
-					<%=postListDto.getPostTitle()%></a>
-					<%if (postListDto.getPostCommentsCount()>0) {%>						
-					[<%=postListDto.getPostCommentsCount()%>]
-					<%}%>
-				<%} else {%>
-					블라인드된 게시글입니다.				
+	<div class="container-800">
+		<h1><a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
+		<%=boardGroupName%></a></h1>
+		
+		<!-- 하위 게시판 선택 링크 -->
+		<%for (BoardDto boardDto : subBoardList) {%>
+			<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
+			&boardNo=<%=boardDto.getBoardNo()%>&pageSize=<%=pageSize%>">
+			<%=boardDto.getBoardName()%></a>
+		<%} %>
+		
+		<!-- 정렬 링크 -->
+		<div class="top-menu float-container">
+			<div class="float-left">
+				<a class="order" id="post_date">
+				작성순
+				</a>
+				<a class="order" id="post_view_count">
+				조회순
+				</a>
+				<a class="order" id="post_like_count">
+				추천순
+				</a>
+			</div>
+			
+			<!-- 페이지 크기 선택 -->
+			<div class="float-right">
+				<select class="select-page-size" name="pageSize">
+					<option value="10">10개씩</option>
+					<option value="20">20개씩</option>
+					<option value="30">30개씩</option>
+				</select>
+			</div>
+		</div>
+		<!-- 게시글 목록 -->
+		<table class="table" >
+			<thead>
+				<tr>
+					<th class="th-line">글번호</th>
+					<th class="th-line" width="50%">제목</th>							
+					<th class="th-line">글쓴이</th>
+					<th class="th-line">작성일</th>
+					<th class="th-line">조회수</th>
+					<th class="th-line">좋아요</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%for (PostListDto postListDto : postList) {%>
+				<tr>
+					<td class="td-line"><%=postListDto.getPostNo() %></td>				
+					<td class="td-line">
+					<% if(postListDto.getPostBlind() == 'F') {%>
+						<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
+						&boardNo=<%=postListDto.getPostBoardNo()%>">
+						[<%=postListDto.getBoardName()%>]</a>
+						<a href="post.jsp?boardGroup=<%=boardGroup%>
+						&postNo=<%=postListDto.getPostNo()%>">
+						<%=postListDto.getPostTitle()%></a>
+						<%if (postListDto.getPostCommentsCount()>0) {%>						
+						[<%=postListDto.getPostCommentsCount()%>]
+						<%}%>
+					<%} else {%>
+						<span class="blind">블라인드된 게시글입니다.</span>				
+					<%} %>
+					</td>
+					<td class="td-line">
+						<a href="<%=request.getContextPath()%>/client/profile.jsp?clientNo=
+						<%=postListDto.getPostClientNo()%>"><%=postListDto.getClientNick() %>
+						</a>
+					</td>
+					<% boolean isToday = dateUtils.isToday(postListDto.getPostDate()) == true; %>
+					<%if (isToday) {%>
+						<td class="td-line"><%=postListDto.getPostDate()%></td>
+					<%} else {%>
+						<td class="td-line"><%=postListDto.getPostDateToday()%></td>
+					<%} %>
+					<td class="td-line"><%=postListDto.getPostViewCount() %></td>
+					<td class="td-line"><%=postListDto.getPostLikeCount() %></td>
+				</tr>
 				<%} %>
-				</td>
-				<td>
-					<a href="<%=request.getContextPath()%>/client/profile.jsp?clientNo=
-					<%=postListDto.getPostClientNo()%>"><%=postListDto.getClientNick() %>
-					</a>
-				</td>
-				<% boolean isToday = dateUtils.isToday(postListDto.getPostDate()) == true; %>
-				<%if (isToday) {%>
-					<td><%=postListDto.getPostDate()%></td>
-				<%} else {%>
-					<td><%=postListDto.getPostDateToday()%></td>
+			</tbody>
+		</table>
+			
+			<%-- 	<a href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a> --%>
+			<div class="bottom-write">
+			<%if (request.getSession().getAttribute("clientNo") != null) {%>
+				
+				<a href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
+			
+			<%} %>
+			
+			</div>
+		<div class="pagination">
+			<% if (startBlock > 1) {%>
+			<a class="move-link">&lt;&lt;</a>
+			<a class="move-link">&lt;</a>
+			<%} %>
+			<% for (int i = startBlock; i <= endBlock; i++) {%>
+				<% if (i == pageNo) {%>
+					<a class="on"><%=i%></a>
+				<% } else {%>
+					<a><%=i%></a>
 				<%} %>
-				<td><%=postListDto.getPostViewCount() %></td>
-				<td><%=postListDto.getPostLikeCount() %></td>
-			</tr>
 			<%} %>
-		</tbody>
-	</table>
+			<% if (endBlock < lastBlock) {%>
+			<a class="move-link">&gt;</a>
+			<a class="move-link">&gt;&gt;</a>
+			<%} %>
+		</div>
+		
 	
-	<div class="pagination">
-		<% if (startBlock > 1) {%>
-		<a class="move-link">&lt;&lt;</a>
-		<a class="move-link">&lt;</a>
-		<%} %>
-		<% for (int i = startBlock; i <= endBlock; i++) {%>
-			<% if (i == pageNo) {%>
-				<a class="on"><%=i%></a>
-			<% } else {%>
-				<a><%=i%></a>
+		<form action="postListTest.jsp" method="get" class="search-form">
+			<input type="hidden" name="pageNo">
+			<input type="hidden" name="pageSize" value="<%=pageSize%>">
+			<input type="hidden" name="orderType">
+			<input type="hidden" name="orderDirection">
+			<input type="hidden" name="boardGroup" value="<%=boardGroup%>">
+			<%if (request.getParameter("boardNo") != null) {%>
+			<input type="hidden" name="boardNo" value="<%=request.getParameter("boardNo")%>">
 			<%} %>
-		<%} %>
-		<% if (endBlock < lastBlock) {%>
-		<a class="move-link">&gt;</a>
-		<a class="move-link">&gt;&gt;</a>
-		<%} %>
+			<select name="searchType" class="select-search">
+				<option value="post_title">제목</option>
+				<option value="post_contents">내용</option>
+				<option value="client_nick">글쓴이</option>
+			</select>
+			<input type="text" name="searchKeyword" placeholder="검색어" class="select-input">	
+			<input type="submit" value="검색" class="select-btn">
+		</form>
 	</div>
-	
-	<a href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a>
-	<%if (request.getSession().getAttribute("clientNo") != null) {%>
-	<a href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
-	<%} %>
-	
-	<form action="postListTest.jsp" method="get" class="search-form">
-		<input type="hidden" name="pageNo">
-		<input type="hidden" name="pageSize" value="<%=pageSize%>">
-		<input type="hidden" name="orderType">
-		<input type="hidden" name="orderDirection">
-		<input type="hidden" name="boardGroup" value="<%=boardGroup%>">
-		<%if (request.getParameter("boardNo") != null) {%>
-		<input type="hidden" name="boardNo" value="<%=request.getParameter("boardNo")%>">
-		<%} %>
-		<select name="searchType">
-			<option value="post_title">제목</option>
-			<option value="post_contents">내용</option>
-			<option value="client_nick">글쓴이</option>
-		</select>
-		<input type="text" name="searchKeyword" placeholder="검색어">	
-		<input type="submit" value="검색">
-	</form>
 </body>
 </html>
