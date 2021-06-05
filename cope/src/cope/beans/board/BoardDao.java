@@ -209,7 +209,7 @@ public class BoardDao {
 
 	// 하위 게시판 조회 기능
 	public List<BoardDto> showListBoardSub(int boardSuperNo) {
-		String sql = "select board_no, board_name, board_super_no"
+		String sql = "select board_no, board_name, board_super_no "
 					 + "from board where board_Super_no = ? order by board_no asc";
 
 		ResultSet rs = null;
