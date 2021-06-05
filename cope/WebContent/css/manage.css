@@ -250,3 +250,42 @@
 }
 
 /* 페이지네이션 끝 */
+
+/* a태그 밑줄 없애고, 방문 페이지 이력 없애기, 호버링될때 밑줄 생성 */
+
+a.manage, a.manage:VISITED{
+	text-decoration: none;
+	color:black;
+}
+ a.manage:HOVER{
+ text-decoration:underline;
+ }
+ 
+/* a태그 관련 끝 */
+
+/*  위치 조정 값 (position -manage해당jsp)*/
+.position-center{
+	padding-left: 150px;
+	padding-top: 100px;
+}
+.main-board{
+	position: relative;
+    width: 1000px;
+    padding-left: 30px;
+    padding-top: 20px;
+	
+}
+.position-board{
+	padding-left:80px;
+padding-top:50px;
+}
+
+.position-center{
+	padding-left: 150px;
+	padding-top: 100px;
+}
+
+.position-client{
+	padding-top: 40px;
+	padding-left: 100px;
+}

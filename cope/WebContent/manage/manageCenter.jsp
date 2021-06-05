@@ -7,9 +7,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
  <%String root = request.getContextPath(); %>
- 
-
- 
+ 		<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <head>
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/layout.css">
@@ -42,10 +40,10 @@
   
 </head>
 <body>
-
+<out class ="float-left position-center">
 <div class="MAIN-ZONE">
 	<div class="aside-sector">
-		<jsp:include page="/template/aside.jsp"></jsp:include>
+
 	</div>
 
 	<div class="content-sector">
@@ -183,8 +181,8 @@
 							</tr>
 							
 							<tr>
-								<td class="underBtn"><a href="manageClient.jsp">회원관리</a></td>
-								<td class="underBtn"><a href="manageBoard.jsp">게시판관리</a></td>
+								<td class="underBtn"><a href="manageClient.jsp" class ="manage">회원관리</a></td>
+								<td class="underBtn"><a href="manageBoard.jsp"  class ="manage">게시판관리</a></td>
 								<td>게시글관리</td>
 							</tr>
 						
@@ -197,10 +195,11 @@
 
 <div class="BOTTOM-ZONE">
 	<div class="footer-sector">
-		<jsp:include page="/template/footer.jsp"></jsp:include>			
+
 	</div>
 </div>
-
+</out>
 
 </body>
 </html>
+		<jsp:include page="/template/footer.jsp"></jsp:include>			
