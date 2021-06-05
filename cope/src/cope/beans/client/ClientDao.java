@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import cope.beans.utils.DateUtils;
@@ -330,28 +329,28 @@ public class ClientDao {
 
 	// 회원 연령대 구하는 기능 (우리 홈페이지는 1950년생부터 가입할 수 있습니다 good)
 	public List<ClientAgeRangeDto> getAgeRange() {
-		String sql = "select (substr((2021-CLIENT_BIRTH_YEAR+10)/10, 1, 1)*10-10) AGE_RANGE, count(*) from client group by (substr((2021-CLIENT_BIRTH_YEAR+10)/10, 1, 1)*10-10) order by AGE_RANGE asc";
-		
-		ResultSet rs = null;
+		String sql = "select (substr((2021-CLIENT_BIRTH_YEAR+10)/10, 1, 1)*10-10) AGE_RANGE,"
+					 + "count(*) from client group by (substr((2021-CLIENT_BIRTH_YEAR+10)/10, 1, 1)*10-10) "
+					 + "order by AGE_RANGE asc";
+
 		List<ClientAgeRangeDto> ageRangeList = null;
-		
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
-			rs = ps.executeQuery();
-			
+
+		try (Connection con = JdbcUtils.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery()) {
 			ageRangeList = new ArrayList<>();
-			while(rs.next()) {
+			while (rs.next()) {
 				ClientAgeRangeDto clientAgeRangeDto = new ClientAgeRangeDto();
-				clientAgeRangeDto.setTeen((rs.getString("age_range"))+"대");
+				clientAgeRangeDto.setTeen((rs.getString("age_range")) + "대");
 				clientAgeRangeDto.setCount(rs.getInt("count(*)"));
-				System.out.println(clientAgeRangeDto.getTeen()+"는 " + clientAgeRangeDto.getCount() + "명");
-				
+				System.out.println(clientAgeRangeDto.getTeen() + "는 " + clientAgeRangeDto.getCount() + "명");
+
 				ageRangeList.add(clientAgeRangeDto);
 			}
-		}
-		catch (Exception e) { 
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	return ageRangeList;
+		return ageRangeList;
 	}
 
 	// 회원이 super인지 판단하는 기능
@@ -375,16 +374,16 @@ public class ClientDao {
 
 		return isSuper;
 	}
-	
+
 	// 회원번호로 회원 닉네임을 찾는 기능
 	public String findClientNick(int clientNo) {
 		String sql = "select client_nick from client where client_no = ?";
-		
+
 		String clientNick = null;
-		
+
 		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
-			
+
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 					clientNick = rs.getString(1);
@@ -393,7 +392,7 @@ public class ClientDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return clientNick;
 	}
 }
