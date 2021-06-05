@@ -3,10 +3,18 @@
 <!DOCTYPE html>
 <html>
 <style>
+  *{
+box-sizing: border-box;
+}
+
+.border{
+border: red solid 2px;
+}
+.float-left{
+float:left;
+}
 
 .footer{
-position: fixed;
-right:0;
 bottom : 0;
 width: 100%;
 height: 50px;
@@ -14,8 +22,8 @@ background-color : #858AB6;
 }
 
 .footer-box{
-font-size: 13px;
-padding-top: 10px;
+font-size: 14px;
+padding-top: 5px;
 padding-right: 15px;
 width: auto;
 height: auto;
@@ -29,10 +37,10 @@ color: white;
 padding-bottom:10px;
 padding-right: 10px;
 text-align : right;
-width: auto;
 height: auto;
-right:0px;
 float: right;
+width: 100%;
+background-color : #858AB6; 
 }
 
 a.underline-footer, a.underline-footer:VISITED{
@@ -48,6 +56,11 @@ text-decoration: underline;
 width:1px;
 height: 5px;
 }
+.whiteboard{
+background-color : white; 
+width:100%;
+hegiht: 100 px;
+}
 
 </style>
 
@@ -58,7 +71,10 @@ height: 5px;
 <style>
 
 </style>
-<div class ="footer">
+
+<div class ="footer float-left">
+<div class =" whiteboard"><br>
+</div>
 <div class= footer-box>
 	  		<a href = "<%=request.getContextPath()%>/info.jsp" class = "text-decoration-none underline-footer" >
 	  			<label style ="cursor: pointer;">Info</label></a>
@@ -86,8 +102,9 @@ height: 5px;
 	  			 <span style ="cursor: pointer;">Git</span></a>
 </div>
 </div>
-<div class = "footer footer-address">
+<div class = "footer-address">
 			<span>© 2021. <strong>CODINGPEOPLE.</strong> All rights reserved.</span>
+
 
 </div>
 </html>

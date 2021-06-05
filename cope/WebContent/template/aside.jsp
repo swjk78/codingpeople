@@ -103,10 +103,6 @@ padding-top: 5px;
 	background-color: white;
 	width: 100%;
 }
-.division{
-	position: absolute;
-	float: left;
-}
 
 .subsidemenudiv{
     padding: 0 20px;
@@ -181,11 +177,21 @@ padding-top: 5px;
 .font-weight{
 font-weight : 700;
 }
+
+.div-out{
+
+padding-right : 100px;
+padding-bottom : 60%;
+float: left;
+height:100%;
+}
+
+
 </style>
 
 
 <!-- 왼쪽 화면 구현 -->
-
+<out class = "div-out">
 		<div class="sidemenu white font-size padding-left1">
 		<div class = "">
 			<div class = "text-center imgcontainer imgdiv test1 aside-border">
@@ -263,5 +269,5 @@ font-weight : 700;
 		</div>
 		
 		</div>
-
+</out>
 </html>

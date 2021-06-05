@@ -27,18 +27,13 @@ input[type=password]::after placeholder {
 			padding-left : 30px;
 			padding-right : 30px;
 }
-.padding-t{
-	padding-top:10px
-}
+
 .row{
 			width:100%;
 			margin-top: 30px;
 			margin-bottom : 30px;
 			}
 			
-.text-center{
-			text-align:center;
-}
 .text-left{
 			text-align:left;
 			}
@@ -47,11 +42,6 @@ input[type=password]::after placeholder {
 			width : 500px;
 			margin-left:auto;
 			margin-right:auto;
-}
-
-.containerimg{
-	width : 30%;
-	height: 30%;
 }
 
 .form-input, .form-btn {

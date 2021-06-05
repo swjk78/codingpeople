@@ -55,9 +55,9 @@ li.aside-board.boardSub{
 }
 
 .sidemenu{
+	position: sticky;
 	top:0;
 	left:0;
-	position: absolute;
 	float: left;
     z-index: 1000;
     width : 180px;
