@@ -270,7 +270,7 @@
 			document.querySelector('input[name=pageSize]').value = pageSize;
 			document.querySelector('.search-form').submit();
 		})
-		
+		 
 		// 정렬 기능 구현
 		var sortBtn = document.querySelectorAll('.order');
 		for (var i = 0; i < sortBtn.length; i++) {

@@ -181,6 +181,7 @@
 	.bottom-write{
 		text-align:right;
 		font-size:14px;
+		margin-top:2%;
 		
 	}
 	.bottom-write>a{
@@ -371,7 +372,16 @@
 				<%} %>
 			</tbody>
 		</table>
-		
+			
+			<%-- 	<a href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a> --%>
+			<div class="bottom-write">
+			<%if (request.getSession().getAttribute("clientNo") != null) {%>
+				
+				<a href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
+			
+			<%} %>
+			
+			</div>
 		<div class="pagination">
 			<% if (startBlock > 1) {%>
 			<a class="move-link">&lt;&lt;</a>
@@ -390,13 +400,7 @@
 			<%} %>
 		</div>
 		
-	<%-- 	<a href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a> --%>
-		<%if (request.getSession().getAttribute("clientNo") != null) {%>
-		<div class="bottom-write">	
-			<a href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
-		</div>
-		<%} %>
-		
+	
 		<form action="postListTest.jsp" method="get" class="search-form">
 			<input type="hidden" name="pageNo">
 			<input type="hidden" name="pageSize" value="<%=pageSize%>">
