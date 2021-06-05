@@ -86,7 +86,7 @@
 			</div>
 		</form>
 
-		<%}else{//글수정 %>
+		<%}else{//글수정1 %>
 		<form action="postEdit.kh" method="post" class="layout">
 			<input type="hidden" name="postNo" value="<%=request.getParameter("postNo")%>">
 			<input type="hidden" name="boardGroup" value="<%=boardGroup%>">
