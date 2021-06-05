@@ -10,9 +10,9 @@ post_board_no references board(board_no) on delete set null,
 post_title varchar2(90) not null,
 post_contents varchar2(4000) not null,
 post_date date default sysdate not null,
-post_like_count number(10) default 0 not null,
-post_view_count number(10) default 0 not null,
-post_comments_count number(10) default 0 not null,
+post_like_count number(10) default 0 not null check(post_like_count >= 0),
+post_view_count number(10) default 0 not null check(post_view_count >= 0),
+post_comments_count number(10) default 0 not null check(post_comments_count >= 0),
 post_blind char(1) default 'F' not null check(post_blind in ('T', 'F'))
 );
 

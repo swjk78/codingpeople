@@ -1,6 +1,7 @@
 package cope.beans.comments;
 
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 public class CommentsDto { //일반적으로 쓰일 Dto
 	private int commentsNo;
@@ -43,7 +44,11 @@ public class CommentsDto { //일반적으로 쓰일 Dto
 		return commentsBlind;
 	}
 	public void setCommentsBlind(String commentsBlind) {
-		this.commentsBlind = commentsBlind;
+		if (commentsBlind.equals("T") || commentsBlind.equals("F")) {
+			this.commentsBlind = commentsBlind;
+		} else {
+			this.commentsBlind = "F";
+		}
 	}
 	public CommentsDto() {
 		super();

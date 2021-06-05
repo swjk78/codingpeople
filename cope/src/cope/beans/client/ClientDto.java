@@ -2,6 +2,7 @@ package cope.beans.client;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import cope.beans.utils.DateUtils;
 
@@ -25,23 +26,26 @@ public class ClientDto {
 	public String getClientId() {
 		return clientId;
 	}
-	// 정규 표현식 필요
 	public void setClientId(String clientId) {
-		this.clientId = clientId;
+		if (Pattern.matches("^[a-zA-Z0-9]{8,20}$", clientId)) {
+			this.clientId = clientId;
+		}
 	}
 	public String getClientPw() {
 		return clientPw;
 	}
-	// 정규 표현식 필요
 	public void setClientPw(String clientPw) {
-		this.clientPw = clientPw;
+		if (Pattern.matches("^[a-zA-Z0-9!@#$%^&*]{8,16}$", clientPw)) {
+			this.clientPw = clientPw;
+		}
 	}
 	public String getClientNick() {
 		return clientNick;
 	}
-	// 정규 표현식 필요
 	public void setClientNick(String clientNick) {
-		this.clientNick = clientNick;
+		if (Pattern.matches("^[가-힣a-zA-Z0-9!@#$%^&*]{1,10}$", clientNick)) {
+			this.clientNick = clientNick;
+		}
 	}
 	public String getClientEmail() {
 		return clientEmail;
@@ -63,9 +67,12 @@ public class ClientDto {
 		else if (clientGrade.equals("super")) return "관리자";
 		else return "미상";
 	}
-	// 조건식 필요
 	public void setClientGrade(String clientGrade) {
-		this.clientGrade = clientGrade;
+		if (clientGrade.equals("normal") || clientGrade.equals("super")) {
+			this.clientGrade = clientGrade;
+		} else {
+			this.clientGrade = "normal";
+		}
 	}
 	public Date getClientUnlockDate() {
 		return clientUnlockDate;

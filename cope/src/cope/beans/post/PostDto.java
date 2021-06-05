@@ -58,24 +58,40 @@ public class PostDto {
 		return postLikeCount;
 	}
 	public void setPostLikeCount(int postLikeCount) {
-		this.postLikeCount = postLikeCount;
+		if (postLikeCount >= 0) {
+			this.postLikeCount = postLikeCount;
+		} else {
+			this.postLikeCount = 0;
+		}
 	}
 	public int getPostViewCount() {
 		return postViewCount;
 	}
 	public void setPostViewCount(int postViewCount) {
-		this.postViewCount = postViewCount;
+		if (postViewCount >= 0) {
+			this.postViewCount = postViewCount;
+		} else {
+			this.postViewCount = 0;
+		}
 	}
 	public int getPostCommentsCount() {
 		return postCommentsCount;
 	}
 	public void setPostCommentsCount(int postCommentsCount) {
-		this.postCommentsCount = postCommentsCount;
+		if (postCommentsCount >= 0) {
+			this.postCommentsCount = postCommentsCount;
+		} else {
+			this.postCommentsCount = 0;
+		}
 	}
 	public char getPostBlind() {
 		return postBlind;
 	}
 	public void setPostBlind(char postBlind) {
-		this.postBlind = postBlind;
+		if (postBlind == 'T' || postBlind == 'F') {
+			this.postBlind = postBlind;
+		} else {
+			this.postBlind = 'F';
+		}
 	}
 }
