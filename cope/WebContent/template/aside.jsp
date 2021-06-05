@@ -179,13 +179,14 @@ font-weight : 700;
 }
 
 .div-out{
-
-padding-right : 100px;
-padding-bottom : 60%;
+padding-right : 110px;
+padding-bottom : 20%;
 float: left;
 height:100%;
 }
-
+.float-left{
+float:left;
+}
 
 </style>
 
