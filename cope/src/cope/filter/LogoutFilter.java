@@ -29,6 +29,7 @@ public class LogoutFilter implements Filter{
 		Integer clientNo = (Integer) req.getSession().getAttribute("clientNo");
 		
 		if(clientNo!=null) {//로그인을 함!
+			System.out.println("LogoutFilter에서 걸림!");
 			resp.sendRedirect(req.getContextPath()+"/index.jsp");
 		}
 		else {

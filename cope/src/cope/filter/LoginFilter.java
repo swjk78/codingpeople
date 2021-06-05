@@ -30,6 +30,7 @@ public class LoginFilter implements Filter{
 				Integer clientNo = (Integer) req.getSession().getAttribute("clientNo");
 				
 				if(clientNo==null) {//로그인을 안했다!
+					System.out.println("LoginFilter에서 걸림");
 					resp.sendRedirect(req.getContextPath()+"/client/login.jsp");
 				}
 				else {//로그인을 했다!
