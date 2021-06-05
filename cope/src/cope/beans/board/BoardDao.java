@@ -218,69 +218,28 @@ public class BoardDao {
 	}
 
 	// 상위게시판에 속한 게시물들 세기
-	public List<Integer> countUnderPosts(List<BoardDto> boardSuperList) {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+	public List<BoardChartDto> countUnderPosts() {
+		String sql = "select board_name, count(*) from (select board_name from (select B.board_super_no from post P inner join board B on P.post_board_no = B.board_no order by B.board_no) X inner join board Y on X.board_super_no = Y.board_no) group by board_name";
+		
+		List<BoardChartDto> boardChartDtoList = null;
+		
+		try (Connection con = JdbcUtils.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql)){
 
-		List<Integer> countUnderpostList = null;
-
-		try (Connection con = JdbcUtils.getConnection()) {
-			// 반복이 너무 많이 되어서 선언만 해놓습니다.
-			countUnderpostList = new ArrayList<>();// 마지막에서야... 하나씩 추가됨...
-			String sql;
-			/*
-			 * 반복문 (상위게시판)과 (하위게시판)의 개수에따라 반복합니다. (대략 곱하기)
-			 */
-			for (int i = 0; i < boardSuperList.size(); i++) {// 상위게시판 개수 만큼 반복
-				int boardSuperNo = boardSuperList.get(i).getBoardNo();
-				sql = "select board_no from board where board_super_no=? order by board_no asc";
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, boardSuperNo);
-				rs = ps.executeQuery();
-
-				List<Integer> boardSubNoList = new ArrayList<>(); // 하위게시판 번호를 담을 리스트
-				while (rs.next()) {// 조회된 하위 게시판 만큼 반복합니다
-					boardSubNoList.add(rs.getInt("board_no"));
+				try(ResultSet rs = ps.executeQuery()) {
+					boardChartDtoList = new ArrayList<>();
+					while (rs.next()) {
+						BoardChartDto clientAgeRangeDto = new BoardChartDto();
+						clientAgeRangeDto.setName(rs.getString("board_name"));
+						clientAgeRangeDto.setCount(rs.getInt("count(*)"));
+						System.out.println("A - " + rs.getString("board_name") + "B - " + rs.getInt("count(*)"));
+				boardChartDtoList.add(clientAgeRangeDto);
+					}
 				}
-
-				rs.close();
-				ps.close();
-
-				int underPostCount = 0;
-				for (int k = 0; k < boardSubNoList.size(); k++) {// 방금 구한 하위 게시판 만큼 반복합니다.
-					sql = "select count(*) from post where post_board_no=?";
-					ps = con.prepareStatement(sql);
-					ps.setInt(1, boardSubNoList.get(k));
-					rs = ps.executeQuery();
-
-					rs.next();
-					underPostCount += rs.getInt("count(*)");
-
-					rs.close();
-					ps.close();
-				}
-				countUnderpostList.add(underPostCount);
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
-
-		return countUnderpostList;
+		return boardChartDtoList;
 	}
 
 	// 특정 유저가 쓴 게시물들 세기 - 위와 거의 동일
@@ -299,7 +258,6 @@ public class BoardDao {
 						BoardChartDto clientAgeRangeDto = new BoardChartDto();
 						clientAgeRangeDto.setName(rs.getString("board_name"));
 						clientAgeRangeDto.setCount(rs.getInt("count(*)"));
-						System.out.println(clientAgeRangeDto.getName() + "은 " + clientAgeRangeDto.getCount() + "개");
 
 				boardChartDtoList.add(clientAgeRangeDto);
 					}

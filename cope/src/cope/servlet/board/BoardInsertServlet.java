@@ -34,7 +34,10 @@ public class BoardInsertServlet extends HttpServlet {
 			System.out.println(boardSubList);
 
 			// 상위 게시판 추가
-			if (Integer.parseInt(req.getParameter("boardSuperNo")) == 0
+			if(boardDao.checkSameBoardName(boardDto.getBoardName())) { //중복이 있다면
+				resp.sendRedirect("manageBoard.jsp?overlap");
+			}
+			else if (Integer.parseInt(req.getParameter("boardSuperNo")) == 0
 					&& !boardDao.checkSameBoardName(boardDto.getBoardName())) {
 				boardDao.insertBoardSuper(boardDto);
 				int currval = boardDao.getCurrentSequence();
