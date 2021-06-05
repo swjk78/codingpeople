@@ -14,7 +14,7 @@ KH 당산 세미프로젝트 1조
 
 -   [일정 및 계획](https://docs.google.com/document/d/17IPcZiLiCdF4sNmWjOfRNvLW5r_aklvVNsz3ZLlmUNU/edit)
 
--   [오류&예외 상황](https://docs.google.com/spreadsheets/d/1eL8a7eddU0PykCZEwqCrl-EpGtzVuhE5V-GLT5sVJ8I/edit)
+-   [진행 상황](https://docs.google.com/spreadsheets/d/1eL8a7eddU0PykCZEwqCrl-EpGtzVuhE5V-GLT5sVJ8I/edit)
 
 -   [주의사항](https://docs.google.com/document/d/1NRpAWHatjQys6yWM_8IkCidtbTRU-5ubAHgfYEQikDI/edit)
 
