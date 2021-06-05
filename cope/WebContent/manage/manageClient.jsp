@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 <%@page import="cope.beans.client.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+ 		<jsp:include page="/template/aside.jsp"></jsp:include>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String root = request.getContextPath();
@@ -163,7 +163,6 @@
 	});
 </script>
 
-<%-- <jsp:include page="/template/aside.jsp"></jsp:include> --%>
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
 <%-- <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/common.css"> --%>
 <%-- <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/postList.css"> --%>
@@ -237,9 +236,10 @@
 		text-align:center;
 	}
 	
-
 </style>
-<div class="main manage-client">
+
+<div class = "float-left position-client">
+<div class="main-board manage-client">
 	<div class="container-800 border">
 	<a href="manageCenter.jsp" class="backToCenter"><img class="backArrow" src="<%=root %>/image/backArrow.png">관리센터로 돌아가기</a>
 		<div class="row">
@@ -376,6 +376,9 @@
 		</div>
 	</div>
 </div>
-<div class="main">
+</div> 
+
+<%-- <div class="main">
 <jsp:include page="/template/sessionView.jsp"></jsp:include>
-</div>
+</div> --%>
+		<jsp:include page="/template/footer.jsp"></jsp:include>			

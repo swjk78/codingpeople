@@ -13,10 +13,10 @@
 
 <jsp:include page="/template/aside.jsp"></jsp:include>
 
-<!-- <html> -->
-<!-- <head> -->
-<!-- <meta charset="UTF-8"> -->
-<!-- <title>Insert title here</title> -->
+ <html>
+ <head>
+ <meta charset="UTF-8">
+<title>Insert title here</title>
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -95,8 +95,6 @@ msg = "정말로 삭제하시겠습니까?";
 function underline(id){
 	var target = document.querySelector("#"+id);
 	
-
-	
 }
 </script>
 
@@ -105,7 +103,8 @@ function underline(id){
 
 <!-- </head> -->
 <!-- <body> -->
-<div class="main">
+<out class = "float-left position-board">
+<div class="main-board">
 	<div class="container-600 border">
 	<a href="manageCenter.jsp" class="backToCenter"><img class="backArrow" src="<%=root %>/image/backArrow.png">관리센터로 돌아가기</a>
 <h2 class="text-center">게시판관리</h2>
@@ -187,5 +186,7 @@ function underline(id){
 		</div>
 	</div>
 </div>
+</out>
 </body>
 </html>
+		<jsp:include page="/template/footer.jsp"></jsp:include>	
