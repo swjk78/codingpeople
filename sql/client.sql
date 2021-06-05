@@ -5,10 +5,10 @@ drop sequence client_seq;
 -- 회원 테이블
 create table client(
 client_no number(19) primary key,
-client_id varchar2(40) not null unique,
-client_pw varchar2(32) not null,
-client_email varchar2(100) not null unique,
-client_nick varchar2(30) not null unique,
+client_id varchar2(40) not null unique check(regexp_like(client_id, '^[a-zA-Z0-9]{8,20}$')),
+client_pw varchar2(32) not null check(regexp_like(client_pw, '^[a-zA-Z0-9!@#$%^&*]{8,16}$')),
+client_email varchar2(100) not null unique check(regexp_like(client_email, '^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$')),
+client_nick varchar2(30) not null unique check(regexp_like(client_nick, '^[가-힣a-zA-Z0-9!@#$%^&*]{1,10}$')),
 client_birth_year number(4),
 client_grade varchar(15) default 'normal' not null check(client_grade IN ('normal', 'super')),
 client_unlock_date date
