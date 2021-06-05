@@ -188,16 +188,149 @@ public class PostListDao {
 		return postList;
 	}
 
-	// 페이지블럭 계산을 위한 카운트(개수)
-	public int getPostCount() {
-		String sql = "select count(post_no) from post_list";
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수
+	public int getClientPostCount(int clientNo) {
+		String sql = "select count(post_no) from post_list where post_client_no = ?";
+		
+		int postCount = 0;
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우)
+	public int getClientPostCount(ListParameter listParameter, int clientNo) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? and instr(#1, ?) > 0";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		
+		int postCount = 0;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setString(2, listParameter.getSearchKeyword());
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(상위 게시판 선택)
+	public int getClientPostCount(int clientNo, int boardGroup) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? and board_group = ?";
+		
+		int postCount = 0;
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setInt(2, boardGroup);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우, 상위 게시판 선택)
+	public int getClientPostCount(ListParameter listParameter, int clientNo, int boardGroup) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? "
+					 + "and board_group = ? and instr(#1, ?) > 0";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		
+		int postCount = 0;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setString(2, listParameter.getSearchKeyword());
+			ps.setInt(3, boardGroup);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(상위 게시판의 하위 게시판 선택)
+	public int getClientPostCount(int clientNo, int boardGroup, int boardNo) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? and "
+					 + "board_group = ? and board_no = ?";
+		
+		int postCount = 0;
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setInt(2, boardGroup);
+			ps.setInt(3, boardNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우, 상위 게시판의 하위 게시판 선택)
+	public int getClientPostCount(ListParameter listParameter, int clientNo, int boardGroup, int boardNo) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? "
+					 + "and board_group = ? and board_no = ? and instr(#1, ?) > 0";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		
+		int postCount = 0;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setInt(2, boardGroup);
+			ps.setInt(3, boardNo);
+			ps.setString(4, listParameter.getSearchKeyword());
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 게시글 목록 페이지의 페이지블럭 계산을 위한 게시글 개수(상위 게시판 선택)
+	public int getPostCount(int boardGroup) {
+		String sql = "select count(post_no) from post_list where board_group = ?";
 
 		int postCount = 0;
-		try (Connection con = JdbcUtils.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery()) {
-			rs.next();
-			postCount = rs.getInt(1);
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, boardGroup);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -205,15 +338,16 @@ public class PostListDao {
 		return postCount;
 	}
 
-	// 페이지블럭 계산을 위한 카운트(개수, 검색할 경우)
-	public int getPostCount(ListParameter listParameter) {
-		String sql = "select count(post_no) from post_list where instr(#1, ?) > 0";
+	// 게시글 목록 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우, 상위 게시판 선택)
+	public int getPostCount(ListParameter listParameter, int boardGroup) {
+		String sql = "select count(post_no) from post_list where instr(#1, ?) > 0 and board_group = ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 
 		int postCount = 0;
 
 		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, listParameter.getSearchKeyword());
+			ps.setInt(2, boardGroup);
 
 			try (ResultSet rs = ps.executeQuery()) {
 				rs.next();
@@ -223,6 +357,50 @@ public class PostListDao {
 			e.printStackTrace();
 		}
 
+		return postCount;
+	}
+
+	// 게시글 목록 페이지의 페이지블럭 계산을 위한 게시글 개수(하위 게시판 선택)
+	public int getPostCount(int boardGroup, int boardNo) {
+		String sql = "select count(post_no) from post_list where board_group = ? and post_board_no = ?";
+		
+		int postCount = 0;
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, boardGroup);
+			ps.setInt(2, boardNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 게시글 목록 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우, 하위 게시판 선택)
+	public int getPostCount(ListParameter listParameter, int boardGroup, int boardNo) {
+		String sql = "select count(post_no) from post_list where board_group = ? "
+					 + "and post_board_no = ? and instr(#1, ?) > 0";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		
+		int postCount = 0;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, boardGroup);
+			ps.setInt(2, boardNo);
+			ps.setString(3, listParameter.getSearchKeyword());
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return postCount;
 	}
 

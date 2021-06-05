@@ -16,6 +16,14 @@
 	String root = request.getContextPath();
 	
 	int clientNo = Integer.parseInt(request.getParameter("clientNo"));
+	int boardGroup = 0;
+	if (request.getParameter("boardGroup") != null) {
+		boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
+	}
+	int boardNo = 0;
+	if (request.getParameter("boardNo") != null) {
+		boardNo = Integer.parseInt(request.getParameter("boardNo"));
+	}
 
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
@@ -68,15 +76,18 @@
 	listParameter.setOrderType(orderType);
 	listParameter.setOrderDirection(orderDirection);
 	
-	// 회원이 작성한 글 전체 목록
+	int postCount;
+	// 회원이 작성한 글 목록 및 게시글 개수 계산
 	if (request.getParameter("boardGroup") == null) {
 		if (isSearch) {
 			listParameter.setSearchType(searchType);
 			listParameter.setSearchKeyword(searchKeyword);
 			clientPostList = postListDao.clientPostListSearch(listParameter, clientNo);
+			postCount = postListDao.getClientPostCount(listParameter, clientNo);
 		}
 		else{
 			clientPostList = postListDao.clientPostList(listParameter, clientNo);
+			postCount = postListDao.getClientPostCount(clientNo);
 		}
 	}
 	
@@ -85,12 +96,12 @@
 		if (isSearch) {
 			listParameter.setSearchType(searchType);
 			listParameter.setSearchKeyword(searchKeyword);
-			clientPostList = postListDao.clientPostListSearch(listParameter, clientNo,
-					Integer.parseInt(request.getParameter("boardGroup")));
+			clientPostList = postListDao.clientPostListSearch(listParameter, clientNo, boardGroup);
+			postCount = postListDao.getClientPostCount(listParameter, clientNo, boardGroup);
 		}
 		else{
-			clientPostList = postListDao.clientPostList(listParameter, clientNo,
-					Integer.parseInt(request.getParameter("boardGroup")));
+			clientPostList = postListDao.clientPostList(listParameter, clientNo, boardGroup);
+			postCount = postListDao.getClientPostCount(clientNo, boardGroup);
 		}
 	}
 	
@@ -99,25 +110,16 @@
 		if (isSearch) {
 			listParameter.setSearchType(searchType);
 			listParameter.setSearchKeyword(searchKeyword);
-			clientPostList = postListDao.clientPostListSearch(listParameter, clientNo,
-					Integer.parseInt(request.getParameter("boardGroup")),
-					Integer.parseInt(request.getParameter("boardNo")));
+			clientPostList = postListDao.clientPostListSearch(listParameter, clientNo, boardGroup, boardNo);
+			postCount = postListDao.getClientPostCount(listParameter, clientNo, boardGroup, boardNo);
 		}
 		else{
-			clientPostList = postListDao.clientPostList(listParameter, clientNo,
-					Integer.parseInt(request.getParameter("boardGroup")),
-					Integer.parseInt(request.getParameter("boardNo")));
+			clientPostList = postListDao.clientPostList(listParameter, clientNo, boardGroup, boardNo);
+			postCount = postListDao.getClientPostCount(clientNo, boardGroup, boardNo);
 		}
 	}
-	// 페이지 네비게이션 영역 계산
-	int postCount;
-	if (isSearch) {
-		postCount = postListDao.getPostCount(listParameter);
-	}
-	else {
-		postCount = postListDao.getPostCount();
-	}
 	
+	// 페이지 네비게이션 영역 계산
 	int lastBlock = (postCount - 1) / pageSize + 1; 
 	
 	int blockSize = 10;
@@ -132,6 +134,7 @@
 	BoardDao boardDao = new BoardDao();
 	List<BoardDto> superBoardList = boardDao.showListBoardSuper();
 	
+	ClientDao clientDao = new ClientDao();
 %>
 
 <!DOCTYPE html>
@@ -299,7 +302,7 @@
 <body>
 	<div class="container-800">
 		<h1><a href="clientPostList.jsp?clientNo=<%=clientNo%>">
-		<%=clientPostList.get(0).getClientNick()%>의 작성한 글 목록</a></h1>
+		<%=clientDao.findClientNick(clientNo)%>의 작성한 글 목록</a></h1>
 		
 		<!-- 상위 게시판 선택 링크 -->
 		<%for (BoardDto boardDto : superBoardList) {%>

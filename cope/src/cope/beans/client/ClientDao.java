@@ -385,4 +385,25 @@ public class ClientDao {
 
 		return isSuper;
 	}
+	
+	// 회원번호로 회원 닉네임을 찾는 기능
+	public String findClientNick(int clientNo) {
+		String sql = "select client_nick from client where client_no = ?";
+		
+		String clientNick = null;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					clientNick = rs.getString(1);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return clientNick;
+	}
 }
