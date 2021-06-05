@@ -116,7 +116,7 @@ function underline(id){
 				<div class = "row text-left">	
 					<label for="superInput">상위게시판 등록</label>
 						<input type="text" id="superInput"  class ="form-input form-input-underline" name="boardName"  required>
-						<input type="text" name="boardSuperNo"  value=0  hidden>
+						<input type="hidden" name="boardSuperNo"  value=0>
 						<input type="submit" class="form-btn form-btn-normal float-right" value="등록">
 				</div>
 			</form>
@@ -169,14 +169,14 @@ function underline(id){
 	
 	
 	<form action="deleteBoard.kh" method="get"  class="inline"  onsubmit="checkDelete()">
-		<input type="text" class="boardNo"  name ="boardNo"  hidden>
-		<input type="text" class="boardName" hidden required>
+		<input type="hidden" class="boardNo"  name ="boardNo" >
+		<input type="hidden" class="boardName"  required>
 		<input type="submit" class="form-btn form-btn-normal"   value="삭제" >
 	</form>
 	<br><br>
 
 <form action="editBoard.kh" method="get"  onsubmit="checkName();">
-	<input type="text" class="boardNo"  name = "boardNo" hidden>
+	<input type="hidden" class="boardNo"  name = "boardNo">
 	<input type="text" class="boardName form-input form-input-underline"   name = "boardName" required>
 	<input type="submit" class="form-btn form-btn-normal float-right"  value="수정">
 </form>
