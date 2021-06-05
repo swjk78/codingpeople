@@ -329,39 +329,29 @@ public class ClientDao {
 	}
 
 	// 회원 연령대 구하는 기능 (우리 홈페이지는 1950년생부터 가입할 수 있습니다 good)
-	public List<Integer> getAgeRange() {
-		Calendar cal = Calendar.getInstance();
-		int currYear = cal.get(Calendar.YEAR);
-		int maxAge = currYear - 1950; // 최대나이 71세
-		int maxAgeRange = (maxAge / 10) * 10;// 최대 70대
-
-		List<Integer> ageRangeList = new ArrayList<>();
-		String sql = null;
-		int count = 0;
-
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-			for (int i = 0; i <= maxAgeRange; i += 10) {// i가 maxAgeRange까지(같아도 실행)
-
-				sql = "select count(TEMP.AGE) age_count "
-						+ "from (select client_no 회원번호, ((EXTRACT(YEAR FROM SYSDATE)-client_birth_year)) AGE "
-					 + "from client) TEMP where TEMP.AGE >=? and TEMP.AGE <?"; // 이렇게 DB를 여러번 갔다 와야할까 아니면 뷰를 만들까...
-																					// 조회하는
-																					// 횟수는 같을 텐데.
-				ps.setInt(1, i); // 보다 크거나 같다
-				ps.setInt(2, i + 10); // 보다 작다
-
-				try (ResultSet rs = ps.executeQuery()) {
-					rs.next();
-					count = rs.getInt("age_count");
-					// System.out.println((i) +"대 조회결과..." + count + "명");
-					ageRangeList.add(count);
-				}
+	public List<ClientAgeRangeDto> getAgeRange() {
+		String sql = "select (substr((2021-CLIENT_BIRTH_YEAR+10)/10, 1, 1)*10-10) AGE_RANGE, count(*) from client group by (substr((2021-CLIENT_BIRTH_YEAR+10)/10, 1, 1)*10-10) order by AGE_RANGE asc";
+		
+		ResultSet rs = null;
+		List<ClientAgeRangeDto> ageRangeList = null;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+			rs = ps.executeQuery();
+			
+			ageRangeList = new ArrayList<>();
+			while(rs.next()) {
+				ClientAgeRangeDto clientAgeRangeDto = new ClientAgeRangeDto();
+				clientAgeRangeDto.setTeen((rs.getString("age_range"))+"대");
+				clientAgeRangeDto.setCount(rs.getInt("count(*)"));
+				System.out.println(clientAgeRangeDto.getTeen()+"는 " + clientAgeRangeDto.getCount() + "명");
+				
+				ageRangeList.add(clientAgeRangeDto);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e) { 
 			e.printStackTrace();
 		}
-
-		return ageRangeList;
+	return ageRangeList;
 	}
 
 	// 회원이 super인지 판단하는 기능
