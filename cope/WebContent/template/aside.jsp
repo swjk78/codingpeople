@@ -221,8 +221,10 @@ font-weight : 700;
 
 				<%}else{//로그인 상태면서 관리자가 아닌경우, 즉 일반 회원 일 때 %>
 				<br><br>
-						<a href = "<%=root %>/client/profile.jsp">
-				<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" ></a>
+					
+						<a href = "<%=root %>/client/profile.jsp?clientNo=<%=clientNo%>">
+						<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" ></a>
+					
 				<br><br><br>
 
 				<!--  일반회원 이름-->
