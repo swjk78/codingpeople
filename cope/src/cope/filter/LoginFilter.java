@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //"Login"이어야 들어갈 수 있는 곳
-@WebFilter (urlPatterns = {"client/editInfo.jsp", "/client/editPw.jsp", "client/exit.jsp",
-		"/client/exit.jsp", "client/postForm.jsp", "/client/editInfo.kh", "/client/editPw.kh", "/client/exit.kh", "/client/logout.kh", 
+@WebFilter (urlPatterns = {"/client/editInfo.jsp", "/client/editPw.jsp", "/client/exit.jsp",
+		"/client/exit.jsp", "/board/postForm.jsp", "/client/editInfo.kh", "/client/editPw.kh", "/client/exit.kh", "/client/logout.kh", 
 		"/board/commentsChoose.kh", "/board/commentsDelete.kh",  "/board/commentsForm.kh", "/board/postDelete.kh", 
 		"/board/postEdit.kh", "/board/postInsert.kh", "/board/postLike.kh"})
 public class LoginFilter implements Filter{
