@@ -99,23 +99,26 @@
 }
 .form-btn.form-btn-normal {
 	background-color: #9A9EC2;
-	font-size: 15px;
+	font-size: 12px;
 	color:white;
-	padding : 5px 20px 5px 20px;
+/* 	padding : 5px; */
 }
 
-.form-btn.form-btn-lock {
-	background-color: #9A9EC2;
-	font-size: 14px;
+.form-btn.form-btn-lock {	
+	font-size: 13px;
+	border:none;
+	background-color:#9A9EC2;
+	padding:5px;
 	color:white;
-	padding : 5px;
+	border:thin;
+	text-align:center;
 }
 
 .form-btn.form-btn-unlock {
 	background-color: #d7a686;
-	font-size: 14px;
+	font-size: 12px;
 	color:white;
-	padding : 5px;
+/* 	padding : 5px; */
 }
 
 .text-center{
@@ -150,11 +153,11 @@
 	height: 15px;
 }
 .manage-client .order{
-	color: black;
+	color: white;
 	text-decoration: none;
 }
 .manage-client .order:hover{
-	color: #9A9EC2;
+	color: black;
 	text-decoration: none;
 }
 .text-black{
@@ -174,11 +177,13 @@
 .table.table-border > tbody > tr > td,
 .table.table-border > tfoot > tr > th,
 .table.table-border > tfoot > tr > td {
-	border: 1px solid gray;
+ 	border: 1px solid gray; 
 }
 .table.table-hover > thead > tr,
 .table.table-hover > tbody > tr:hover {
-	background-color: #a3a6c7;
+	background-color: #9A9EC2;
+	
+	
 }
 .vertical-5px{
 	margin-top: 5px;
