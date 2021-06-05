@@ -3,7 +3,6 @@ package cope.beans.post;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,42 +19,34 @@ public class PostListDao {
 		sql = sql.replace("#1", listParameter.getOrderType());
 		sql = sql.replace("#2", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<PostListDto> postList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, boardGroup);
 			ps.setInt(2, listParameter.getStartRow());
 			ps.setInt(3, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			postList = new ArrayList<>();
-			while (rs.next()) {
-				PostListDto postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
-				postList.add(postListDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				postList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postList.add(postListDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return postList;
@@ -66,49 +57,41 @@ public class PostListDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date,"
 					 	+ "post_like_count, post_view_count, post_comments_count, post_blind, client_nick, board_name "
-					 + "from post_list where board_group = ? and post_board_no = ? order by #1 #2, post_no desc) tmp)"
+					 	+ "from post_list where board_group = ? and post_board_no = ? order by #1 #2, post_no desc) tmp)"
 					 + "where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getOrderType());
 		sql = sql.replace("#2", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<PostListDto> postList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, boardGroup);
 			ps.setInt(2, boardNo);
 			ps.setInt(3, listParameter.getStartRow());
 			ps.setInt(4, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			postList = new ArrayList<>();
-			while (rs.next()) {
-				PostListDto postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
-				postList.add(postListDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				postList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postList.add(postListDto);
+				}
+				rs.close();
 			}
-			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 
 		return postList;
@@ -119,49 +102,41 @@ public class PostListDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date,"
 					 	+ "post_like_count, post_view_count, post_comments_count, post_blind, client_nick, board_name "
-					 + "from post_list where board_group = ? and instr(#1, ?) > 0 order by #2 #3, post_no desc) tmp)"
+					 	+ "from post_list where board_group = ? and instr(#1, ?) > 0 order by #2 #3, post_no desc) tmp)"
 					 + "where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 		sql = sql.replace("#2", listParameter.getOrderType());
 		sql = sql.replace("#3", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<PostListDto> postList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, boardGroup);
 			ps.setString(2, listParameter.getSearchKeyword());
 			ps.setInt(3, listParameter.getStartRow());
 			ps.setInt(4, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			postList = new ArrayList<>();
-			while (rs.next()) {
-				PostListDto postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
-				postList.add(postListDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				postList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postList.add(postListDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return postList;
@@ -172,65 +147,190 @@ public class PostListDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date,"
 					 	+ "post_like_count, post_view_count, post_comments_count, post_blind, client_nick, board_name "
-					 + "from post_list where board_group = ? and post_board_no = ? and instr(#1, ?) > 0 "
+					 	+ "from post_list where board_group = ? and post_board_no = ? and instr(#1, ?) > 0 "
 					 + "order by #2 #3, post_no desc) tmp)" + "where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 		sql = sql.replace("#2", listParameter.getOrderType());
 		sql = sql.replace("#3", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<PostListDto> postList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, boardGroup);
 			ps.setInt(2, boardNo);
 			ps.setString(3, listParameter.getSearchKeyword());
 			ps.setInt(4, listParameter.getStartRow());
 			ps.setInt(5, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			postList = new ArrayList<>();
-			while (rs.next()) {
-				PostListDto postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
-				postList.add(postListDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				postList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postList.add(postListDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return postList;
 	}
 
-	// 페이지블럭 계산을 위한 카운트(개수)
-	public int getPostCount() {
-		String sql = "select count(post_no) from post_list";
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수
+	public int getClientPostCount(int clientNo) {
+		String sql = "select count(post_no) from post_list where post_client_no = ?";
+		
+		int postCount = 0;
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우)
+	public int getClientPostCount(ListParameter listParameter, int clientNo) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? and instr(#1, ?) > 0";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		
+		int postCount = 0;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setString(2, listParameter.getSearchKeyword());
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(상위 게시판 선택)
+	public int getClientPostCount(int clientNo, int boardGroup) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? and board_group = ?";
+		
+		int postCount = 0;
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setInt(2, boardGroup);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우, 상위 게시판 선택)
+	public int getClientPostCount(ListParameter listParameter, int clientNo, int boardGroup) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? "
+					 + "and board_group = ? and instr(#1, ?) > 0";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		
+		int postCount = 0;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setString(2, listParameter.getSearchKeyword());
+			ps.setInt(3, boardGroup);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(상위 게시판의 하위 게시판 선택)
+	public int getClientPostCount(int clientNo, int boardGroup, int boardNo) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? and "
+					 + "board_group = ? and board_no = ?";
+		
+		int postCount = 0;
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setInt(2, boardGroup);
+			ps.setInt(3, boardNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 회원이 작성한 글 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우, 상위 게시판의 하위 게시판 선택)
+	public int getClientPostCount(ListParameter listParameter, int clientNo, int boardGroup, int boardNo) {
+		String sql = "select count(post_no) from post_list where post_client_no = ? "
+					 + "and board_group = ? and board_no = ? and instr(#1, ?) > 0";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		
+		int postCount = 0;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setInt(2, boardGroup);
+			ps.setInt(3, boardNo);
+			ps.setString(4, listParameter.getSearchKeyword());
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 게시글 목록 페이지의 페이지블럭 계산을 위한 게시글 개수(상위 게시판 선택)
+	public int getPostCount(int boardGroup) {
+		String sql = "select count(post_no) from post_list where board_group = ?";
 
 		int postCount = 0;
-		try (Connection con = JdbcUtils.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery();) {
-			rs.next();
-			postCount = rs.getInt(1);
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, boardGroup);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -238,31 +338,69 @@ public class PostListDao {
 		return postCount;
 	}
 
-	// 페이지블럭 계산을 위한 카운트(개수, 검색할 경우)
-	public int getPostCount(ListParameter listParameter) {
-		String sql = "select count(post_no) from post_list where instr(#1, ?) > 0";
+	// 게시글 목록 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우, 상위 게시판 선택)
+	public int getPostCount(ListParameter listParameter, int boardGroup) {
+		String sql = "select count(post_no) from post_list where instr(#1, ?) > 0 and board_group = ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 
-		ResultSet rs = null;
 		int postCount = 0;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, listParameter.getSearchKeyword());
-			rs = ps.executeQuery();
-			rs.next();
-			postCount = rs.getInt(1);
+			ps.setInt(2, boardGroup);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
+		return postCount;
+	}
+
+	// 게시글 목록 페이지의 페이지블럭 계산을 위한 게시글 개수(하위 게시판 선택)
+	public int getPostCount(int boardGroup, int boardNo) {
+		String sql = "select count(post_no) from post_list where board_group = ? and post_board_no = ?";
+		
+		int postCount = 0;
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, boardGroup);
+			ps.setInt(2, boardNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return postCount;
+	}
+	
+	// 게시글 목록 페이지의 페이지블럭 계산을 위한 게시글 개수(검색할 경우, 하위 게시판 선택)
+	public int getPostCount(ListParameter listParameter, int boardGroup, int boardNo) {
+		String sql = "select count(post_no) from post_list where board_group = ? "
+					 + "and post_board_no = ? and instr(#1, ?) > 0";
+		sql = sql.replace("#1", listParameter.getSearchType());
+		
+		int postCount = 0;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, boardGroup);
+			ps.setInt(2, boardNo);
+			ps.setString(3, listParameter.getSearchKeyword());
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				postCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return postCount;
 	}
 
@@ -278,7 +416,7 @@ public class PostListDao {
 		}
 
 		int count = 0;
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, postListDto.getPostNo());
 			count = ps.executeUpdate();
 		} catch (Exception e) {
@@ -292,38 +430,30 @@ public class PostListDao {
 	public PostListDto find(int postNo) {
 		String sql = "select * from post_list where post_no = ?";
 
-		ResultSet rs = null;
 		PostListDto postListDto = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, postNo);
-			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return postListDto;
@@ -334,48 +464,40 @@ public class PostListDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
 					 	+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
-					 + "from post_list where post_client_no = ? order by #1 #2, post_no desc) tmp)"
+					 	+ "from post_list where post_client_no = ? order by #1 #2, post_no desc) tmp)"
 					 + "where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getOrderType());
 		sql = sql.replace("#2", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<PostListDto> clientPostList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
 			ps.setInt(2, listParameter.getStartRow());
 			ps.setInt(3, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			clientPostList = new ArrayList<>();
-			while (rs.next()) {
-				PostListDto postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
-				postListDto.setBoardGroup(rs.getInt("board_group"));
-				clientPostList.add(postListDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				clientPostList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postListDto.setBoardGroup(rs.getInt("board_group"));
+					clientPostList.add(postListDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return clientPostList;
@@ -386,49 +508,41 @@ public class PostListDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
 					 	+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
-					 + "from post_list where post_client_no = ? and board_group = ? order by #1 #2, post_no desc) tmp)"
-					 + "where rn between ? and ?";
+					 	+ "from post_list where post_client_no = ? and board_group = ? order by #1 #2, post_no desc) tmp)"
+				 	 + "where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getOrderType());
 		sql = sql.replace("#2", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<PostListDto> clientPostList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
 			ps.setInt(2, boardGroup);
 			ps.setInt(3, listParameter.getStartRow());
 			ps.setInt(4, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			clientPostList = new ArrayList<>();
-			while (rs.next()) {
-				PostListDto postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
-				postListDto.setBoardGroup(rs.getInt("board_group"));
-				clientPostList.add(postListDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				clientPostList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postListDto.setBoardGroup(rs.getInt("board_group"));
+					clientPostList.add(postListDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return clientPostList;
@@ -439,50 +553,42 @@ public class PostListDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
 					 	+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
-					 + "from post_list where post_client_no = ? and board_group = ? and post_board_no = ? "
+					 	+ "from post_list where post_client_no = ? and board_group = ? and post_board_no = ? "
 					 + "order by #1 #2, post_no desc) tmp)" + "where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getOrderType());
 		sql = sql.replace("#2", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<PostListDto> clientPostList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
 			ps.setInt(2, boardGroup);
 			ps.setInt(3, boardNo);
 			ps.setInt(4, listParameter.getStartRow());
 			ps.setInt(5, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			clientPostList = new ArrayList<>();
-			while (rs.next()) {
-				PostListDto postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
-				postListDto.setBoardGroup(rs.getInt("board_group"));
-				clientPostList.add(postListDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				clientPostList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postListDto.setBoardGroup(rs.getInt("board_group"));
+					clientPostList.add(postListDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return clientPostList;
@@ -493,50 +599,42 @@ public class PostListDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
 					 	+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
-					 + "from post_list where post_client_no = ? and instr(#1, ?) > 0 order by #2 #3, post_no desc) tmp)"
+					 	+ "from post_list where post_client_no = ? and instr(#1, ?) > 0 order by #2 #3, post_no desc) tmp)"
 					 + "where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 		sql = sql.replace("#2", listParameter.getOrderType());
 		sql = sql.replace("#3", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<PostListDto> clientPostList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
 			ps.setString(2, listParameter.getSearchKeyword());
 			ps.setInt(3, listParameter.getStartRow());
 			ps.setInt(4, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			clientPostList = new ArrayList<>();
-			while (rs.next()) {
-				PostListDto postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
-				postListDto.setBoardGroup(rs.getInt("board_group"));
-				clientPostList.add(postListDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				clientPostList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postListDto.setBoardGroup(rs.getInt("board_group"));
+					clientPostList.add(postListDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return clientPostList;
@@ -547,51 +645,43 @@ public class PostListDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
 					 	+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
-					 + "from post_list where post_client_no = ? and instr(#1, ?) > 0 and board_group = ? "
+					 	+ "from post_list where post_client_no = ? and instr(#1, ?) > 0 and board_group = ? "
 					 + "order by #2 #3, post_no desc) tmp)" + "where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 		sql = sql.replace("#2", listParameter.getOrderType());
 		sql = sql.replace("#3", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<PostListDto> clientPostList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
 			ps.setString(2, listParameter.getSearchKeyword());
 			ps.setInt(3, boardGroup);
 			ps.setInt(4, listParameter.getStartRow());
 			ps.setInt(5, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			clientPostList = new ArrayList<>();
-			while (rs.next()) {
-				PostListDto postListDto = new PostListDto();
-				postListDto.setPostNo(rs.getInt("post_no"));
-				postListDto.setPostClientNo(rs.getInt("post_client_no"));
-				postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-				postListDto.setPostTitle(rs.getString("post_title"));
-				postListDto.setPostContents(rs.getString("post_contents"));
-				postListDto.setPostDate(rs.getDate("post_date"));
-				postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-				postListDto.setPostViewCount(rs.getInt("post_view_count"));
-				postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-				postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-				postListDto.setClientNick(rs.getString("client_nick"));
-				postListDto.setBoardName(rs.getString("board_name"));
-				postListDto.setBoardGroup(rs.getInt("board_group"));
-				clientPostList.add(postListDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				clientPostList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postListDto.setBoardGroup(rs.getInt("board_group"));
+					clientPostList.add(postListDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return clientPostList;
@@ -603,52 +693,44 @@ public class PostListDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select post_no, post_client_no, post_board_no, post_title, post_contents, post_date, post_like_count,"
 					 	+ "post_view_count, post_comments_count, post_blind, client_nick, board_name, board_group "
-					 + "from post_list where post_client_no = ? and instr(#1, ?) > 0 and board_group = ? and post_board_no = ? "
+					 	+ "from post_list where post_client_no = ? and instr(#1, ?) > 0 and board_group = ? and post_board_no = ? "
 					 + "order by #2 #3, post_no desc) tmp)" + "where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 		sql = sql.replace("#2", listParameter.getOrderType());
 		sql = sql.replace("#3", listParameter.getOrderDirection());
-		
-		ResultSet rs = null;
-		List<PostListDto> clientPostList = null;
-		
-		try(Connection con = JdbcUtils.getConnection();PreparedStatement ps = con.prepareStatement(sql);) {
-		ps.setInt(1, clientNo);
-		ps.setString(2, listParameter.getSearchKeyword());
-		ps.setInt(3, boardGroup);
-		ps.setInt(4, boardNo);
-		ps.setInt(5, listParameter.getStartRow());
-		ps.setInt(6, listParameter.getEndRow());
-		rs = ps.executeQuery();
 
-		clientPostList = new ArrayList<>();
-		while (rs.next()) {
-			PostListDto postListDto = new PostListDto();
-			postListDto.setPostNo(rs.getInt("post_no"));
-			postListDto.setPostClientNo(rs.getInt("post_client_no"));
-			postListDto.setPostBoardNo(rs.getInt("post_board_no"));
-			postListDto.setPostTitle(rs.getString("post_title"));
-			postListDto.setPostContents(rs.getString("post_contents"));
-			postListDto.setPostDate(rs.getDate("post_date"));
-			postListDto.setPostLikeCount(rs.getInt("post_like_count"));
-			postListDto.setPostViewCount(rs.getInt("post_view_count"));
-			postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
-			postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
-			postListDto.setClientNick(rs.getString("client_nick"));
-			postListDto.setBoardName(rs.getString("board_name"));
-			postListDto.setBoardGroup(rs.getInt("board_group"));
-			clientPostList.add(postListDto);
-		}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (rs!=null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+		List<PostListDto> clientPostList = null;
+
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			ps.setString(2, listParameter.getSearchKeyword());
+			ps.setInt(3, boardGroup);
+			ps.setInt(4, boardNo);
+			ps.setInt(5, listParameter.getStartRow());
+			ps.setInt(6, listParameter.getEndRow());
+
+			try (ResultSet rs = ps.executeQuery()) {
+				clientPostList = new ArrayList<>();
+				while (rs.next()) {
+					PostListDto postListDto = new PostListDto();
+					postListDto.setPostNo(rs.getInt("post_no"));
+					postListDto.setPostClientNo(rs.getInt("post_client_no"));
+					postListDto.setPostBoardNo(rs.getInt("post_board_no"));
+					postListDto.setPostTitle(rs.getString("post_title"));
+					postListDto.setPostContents(rs.getString("post_contents"));
+					postListDto.setPostDate(rs.getDate("post_date"));
+					postListDto.setPostLikeCount(rs.getInt("post_like_count"));
+					postListDto.setPostViewCount(rs.getInt("post_view_count"));
+					postListDto.setPostCommentsCount(rs.getInt("post_comments_count"));
+					postListDto.setPostBlind(rs.getString("post_blind").charAt(0));
+					postListDto.setClientNick(rs.getString("client_nick"));
+					postListDto.setBoardName(rs.getString("board_name"));
+					postListDto.setBoardGroup(rs.getInt("board_group"));
+					clientPostList.add(postListDto);
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return clientPostList;

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -20,7 +19,7 @@ public class ClientDao {
 
 		int count = 0;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
 			ps.setString(2, clientPw);
 			count = ps.executeUpdate();
@@ -35,34 +34,25 @@ public class ClientDao {
 	public ClientDto myInfo(int clientNo) {
 		String sql = "select * from client where client_no=?";
 
-		ResultSet rs = null;
 		ClientDto clientDto = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
-			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				clientDto = new ClientDto();
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					clientDto = new ClientDto();
 
-				clientDto.setClientId(rs.getString("client_id"));
-				clientDto.setClientNick(rs.getString("client_nick"));
-				clientDto.setClientEmail(rs.getString("client_email"));
-				clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
-				clientDto.setClientGrade(rs.getString("client_grade"));
+					clientDto.setClientId(rs.getString("client_id"));
+					clientDto.setClientNick(rs.getString("client_nick"));
+					clientDto.setClientEmail(rs.getString("client_email"));
+					clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
+					clientDto.setClientGrade(rs.getString("client_grade"));
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
-
 		return clientDto;
 	}
 
@@ -71,7 +61,7 @@ public class ClientDao {
 
 		int count = 0;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, chgPw);
 			ps.setInt(2, clientNo);
 			ps.setString(3, originPw);
@@ -89,7 +79,7 @@ public class ClientDao {
 
 		int count = 0;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, clientDto.getClientNick());
 			ps.setString(2, clientDto.getClientEmail());
 			ps.setInt(3, clientDto.getClientNo());
@@ -107,15 +97,15 @@ public class ClientDao {
 	public String findId(String inputEmail) {
 		String sql = "select client_id from client where client_email = ?";
 
-		ResultSet rs = null;
 		String clientId = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, inputEmail);
-			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				clientId = rs.getString(1);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					clientId = rs.getString(1);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,7 +120,7 @@ public class ClientDao {
 
 		int count = 0;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, inputPw);
 			ps.setString(2, inputEmail);
 			count = ps.executeUpdate();
@@ -146,40 +136,32 @@ public class ClientDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select client_no, client_id, client_nick, client_email, client_birth_year,"
 					 	+ "client_grade, client_unlock_date from client order by #1 #2, client_no desc) tmp"
-					 + ") where rn between ? and ?";
+					+ ") where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getOrderType());
 		sql = sql.replace("#2", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<ClientDto> clientList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, listParameter.getStartRow());
 			ps.setInt(2, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			clientList = new ArrayList<>();
-			while (rs.next()) {
-				ClientDto clientDto = new ClientDto();
-				clientDto.setClientNo(rs.getInt("client_no"));
-				clientDto.setClientId(rs.getString("client_id"));
-				clientDto.setClientNick(rs.getString("client_nick"));
-				clientDto.setClientEmail(rs.getString("client_email"));
-				clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
-				clientDto.setClientGrade(rs.getString("client_grade"));
-				clientDto.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
-				clientList.add(clientDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				clientList = new ArrayList<>();
+				while (rs.next()) {
+					ClientDto clientDto = new ClientDto();
+					clientDto.setClientNo(rs.getInt("client_no"));
+					clientDto.setClientId(rs.getString("client_id"));
+					clientDto.setClientNick(rs.getString("client_nick"));
+					clientDto.setClientEmail(rs.getString("client_email"));
+					clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
+					clientDto.setClientGrade(rs.getString("client_grade"));
+					clientDto.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
+					clientList.add(clientDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return clientList;
@@ -190,42 +172,34 @@ public class ClientDao {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select client_no, client_id, client_nick, client_email, client_birth_year, client_grade,"
 					 	+ "client_unlock_date from client where instr(#1, ?) > 0 order by #2 #3, client_no desc) tmp"
-					 + ") where rn between ? and ?";
+					+ ") where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 		sql = sql.replace("#2", listParameter.getOrderType());
 		sql = sql.replace("#3", listParameter.getOrderDirection());
 
-		ResultSet rs = null;
 		List<ClientDto> clientList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, listParameter.getSearchKeyword());
 			ps.setInt(2, listParameter.getStartRow());
 			ps.setInt(3, listParameter.getEndRow());
-			rs = ps.executeQuery();
 
-			clientList = new ArrayList<>();
-			while (rs.next()) {
-				ClientDto clientDto = new ClientDto();
-				clientDto.setClientNo(rs.getInt("client_no"));
-				clientDto.setClientId(rs.getString("client_id"));
-				clientDto.setClientNick(rs.getString("client_nick"));
-				clientDto.setClientEmail(rs.getString("client_email"));
-				clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
-				clientDto.setClientGrade(rs.getString("client_grade"));
-				clientDto.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
-				clientList.add(clientDto);
+			try (ResultSet rs = ps.executeQuery()) {
+				clientList = new ArrayList<>();
+				while (rs.next()) {
+					ClientDto clientDto = new ClientDto();
+					clientDto.setClientNo(rs.getInt("client_no"));
+					clientDto.setClientId(rs.getString("client_id"));
+					clientDto.setClientNick(rs.getString("client_nick"));
+					clientDto.setClientEmail(rs.getString("client_email"));
+					clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
+					clientDto.setClientGrade(rs.getString("client_grade"));
+					clientDto.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
+					clientList.add(clientDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return clientList;
@@ -239,7 +213,7 @@ public class ClientDao {
 
 		try (Connection con = JdbcUtils.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery();) {
+				ResultSet rs = ps.executeQuery()) {
 			rs.next();
 			clientCount = rs.getInt(1);
 		} catch (Exception e) {
@@ -254,24 +228,17 @@ public class ClientDao {
 		String sql = "select count(client_no) from client where instr(#1, ?) > 0";
 		sql = sql.replace("#1", listParameter.getSearchType());
 
-		ResultSet rs = null;
 		int clientCount = 0;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, listParameter.getSearchKeyword());
-			rs = ps.executeQuery();
-			rs.next();
-			clientCount = rs.getInt(1);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				clientCount = rs.getInt(1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return clientCount;
@@ -281,7 +248,7 @@ public class ClientDao {
 	public void refreshUnlockDate(int clientNo) {
 		String sql = "update client set client_unlock_date = null where client_no = ?";
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -308,7 +275,7 @@ public class ClientDao {
 
 		int count = 0;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setDate(1, unlockDate);
 			ps.setInt(2, clientNo);
 			count = ps.executeUpdate();
@@ -324,7 +291,7 @@ public class ClientDao {
 		String sql = "insert into client(client_no, client_id, client_pw, client_email, client_nick,"
 					 + "client_birth_year) values(client_seq.nextval, ?, ?, ?, ?, ?)";
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, clientDto.getClientId());
 			ps.setString(2, clientDto.getClientPw());
 			ps.setString(3, clientDto.getClientEmail());
@@ -340,19 +307,19 @@ public class ClientDao {
 	public ClientDto login(ClientDto clientDto) {
 		String sql = "select client_no, client_unlock_date from client where client_id = ? and client_pw = ?";
 
-		ResultSet rs = null;
 		ClientDto find = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, clientDto.getClientId());
 			ps.setString(2, clientDto.getClientPw());
-			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				find = new ClientDto();
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					find = new ClientDto();
 
-				find.setClientNo(rs.getInt("client_no"));
-				find.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
+					find.setClientNo(rs.getInt("client_no"));
+					find.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -379,7 +346,6 @@ public class ClientDao {
 				System.out.println(clientAgeRangeDto.getTeen()+"는 " + clientAgeRangeDto.getCount() + "명");
 				
 				ageRangeList.add(clientAgeRangeDto);
-				
 			}
 		}
 		catch (Exception e) { 
@@ -392,28 +358,42 @@ public class ClientDao {
 	public boolean isSuper(int clientNo) {
 		String sql = "select client_grade from client where client_no=?";
 
-		ResultSet rs = null;
 		boolean isSuper = false;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
-			rs = ps.executeQuery();
-			rs.next();
-			// System.out.println("등급" + rs.getString("client_grade"));
-			isSuper = rs.getString("client_grade").equals("super");
-			// System.out.println("불린" + isSuper);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				rs.next();
+				// System.out.println("등급" + rs.getString("client_grade"));
+				isSuper = rs.getString("client_grade").equals("super");
+				// System.out.println("불린" + isSuper);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return isSuper;
+	}
+	
+	// 회원번호로 회원 닉네임을 찾는 기능
+	public String findClientNick(int clientNo) {
+		String sql = "select client_nick from client where client_no = ?";
+		
+		String clientNick = null;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					clientNick = rs.getString(1);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return clientNick;
 	}
 }

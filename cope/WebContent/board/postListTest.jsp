@@ -31,6 +31,10 @@
 	BoardDao boardDao = new BoardDao();
 	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
 	String boardGroupName = boardDao.findBoardName(boardGroup);
+	int boardNo = 0;
+	if (request.getParameter("boardNo") != null) {
+		boardNo = Integer.parseInt(request.getParameter("boardNo"));
+	}
 	
 	// 페이지 번호
 	int pageNo;
@@ -69,39 +73,36 @@
 	listParameter.setOrderType(orderType);
 	listParameter.setOrderDirection(orderDirection);
 	
-	// 게시판 전체 글 목록
+	int postCount;
+	// 게시판 글 목록 및 게시글 개수 계산
 	if (request.getParameter("boardNo") == null) {
 		if (isSearch) {
 			listParameter.setSearchType(searchType);
 			listParameter.setSearchKeyword(searchKeyword);
 			postList = postListDao.search(listParameter, boardGroup);
+			postCount = postListDao.getPostCount(listParameter, boardGroup);
 		}
 		else{
 			postList = postListDao.list(listParameter, boardGroup);
+			postCount = postListDao.getPostCount(boardGroup);
 		}
 	}
 	
-	// 하위 게시판 선택 시 목록
+	// 게시판 글 목록(하위 게시판 선택)
 	else {
 		if (isSearch) {
 			listParameter.setSearchType(searchType);
 			listParameter.setSearchKeyword(searchKeyword);
-			postList = postListDao.search(listParameter, boardGroup, Integer.parseInt(request.getParameter("boardNo")));
+			postList = postListDao.search(listParameter, boardGroup, boardNo);
+			postCount = postListDao.getPostCount(listParameter, boardGroup, boardNo);
 		}
 		else{
-			postList = postListDao.list(listParameter, boardGroup, Integer.parseInt(request.getParameter("boardNo")));
+			postList = postListDao.list(listParameter, boardGroup, boardNo);
+			postCount = postListDao.getPostCount(boardGroup, boardNo);
 		}
 	}
 	
 	// 페이지 네비게이션 영역 계산
-	int postCount;
-	if (isSearch) {
-		postCount = postListDao.getPostCount(listParameter);
-	}
-	else {
-		postCount = postListDao.getPostCount();
-	}
-	
 	int lastBlock = (postCount - 1) / pageSize + 1; 
 	
 	int blockSize = 10;
@@ -234,11 +235,11 @@
 		selectPageSize.value = '<%=pageSize%>';
 
 		// 페이지네이션 버튼 처리
-		var pagination = document.querySelectorAll(".pagination>a");
-		for(var i=0; i<pagination.length; i++){
-			pagination[i].addEventListener("click", function() {
+		var pagination = document.querySelectorAll('.pagination > a');
+		for (var i=0; i<pagination.length; i++) {
+			pagination[i].addEventListener('click', function() {
 				var pageNo = this.textContent;
-				var moveBtn = document.querySelectorAll(".pagination>a:not(.move-link)");
+				var pageMoveBtn = document.querySelectorAll('.pagination > a:not(.move-link)');
 				if (pageNo === '<') {
 					pageNo = parseInt(pageMoveBtn[0].textContent) - 1;
 				}

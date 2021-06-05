@@ -8,6 +8,8 @@ KH 당산 세미프로젝트 1조
 
 ## 문서 링크
 
+-   [발표 준비](https://docs.google.com/document/d/1srqXQzfR8Qkx0r1Jxnddwjoi00T6jUmVL6oNeO8Dm2o/edit)
+
 -   [종합](https://docs.google.com/document/d/1FcH7gKhC-XnLR0Hcn_lQs-wgjmoAp1KpvrpbiNWD_rA/edit)
 
 -   [일정 및 계획](https://docs.google.com/document/d/17IPcZiLiCdF4sNmWjOfRNvLW5r_aklvVNsz3ZLlmUNU/edit)

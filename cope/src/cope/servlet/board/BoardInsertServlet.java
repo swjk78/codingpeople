@@ -1,6 +1,7 @@
 package cope.servlet.board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,14 +24,23 @@ public class BoardInsertServlet extends HttpServlet {
 			boardDto.setBoardName(req.getParameter("boardName"));
 			boardDto.setBoardGroup(Integer.parseInt(req.getParameter("boardSuperNo")));// 상위는 Dao에서 자기 번호로 자동 변환
 			boardDto.setBoardSuperNo(Integer.parseInt(req.getParameter("boardSuperNo")));
-
-			// 처리 준비...
 			BoardDao boardDao = new BoardDao();
-			// 처리1 상위게시판
+
+			// 기본 하위 게시판 목록
+			String[] boardSub = { "자유게시판", "질문게시판", "팁게시판" };
+
+			// 하위 게시판 목록
+			List<BoardDto> boardSubList = boardDao.showListBoardSub(boardDto.getBoardSuperNo());
+			System.out.println(boardSubList);
+
+			// 상위 게시판 추가
 			if (Integer.parseInt(req.getParameter("boardSuperNo")) == 0
 					&& !boardDao.checkSameBoardName(boardDto.getBoardName())) {
 				boardDao.insertBoardSuper(boardDto);
-				boardDao.insertDefaultBoard(boardDao.getCurrentSequence());
+				int currval = boardDao.getCurrentSequence();
+				for (int i = 0; i < boardSub.length; i++) {
+					boardDao.insertDefaultBoard(boardSub[i], currval);
+				}
 			} else {
 				boardDao.insertBoardSub(boardDto);
 			}
