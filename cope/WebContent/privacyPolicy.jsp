@@ -1,50 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
-<link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/bottom.css">
+<link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/miniFooterSide.css">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
 
-.title-border{
-padding : 20px;
-color:white;
-font-size : 18px;
-width:85.78%;
-background-color:#5A5F94;
-position : relative;
-}
-    .padding-left{
-    padding-left:188px;
-    }
-    
-    .margin{
-    margin-left : 10px;
-    }
-
-.border-inner{
-width : 100%
-}
-</style>
 </head>
 <body>
+<div class = display>
+
 <div class = "text-center">
 	<a href= "<%=request.getContextPath()%>/index.jsp">
 <img src = "<%=request.getContextPath()%>/image/example.png" class = "containerimg">
 </a>
  </div>
-   	
   		  			<span>&nbsp;</span>
   		  			<span>&nbsp;</span>
-  		  			<div class = " text-center ">
-  		  			<div class = padding-left>
-  		  			<div class = "title-border ">KH정보교육원 개인정보 취급방침</div>
-  		  			</div>
-<div class = " display-inline-block bottomBorder">
-        <pre class = "text-left border-inner">
+  		  			
+  		  			<div class = blue-box>KH정보교육원 개인정보 취급방침</div>
+<div class = border-footer-side>
+        <pre class = "footer-side-text-left">
 KH정보교육원 개인정보 취급방침은 다음과 같습니다.
 
 수집하는 개인정보 항목
@@ -107,7 +85,8 @@ KH정보교육원 개인정보 취급방침은 다음과 같습니다.
 4.경찰청 사이버테러대응센터 (cyberbureau.police.go.kr/182)</pre>
 </div>
 </div>
-</body>
 
+
+</body>
 </html>
-<jsp:include page="/template/miniFooter.jsp"></jsp:include>
+<jsp:include page="/template/footer.jsp"></jsp:include>
