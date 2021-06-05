@@ -3,7 +3,6 @@ package cope.beans.comments;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class CommentsDao {
 	public void insert(CommentsDto commentsDto) {
 		String sql = "insert into comments values (comments_seq.nextval, ?, ?, ?, sysdate, 'F')";
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, commentsDto.getCommentsClientNo());
 			ps.setInt(2, commentsDto.getCommentsPostNo());
 			ps.setString(3, commentsDto.getCommentsContents());
@@ -29,7 +28,7 @@ public class CommentsDao {
 	public void update(CommentsDto commentsDto) {
 		String sql = "update comments set comments_contents = ? where comments_no = ?";
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, commentsDto.getCommentsContents());
 			ps.setInt(2, commentsDto.getCommentsNo());
 			ps.executeUpdate();
@@ -73,37 +72,29 @@ public class CommentsDao {
 					 + "comments_date, comments_blind, client_nick "
 					 + "from comments_view where comments_post_no=? order by comments_no asc";
 
-		ResultSet rs = null;
 		List<CommentsViewDto> commentsList = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, postNo);
-			rs = ps.executeQuery();
 
-			commentsList = new ArrayList<>();
-			while (rs.next()) {
-				CommentsViewDto commentsViewDto = new CommentsViewDto();
+			try (ResultSet rs = ps.executeQuery()) {
+				commentsList = new ArrayList<>();
+				while (rs.next()) {
+					CommentsViewDto commentsViewDto = new CommentsViewDto();
 
-				commentsViewDto.setCommentsClientNo(rs.getInt("COMMENTS_CLIENT_NO"));
-				commentsViewDto.setCommentsPostNo(rs.getInt("COMMENTS_POST_NO"));
-				commentsViewDto.setCommentsContents(rs.getString("COMMENTS_CONTENTS"));
-				commentsViewDto.setCommentsDate(rs.getDate("COMMENTS_DATE"));
-				commentsViewDto.setCommentsBlind(rs.getString("COMMENTS_BLIND"));
-				commentsViewDto.setClientNick(rs.getString("CLIENT_NICK"));
-				commentsViewDto.setCommentsNo(rs.getInt("COMMENTS_NO"));
+					commentsViewDto.setCommentsClientNo(rs.getInt("COMMENTS_CLIENT_NO"));
+					commentsViewDto.setCommentsPostNo(rs.getInt("COMMENTS_POST_NO"));
+					commentsViewDto.setCommentsContents(rs.getString("COMMENTS_CONTENTS"));
+					commentsViewDto.setCommentsDate(rs.getDate("COMMENTS_DATE"));
+					commentsViewDto.setCommentsBlind(rs.getString("COMMENTS_BLIND"));
+					commentsViewDto.setClientNick(rs.getString("CLIENT_NICK"));
+					commentsViewDto.setCommentsNo(rs.getInt("COMMENTS_NO"));
 
-				commentsList.add(commentsViewDto);
+					commentsList.add(commentsViewDto);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return commentsList;
@@ -113,7 +104,7 @@ public class CommentsDao {
 	public void delete(int commetnsNo) {
 		String sql = "delete comments where comments_no=?";
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, commetnsNo);
 			ps.execute();
 		} catch (Exception e) {
@@ -131,7 +122,7 @@ public class CommentsDao {
 			sql = "update comments set comments_blind = 'F' where comments_no = ?";
 		}
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, commentsDto.getCommentsNo());
 			ps.execute();
 		} catch (Exception e) {
@@ -143,7 +134,7 @@ public class CommentsDao {
 	public void choose(CommentsChooseDto commentsChooseDto) {
 		String sql = "insert into choose values(choose_seq.nextval, ?, ?)";
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, commentsChooseDto.getChoosePostNo());
 			ps.setInt(2, commentsChooseDto.getChooseCommentsNo());
 			ps.execute();
@@ -156,26 +147,18 @@ public class CommentsDao {
 	public boolean isChoose(int postNo) {
 		String sql = "select choose_post_no from choose where choose_post_no = ?";
 
-		ResultSet rs = null;
 		boolean isChoose = false;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, postNo);
-			rs = ps.executeQuery();
 
-			if (rs.next()) {// 조회 성공
-				isChoose = true;
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {// 조회 성공
+					isChoose = true;
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return isChoose;
@@ -185,26 +168,18 @@ public class CommentsDao {
 	public int getChooseNo(int postNo) {
 		String sql = "select choose_comments_no from choose where choose_post_no = ?";
 
-		ResultSet rs = null;
 		int ChooseNo = 0;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, postNo);
-			rs = ps.executeQuery();
 
-			if (rs.next()) {// 조회 성공
-				ChooseNo = rs.getInt("choose_comments_no");
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {// 조회 성공
+					ChooseNo = rs.getInt("choose_comments_no");
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return ChooseNo;
@@ -214,26 +189,18 @@ public class CommentsDao {
 	public String getNick(int clientNo) {
 		String sql = "select client_nick from client where client_no=?";
 
-		ResultSet rs = null;
 		String clientNick = null;
 
-		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
-			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				clientNick = rs.getString("client_nick");
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					clientNick = rs.getString("client_nick");
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		return clientNick;
