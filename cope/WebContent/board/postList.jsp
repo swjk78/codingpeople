@@ -292,12 +292,12 @@
 </head>
 <body>
 	<div class="container-800">
-		<h1><a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>">
+		<h1><a href="<%=root%>/board/postList.jsp?boardGroup=<%=boardGroup%>">
 		<%=boardGroupName%></a></h1>
 		
 		<!-- 하위 게시판 선택 링크 -->
 		<%for (BoardDto boardDto : subBoardList) {%>
-			<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
+			<a href="<%=root%>/board/postList.jsp?boardGroup=<%=boardGroup%>
 			&boardNo=<%=boardDto.getBoardNo()%>&pageSize=<%=pageSize%>">
 			<%=boardDto.getBoardName()%></a>
 		<%} %>
@@ -343,7 +343,7 @@
 					<td class="td-line"><%=postListDto.getPostNo() %></td>				
 					<td class="td-line">
 					<% if(postListDto.getPostBlind() == 'F') {%>
-						<a href="<%=root%>/board/postListTest.jsp?boardGroup=<%=boardGroup%>
+						<a href="<%=root%>/board/postList.jsp?boardGroup=<%=boardGroup%>
 						&boardNo=<%=postListDto.getPostBoardNo()%>">
 						[<%=postListDto.getBoardName()%>]</a>
 						<a href="post.jsp?boardGroup=<%=boardGroup%>
@@ -374,7 +374,7 @@
 			</tbody>
 		</table>
 			
-			<%-- 	<a href="postListTest.jsp?boardGroup=<%=boardGroup%>">목록</a> --%>
+			<%-- 	<a href="postList.jsp?boardGroup=<%=boardGroup%>">목록</a> --%>
 			<div class="bottom-write">
 			<%if (request.getSession().getAttribute("clientNo") != null) {%>
 				
@@ -402,7 +402,7 @@
 		</div>
 		
 	
-		<form action="postListTest.jsp" method="get" class="search-form">
+		<form action="postList.jsp" method="get" class="search-form">
 			<input type="hidden" name="pageNo">
 			<input type="hidden" name="pageSize" value="<%=pageSize%>">
 			<input type="hidden" name="orderType">
