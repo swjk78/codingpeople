@@ -7,9 +7,6 @@
 box-sizing: border-box;
 }
 
-.border{
-border: red solid 2px;
-}
 .float-left{
 float:left;
 }
