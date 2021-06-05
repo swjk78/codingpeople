@@ -51,9 +51,7 @@ public class ClientDto {
 		return clientEmail;
 	}
 	public void setClientEmail(String clientEmail) {
-		if (Pattern.matches("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$", clientEmail)) {
-			this.clientEmail = clientEmail;
-		}
+		this.clientEmail = clientEmail;
 	}
 	public short getClientBirthYear() {
 		return clientBirthYear;
