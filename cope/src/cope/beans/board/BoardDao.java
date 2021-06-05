@@ -284,70 +284,32 @@ public class BoardDao {
 	}
 
 	// 특정 유저가 쓴 게시물들 세기 - 위와 거의 동일
-	public List<Integer> countWritenPosts(int clientNo, List<BoardDto> boardSuperList) {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+	public List<BoardChartDto> countWritenPosts(int clientNo) {
+		String sql = "select board_name, count(*) from (select board_name from (select B.board_super_no from post P inner join board B on P.post_board_no = B.board_no where P.post_client_no=? order by B.board_no) X inner join board Y on X.board_super_no = Y.board_no) group by board_name";
+		
+		List<BoardChartDto> boardChartDtoList = null;
+		
+		try (Connection con = JdbcUtils.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql)){
+				ps.setInt(1, clientNo);
+				
+				try(ResultSet rs = ps.executeQuery()) {
+					boardChartDtoList = new ArrayList<>();
+					while (rs.next()) {
+						BoardChartDto clientAgeRangeDto = new BoardChartDto();
+						clientAgeRangeDto.setName(rs.getString("board_name"));
+						clientAgeRangeDto.setCount(rs.getInt("count(*)"));
+						System.out.println(clientAgeRangeDto.getName() + "은 " + clientAgeRangeDto.getCount() + "개");
 
-		List<Integer> countWritenpostList = null;
-
-		try (Connection con = JdbcUtils.getConnection()) {
-			countWritenpostList = new ArrayList<>();
-			String sql;
-			/*
-			 * 반복문 (상위게시판)과 (하위게시판)의 개수에따라 반복합니다. (대략 곱하기)
-			 */
-			for (int i = 0; i < boardSuperList.size(); i++) {// 상위게시판 개수 만큼 반복
-				int boardSuperNo = boardSuperList.get(i).getBoardNo();
-				sql = "select board_no from board where board_super_no=? order by board_no asc";
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, boardSuperNo);
-				rs = ps.executeQuery();
-
-				List<Integer> boardSubNoList = new ArrayList<>(); // 하위게시판 번호를 담을 리스트
-				while (rs.next()) {// 조회된 하위 게시판 만큼 반복합니다
-					boardSubNoList.add(rs.getInt("board_no"));
+				boardChartDtoList.add(clientAgeRangeDto);
+					}
 				}
-
-				rs.close();
-				ps.close();
-
-				int underPostCount = 0;
-				for (int k = 0; k < boardSubNoList.size(); k++) {// 방금 구한 하위 게시판 만큼 반복합니다.
-					sql = "select count(*) from post where post_board_no=? and post_client_no = ?";
-					ps = con.prepareStatement(sql);
-					ps.setInt(1, boardSubNoList.get(k));
-					ps.setInt(2, clientNo);
-					rs = ps.executeQuery();
-
-					rs.next();
-					underPostCount += rs.getInt("count(*)");
-
-					rs.close();
-					ps.close();
-				}
-				countWritenpostList.add(underPostCount);
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
-
-		return countWritenpostList;
+		return boardChartDtoList;
 	}
+
 
 	// 게시판 개수 세기
 	public int countBoardSuper() {

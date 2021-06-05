@@ -1,3 +1,4 @@
+<%@page import="cope.beans.board.BoardChartDto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="cope.beans.board.BoardDto"%>
 <%@page import="java.util.List"%>
@@ -42,9 +43,9 @@
 		int randomInt= (seed/no)%1000000;
 		
 		BoardDao boardDao = new BoardDao();
-		List<BoardDto>boardSuperList = boardDao.showListBoardSuper();
-		List<Integer>countWritenpostList = new ArrayList<>();
-		countWritenpostList = boardDao.countWritenPosts(clientNo, boardSuperList);
+// 		List<BoardDto>boardSuperList = boardDao.showListBoardSuper();
+		List<BoardChartDto>countWritenpostList = new ArrayList<>();
+		countWritenpostList = boardDao.countWritenPosts(clientNo);
 %>
 
 <html>
@@ -108,24 +109,24 @@
 						<canvas id="postChartUser" ></canvas>
 					</div>
 					<script>
-					var boardSuperNames = [];
-					<%for(int i=0; i<boardSuperList.size(); i++){%>
-					boardSuperNames[<%=i%>] = '<%=boardSuperList.get(i).getBoardName()%>';
+					var boardNames = [];
+					<%for(int i=0; i<countWritenpostList.size(); i++){%>
+					boardNames[<%=i%>] = '<%=countWritenpostList.get(i).getName()%>';
 					<%}%>
 					
-					var countWrttenpostArray =[];
+					var count =[];
 					<%for(int i=0; i<countWritenpostList.size(); i++){%>
-					countWrttenpostArray[<%=i%>] = <%=countWritenpostList.get(i)%>; // 배열을 복사합니다.
+					count[<%=i%>] = <%=countWritenpostList.get(i).getCount()%>; // 배열을 복사합니다.
 					<%}%>	
 					
 					var ctx = document.getElementById('postChartUser').getContext('2d');
 					var myChart = new Chart(ctx, {
 					    type: 'bar',
 					    data: {
-					    	labels: boardSuperNames,
+					    	labels: boardNames,
 					        datasets: [{
 					            label: '게시글 수',
-					            data: countWrttenpostArray,
+					            data: count,
 					            backgroundColor: [
 					                'rgba(255, 255, 153, 0.2)',
 					                'rgba(204, 255, 153, 0.2)',
