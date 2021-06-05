@@ -11,10 +11,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter (urlPatterns = {"/client/exitSuccess.jsp", "/client/findId.jsp", "/client/findPw.jsp", "/client/login.jsp", "/client/join.jsp", "/client/joinSuccess.jsp", "/client/resetPw.jsp"})
+//"로그아웃"이어야 들어갈 수 있는 곳 ->즉 로그인 상태에서 들어가면 "불가"정도는 아닌데 이상한 페이지나 서블릿도 포함입니다.
+@WebFilter (urlPatterns = {"/client/exitSuccess.jsp", "/client/findId.jsp", "/client/findPw.jsp", "/client/login.jsp", "/client/join.jsp", "/client/joinSuccess.jsp", "/client/resetPw.jsp",  "/client/findId.kh", "/client/findPw.kh", "/client/join.kh", "/client/login.kh", "/client/resetPw.kh"})
+//나중에 login.kh추가할 것
 
-//로그인 상태에서 들어갈 수 없는 곳
-public class IfLoginFilter implements Filter{
+public class LogoutFilter implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -28,6 +29,7 @@ public class IfLoginFilter implements Filter{
 		Integer clientNo = (Integer) req.getSession().getAttribute("clientNo");
 		
 		if(clientNo!=null) {//로그인을 함!
+			System.out.println("LogoutFilter에서 걸림!");
 			resp.sendRedirect(req.getContextPath()+"/index.jsp");
 		}
 		else {

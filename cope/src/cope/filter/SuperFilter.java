@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import cope.beans.client.ClientDao;
 
-@WebFilter (urlPatterns = {"/manage/manageCenter.jsp", "/manage/manageClient", "/manage/manageBoard.jsp"}) //나중에 게시글 관리도 추가해야합니다. 테스트 후 "/manage/*"로 해버립시다
+//"Super"이어야 들어갈 수 있는 곳
+@WebFilter (urlPatterns = {"/manage/manageCenter.jsp", "/manage/manageClient", "/manage/manageBoard.jsp", "/manage/lockClient.kh", 
+		"/manage/createBoard.kh", "/manage/editBoard.kh", "/manage/deleteBoard.kh", "/manage/postBlind.kh",  "/board/commentsBlind.kh"}) //나중에 게시글 관리도 추가해야합니다. 테스트 후 "/manage/*"로 해버립시다
 public class SuperFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -27,6 +29,7 @@ public class SuperFilter implements Filter{
 		Integer clientNo = (Integer) req.getSession().getAttribute("clientNo");
 		
 		if(clientNo==null) {//로그인 조차 안 함
+			System.out.println("SuperFilter에서 걸림! (로그인을 안함)");
 			resp.sendRedirect(req.getContextPath()+"/client/login.jsp");
 		}
 		else {
@@ -39,6 +42,7 @@ public class SuperFilter implements Filter{
 				}
 				else {
 					resp.sendError(401);
+					System.out.println("SuperFilter에서 걸림! (관리자가 아님!)");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
