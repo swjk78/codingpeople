@@ -52,7 +52,7 @@
 		<div class="">
 			<div class="manage-center">
 				<div class="container-1000 border">
-					<h2 class="text-center">관리센터???</h2>
+					<h2 class="text-center">관리센터(버튼스타일 고칠예정!)</h2>
 		
 						<table class="table table-border text-center">
 							<tr>
