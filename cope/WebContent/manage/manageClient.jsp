@@ -292,7 +292,7 @@
 					<tr>
 						<td class="td-line"><%=clientDto.getClientNo()%></td>
 						<td class="td-line"><%=clientDto.getClientId()%></td>
-						<td class="td-line"><a href="<%=root%>/client.jsp?clientNo=<%=clientDto.getClientNo()%>"><%=clientDto.getClientNick()%></a></td>
+						<td class="td-line"><a href="<%=root%>/client/profile.jsp?clientNo=<%=clientDto.getClientNo()%>"><%=clientDto.getClientNick()%></a></td>
 						<td class="td-line"><%=clientDto.getClientEmail()%></td>
 						<td class="td-line">
 							<%if (clientDto.getClientBirthYear() == 0) {%>
