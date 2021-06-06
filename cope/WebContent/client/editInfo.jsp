@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -13,6 +14,10 @@
 		.error{
 			color:red;
 		}
+		
+	.pw-font{
+	 font-family : "맑은 고딕", "돋움", sans-serif; 
+	}
 	</style>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -60,8 +65,8 @@
 	
 </head>
 <body>
-<jsp:include page="/template/aside.jsp"></jsp:include>
-<div class="main">
+<div class = float-left>
+<div class="main-margin-editinfo">
 	<div class="container-600 border">
 	<div class="row"><h2 class="text-center">회원정보 수정</h2></div>
 	
@@ -78,7 +83,7 @@
 	</div>
 	<div class="row">
 		<label>현재비밀번호</label>
-		<input type="password" name="clientPw" required class="form-input form-input-underline"> 
+		<input type="password" name="clientPw" required class="pw-font form-input form-input-underline"> 
 	</div>
 	<div>
 		<%if(request.getParameter("error") != null){%>
@@ -94,5 +99,9 @@
 	</form>
 	</div>
 </div>
+</div>
+
 </body>
 </html>
+
+<jsp:include page="/template/footer.jsp"></jsp:include>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -9,6 +10,9 @@
 <style>
 	.error{
 		color:red;
+	}
+		.pw-font{
+	 font-family : "맑은 고딕", "돋움", sans-serif; 
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -76,25 +80,25 @@
 	</script>
 </head>
 <body>
-<jsp:include page="/template/aside.jsp"></jsp:include>
-<div class="main">
+<div class = float-left>
+<div class="main-margin-editinfo">
 	<div class="container-600 border">
 	<div class=row><h2 class="text-center">비밀번호 변경</h2></div>
 	
 	<form action="editPw.kh" method="post" class="form-input form">
 	
 	<div class="row">	
-	<input  type="password" placeholder="현재 비밀번호를 입력하세요" name="originPw" class="form-input form-input-underline">
+	<input  type="password" placeholder="현재 비밀번호를 입력하세요" name="originPw" class=" pw-font form-input form-input-underline">
 	<span></span>
 	</div>
 	
 	<div class="row">
-	<input  type="password" placeholder="바꿀 비밀번호를 입력하세요" name="chgPw" class="form-input form-input-underline">
+	<input  type="password" placeholder="바꿀 비밀번호를 입력하세요" name="chgPw" class="pw-font form-input form-input-underline">
 	<span></span>
 	</div>
 	
 	<div class="row">
-	<input  type="password" placeholder="바꿀 비밀번호를 입력하세요" name="checkPw" class="form-input form-input-underline">
+	<input  type="password" placeholder="바꿀 비밀번호를 입력하세요" name="checkPw" class=" pw-font form-input form-input-underline">
 	<span></span>
 	</div>
 	<div>
@@ -113,5 +117,7 @@
 	<br><br><br>
 	</div>
 </div>
+</div>
 </body>
 </html>
+<jsp:include page="/template/footer.jsp"></jsp:include>

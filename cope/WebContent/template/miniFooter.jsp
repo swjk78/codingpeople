@@ -34,7 +34,9 @@ cursor:pointer;
 a.underline-bottom:hover{
 text-decoration: underline;
 }
-
+.bottom{
+bottom:0;
+}
   	</style>
   	
   		  			<span>&nbsp;</span>

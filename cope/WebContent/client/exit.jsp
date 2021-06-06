@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -10,6 +11,9 @@
 <style>
 	.error{
 		color:red;
+	}
+		.pw-font{
+	 font-family : "맑은 고딕", "돋움", sans-serif; 
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -37,15 +41,16 @@
 
 </head>
 <body>
-<jsp:include page="/template/aside.jsp"></jsp:include>
-<div class="main">
+
+<div class = float-left>
+<div class="main-margin-exit">
 	<div class="container-600 border">
-	<div class="row"><h2 class="text-center">비밀번호 찾기</h2></div>
+	<div class="row"><h2 class="text-center">탈퇴</h2></div>
 	
 	<form action="exit.kh" method="post" class="form">
 	
 	<div class="row">
-	<input type="password" name="clientPw" placeholder="비밀번호를 입력하세요" required class="form-input form-input-underline">
+	<input type="password" name="clientPw" placeholder="비밀번호를 입력하세요" required class="pw-font form-input form-input-underline">
 		
 	</div>
 	
@@ -68,11 +73,8 @@
 	
 	<br><br><br>
 </div>
-	
-
-	
-	
-	
+	</div>
 	</div>
 </body>
 </html>
+<jsp:include page="/template/miniFooter.jsp"></jsp:include>
