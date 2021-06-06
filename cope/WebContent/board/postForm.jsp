@@ -36,6 +36,7 @@
 	}
 	
 	List<BoardDto> subBoardList = boardDao.showListBoardSub(boardGroup);
+
  %>
  
  <script>
@@ -98,11 +99,11 @@
 				</select>
 			</div>
 			<div class="post-title-input-div">
-				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="post-title-input post-title-input-underline input-title" required>
+				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="post-title-input post-title-input-underline input-title" value="<%=postDto.getPostTitle()%>"required>
 			</div>
 				<div>
 					<div class="post-contents-input-div">
-						<textarea name="postContents" placeholder="내용을 입력하세요" class="box-contents" required></textarea>
+						<textarea name="postContents" placeholder="내용을 입력하세요" class="box-contents" required><%=postDto.getPostContents() %></textarea>
 						<div class="row text-right">
 							<input class="form-btn form-btn-normal" type="submit" value="작성완료">
 						</div>
