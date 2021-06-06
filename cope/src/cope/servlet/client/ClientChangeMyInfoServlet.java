@@ -21,6 +21,7 @@ public class ClientChangeMyInfoServlet extends HttpServlet{
 			req.setCharacterEncoding("UTF-8");
 			
 			ClientDto clientDto = new ClientDto();
+			int clientNo = (int)req.getSession().getAttribute("clientNo");
 			clientDto.setClientNo((int)req.getSession().getAttribute("clientNo"));
 			clientDto.setClientPw(req.getParameter("clientPw"));
 			clientDto.setClientNick(req.getParameter("clientNick"));
@@ -30,7 +31,7 @@ public class ClientChangeMyInfoServlet extends HttpServlet{
 			boolean result = clientDao.chgMyInfo(clientDto);
 			
 			if(result) {
-				resp.sendRedirect("profile.jsp");
+				resp.sendRedirect("profile.jsp?clientNo="+clientNo);
 			}
 			else {
 				resp.sendRedirect("editInfo.jsp?error");
