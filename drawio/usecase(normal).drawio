@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-06-06T13:36:45.251Z" agent="5.0 (Windows)" etag="RWHgwhsd2bh_MUNvVH_l" version="14.7.6" type="github">
+<mxfile host="app.diagrams.net" modified="2021-06-06T13:39:45.023Z" agent="5.0 (Windows)" etag="sSuK4JDL2oXJiibxUNxE" version="14.7.6" type="github">
   <diagram id="s5FeZtneYwRWD_tnRQMd" name="Page-1">
     <mxGraphModel dx="1022" dy="392" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -83,7 +83,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="V-QRn7E8yriiG7SRzbsN-1" value="일반 회원" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="170" y="270" width="60" height="20" as="geometry" />
+          <mxGeometry x="175" y="270" width="60" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
