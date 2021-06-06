@@ -102,9 +102,10 @@ window.addEventListener('load', function() {
 		alert('이메일 전송을 성공했습니다.');
 		history.replaceState({}, null, location.pathname);
 	}
-	if (<%=request.getParameter("unlockDate") != null%>) {
-		alert('활동정지당한 계정입니다\n' + '정지해제 날짜: ' + request.getParameter("unlockDate"));
-		history.replaceState({}, null, location.pathname);
+	var unlockDate = '<%=request.getSession().getAttribute("unlockDate")%>';
+	if (unlockDate != 'null') {
+		alert('활동정지당한 계정입니다\n' + '정지해제 날짜: ' + unlockDate);
+		<%request.getSession().removeAttribute("unlockDate");%>
 	}
 });
 </script>

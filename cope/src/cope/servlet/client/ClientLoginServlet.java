@@ -29,7 +29,8 @@ public class ClientLoginServlet extends HttpServlet {
 				resp.sendRedirect("login.jsp?notFound");
 			}
 			else if (find.getClientUnlockDate() != null) {
-				resp.sendRedirect("login.jsp?unlockDate=" + find.getClientUnlockDateString());
+				req.getSession().setAttribute("unlockDate", find.getClientUnlockDateString());
+				resp.sendRedirect("login.jsp");
 			}
 			else {
 				req.getSession().setAttribute("clientNo", find.getClientNo());
