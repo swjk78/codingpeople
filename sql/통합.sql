@@ -84,8 +84,8 @@ choose_comments_no references comments(comments_no) not null
 );
 create sequence choose_seq nocache;
 
---초기 데이터
-insert into client values(client_seq.nextval, 'admin', 'admin', 'aaaa1111@naver.com', '광개토대왕', 1950, 'super', null);
+--회원 초기 데이터
+insert into client values(client_seq.nextval, 'superadmin', 'superadmin', 'aaaa1111@naver.com', '광개토대왕', 1950, 'super', null);
 insert into client values(client_seq.nextval, 'bbbb2222', 'bbbb2222', 'bbbb2222@naver.com', '세종대왕', 1952, 'normal', null);
 insert into client values(client_seq.nextval, 'cccc3333', 'cccc3333', 'cccc3333@naver.com', '소수림왕', 1959, 'normal', null);
 insert into client values(client_seq.nextval, 'dddd4444', 'dddd4444', 'dddd4444@naver.com', '이완용', 1961, 'normal', null);
@@ -128,3 +128,151 @@ insert into client values(client_seq.nextval, 'I9999999', 'I9999999', 'I9999999@
 insert into client values(client_seq.nextval, 'J0000000', 'J0000000', 'J0000000@naver.com', '노벨', 1951, 'normal', null);
 
 insert into client values(client_seq.nextval, 'K1111111', 'K1111111', 'K1111111@naver.com', '영', 2015, 'normal', null);
+
+-- 게시판 초기 데이터
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (1,'커뮤니티',1,0);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (2,'공지사항',1,1);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (3,'홍보게시판',1,1);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (4,'자바',4,0);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (5,'자유게시판',4,4);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (6,'질문게시판',4,4);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (7,'팁게시판',4,4);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (8,'C++',8,0);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (9,'자유게시판',8,8);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (10,'질문게시판',8,8);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (11,'팁게시판',8,8);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (12,'파이썬',12,0);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (13,'자유게시판',12,12);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (14,'질문게시판',12,12);
+Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (15,'팁게시판',12,12);
+
+
+-- 게시글 초기 데이터
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (1,1,2,'안녕하세요 코딩피플이 만들어졌습니다.','많은 사랑 부탁 드려요',to_date('21/06/06','RR/MM/DD'),1,38,4,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (2,4,6,'자바를 배우고 싶은데...','어디서 어떻게 시작해야할지 몰라서 고민입니다.',to_date('21/06/06','RR/MM/DD'),0,4,1,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (5,5,6,'마방진을 만드는 중인데','package MBG;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class MBG04 {
+	public static void main(String[] args) {
+
+		//입력
+		Scanner sc = new Scanner (System.in);
+
+		System.out.println("한줄에 있는 칸 수를 입력해주세요(홀수)");
+		int line = (sc.nextInt());
+
+		int[] arr = new int[line*line];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = i + 1;
+		}
+
+		//
+		Integer[][] m = new Integer[line][line];
+
+		int h = 0;
+		int v = m.length / 2;
+
+		for (int i = 0; i < arr.length; i++) {
+
+			m[h][v] = arr[i]; // 하나씩 입력
+			System.out.println("m[" + h + "] [" + v + "] = " + arr[i]);
+
+			if (i % m.length == m.length - 1) { // 누군가 만났을 때
+				h++;
+				continue;
+			} else {
+				h--; // 반복문으로 안해도 된다.
+				v++; // 이것도 그냥 증감
+			}
+			if (h == -1) {
+				h = m.length - 1;
+			} else if (v == m.length) {
+				v = 0;
+			} else {
+				continue;
+			}
+		}
+
+
+		System.out.println(Arrays.toString(m[i]));
+
+	}
+}
+
+한 줄만 나오네요 ㅠㅠ',to_date('21/06/06','RR/MM/DD'),0,11,2,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (6,34,7,'자바에 대한 자잘한 팁','()',to_date('21/06/06','RR/MM/DD'),0,4,2,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (7,19,11,'c++이 좋을까 c#이 좋을까?','()',to_date('21/06/06','RR/MM/DD'),0,3,1,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (8,21,11,'에러가 나고 있네요 도와 주실 수 있으신가요?','()',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (9,1,13,'파이썬의 유래','()',to_date('21/06/06','RR/MM/DD'),0,3,0,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (10,23,14,'출력구문은 print() 뿐인가요?','(0',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (11,11,3,'자바 스터디그룹 모집합니다!','kkkk1111@naver.com로 메일 주세요!',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (12,11,5,'자바의 창시자 제임스 고슬링','(0',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (13,11,6,'이클립스 오류가 뜨네요 ㅠㅠㅠ','()',to_date('21/06/06','RR/MM/DD'),0,2,0,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (14,11,7,'자바 하면서 알아낸 몇가지 팁','1.2.3.4.5.',to_date('21/06/06','RR/MM/DD'),0,2,0,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (15,26,6,'너무 어려워요 도와주세요 ㅠㅠㅠ','()',to_date('21/06/06','RR/MM/DD'),0,3,0,'F');
+Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (16,11,6,'급합니다... 도와주세요!!','package filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+//"로그아웃"이어야 들어갈 수 있는 곳 ->즉 로그인 상태에서 들어가면 "불가"정도는 아닌데 이상한 페이지나 서블릿도 포함입니다.
+@WebFilter (urlPatterns = {"/client/exitSuccess.jsp", "/client/findId.jsp", "/client/findPw.jsp", "/client/login.jsp", "/client/join.jsp", "/client/joinSuccess.jsp", "/client/resetPw.jsp",  "/client/findId.kh", "/client/findPw.kh", "/client/join.kh", "/client/login.kh", "/client/resetPw.kh"})
+//나중에 login.kh추가할 것
+
+public class LogoutFilter implements Filter{
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+
+		//다운캐스팅을 해야한다.
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse resp = (HttpServletResponse) response;
+
+		request.setCharacterEncoding("UTF-8");
+		Integer clientNo = (Integer) req.getSession().getAttribute("clientNo");
+
+		if(clientNo!=null) {//로그인을 함!
+			System.out.println("LogoutFilter에서 걸림!");
+			resp.sendRedirect(req.getContextPath()+"/index.jsp");
+		}
+		else {
+		}
+	}
+
+}
+
+필터를 만들고 있는데 다 막아버리네요 ㅠㅠ',to_date('21/06/06','RR/MM/DD'),1,15,5,'F');
+
+-- 댓글 초기 데이터
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (1,2,1,'안녕하세요 오늘 가입했습니다.',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (2,4,1,'많이 배워가겠습니다',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (3,24,1,'열심히 활동 할게요',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (4,24,2,'KH정보교육원 추천합니다. 황인빈 강사님이 제일 좋아요!',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (9,1,1,'모두들 감사합니다',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (15,19,6,'감사합니다 도움이 되었습니다 ',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (13,5,5,'감사합니다 채택 할게요!',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (12,1,5,'출력문장을 반복문으로 하시면 될 거 같습니다.',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (14,34,6,'(부연설명)',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (16,21,7,'글쎄요',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (17,1,16,'else 이후에
+chain.doFilter(req, resp);
+을 입력하여서 통과시키게 하면 될 거 같습니다.',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (18,30,16,'팁을 하다 더 드리자면 url 에 "*"을 활용할 수도 있습니다.',to_date('21/06/06','RR/MM/DD'),'F');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (19,4,16,'멍청아!!',to_date('21/06/06','RR/MM/DD'),'T');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (20,11,16,'이완용 꺼져',to_date('21/06/06','RR/MM/DD'),'T');
+Insert into COMMENTS (COMMENTS_NO,COMMENTS_CLIENT_NO,COMMENTS_POST_NO,COMMENTS_CONTENTS,COMMENTS_DATE,COMMENTS_BLIND) values (21,26,16,'감사합니다 저도 도움이 많이 되었습니다',to_date('21/06/06','RR/MM/DD'),'F');
+
+commit;
