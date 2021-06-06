@@ -26,7 +26,7 @@
  		</div>
  		 <br>
  		<div class="welcome-div image">
- 			<img src ="<%=root %>/image/main-Image.png"  width=100%>
+ 			<img src ="<%=root %>/image/main-img.png"  width=100%>
  		</div>
  	</div>
 </div>
