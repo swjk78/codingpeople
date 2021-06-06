@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/join.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/join.js"></script>
 
 <body>
@@ -11,7 +11,7 @@
 	<a href= "<%=request.getContextPath()%>/index.jsp" >
 	<img src="<%=request.getContextPath()%>/image/example.png" class = inline-block>
 	</a>
-		</div>
+</div>
 		
 	<div class = "container joinBorder">
 		<div class = "row text-center">

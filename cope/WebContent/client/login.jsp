@@ -132,7 +132,7 @@ window.addEventListener('load', function() {
 		<hr>
 		<div class="row">
 			<input type="button" value="회원가입" class="form-btn btn-normal"
-			onclick="location.href='<%=request.getContextPath()%>/join.jsp'">
+			onclick="location.href='<%=request.getContextPath()%>/client/join.jsp'">
 		</div>
 	</div>
 	<div class="row">
