@@ -57,7 +57,7 @@
 	<div>
 		<%if(request.getParameter("error") != null){%>
 			<div>
-<!-- 				span을 빨간색으로 입히고싶은데  -->
+<!-- 				span을 빨간색으로 입히고싶은데  -->	
 				<span class="error">비밀번호가 일치하지 않습니다</span>
 			</div>
 		<%} %>
