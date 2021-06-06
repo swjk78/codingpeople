@@ -164,8 +164,7 @@
 </script>
 
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
-<%-- <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/common.css"> --%>
-<%-- <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/postList.css"> --%>
+
 <style>
 	h2>a{
 		font-size:28px;
@@ -207,13 +206,13 @@
 		color:rgb(78, 78, 78);
 		font-color:black;
 		text-align:center;
-		height:35px;
+		height:43px;
 		background-color:rgb(242, 242, 242);		
 		
 	}
 	.td-line{
 		border-bottom:1px solid rgb(242, 242, 242);
-		height:35px;
+		height:43px;
 	}
 	
 	.order{
@@ -251,15 +250,15 @@
 				<div class="float-left">
 					<a class="order" id="client_no">
 					가입순
-		<%-- 			<img class="UDarrow" src="<%=root %>/image/UDarrow.png"> --%>
+
 					</a>
 					<a class="order" id="client_id">
 					아이디순
-		<%-- 			<img class="UDarrow" src="<%=root %>/image/UDarrow.png"> --%>
+
 					</a>
 					<a class="order" id="client_nick">
 					닉네임순
-		<%-- 			<img class="UDarrow" src="<%=root %>/image/UDarrow.png"> --%>
+
 					</a>
 				</div>
 		
@@ -378,7 +377,4 @@
 </div>
 </div> 
 
-<%-- <div class="main">
-<jsp:include page="/template/sessionView.jsp"></jsp:include>
-</div> --%>
 		<jsp:include page="/template/footer.jsp"></jsp:include>			
