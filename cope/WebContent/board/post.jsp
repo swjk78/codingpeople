@@ -12,7 +12,6 @@
 <%
 	BoardDao boardDao = new BoardDao();
 	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));
-	request.getSession().setAttribute("boardGroup", boardGroup);
 	String boardGroupName = boardDao.findBoardName(boardGroup);
 	
 	int postNo = Integer.parseInt(request.getParameter("postNo"));
