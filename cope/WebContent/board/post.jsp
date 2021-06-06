@@ -184,7 +184,7 @@
 		<table class="post-info-table right">
 			<tbody>
 				<tr>
-					<td><div class="right like-count">좋아요 <%=postDto.getPostLikeCount()%></div></td>
+					<td><div class="right like-count">추천수 <%=postDto.getPostLikeCount()%></div></td>
 					<td><div class="right read-count">조회수 <%=postDto.getPostViewCount()%></div></td>
 				</tr>
 			</tbody>
