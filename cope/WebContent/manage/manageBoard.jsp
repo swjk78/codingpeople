@@ -16,7 +16,6 @@
  <html>
  <head>
  <meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 

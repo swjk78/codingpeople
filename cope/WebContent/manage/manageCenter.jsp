@@ -13,7 +13,6 @@
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/layout.css">
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
 
 <!-- 차트.js를 가져오는 코드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>

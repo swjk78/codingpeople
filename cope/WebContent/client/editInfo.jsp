@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/client.css">
 	
 	<style>
