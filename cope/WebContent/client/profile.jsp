@@ -50,7 +50,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title></title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/client.css">
 
 <style>
@@ -91,7 +90,7 @@
 				<div class="profile-card-bottom">
 						<%if (isOwn) {%>
 							<a href="<%=root%>/client/editInfo.jsp"><button class="client-btn">내 정보 수정</button></a>
-							<a href="<%=root%>/client/resetPw.jsp"><button class="client-btn">비밀번호 재설정</button></a>
+							<a href="<%=root%>/client/editPw.jsp"><button class="client-btn">비밀번호 변경</button></a>
 							<a href="<%=root%>/client/exit.jsp"><button class="client-btn">회원탈퇴</button></a>
 						<%} %>
 				</div>
