@@ -9,7 +9,7 @@
 <%@page import="cope.beans.post.PostDao"%>
 <%@page import="cope.beans.board.BoardDao"%>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/post.css">
@@ -19,6 +19,13 @@
 	border: 1.5px solid #ffffff;
 	border-radius: 50%;
 	padding: 5px;
+	}
+	
+	.postform-padding-left{
+	padding-top: 15px;
+	padding-left: 130px;
+	}
+	
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
@@ -49,7 +56,7 @@
  </script>
 </head>
 <body>
-
+<div class = "float-left postform-padding-left">
 <div class=post-form>
 	<div class="container-900 border">
 		<div class="row text-left boardName-div">
@@ -74,6 +81,7 @@
 					<%} %>
 				</select>
 			</div>
+			<DIV>
 			<div class="post-title-input-div">
 				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="post-title-input post-title-input-underline input-title" required>
 			</div>
@@ -81,10 +89,11 @@
 				<div class="post-contents-input-div">
 					<textarea name="postContents" placeholder="내용을 입력하세요" class="box-contents" required></textarea>
 					<div class="row text-right">
-						<input class="form-btn form-btn-normal" type="submit" value="작성완료">
+						<input class="form-btn form-btn-normal" type="submit" value="작성완료" style = cursor:pointer; >
 					</div>
 				</div>			
 			</div>
+			</DIV>
 		</form>
 
 		<%}else{//글수정 %>
@@ -113,5 +122,7 @@
 		<%} %>
 	</div>
 </div>
+</div> 
 </body>
 </html>
+<jsp:include page="/template/footer.jsp"></jsp:include>
