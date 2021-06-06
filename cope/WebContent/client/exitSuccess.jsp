@@ -8,7 +8,6 @@ String root = request.getContextPath();%>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="<%=root%>/css/client.css">
 </head>
 <body>

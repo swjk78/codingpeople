@@ -326,7 +326,6 @@ top:0;
 </script>
 
 
-<title>Insert title here</title>
 </head>
 <body class = left>
 	<div class="container-800-postlist">
