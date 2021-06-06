@@ -50,7 +50,7 @@ public class SendEmail {
 		this.mailContents = mailContents;
 	}
 
-	public void send() {
+	public void send() throws Exception {
 		// SMTP 서버 정보 설정
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com"); // SMTP 서버
@@ -67,7 +67,7 @@ public class SendEmail {
 		
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(senderEmail));
+			message.setFrom(new InternetAddress(senderEmail, "코딩피플"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmail));
 			message.setSubject(mailSubject);
 			message.setText(mailContents);
