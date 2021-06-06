@@ -25,7 +25,7 @@
 <script>
 	window.addEventListener('load', function () {
 		if (<%=request.getParameter("fail") != null%>) {
-			alert('해당 이메일로 가입한 계정이 존재하지 않습니다');
+			alert('해당 이메일로 가입한 계정이 존재하지 않습니다.');
 			history.replaceState({}, null, location.pathname);
 		}
 		var form = document.querySelector('.find-id-form');
@@ -51,6 +51,3 @@
 		</div>
 	</div>
 </div>
-	<div class="main">
-	<jsp:include page="/template/sessionView.jsp"></jsp:include>
-	</div>

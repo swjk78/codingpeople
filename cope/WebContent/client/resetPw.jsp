@@ -2,7 +2,7 @@
 <script>
 	window.addEventListener('load', function () {
 		if (<%=request.getParameter("success") != null%>) {
-			alert('이메일 전송을 성공했습니다');
+			alert('이메일 전송을 성공했습니다.');
 			history.replaceState({}, null, location.pathname);
 		}
 		document.querySelector('.reset-pw-form').addEventListener('submit', function () {
@@ -10,12 +10,12 @@
 			var authNum = <%=request.getSession().getAttribute("authNum")%>;
 
 			if (authNum == authNumInput.value) {
-				alert('성공!');
+				alert('비밀번호 재설정을 성공했습니다.');
 				<%
 					request.getSession().removeAttribute("authNum");
 				%>
 			} else {
-				alert('인증번호가 다릅니다');
+				alert('인증번호가 다릅니다.');
 				event.preventDefault();
 			}
 		});
@@ -39,6 +39,3 @@
 		<br><br>
 	</div>
 </div>
-	<div class="main">
-	<jsp:include page="/template/sessionView.jsp"></jsp:include>
-	</div>
