@@ -16,7 +16,7 @@ create sequence board_seq;
 -- 필수 구문
 insert into board values(0, '전체게시판', 0 , null); --꼭 등록하셔야 상위게시판이 정상적으로 들어갑니다.
 
--- 초기 데이터
+-- 초기 데이터(NEXTVAL)
 Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'커뮤니티',1,0);
 Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'공지사항',1,1);
 Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'홍보게시판',1,1);
