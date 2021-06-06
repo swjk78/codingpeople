@@ -256,12 +256,16 @@ float:left;
 			
 			<%for(BoardDto boardDtoSuper : boardSuperList){%>
 				<ul class ="a-text-decoration aside-board">
-				<li class="boardSuper aside-board"><a href="board/postListTest.jsp?boardGroup=<%=boardDtoSuper.getBoardNo() %>" class = underline><%=boardDtoSuper.getBoardName()%></a>
+				<li class="boardSuper aside-board"><a href="board/postList.jsp?boardGroup=<%=boardDtoSuper.getBoardNo() %>" class = underline><%=boardDtoSuper.getBoardName()%></a>
 
 						<ul class ="a-text-decoration aside-board">
 							<%List<BoardDto> boardSubList =  boardDao.showListBoardSub(boardDtoSuper.getBoardNo()); %>
 							<%for(BoardDto boardDtoSub : boardSubList){%>
-							<li class="boardSub aside-board"><a href="<%=root%>/board/postList.jsp?boardNo=<%=boardDtoSub.getBoardNo()%>" class = "underline aside-sublist-font-size"><%=boardDtoSub.getBoardName()%></a></li>
+							<li class="boardSub aside-board"><a href="<%=root%>
+							/board/postList.jsp?boardGroup=<%=boardDtoSuper.getBoardNo()%>
+							&boardNo=<%=boardDtoSub.getBoardNo()%>" class = "underline aside-sublist-font-size">
+							<%=boardDtoSub.getBoardName()%></a>
+							</li>
 							<%} %>
 						</ul>
 					</li>
