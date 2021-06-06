@@ -256,7 +256,7 @@ float:left;
 			
 			<%for(BoardDto boardDtoSuper : boardSuperList){%>
 				<ul class ="a-text-decoration aside-board">
-				<li class="boardSuper aside-board"><a href="board/postList.jsp?boardGroup=<%=boardDtoSuper.getBoardNo() %>" class = underline><%=boardDtoSuper.getBoardName()%></a>
+				<li class="boardSuper aside-board"><a href="<%=root%>/board/postList.jsp?boardGroup=<%=boardDtoSuper.getBoardNo() %>" class = underline><%=boardDtoSuper.getBoardName()%></a>
 
 						<ul class ="a-text-decoration aside-board">
 							<%List<BoardDto> boardSubList =  boardDao.showListBoardSub(boardDtoSuper.getBoardNo()); %>
