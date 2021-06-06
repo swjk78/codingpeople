@@ -50,7 +50,7 @@
 		<div class="">
 			<div class="manage-center">
 				<div class="container-1000 border">
-					<h2 class="text-center">관리센터(버튼스타일 고칠예정!)</h2>
+					<h2 class="text-center">관리센터</h2>
 		
 						<table class="table table-border text-center">
 							<tr>
@@ -59,16 +59,7 @@
 									<canvas id="ageChart" ></canvas>
 								</div>
 									<script>
-// 									var boardSuperNames = [];
-<%-- 									<%for(int i=0; i<boardSuperList.size(); i++){%> --%>
-<%-- 									boardSuperNames[<%=i%>] = '<%=boardSuperList.get(i).getBoardName()%>'; --%>
-<%-- 									<%}%> --%>
-									
-// 									var countUnderpostArray =[];
-<%-- 									<%for(int i=0; i<countUnderpostList.size(); i++){%> --%>
-<%-- 									countUnderpostArray[<%=i%>] = <%=countUnderpostList.get(i)%>; // 배열을 복사합니다. --%>
-<%-- 									<%}%>	 --%>
-									
+						
 									var teenNames=[];
 									<%for(int i=0; i<ageRangeList.size(); i++){%>
 									teenNames[<%=i%>] = '<%=ageRangeList.get(i).getTeen()%>';

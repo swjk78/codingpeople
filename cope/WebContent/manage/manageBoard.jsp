@@ -50,7 +50,7 @@ function returnBoardInfo(boardNo, boardName, isSuper){
 		}
 		else{//"(상위게시판)", "(하위게시판)"을 선택한 경우 빈칸 출력
 			for(var i=0; i<inputBoardNo.length; i++){ 
-				inputBoardNo[i].setAttribute('value', "");
+				inputBoard No[i].setAttribute('value', "");
 				inputBoardName[i].setAttribute('value', "");
 				}
 		}
