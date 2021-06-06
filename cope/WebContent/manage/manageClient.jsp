@@ -250,15 +250,15 @@
 				<div class="float-left">
 					<a class="order" id="client_no">
 					가입순
-		<%-- 			<img class="UDarrow" src="<%=root %>/image/UDarrow.png"> --%>
+
 					</a>
 					<a class="order" id="client_id">
 					아이디순
-		<%-- 			<img class="UDarrow" src="<%=root %>/image/UDarrow.png"> --%>
+
 					</a>
 					<a class="order" id="client_nick">
 					닉네임순
-		<%-- 			<img class="UDarrow" src="<%=root %>/image/UDarrow.png"> --%>
+
 					</a>
 				</div>
 		
