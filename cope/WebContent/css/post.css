@@ -211,6 +211,15 @@
 	margin-right: auto;
 }
 
+.form-comments-textarea{
+	width: 100%;
+	min-height: 150px;
+	border : 2px solid #E2E3ED;
+	font-size:15px;
+	resize: none;
+	outline-color:#9A9EC2;	
+}
+
 .subName-td{
 	width: 150px;
 }
@@ -322,3 +331,19 @@
 .post-contents-input-div textarea:focus{
 	
 }
+
+
+/* 이전글 다음글*/
+
+.move-side-div{
+	width:800px;
+	margin-left: auto;
+	margin-right: auto;
+} 
+
+.move-side{
+	width:80%;
+	color:#9A9EC2;
+}
+
+.move-side> a
