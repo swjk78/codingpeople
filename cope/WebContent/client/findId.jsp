@@ -12,7 +12,7 @@
 	}
 
 	.loading-modal > .loading-icon {
-		width: 400px;
+		width: 300px;
 		height: 300px;
 		position: fixed;
 		top: 50%;
@@ -48,7 +48,7 @@
 		</form>
 		<br><br>
 		<div class="loading-modal">
-				<img src="<%=request.getContextPath()%>/image/mailSend.gif" class="loading-icon">
+				<img src="<%=request.getContextPath()%>/image/sendMail.png" class="loading-icon">
 		</div>
 	</div>
 </div>
