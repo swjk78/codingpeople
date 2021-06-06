@@ -22,7 +22,7 @@
 	<div class="welcome-div">
 		<div class="welcome-div massage">
 		<br><br>
- 			<h1>코딩 피플에 오신 것을 환영합니다.</h1>
+ 			<h1>코딩 피플에 오신 것을 환영합니다</h1>
  		</div>
  		 <br>
  		<div class="welcome-div image">
