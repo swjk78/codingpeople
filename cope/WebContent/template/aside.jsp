@@ -222,12 +222,12 @@ float:left;
 				<a href = "<%=request.getContextPath()%>/client/join.jsp" class = "underline font-join">회원가입</a><br>
 				</div>
 				</div>
-					<%}else{//로그인 상태
-						if(isSuper){//관리자 로그인%>
+					<%}else{//로그인 상태%>
 						<br><br>
-								<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" >
-								<br><br>
-		<p class = button-padding><strong>관리자님 환영합니다.</strong><p>
+						<a href = "<%=root %>/client/profile.jsp?clientNo=<%=clientNo%>">
+						<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" ></a>
+						<%if(isSuper){//관리자 로그인%>
+						<p class = button-padding><strong>관리자님 환영합니다.</strong><p>
 				<a href = "<%=root%>/manage/manageCenter.jsp">
 		<button id = AdminloginButton value = "adminLogin" class = "loginButton test aside-border font-weight" style = cursor:pointer >관리메뉴</button>
 		</a>
@@ -237,11 +237,6 @@ float:left;
 
 				<%}else{//로그인 상태면서 관리자가 아닌경우, 즉 일반 회원 일 때 %>
 				<br><br>
-					
-						<a href = "<%=root %>/client/profile.jsp?clientNo=<%=clientNo%>">
-						<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" ></a>
-					
-				<br><br><br>
 
 				<!--  일반회원 이름-->
 						<div class = "nameOver button-padding pre-wrap" ><strong><%=clientDto.getClientNick()%></strong></div>
