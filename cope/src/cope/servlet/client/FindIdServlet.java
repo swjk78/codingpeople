@@ -35,7 +35,7 @@ public class FindIdServlet extends HttpServlet {
 				
 				sendEmail.send();
 				
-				resp.sendRedirect("loginTest.jsp?success");
+				resp.sendRedirect("login.jsp?success");
 			}
 			// 일치하는 이메일이 없는 경우
 			else {

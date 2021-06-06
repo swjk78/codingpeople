@@ -13,8 +13,8 @@ import cope.beans.client.ClientDto;
 
 // 활동정지된 회원의 로그인 방지를 위한 테스트 로그인 서블릿
 // create by JK
-@WebServlet(urlPatterns = "/client/loginTest.kh")
-public class ClientLoginTestServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/client/login.kh")
+public class ClientLoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -26,11 +26,10 @@ public class ClientLoginTestServlet extends HttpServlet {
 			ClientDao clientDao = new ClientDao();
 			ClientDto find = clientDao.login(clientDto);
 			if (find == null) {
-				resp.sendRedirect("loginTest.jsp?error");
+				resp.sendRedirect("login.jsp?notFound");
 			}
 			else if (find.getClientUnlockDate() != null) {
-				req.getSession().setAttribute("unlockDate", find.getClientUnlockDateString());
-				resp.sendRedirect("loginTest.jsp");
+				resp.sendRedirect("login.jsp?unlockDate=" + find.getClientUnlockDateString());
 			}
 			else {
 				req.getSession().setAttribute("clientNo", find.getClientNo());
