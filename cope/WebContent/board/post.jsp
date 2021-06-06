@@ -364,12 +364,11 @@
 							<input type="hidden"  name="boardGroup" value=<%=boardGroup %>>
 							<input type="hidden"  name="postNo" value="<%=postNo%>">
 							<input type="hidden"  name=isNew value="F">
-							<div class="commentsEditDiv form-comments dd-border commentsEditDiv-<%=commentsViewDto.getCommentsNo()%> dd-border" contenteditable="true"  oninput="copytextEdit(<%=commentsViewDto.getCommentsNo()%>);">
-							<%=commentsViewDto.getCommentsContents() %>
-							</div>
-							<textarea class="commentsEditTextarea commentsEditTextarea-<%=commentsViewDto.getCommentsNo()%>" name="commentsContents"  style="display: none">
-							<%=commentsViewDto.getCommentsContents() %>
-							</textarea>
+							<textarea class="commentsEditDiv form-comments commentsEditTextarea dd-border form-comments-textarea commentsEditTextarea-<%=commentsViewDto.getCommentsNo()%>"  style="width:100%;" 
+							name="commentsContents" ><%=commentsViewDto.getCommentsContents() %></textarea>
+<%-- 							<div class="commentsEditDiv form-comments dd-border commentsEditDiv-<%=commentsViewDto.getCommentsNo()%> dd-border" contenteditable="true"  oninput="copytextEdit(<%=commentsViewDto.getCommentsNo()%>);"> --%>
+<%-- 							<%=commentsViewDto.getCommentsContents() %> --%>
+<!-- 							</div> -->
 							<input class="form-btn form-btn-normal"  type="submit" value="수정">
 						</form>
 					</div>
@@ -455,9 +454,8 @@
 					<input type="hidden"  name=postNo value=<%=postNo %>>
 					<input type="hidden"  name=boardGroup value=<%=boardGroup %>>
 					<input type="hidden"  name=isNew value="T">
-					<div class="commentsNewDiv border form-comments" contenteditable="true"  oninput="copytextNew();"></div>
+					<textarea class="form-comments commentsNewDiv border form-comments-textarea"  style="width:100%;"name="commentsContents" ></textarea>
 					<input class="form-btn form-btn-normal"  type="submit" value="작성">
-					<textarea class="commentsNewTextarea" name="commentsContents" style="display: none;"></textarea>
 				</form>
 			</div>
 		</div>
@@ -466,26 +464,30 @@
 	<!-- 댓글작성끝-->
 	
 	<!-- 이전글/다음글 영역 -->
-	<div class="row text-left">
-		다음글 : 
-		<% if (nextPostDto == null) {%>
-		다음글이 없습니다.
-		<% } else {%>
-		<a href="post.jsp?boardGroup=<%=boardGroup%>&postNo=<%=nextPostDto.getPostNo()%>">
-			<%=nextPostDto.getPostTitle()%>
-		</a>
-		<% }%>
+	<div class="move-side-div">
+		<div class="move-side row text-left">
+			다음글 : 
+			<% if (nextPostDto == null) {%>
+			다음글이 없습니다.
+			<% } else {%>
+			<a href="post.jsp?boardGroup=<%=boardGroup%>&postNo=<%=nextPostDto.getPostNo()%>">
+				<%=nextPostDto.getPostTitle()%>
+			</a>
+			<% }%>
+		</div>
+		<div class="move-side row text-left">
+			이전글 : 
+			<% if (prevPostDto == null) {%>
+			이전글이 없습니다.
+			<% } else {%>
+			<a href="post.jsp?boardGroup=<%=boardGroup%>&postNo=<%=prevPostDto.getPostNo()%>">
+				<%=prevPostDto.getPostTitle()%>
+			</a>
+			<% }%>
+		</div>	
 	</div>
-	<div class="row text-left">
-		이전글 : 
-		<% if (prevPostDto == null) {%>
-		이전글이 없습니다.
-		<% } else {%>
-		<a href="post.jsp?boardGroup=<%=boardGroup%>&postNo=<%=prevPostDto.getPostNo()%>">
-			<%=prevPostDto.getPostTitle()%>
-		</a>
-		<% }%>
-	</div>
+
+
 	<!-- 이전글/다음글 영역 끝 -->
 </body>
 </html>
