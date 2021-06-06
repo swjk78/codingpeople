@@ -265,9 +265,8 @@ a.manage, a.manage:VISITED{
 
 /*  위치 조정 값 (position -manage해당jsp)*/
 .position-center{
-	border:solid 4px;
 	padding-top: 100px;
-		padding-left: 60px;
+	padding-left: 60px;
 }
 
 .main-board{
