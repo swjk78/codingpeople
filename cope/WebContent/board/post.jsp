@@ -73,8 +73,6 @@
 	padding: 5px;
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title></title>
-
 <script>
 	window.addEventListener('load', function() {
 		// 중복 추천 방지

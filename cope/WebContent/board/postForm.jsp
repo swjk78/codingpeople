@@ -21,7 +21,6 @@
 	padding: 5px;
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title></title>
 <%
 	BoardDao boardDao = new BoardDao();
 	int boardGroup = Integer.parseInt(request.getParameter("boardGroup"));

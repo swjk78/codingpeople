@@ -3,7 +3,6 @@
     <!DOCTYPE html>
     <html>
 		<link rel = "stylesheet" type = "text/css" href = "<%=request.getContextPath()%>/css/miniFooter.css">
-		    <script src="https://code.jquery.com/jquery-latest.js"></script> 
     <style>
    
     .width-auto{
