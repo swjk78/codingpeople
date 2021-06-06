@@ -23,7 +23,8 @@
 </script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/client.css">
 <jsp:include page="/template/aside.jsp"></jsp:include>
-<div class="main">
+<div class = float-left>
+<div class="main-margin-exit">
 	<div class="container-600 border">
 		<div class="row"><h2 class="text-center">비밀번호 재설정</h2></div>
 		<form action="resetPw.kh" method="POST" class="reset-pw-form">
@@ -39,3 +40,5 @@
 		<br><br>
 	</div>
 </div>
+</div>
+<jsp:include page="/template/footer.jsp"></jsp:include>
