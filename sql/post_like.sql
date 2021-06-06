@@ -8,3 +8,4 @@ post_like_post_no number(19) references post(post_no) on delete cascade,
 post_like_date date default sysdate not null,
 primary key(post_like_client_no, post_like_post_no)
 );
+

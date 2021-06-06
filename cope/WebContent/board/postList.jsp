@@ -374,7 +374,7 @@
 			</tbody>
 		</table>
 			
-			<%-- 	<a href="postList.jsp?boardGroup=<%=boardGroup%>">목록</a> --%>
+			
 			<div class="bottom-write">
 			<%if (request.getSession().getAttribute("clientNo") != null) {%>
 				

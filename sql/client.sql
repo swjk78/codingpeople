@@ -17,8 +17,8 @@ client_unlock_date date
 -- 회원 시퀀스
 create sequence client_seq;
 
---초기 데이터
-insert into client values(client_seq.nextval, 'admin', 'admin', 'aaaa1111@naver.com', '광개토대왕', 1950, 'super', null);
+-- 초기 데이터
+insert into client values(client_seq.nextval, 'superadmin', 'superadmin', 'aaaa1111@naver.com', '광개토대왕', 1950, 'super', null); --관리자
 insert into client values(client_seq.nextval, 'bbbb2222', 'bbbb2222', 'bbbb2222@naver.com', '세종대왕', 1952, 'normal', null);
 insert into client values(client_seq.nextval, 'cccc3333', 'cccc3333', 'cccc3333@naver.com', '소수림왕', 1959, 'normal', null);
 insert into client values(client_seq.nextval, 'dddd4444', 'dddd4444', 'dddd4444@naver.com', '이완용', 1961, 'normal', null);

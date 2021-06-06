@@ -43,7 +43,6 @@
 		int randomInt= (seed/no)%1000000;
 		
 		BoardDao boardDao = new BoardDao();
-// 		List<BoardDto>boardSuperList = boardDao.showListBoardSuper();
 		List<BoardChartDto>countWritenpostList = new ArrayList<>();
 		countWritenpostList = boardDao.countWritenPosts(clientNo);
 %>
@@ -170,14 +169,10 @@
 </tbody>
 </table>
 
-<br><br><br>
+<br><br>
 </div>
 </div>
 		
-<div class="main">
-		세션번호<%=session.getAttribute("clientNo") %> 
-</div>
-
 </body>
 <%} %>
 </html>

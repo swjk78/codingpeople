@@ -93,55 +93,53 @@ width:49%;
 </style>
 
 <script>
-//function password(){
-//var target = document.querySelector("input[name=ClientPw]");
-// 		target.type = "password";
-// 	}
-	window.addEventListener('load', function() {
-		var errorCheck = '<%=request.getSession().getAttribute("errorCheck")%>';
-		if (errorCheck == 'notFound' ) {
-			alert('존재하지 않는 계정입니다');
-			<%request.getSession().removeAttribute("errorCheck");%>
-		}
-	});
+window.addEventListener('load', function() {
+	if (<%=request.getParameter("notFound") != null%>) {
+		alert('입력한 정보에 해당하는 계정이 없습니다.');
+		history.replaceState({}, null, location.pathname);
+	}
+	if (<%=request.getParameter("success") != null%>) {
+		alert('이메일 전송을 성공했습니다.');
+		history.replaceState({}, null, location.pathname);
+	}
+	if (<%=request.getParameter("unlockDate") != null%>) {
+		alert('활동정지당한 계정입니다\n' + '정지해제 날짜: ' + request.getParameter("unlockDate"));
+		history.replaceState({}, null, location.pathname);
+	}
+});
 </script>
 
 </head>
 <body>
 <div class= "cope-login">
-<div class="container-400">
-	<div class="row text-center">
-		<div class="cope-logo">
-			<span><a onclick="location.href='<%=request.getContextPath()%>/index.jsp'"><img class="image image-logo" alt="cope" src="/cope/image/example.png" width="350" height="150"></a></span>
-</div>
-</div>
-	<form action = "login.kh" method = "post">
-	<div class="row">
-	<input type = "text" name = "clientId" placeholder="아이디" required class="form-input id-intput">
-	</div>
-	<div class="row">
-	<input type = "password" name = "clientPw" placeholder="비밀번호" required class="form-input pw-input">	
-	</div>
-	<div class="row">
-	<input type = "submit" value ="로그인" class="form-btn btn-submit">
-	</div>
-	</form>
-	<hr>
-	<div class="row">
-	<input type="button" value="회원가입" class="form-btn btn-normal" onclick="location.href='<%=request.getContextPath()%>/join.jsp'">
-	</div>
+	<div class="container-400">
+		<div class="row text-center">
+			<div class="cope-logo">
+				<span><a onclick="location.href='<%=request.getContextPath()%>/index.jsp'"><img class="image image-logo" alt="cope" src="/cope/image/example.png" width="350" height="150"></a></span>
+			</div>
 		</div>
-			<%if(request.getParameter("error") != null){ %>
-	<div class="row">
-		<h5 class="error">정보가 일치하지 않습니다</h5>
+		<form action = "login.kh" method = "post">
+			<div class="row">
+				<input type = "text" name = "clientId" placeholder="아이디" required class="form-input id-intput">
+			</div>
+			<div class="row">
+				<input type = "password" name = "clientPw" placeholder="비밀번호" required class="form-input pw-input">	
+			</div>
+			<div class="row">
+				<input type = "submit" value ="로그인" class="form-btn btn-submit">
+			</div>
+		</form>
+		<hr>
+		<div class="row">
+			<input type="button" value="회원가입" class="form-btn btn-normal"
+			onclick="location.href='<%=request.getContextPath()%>/client/join.jsp'">
+		</div>
 	</div>
-	<%} %>
-	
 	<div class="row">
 		<a href="<%=request.getContextPath()%>/client/findId.jsp"><input type= "button" value="아이디 찾기" class= "id-find"></a>
 		<a href="<%=request.getContextPath()%>/client/findPw.jsp"><input type= "button" value="비밀번호 찾기" class= "pw-find" ></a>
 	</div>
-	</div>
+</div>
 
 <jsp:include page="/template/miniFooter.jsp"></jsp:include>
 
