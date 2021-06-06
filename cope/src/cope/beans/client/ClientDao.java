@@ -395,4 +395,25 @@ public class ClientDao {
 
 		return clientNick;
 	}
+	
+	// 회원번호로 회원 등급을 찾는 기능
+	public String findClientGrade(int clientNo) {
+		String sql = "select client_grade from client where client_no = ?";
+		
+		String clientGrade = null;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					clientGrade = rs.getString(1);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return clientGrade;
+	}
 }
