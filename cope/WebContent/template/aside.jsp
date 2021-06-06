@@ -16,6 +16,12 @@ boolean isSuper=false;
 		ClientDao clientDao = new  ClientDao();
 		isSuper =  clientDao.isSuper(clientNo)==true;
 		System.out.println("isSuper" + isSuper);
+		
+		ClientDto clientDto = clientDao.findClient(clientNo);
+		if (clientDto.getClientUnlockDate() != null) {
+			request.getSession().setAttribute("unlockDate", clientDto.getClientUnlockDate());
+			request.getSession().removeAttribute("clientNo");
+		}
 	}
 %>
 
@@ -53,7 +59,10 @@ randomInt= (seed/no)%1000000;
 function logout(){
 	location.href="/client/logout.kh"
 }
-	
+	if (<%=request.getSession().getAttribute("unlockDate") != null%>) {
+		alert('활동정지당한 계정입니다\n' + '정지해제 날짜: ' + '<%=request.getSession().getAttribute("unlockDate")%>');
+		<%request.getSession().removeAttribute("unlockDate");%>
+	}
 </script>
 
 <head>

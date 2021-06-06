@@ -416,4 +416,26 @@ public class ClientDao {
 		
 		return clientGrade;
 	}
+	
+	// 회원정지 및 로그아웃을 위한 단일조회
+	public ClientDto findClient(int clientNo) {
+		String sql = "select client_unlock_date from client where client_no = ?";
+		
+		ClientDto clientDto = null;
+		
+		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, clientNo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					clientDto = new ClientDto();
+					clientDto.setClientUnlockDateRefresh(rs.getDate(1));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return clientDto;
+	}
 }

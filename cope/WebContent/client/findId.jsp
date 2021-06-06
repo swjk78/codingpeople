@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <style>
 	.loading-modal {
 		position: fixed;
@@ -35,8 +36,8 @@
 		});
 	});
 </script>
-<jsp:include page="/template/aside.jsp"></jsp:include>
-<div class="main">
+<div class = float-left>
+<div class="main-margin-exit">
 	<div class="container-600 border">
 		<div class="row"><h2 class="text-center">아이디 찾기</h2></div>
 		<form action="findId.kh" method="POST" class="find-id-form">
@@ -51,3 +52,5 @@
 		</div>
 	</div>
 </div>
+</div>
+<jsp:include page="/template/footer.jsp"></jsp:include>
