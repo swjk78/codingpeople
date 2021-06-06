@@ -5,7 +5,6 @@
 <link rel = "stylesheet" type = "text/css" href ="<%=request.getContextPath() %>/css/footer.css">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 
 <div class ="footer float-left">
