@@ -118,6 +118,7 @@
 %>
 
 <!DOCTYPE html>
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -128,12 +129,24 @@
 
 <!-- 임시 스타일링 -->
 <style>
-		*{ 
+/* 		*{ 
 		font-family:"Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
 		color:rgb(78, 78, 78);
-		font-size:13px;
+		font-size:13px; */
 		 
+		 .postlist-position{ 
+		font-family:"Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
+		color:rgb(78, 78, 78);
+		font-size:13px;		 
+		
  	} 
+		a.postlist-white, a.postlist-white:VISITED{
+		color:white;
+		}
+		a.postlist-black, a.postlist-black:VISITED{
+		color:black;
+		}
+ 	
 	h1{
 		text-align:center;
 		margin-top:5%;
@@ -215,6 +228,13 @@
 		font-style:italic;
 	}
 	
+	.postlist-margin-bottom{
+	margin-bottom: 10px;
+	}
+	.postlist-float-padding{
+	padding-left: 110px;
+	padding-top: 30px;
+	}
 </style>
 
 <%if (isSearch) {%>
@@ -290,27 +310,29 @@
 
 </head>
 <body>
+<div class = "float-left postlist-position postlist-float-padding">
 	<div class="container-800">
-		<h1><a href="<%=root%>/board/postList.jsp?boardGroup=<%=boardGroup%>">
+		<h1><a href="<%=root%>/board/postList.jsp?boardGroup=<%=boardGroup%>" class = postlist-black>
 		<%=boardGroupName%></a></h1>
 		
 		<!-- 하위 게시판 선택 링크 -->
+		<div class = postlist-margin-bottom>
 		<%for (BoardDto boardDto : subBoardList) {%>
 			<a href="<%=root%>/board/postList.jsp?boardGroup=<%=boardGroup%>
-			&boardNo=<%=boardDto.getBoardNo()%>&pageSize=<%=pageSize%>">
+			&boardNo=<%=boardDto.getBoardNo()%>&pageSize=<%=pageSize%>" class = "postlist-black">
 			<%=boardDto.getBoardName()%></a>
 		<%} %>
-		
+		</div>
 		<!-- 정렬 링크 -->
 		<div class="top-menu float-container">
 			<div class="float-left">
-				<a class="order" id="post_date">
+				<a class="order postlist-white" id="post_date" style = cursor:pointer;>
 				작성순
 				</a>
-				<a class="order" id="post_view_count">
+				<a class="order postlist-white" id="post_view_count" style = cursor:pointer;>
 				조회순
 				</a>
-				<a class="order" id="post_like_count">
+				<a class="order postlist-white" id="post_like_count" style = cursor:pointer;>
 				추천순
 				</a>
 			</div>
@@ -343,10 +365,10 @@
 					<td class="td-line">
 					<% if(postListDto.getPostBlind() == 'F') {%>
 						<a href="<%=root%>/board/postList.jsp?boardGroup=<%=boardGroup%>
-						&boardNo=<%=postListDto.getPostBoardNo()%>">
-						[<%=postListDto.getBoardName()%>]</a>
+						&boardNo=<%=postListDto.getPostBoardNo()%>" class = postlist-black >
+						[<%=postListDto.getBoardName()%>] </a>
 						<a href="post.jsp?boardGroup=<%=boardGroup%>
-						&postNo=<%=postListDto.getPostNo()%>">
+						&postNo=<%=postListDto.getPostNo()%>" class = postlist-black>
 						<%=postListDto.getPostTitle()%></a>
 						<%if (postListDto.getPostCommentsCount()>0) {%>						
 						[<%=postListDto.getPostCommentsCount()%>]
@@ -357,7 +379,7 @@
 					</td>
 					<td class="td-line">
 						<a href="<%=request.getContextPath()%>/client/profile.jsp?clientNo=
-						<%=postListDto.getPostClientNo()%>"><%=postListDto.getClientNick() %>
+						<%=postListDto.getPostClientNo()%>" class = postlist-black><%=postListDto.getClientNick() %>
 						</a>
 					</td>
 					<% boolean isToday = dateUtils.isToday(postListDto.getPostDate()) == true; %>
@@ -416,8 +438,10 @@
 				<option value="client_nick">글쓴이</option>
 			</select>
 			<input type="text" name="searchKeyword" placeholder="검색어" class="select-input">	
-			<input type="submit" value="검색" class="select-btn">
+			<input type="submit" value="검색" class="select-btn" style = cursor:pointer>
 		</form>
+	</div>
 	</div>
 </body>
 </html>
+<jsp:include page="/template/footer.jsp"></jsp:include>
