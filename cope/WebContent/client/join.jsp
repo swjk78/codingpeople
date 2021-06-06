@@ -22,7 +22,6 @@
 			<div class = "row text-left">
 				<label for = "clientId">아이디</label>
 				<input type = "text" name="clientId" id = "clientId" required class = "form-input form-input-underline" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
-				<button class = "form-btn form-btn-normal " onclick = "">ID중복확인</button>
 					<span class = "fail">아이디 형식이 올바르지 않습니다</span>
 					<span class = "success">올바른 형식의 아이디입니다</span>
 			</div>
@@ -49,7 +48,7 @@
 				<label for = "clientNick">닉네임</label>
 				<input type = "text" name="clientNick" id = "clientNick" required class= "form-input form-input-underline"
 							placeholder = "한 글자 이상, 형식 제한 없음 ">
-							<span class = "fail">닉네임은 한글자 이상이어야 합니다</span>
+							<span class = "fail">닉네임은 최소 한 글자 이상, 최대 열 글자 까지입니다</span>
 							<span class = "success">멋진 닉네임입니다.</span>
 			</div>
 	
