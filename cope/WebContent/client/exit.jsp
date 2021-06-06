@@ -76,4 +76,4 @@
 	</div>
 </body>
 </html>
-<jsp:include page="/template/miniFooter.jsp"></jsp:include>
+<jsp:include page="/template/footer.jsp"></jsp:include>
