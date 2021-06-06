@@ -377,7 +377,7 @@ top:0;
 					<th class="th-line">글쓴이</th>				
 					<th class="th-line">작성일</th>
 					<th class="th-line">조회수</th>
-					<th class="th-line">좋아요</th>
+					<th class="th-line">추천수</th>
 				</tr>
 			</thead>
 			<tbody>
