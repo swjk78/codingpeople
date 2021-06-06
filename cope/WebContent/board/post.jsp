@@ -410,7 +410,7 @@
 						<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
 					</td>
 					<td>
-						<a class="writer-name" href="<%=root%>/client/profile.jsp?clientNo=<%=postDto.getPostClientNo()%>">
+						<a class="writer-name" href="<%=root%>/client/profile.jsp?clientNo=<%=clientNo%>">
 						<%=loginNick%></a>
 					</td>
 				</tr>
