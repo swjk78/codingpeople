@@ -26,7 +26,7 @@ public class ClientChangePwServlet extends HttpServlet {
 			boolean result = clientDao.chgPw(clientNo, originPw, chgPw);
 					
 			if(result) {
-				resp.sendRedirect("profile.jsp");
+				resp.sendRedirect("profile.jsp?clientNo=" + clientNo);
 
 			}
 			else {
