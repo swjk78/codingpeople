@@ -6,7 +6,7 @@
 	box-sizing을 설정
 */
 * {
-	font-family: Neo Sans Pro, sans-serif;
+ 	font-family: 'NanumSquare', sans-serif;
 	box-sizing: border-box;
 }
 

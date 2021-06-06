@@ -202,3 +202,29 @@
 .table-card td{
 	border: 7.5px solid white;
 }
+
+/*위치 조정 값 -바꿀속성-바꿀jsp  */
+.main-margin-editinfo{
+	position: relative;
+    width: 1000px;
+    padding-top: 80px;
+    padding-left:20px;
+}
+.main-margin-exit{
+	position: relative;
+    width: 1000px;
+    padding-top: 200px;
+    padding-left:20px;
+}
+.main-margin-exitsuccess{
+	position: left;
+    width: 1000px;
+    padding-top: 40px;
+    padding-left:20px;
+    padding-bottom: 40px;
+}
+
+/*글꼴 초기화 태그*/
+	.pw-font{
+	 font-family : "맑은 고딕", "돋움", sans-serif; 
+	}

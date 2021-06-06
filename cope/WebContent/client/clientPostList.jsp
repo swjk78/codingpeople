@@ -6,7 +6,7 @@
 <%@page import="cope.beans.utils.DateUtils"%>
 <%@page import="cope.beans.post.PostListDto"%>
 <%@page import="java.util.List"%>
-<%@page import="cope.beans.post.PostListDao"%>
+<%@page import="cope.beans.post.PostListDao"%>	
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -138,23 +138,17 @@
 %>
 
 <!DOCTYPE html>
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/common.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/join.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/layout.css">
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/client.css">
 
 <!-- 임시 스타일링 -->
 
 <style>
-	*{ 
-		font-family:"Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
-		color:rgb(78, 78, 78);
-		font-size:13px;
-		 
- 	} 
+
 	h1{
 		text-align:center;
 		margin-top:5%;
@@ -164,7 +158,7 @@
 		font-size:28px;
 	}
 	
-	a {
+	a {		color:rgb(78, 78, 78);
 		text-decoration: none;
 		
 	}
@@ -174,6 +168,7 @@
 	}
 	
 	.table{
+	width:100%;
 		border-top:1px solid rgb(78, 78, 78);
 /* 		font-size:13px; */
 		font-color:black;
@@ -223,6 +218,40 @@
 		text-decoration:line-through;
 		font-style:italic;
 	}
+	
+	    float 스타일(다단 레이아웃)
+*/
+.float-container-postlist::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.float-container-postlist > .left {
+	float: left;
+}
+.float-container-postlist > .right {
+	float: right;
+}
+
+.position-pag{
+margin-top : 400px;
+padding-top = 300px;
+bottom:0px;
+}
+.test-border{
+border:10px solid;
+}
+.border-thin{
+border: thin;
+top:0;
+}
+
+.container-800-postlist{
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
 </style>
 
 <%if (isSearch) {%>
@@ -299,19 +328,22 @@
 
 <title>Insert title here</title>
 </head>
-<body>
-	<div class="container-800">
+<body class = left>
+	<div class="container-800-postlist">
 		<h1><a href="clientPostList.jsp?clientNo=<%=clientNo%>">
 		<%=clientDao.findClientNick(clientNo)%>의 작성한 글 목록</a></h1>
 		
 		<!-- 상위 게시판 선택 링크 -->
-		<%for (BoardDto boardDto : superBoardList) {%>
-			<a href="clientPostList.jsp?clientNo=<%=clientNo%>&boardGroup=<%=boardDto.getBoardNo()%>
-			&pageSize=<%=pageSize%>">
-			<%=boardDto.getBoardName()%></a>	
-		<%} %>
+					<select class = "border-thin top-menu">
+							<%for (BoardDto boardDto : superBoardList) {%>
+		    				clientPostList.jsp?clientNo=<%=clientNo%>&boardGroup=<%=boardDto.getBoardNo()%>
+							&pageSize=<%=pageSize%>
+					<option><%=boardDto.getBoardName()%></option>	
+								<%} %>
+		</select>
+		
 		<!-- 정렬 링크 -->
-		<div class="float-container top-menu">
+		<div class="float-container-postlist top-menu">
 			<div class="float-left">
 				<a class="order" id="post_date">
 				작성순
@@ -387,6 +419,7 @@
 			</tbody>
 		</table>
 		
+		<div class= "position-pag">
 		<div class="pagination">
 			<% if (startBlock > 1) {%>
 			<a class="move-link">&lt;&lt;</a>
@@ -425,5 +458,7 @@
 			<input type="submit" value="검색" class="select-btn">
 		</form>
 	</div>
+	</div>
 </body>
 </html>
+		<jsp:include page="/template/footer.jsp"></jsp:include>	

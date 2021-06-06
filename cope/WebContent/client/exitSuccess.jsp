@@ -4,7 +4,7 @@
 <%
 //root
 String root = request.getContextPath();%>
-
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -12,8 +12,8 @@ String root = request.getContextPath();%>
 <link rel="stylesheet" type="text/css" href="<%=root%>/css/client.css">
 </head>
 <body>
-<jsp:include page="/template/aside.jsp"></jsp:include>
-<div class="main">
+<div class= float-left>
+<div class="main-margin-exitsuccess">
     <div class = "text-center">
 		<a href= "<%=root%>/index.jsp">
 			<img src="<%=request.getContextPath()%>/image/example.png" class = "containerimg">
@@ -39,6 +39,7 @@ String root = request.getContextPath();%>
 		</div>
 	</div>
 </div>
-
+</div>
 </body>
 </html>
+<jsp:include page="/template/footer.jsp"></jsp:include>
