@@ -17,10 +17,7 @@
  <head>
  <meta charset="UTF-8">
 <link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
 <script>
-
 //하위게시판 보이는 기능(나머지는 숨기고)
 function returnBoardInfo(boardNo, boardName, isSuper){
 			var inputBoardNo = document.getElementsByClassName("boardNo");
@@ -88,17 +85,12 @@ msg = "정말로 삭제하시겠습니까?";
 	}
 }
 
-
-
 //언더라인
 function underline(id){
 	var target = document.querySelector("#"+id);
 	
 }
 </script>
-
-
-
 
 <!-- </head> -->
 <!-- <body> -->

@@ -53,9 +53,7 @@ randomInt= (seed/no)%1000000;
 
 
 <html>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-
 function logout(){
 	location.href="/client/logout.kh"
 }

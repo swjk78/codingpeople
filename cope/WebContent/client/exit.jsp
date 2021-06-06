@@ -15,13 +15,7 @@
 	 font-family : "맑은 고딕", "돋움", sans-serif; 
 	}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-	
-	
-	
-	
-	
  	window.addEventListener("load",function(){
  		var form = document.querySelector(".form")
  		form.addEventListener("submit",function(e){
@@ -34,8 +28,6 @@
  			
  		});
  	});
-
-	
 </script>
 
 </head>

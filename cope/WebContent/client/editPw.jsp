@@ -14,68 +14,56 @@
 	 font-family : "맑은 고딕", "돋움", sans-serif; 
 	}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script>
-		
-		window.addEventListener("load",function(){
-			var form = document.querySelector(".form");
-			form.addEventListener("submit",function(e){
-				
+<script>
+	window.addEventListener("load",function(){
+		var form = document.querySelector(".form");
+		form.addEventListener("submit",function(e){
+			
 // 				var originPw=document.querySelector("input[name=originPw]");
 // 				var regexOriginPw = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 // 				if(!regexOriginPw.test(originPw.value)){
 // 					var originPwSpan = document.querySelector("input[name=originPw]+span");
 // 					chgPwSpan.textContent="비밀번호는 영문: 대문자,소문자 숫자:0~9 특수기호 : !@#$%^&* 을 포함한8~16 자리만 가능합니다";
 // 				}
+			
+			var chgPw = document.querySelector("input[name=chgPw]");
+			var regexChgPw = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+			
+			if(!regexChgPw.test(chgPw.value)){
+				var chgPwSpan = document.querySelector("input[name=chgPw]+span");
+				chgPwSpan.textContent="비밀번호는 영문: 대문자,소문자 숫자:0~9 특수기호 : !@#$%^&* 을 포함한8~16 자리만 가능합니다";
+				chgPwSpan.style.color="red";
+				e.preventDefault();
+				chgPw.select();
 				
-				
-				var chgPw = document.querySelector("input[name=chgPw]");
-				var regexChgPw = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
-				
-				if(!regexChgPw.test(chgPw.value)){
-					var chgPwSpan = document.querySelector("input[name=chgPw]+span");
-					chgPwSpan.textContent="비밀번호는 영문: 대문자,소문자 숫자:0~9 특수기호 : !@#$%^&* 을 포함한8~16 자리만 가능합니다";
-					chgPwSpan.style.color="red";
-					e.preventDefault();
-					chgPw.select();
+			}
+			else{
+				var chgPwSpan = document.querySelector("input[name=chgPw]+span");
+				chgPwSpan.textContent="";
+			}
+			var checkPw = document.querySelector("input[name=checkPw]");
+			
+				if(chgPw.value == checkPw.value){
+					var checkPwSpan = document.querySelector("input[name=checkPw]+span");
+					checkPwSpan.textContent="";
 					
+					var choice = window.confirm("수정하시겠습니까?");
+					if(!choice){
+						e.preventDefault();
+					}
 				}
 				else{
-					var chgPwSpan = document.querySelector("input[name=chgPw]+span");
-					chgPwSpan.textContent="";
+					var checkPwSpan = document.querySelector("input[name=checkPw]+span");
+					checkPwSpan.textContent = "새로운 비밀번호가 일치하지않습니다";
+					checkPwSpan.style.color="red";
+					e.preventDefault();
+					checkPw.select();
+					
 				}
-				var checkPw = document.querySelector("input[name=checkPw]");
-				
-					if(chgPw.value == checkPw.value){
-						var checkPwSpan = document.querySelector("input[name=checkPw]+span");
-						checkPwSpan.textContent="";
-						
-						var choice = window.confirm("수정하시겠습니까?");
-						if(!choice){
-							e.preventDefault();
-						}
-					}
-					else{
-						var checkPwSpan = document.querySelector("input[name=checkPw]+span");
-						checkPwSpan.textContent = "새로운 비밀번호가 일치하지않습니다";
-						checkPwSpan.style.color="red";
-						e.preventDefault();
-						checkPw.select();
-						
-					}
-			 
-			});
+		 
 		});
-		
- 			
-			
-			
-		
-				
-			
-	
-	
-	</script>
+	});
+</script>
 </head>
 <body>
 <div class = float-left>
