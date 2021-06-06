@@ -26,7 +26,7 @@
 	PostDto prevPostDto = postDao.getPrevious(boardGroup, postNo);
 	PostDto nextPostDto = postDao.getNext(boardGroup, postNo);
 	
-	//석현
+	
 	String root= request.getContextPath();
 	boolean isLogin;
 	boolean isSuper= false;
@@ -59,26 +59,14 @@
 	int randomInt= (seed/no)%1000000;
 %>
 
-<%-- <jsp:include page="/template/aside.jsp"></jsp:include> --%>
+
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/post.css">
 
-<!-- 임시 테두리 -->
+
 <style>
-/* 	main, */
-/* 	header, */
-/* 	nav, */
-/* 	section, */
-/* 	article, */
-/* 	aside, */
-/* 	footer, */
-/* 	div, */
-/* 	span, */
-/* 	p, */
-/* 	label { */
-/* 	    border: 1px dotted lightgray; */
-/* 	} */
+
 	.imgRound {
 	border: 1.5px solid #ffffff;
 	border-radius: 50%;
@@ -365,32 +353,13 @@
 							<input type="hidden"  name=isNew value="F">
 							<textarea class="commentsEditDiv form-comments commentsEditTextarea dd-border form-comments-textarea commentsEditTextarea-<%=commentsViewDto.getCommentsNo()%>"  style="width:100%;" 
 							name="commentsContents" ><%=commentsViewDto.getCommentsContents() %></textarea>
-<%-- 							<div class="commentsEditDiv form-comments dd-border commentsEditDiv-<%=commentsViewDto.getCommentsNo()%> dd-border" contenteditable="true"  oninput="copytextEdit(<%=commentsViewDto.getCommentsNo()%>);"> --%>
-<%-- 							<%=commentsViewDto.getCommentsContents() %> --%>
-<!-- 							</div> -->
+
 							<input class="form-btn form-btn-normal"  type="submit" value="수정">
 						</form>
 					</div>
 				</div>
 			</div>
-<%-- 				<div id="commentsEditNo-<%=commentsViewDto.getCommentsNo()%>" style="display:none"> --%>
-<!-- 					<div class="commentsEditBox"> -->
-<!-- 						<div class="writer-info"> -->
-<%-- 						<%=commentsViewDto.getClientNick() %> --%>
-<!-- 						</div> -->
-<!-- 						<div class="edit-comment"> -->
-<!-- 							<form action="commentsForm.kh" method="post"> -->
-<%-- 								<input type="hidden"  name=commentsNo value=<%=commentsViewDto.getCommentsNo()%>> --%>
-<%-- 								<input type="hidden"  name="boardGroup" value=<%=boardGroup %>> --%>
-<%-- 								<input type="hidden"  name="postNo" value="<%=postNo%>"> --%>
-<!-- 								<input type="hidden"  name=isNew value="F"> -->
-<%-- 								<div class="commentsEditDiv form-comments dd-border commentsEditDiv-<%=commentsViewDto.getCommentsNo()%>" contenteditable="true"  oninput="copytextEdit(<%=commentsViewDto.getCommentsNo()%>);"></div> --%>
-<%-- 								<textarea class="commentsEditTextarea commentsEditTextarea-<%=commentsViewDto.getCommentsNo()%>" name="commentsContents"  style="display: none"></textarea> --%>
-<!-- 								<input class="form-btn form-btn-normal"  type="submit" value="수정"> -->
-<!-- 							</form> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+
 		<%} %><!-- 	반복문의 끝... -->
 		</div>
 	</div>
