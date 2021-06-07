@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import cope.beans.client.JdbcUtils;
+import cope.beans.utils.JdbcUtils;
 
 public class LikeDao {
 	
