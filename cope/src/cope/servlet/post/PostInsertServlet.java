@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import cope.beans.post.PostDao;
 import cope.beans.post.PostDto;
 
-@WebServlet(urlPatterns = "/board/postInsert.kh")
+@WebServlet(urlPatterns = "/board/postForm.kh")
 public class PostInsertServlet extends HttpServlet{
 	// 게시물 등록
 	@Override
