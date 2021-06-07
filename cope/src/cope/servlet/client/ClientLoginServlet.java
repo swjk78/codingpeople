@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import cope.beans.client.ClientDao;
 import cope.beans.client.ClientDto;
 
-// 활동정지된 회원의 로그인 방지를 위한 테스트 로그인 서블릿
-// create by JK
 @WebServlet(urlPatterns = "/client/login.kh")
 public class ClientLoginServlet extends HttpServlet {
 	@Override
