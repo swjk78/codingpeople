@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cope.beans.post.PostCodeDao;
+import cope.beans.post.PostCodeDto;
 import cope.beans.post.PostDao;
 import cope.beans.post.PostDto;
 
@@ -27,6 +29,31 @@ public class PostEditServlet extends HttpServlet{
 			
 			PostDao postDao = new PostDao();
 			boolean result = postDao.editPost(postDto);
+			
+			//codeUrl이 있다면
+			if(req.getParameter("codeUrl")!=null) {
+				PostCodeDao postCodeDao = new PostCodeDao();
+				PostCodeDto postCodeDto = new PostCodeDto();
+				
+				int postNo = Integer.parseInt(req.getParameter("postNo"));
+				boolean isExist = postCodeDao.isExist(postNo);
+
+				//이미 입력된 url이 있다면 update
+				if(isExist) {
+					postCodeDto.setCodePostNo(Integer.parseInt(req.getParameter("postNo")));
+					postCodeDto.setCodeUrl(req.getParameter("codeUrl"));
+					
+					postCodeDao.update(postCodeDto);
+					
+				}else {//입력값이 없다면 (!isExist) insert
+					postCodeDto.setCodePostNo(postNo);
+					postCodeDto.setCodeUrl(req.getParameter("codeUrl"));
+					
+					postCodeDao.insert(postCodeDto);
+				}
+			}
+			else {
+			}
 			
 			if (result) {
 				resp.sendRedirect("post.jsp?boardGroup=" + req.getParameter("boardGroup")

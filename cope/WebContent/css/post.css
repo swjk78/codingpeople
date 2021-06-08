@@ -355,6 +355,18 @@ a.writer-info:VISITED, a.writer-name:VISITED{
 	text-decoration:none;
 }
 a{
-	text-decoration:none;
-	
+	text-decoration:none;	
+}
+
+
+.github-gist-div{
+margin-top: 50px;
+width: 800px;
+margin-left: auto;
+margin-right: auto;
+}
+
+.gist-title{
+font-size:15px;
+font-weight: bold;
 }
