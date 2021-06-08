@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-06-08T14:10:22.574Z" agent="5.0 (Windows)" etag="GAJWm_h4j7GJT5_scIkT" version="14.7.6" type="github">
+<mxfile host="app.diagrams.net" modified="2021-06-08T14:12:09.514Z" agent="5.0 (Windows)" etag="GOXHvXp2KJWz_rIuBAzH" version="14.7.6" type="github">
   <diagram id="JOm_St9xGrI6XosQPw2V" name="Page-1">
     <mxGraphModel dx="2169" dy="534" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -28,7 +28,7 @@
         <mxCell id="blwMkycvGweT-16OEjZh-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="blwMkycvGweT-16OEjZh-4" target="blwMkycvGweT-16OEjZh-11" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="blwMkycvGweT-16OEjZh-4" value="&lt;div&gt;로그인 페이지&lt;/div&gt;&lt;div&gt;/client/login.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+        <mxCell id="blwMkycvGweT-16OEjZh-4" value="&lt;div&gt;로그인 페이지&lt;/div&gt;&lt;div&gt;/client/login.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="520" y="755" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="blwMkycvGweT-16OEjZh-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="blwMkycvGweT-16OEjZh-6" target="blwMkycvGweT-16OEjZh-8" edge="1">
@@ -52,13 +52,13 @@
         <mxCell id="blwMkycvGweT-16OEjZh-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="blwMkycvGweT-16OEjZh-13" target="blwMkycvGweT-16OEjZh-17" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="blwMkycvGweT-16OEjZh-13" value="&lt;div&gt;아이디 찾기 페이지&lt;br&gt;&lt;/div&gt;&lt;div&gt;/client/findId.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+        <mxCell id="blwMkycvGweT-16OEjZh-13" value="&lt;div&gt;아이디 찾기 페이지&lt;br&gt;&lt;/div&gt;&lt;div&gt;/client/findId.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="260" y="692.5" width="130" height="80" as="geometry" />
         </mxCell>
         <mxCell id="blwMkycvGweT-16OEjZh-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="blwMkycvGweT-16OEjZh-15" target="blwMkycvGweT-16OEjZh-19" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="blwMkycvGweT-16OEjZh-15" value="&lt;div&gt;비밀번호 찾기 페이지&lt;br&gt;&lt;/div&gt;&lt;div&gt;/client/findPw.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+        <mxCell id="blwMkycvGweT-16OEjZh-15" value="&lt;div&gt;비밀번호 찾기 페이지&lt;br&gt;&lt;/div&gt;&lt;div&gt;/client/findPw.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="260" y="807.5" width="130" height="80" as="geometry" />
         </mxCell>
         <mxCell id="blwMkycvGweT-16OEjZh-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="blwMkycvGweT-16OEjZh-17" target="blwMkycvGweT-16OEjZh-20" edge="1">
@@ -75,7 +75,7 @@
         <mxCell id="blwMkycvGweT-16OEjZh-19" value="&lt;div&gt;비밀번호 찾기 처리&lt;br&gt;&lt;/div&gt;&lt;div&gt;/client/findPw.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="80" y="807.5" width="130" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="blwMkycvGweT-16OEjZh-20" value="&lt;div&gt;로그인 페이지&lt;/div&gt;&lt;div&gt;/client/login.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+        <mxCell id="blwMkycvGweT-16OEjZh-20" value="&lt;div&gt;로그인 페이지&lt;/div&gt;&lt;div&gt;/client/login.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="-180" y="700" width="140" height="65" as="geometry" />
         </mxCell>
         <mxCell id="blwMkycvGweT-16OEjZh-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="blwMkycvGweT-16OEjZh-22" target="blwMkycvGweT-16OEjZh-26" edge="1">
@@ -336,7 +336,7 @@
         <mxCell id="HkHfSld4iR-uJVx8hR3l-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="HkHfSld4iR-uJVx8hR3l-2" target="HkHfSld4iR-uJVx8hR3l-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="HkHfSld4iR-uJVx8hR3l-2" value="&lt;div&gt;비밀번호 재설정 페이지&lt;/div&gt;&lt;div&gt;/client/resetPw.jsp&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+        <mxCell id="HkHfSld4iR-uJVx8hR3l-2" value="&lt;div&gt;비밀번호 재설정 페이지&lt;/div&gt;&lt;div&gt;/client/resetPw.jsp&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="-180" y="815" width="140" height="65" as="geometry" />
         </mxCell>
         <mxCell id="HkHfSld4iR-uJVx8hR3l-4" value="&lt;div&gt;비밀번호 재설정 처리&lt;/div&gt;&lt;div&gt;/client/resetPw.kh&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
@@ -350,21 +350,6 @@
               <mxPoint x="-329" y="733" />
             </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="lSYvZlXfB9ax1exCg4gH-11" value="&lt;div&gt;비밀번호 재설정 페이지&lt;/div&gt;&lt;div&gt;/client/resetPw.jsp&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="-180" y="815" width="140" height="65" as="geometry" />
-        </mxCell>
-        <mxCell id="lSYvZlXfB9ax1exCg4gH-12" value="&lt;div&gt;로그인 페이지&lt;/div&gt;&lt;div&gt;/client/login.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="-180" y="700" width="140" height="65" as="geometry" />
-        </mxCell>
-        <mxCell id="lSYvZlXfB9ax1exCg4gH-13" value="&lt;div&gt;아이디 찾기 페이지&lt;br&gt;&lt;/div&gt;&lt;div&gt;/client/findId.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="260" y="692.5" width="130" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="lSYvZlXfB9ax1exCg4gH-14" value="&lt;div&gt;비밀번호 찾기 페이지&lt;br&gt;&lt;/div&gt;&lt;div&gt;/client/findPw.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="260" y="807.5" width="130" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="lSYvZlXfB9ax1exCg4gH-15" value="&lt;div&gt;로그인 페이지&lt;/div&gt;&lt;div&gt;/client/login.jsp&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="520" y="755" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="lSYvZlXfB9ax1exCg4gH-28" value="&lt;div&gt;게시글 페이지&lt;br&gt;&lt;/div&gt;&lt;div&gt;/board/post.jsp&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="1090" y="1387.5" width="140" height="62.5" as="geometry" />
