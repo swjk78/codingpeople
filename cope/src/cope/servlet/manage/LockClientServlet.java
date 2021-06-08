@@ -19,8 +19,9 @@ public class LockClientServlet extends HttpServlet {
 			
 			int clientNo = Integer.parseInt(req.getParameter("clientNo"));
 			int lockHour = Integer.parseInt(req.getParameter("lockHour"));
+			String clientLockReason = req.getParameter("clientLockReason");
 			ClientDao clientDao = new ClientDao();
-			boolean result = clientDao.lockClient(clientNo, lockHour);
+			boolean result = clientDao.lockClient(clientNo, lockHour, clientLockReason);
 			
 			if (result) {
 				resp.sendRedirect("manageClient.jsp");

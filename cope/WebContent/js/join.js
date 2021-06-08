@@ -1,7 +1,7 @@
 $(function () {
 	$('#clientId').blur('input', function () {
 		var id = $(this).val();
-		var regexId = /^[a-zA-Z0-9]{8,20}$/;
+		var regexId = /^[a-zA-Z0-9]{5,20}$/;
 		if (regexId.test(id)) {
 			$(this).nextAll('.fail').hide();
 			$(this).nextAll('.success').show();
@@ -13,7 +13,7 @@ $(function () {
 
 	$('#clientPw').blur('input', function () {
 		var pw = $(this).val();
-		var regexPw = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+		var regexPw = /^[a-zA-Z0-9!@#$%^&*]{5,16}$/;
 		if (regexPw.test(pw)) {
 			$(this).nextAll('.fail').hide();
 			$(this).nextAll('.successPw').show();
@@ -74,11 +74,11 @@ $(function () {
 
 	$('.join-form').on('submit', function (e) {
 		var id = $('#clientId').val();
-		var regexId = /^[a-zA-Z0-9]{8,20}$/;
+		var regexId = /^[a-zA-Z0-9]{5,20}$/;
 		var pw = $('#clientPw').val();
-		var regexPw = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+		var regexPw = /^[a-zA-Z0-9!@#$%^&*]{5,16}$/;
 		var pw2 = $('#clientPw2').val();
-		var regexPw2 = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+		var regexPw2 = /^[a-zA-Z0-9!@#$%^&*]{5,16}$/;
 		var nick = $('#clientNick').val();
 		var regexNick = /^[가-힣a-zA-Z0-9!@#$%^&*]{1,10}$/;
 

@@ -30,7 +30,6 @@ public class SuperFilter implements Filter{
 		Integer clientNo = (Integer) req.getSession().getAttribute("clientNo");
 		
 		if(clientNo==null) {//로그인 조차 안 함
-			System.out.println("SuperFilter에서 걸림! (로그인을 안함)");
 			resp.sendRedirect(req.getContextPath()+"/client/login.jsp");
 		}
 		else {
@@ -43,7 +42,6 @@ public class SuperFilter implements Filter{
 				}
 				else {
 					resp.sendError(401);
-					System.out.println("SuperFilter에서 걸림! (관리자가 아님!)");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

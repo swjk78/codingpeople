@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,9 +101,10 @@ window.addEventListener('load', function() {
 		alert('이메일 전송을 성공했습니다.');
 		history.replaceState({}, null, location.pathname);
 	}
-	if (<%=request.getSession().getAttribute("unlockDate") != null%>) {
-		alert('활동정지당한 계정입니다\n' + '정지해제 날짜: ' + '<%=request.getSession().getAttribute("unlockDate")%>');
-		<%request.getSession().removeAttribute("unlockDate");%>
+	if (<%=request.getParameter("unlockDate") != null%>) {
+		alert('활동정지당한 계정입니다\n' + '정지해제 날짜: ' + '<%=request.getParameter("unlockDate")%>'
+		+ '\n정지사유: ' + '<%=request.getParameter("clientLockReason")%>');
+		history.replaceState({}, null, location.pathname);
 	}
 });
 </script>

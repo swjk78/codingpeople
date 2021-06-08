@@ -22,7 +22,6 @@ public class ResetPwServlet extends HttpServlet {
 			ClientDao clientDao = new ClientDao();
 			boolean result = clientDao.resetPw(inputPw, inputEmail);
 			if (result) {
-				req.getSession().removeAttribute("inputEmail");
 				resp.sendRedirect("login.jsp");
 			}
 			else {

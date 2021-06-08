@@ -3,7 +3,9 @@
 <%@page import="java.util.List"%>
 <%@page import="cope.beans.client.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- 		<jsp:include page="/template/aside.jsp"></jsp:include>
+
+<jsp:include page="/template/aside.jsp"></jsp:include>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	String root = request.getContextPath();
@@ -85,6 +87,79 @@
 	if (endBlock > lastBlock) endBlock = lastBlock;
 %>
 
+<link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
+
+<style>
+	h2>a{
+		font-size:28px;
+	}
+	a{
+		text-decoration: none;
+		color:rgb(78, 78, 78);
+		font-size:13px;
+	}
+	.top-menu{
+		margin-bottom:7%;
+	}
+	.table{
+		margin-top:5%;
+		margin-bottom:1.5%;
+		font-color:black;
+		font-size:13px;
+	}
+	.bottom-menu, .pagination{
+		text-align:center;
+	}
+	.select-search, .select-input {
+		padding:5px 36px 5px 12px;
+ 		border:none; 
+		border-bottom:1px solid rgb(78, 78, 78);
+		font-size:12px;
+	}
+	.select-btn{
+		border:none;
+		background-color:#9A9EC2;
+		padding:5px 15px 5px 12px;
+		color:white;
+		border:thin;
+		text-align:center;
+	}
+		 
+	.th-line{
+		border-bottom:1px solid rgb(242, 242, 242);
+		color:rgb(78, 78, 78);
+		font-color:black;
+		text-align:center;
+		height:43px;
+		background-color:rgb(242, 242, 242);		
+		
+	}
+	.td-line{
+		border-bottom:1px solid rgb(242, 242, 242);
+		height:43px;
+	}
+	
+	.order{
+		
+		background-color:#9A9EC2;
+		color:white;
+		padding:5px 5px 5px 5px;
+	}
+	
+	.select-page-size, .select-form{
+		padding:5px 5px 5px 12px;
+		border:thin;
+	}
+	.form-btn, .form-btn-lock{
+		border:none;
+		background-color:#9A9EC2;
+		padding:5px 15px 5px 12px;
+		color:white;
+		border:thin;
+		text-align:center;
+	}
+</style>
+
 <%if (isSearch) {%>
 <script>
 	window.addEventListener('load', function() {
@@ -160,82 +235,35 @@
 				document.querySelector('.search-form').submit();
 			});
 		}
+		
+		// 정지 사유 입력 이벤트
+		document.querySelector('.form-btn-lock').addEventListener('click', function() {
+			while (true) {
+				var clientLockReason = prompt('정지사유를 20자 이내로 작성하세요.');
+				if (clientLockReason == null) {
+					event.preventDefault();
+					return;
+				} else if (clientLockReason.trim() != "") {
+					document.querySelector('input[name=clientLockReason]').value = clientLockReason;
+					document.querySelector('.lock-client-form').submit();
+					return;
+				} else {
+					event.preventDefault();
+					alert('정지사유는 필수 입력 사항입니다.');
+				}
+			}
+		});
+		
+		// 정지 해제 및 사유 확인 이벤트
+		document.querySelector('.form-btn-unlock').addEventListener('click', function() {
+			var clientLockReason = document.querySelector('input[name=clientLockReason]').value;
+			var confirmCheck = confirm('정지 해제하시겠습니까?\n' + '정지사유: ' + clientLockReason);
+			if (!confirmCheck) {
+				event.preventDefault();
+			}
+		});
 	});
 </script>
-
-<link rel = "stylesheet" type = "text/css" href = "<%=root%>/css/manage.css">
-
-<style>
-	h2>a{
-		font-size:28px;
-	}
-	a{
-		text-decoration: none;
-		color:rgb(78, 78, 78);
-		font-size:13px;
-	}
-	.top-menu{
-		margin-bottom:7%;
-	}
-	.table{
-		margin-top:5%;
-		margin-bottom:1.5%;
-		font-color:black;
-		font-size:13px;
-	}
-	.bottom-menu, .pagination{
-		text-align:center;
-	}
-	.select-search, .select-input {
-		padding:5px 36px 5px 12px;
- 		border:none; 
-		border-bottom:1px solid rgb(78, 78, 78);
-		font-size:12px;
-	}
-	.select-btn{
-		border:none;
-		background-color:#9A9EC2;
-		padding:5px 15px 5px 12px;
-		color:white;
-		border:thin;
-		text-align:center;
-	}
-		 
-	.th-line{
-		border-bottom:1px solid rgb(242, 242, 242);
-		color:rgb(78, 78, 78);
-		font-color:black;
-		text-align:center;
-		height:43px;
-		background-color:rgb(242, 242, 242);		
-		
-	}
-	.td-line{
-		border-bottom:1px solid rgb(242, 242, 242);
-		height:43px;
-	}
-	
-	.order{
-		
-		background-color:#9A9EC2;
-		color:white;
-		padding:5px 5px 5px 5px;
-	}
-	
-	.select-page-size, .select-form{
-		padding:5px 5px 5px 12px;
-		border:thin;
-	}
-	.form-btn, .form-btn-lock{
-		border:none;
-		background-color:#9A9EC2;
-		padding:5px 15px 5px 12px;
-		color:white;
-		border:thin;
-		text-align:center;
-	}
-	
-</style>
 
 <div class = "float-left position-client">
 <div class="main-board manage-client">
@@ -250,15 +278,12 @@
 				<div class="float-left">
 					<a class="order" id="client_no">
 					가입순
-
 					</a>
 					<a class="order" id="client_id">
 					아이디순
-
 					</a>
 					<a class="order" id="client_nick">
 					닉네임순
-
 					</a>
 				</div>
 		
@@ -284,7 +309,7 @@
 						<th class="th-line">출생연도</th>
 						<th class="th-line">등급</th>
 						<th class="th-line">정지해제날짜</th>
-						<th class="th-line">활동정지</th>
+						<th class="th-line">회원관리</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -313,6 +338,7 @@
 							<%if (clientDto.getClientGrade().equals("normal")) {%>
 								<form action="lockClient.kh" method="POST" class="lock-client-form vertical-center">
 									<input type="hidden" name="clientNo" value="<%=clientDto.getClientNo()%>">
+									<input type="hidden" name="clientLockReason" value="<%=clientDto.getClientLockReason()%>">
 									<%if (clientDto.getClientUnlockDate() == null) {%>
 									<select class="select-form vertical-5px" name="lockHour">
 										<option value="0">10초(시연용)</option>
@@ -327,7 +353,7 @@
 									<input class="form-btn form-btn-lock vertical-5px" type="submit" value="활동정지">
 									<%} else {%>
 									<input type="hidden" name="lockHour" value="-1">
-									<input class="form-btn form-btn-unlock vertical-5px "  type="submit" value="정지해제">
+									<input class="form-btn form-btn-unlock vertical-5px "  type="submit" value="사유확인/정지해제">
 									<%} %>
 								</form>
 							<%} else {%>
@@ -377,4 +403,4 @@
 </div>
 </div> 
 
-		<jsp:include page="/template/footer.jsp"></jsp:include>			
+<jsp:include page="/template/footer.jsp"></jsp:include>			
