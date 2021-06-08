@@ -4,9 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>cope로그인기능</title>
 <style>
-
 *{
 font-family : monospace,sans-serif;
 }

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cope.beans.auth.AuthDao;
+import cope.beans.auth.AuthDto;
 import cope.beans.client.ClientDao;
 import cope.beans.utils.SendEmail;
 
@@ -26,13 +28,23 @@ public class FindPwServlet extends HttpServlet {
 			ClientDao clientDao = new ClientDao();
 			String clientId = clientDao.findId(inputEmail);
 			
-			// 메일 전송
 			if (clientId != null) {
 				SendEmail sendEmail = new SendEmail();
-				String authNum = getAuthNum();
-				req.getSession().setAttribute("authNum", authNum);
-				req.getSession().setAttribute("inputEmail", inputEmail);
 				
+				// 인증정보 등록
+				AuthDao authDao = new AuthDao();
+				AuthDto authDto = new AuthDto(inputEmail);
+				int authNum = getAuthNum();
+				authDto.setAuthNum(authNum);
+				
+				// 중복 체크(이전에 인증정보 등록하고 5분이 안 지났을 경우)
+				if (authDao.findAuthNum(inputEmail) != -1) {
+					 authDao.deleteAuth(inputEmail);
+				}
+
+				authDao.insertAuth(authDto);
+				
+				// 메일 전송
 				sendEmail.setSenderEmail(SENDERMAIL);
 				sendEmail.setSenderPw(SENDERPW);
 				sendEmail.setReceiverEmail(inputEmail);
@@ -41,7 +53,7 @@ public class FindPwServlet extends HttpServlet {
 				
 				sendEmail.send();
 				
-				resp.sendRedirect("resetPw.jsp?success");
+				resp.sendRedirect("resetPw.jsp?inputEmail=" + inputEmail);
 			}
 			// 일치하는 이메일이 없는 경우
 			else {
@@ -55,15 +67,18 @@ public class FindPwServlet extends HttpServlet {
 	}
 	
 	// 인증번호 생성 기능
-	public String getAuthNum() {
+	public int getAuthNum() {
 		Random ran = new Random();
 		String authNum = "";
 		int[] numArr = new int[6];
-		for (int i = 0; i < numArr.length; i++) {
+		
+		numArr[0] = ran.nextInt(9) + 1;
+		authNum += String.valueOf(numArr[0]);
+		for (int i = 1; i < numArr.length; i++) {
 			numArr[i] = ran.nextInt(10);
 			authNum += String.valueOf(numArr[i]);
 		}
 		
-		return authNum;
+		return Integer.parseInt(authNum);
 	}
 }
