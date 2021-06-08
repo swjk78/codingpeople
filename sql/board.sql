@@ -17,18 +17,18 @@ create sequence board_seq;
 insert into board values(0, '전체게시판', 0 , null); --꼭 등록하셔야 상위게시판이 정상적으로 들어갑니다.
 
 -- 초기 데이터(NEXTVAL 적용)
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'커뮤니티',1,0);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'공지사항',1,1);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'홍보게시판',1,1);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'자바',4,0);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'자유게시판',4,4);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'질문게시판',4,4);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'팁게시판',4,4);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'C++',8,0);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'자유게시판',8,8);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'질문게시판',8,8);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'팁게시판',8,8);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'파이썬',12,0);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'자유게시판',12,12);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'질문게시판',12,12);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'팁게시판',12,12);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'커뮤니티',1,0);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'공지사항',1,1);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'홍보게시판',1,1);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'자바',4,0);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'자유게시판',4,4);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'질문게시판',4,4);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'팁게시판',4,4);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'C++',8,0);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'자유게시판',8,8);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'질문게시판',8,8);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'팁게시판',8,8);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'파이썬',12,0);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'자유게시판',12,12);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'질문게시판',12,12);
+Insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'팁게시판',12,12);

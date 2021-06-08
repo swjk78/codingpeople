@@ -26,10 +26,10 @@ left outer join client on post_client_no = client_no
 left outer join board on post_board_no = board_no;
 
 
--- 초기 데이터(NEXTVAL 적용)
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,1,2,'안녕하세요 코딩피플이 만들어졌습니다.','많은 사랑 부탁 드려요',to_date('21/06/06','RR/MM/DD'),1,38,4,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,4,6,'자바를 배우고 싶은데...','어디서 어떻게 시작해야할지 몰라서 고민입니다.',to_date('21/06/06','RR/MM/DD'),0,4,1,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,5,6,'마방진을 만드는 중인데','package MBG;
+-- 초기 데이터
+Insert into post values(post_seq.nextval,1,2,'안녕하세요 코딩피플이 만들어졌습니다.','많은 사랑 부탁 드려요',to_date('20/04/06','RR/MM/DD'),15,38,0,'F');
+Insert into post values(post_seq.nextval,4,6,'자바를 배우고 싶은데...','어디서 어떻게 시작해야할지 몰라서 고민입니다.',to_date('20/01/06','RR/MM/DD'),12,44,0,'F');
+Insert into post values(post_seq.nextval,5,6,'마방진을 만드는 중인데','package MBG;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -82,18 +82,18 @@ public class MBG04 {
 	}
 }
 
-한 줄만 나오네요 ㅠㅠ',to_date('21/06/06','RR/MM/DD'),0,11,2,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,34,7,'자바에 대한 자잘한 팁','()',to_date('21/06/06','RR/MM/DD'),0,4,2,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,19,11,'c++이 좋을까 c#이 좋을까?','()',to_date('21/06/06','RR/MM/DD'),0,3,1,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,21,11,'에러가 나고 있네요 도와 주실 수 있으신가요?','()',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,1,13,'파이썬의 유래','()',to_date('21/06/06','RR/MM/DD'),0,3,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,23,14,'출력구문은 print() 뿐인가요?','(0',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,3,'자바 스터디그룹 모집합니다!','kkkk1111@naver.com로 메일 주세요!',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,5,'자바의 창시자 제임스 고슬링','(0',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,6,'이클립스 오류가 뜨네요 ㅠㅠㅠ','()',to_date('21/06/06','RR/MM/DD'),0,2,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,7,'자바 하면서 알아낸 몇가지 팁','1.2.3.4.5.',to_date('21/06/06','RR/MM/DD'),0,2,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,26,6,'너무 어려워요 도와주세요 ㅠㅠㅠ','()',to_date('21/06/06','RR/MM/DD'),0,3,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,6,'급합니다... 도와주세요!!','package filter;
+한 줄만 나오네요 ㅠㅠ',to_date('20/06/03','RR/MM/DD'),2,11,0,'F');
+Insert into post values(post_seq.nextval,34,7,'자바에 대한 자잘한 팁','()',to_date('21/01/06','RR/MM/DD'),113,442,0,'F');
+Insert into post values(post_seq.nextval,19,11,'c++이 좋을까 c#이 좋을까?','()',to_date('21/02/06','RR/MM/DD'),121,311,0,'F');
+Insert into post values(post_seq.nextval,21,11,'에러가 나고 있네요 도와 주실 수 있으신가요?','()',to_date('21/04/06','RR/MM/DD'),100,111,0,'F');
+Insert into post values(post_seq.nextval,1,13,'파이썬의 유래','()',to_date('21/07/05','RR/MM/DD'),10,31,0,'F');
+Insert into post values(post_seq.nextval,23,14,'출력구문은 print() 뿐인가요?','(0',to_date('21/04/05','RR/MM/DD'),10,11,0,'F');
+Insert into post values(post_seq.nextval,11,3,'자바 스터디그룹 모집합니다!','kkkk1111@naver.com로 메일 주세요!',to_date('21/06/06','RR/MM/DD'),40,51,0,'F');
+Insert into post values(post_seq.nextval,11,5,'자바의 창시자 제임스 고슬링','(0',to_date('21/06/16','RR/MM/DD'),2,4,0,'F');
+Insert into post values(post_seq.nextval,11,6,'이클립스 오류가 뜨네요 ㅠㅠㅠ','()',to_date('21/03/06','RR/MM/DD'),1,2,0,'F');
+Insert into post values(post_seq.nextval,11,7,'자바 하면서 알아낸 몇가지 팁','1.2.3.4.5.',to_date('21/06/02','RR/MM/DD'),1,2,0,'F');
+Insert into post values(post_seq.nextval,26,6,'너무 어려워요 도와주세요 ㅠㅠㅠ','()',to_date('21/06/04','RR/MM/DD'),1,3,0,'F');
+Insert into post values(post_seq.nextval,1,6,'급합니다... 도와주세요!!','package filter;
 
 import java.io.IOException;
 
@@ -133,4 +133,4 @@ public class LogoutFilter implements Filter{
 
 }
 
-필터를 만들고 있는데 다 막아버리네요 ㅠㅠ',to_date('21/06/06','RR/MM/DD'),1,15,5,'F');
+필터를 만들고 있는데 다 막아버리네요 ㅠㅠ',to_date('21/06/18','RR/MM/DD'),7,15,0,'F');

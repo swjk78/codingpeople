@@ -1,8 +1,11 @@
 -- 삭제 구문
+drop table auth;
 drop table choose;
 drop sequence choose_seq;
 drop table comments;
 drop sequence comments_seq;
+drop table code;
+drop sequence code_seq;
 drop table post_like;
 drop table post;
 drop sequence post_seq;
@@ -15,13 +18,14 @@ drop sequence client_seq;
 -- 회원 테이블, 시퀀스
 create table client(
 client_no number(19) primary key,
-client_id varchar2(40) not null unique check(regexp_like(client_id, '^[a-zA-Z0-9]{8,20}$')),
-client_pw varchar2(32) not null check(regexp_like(client_pw, '^[a-zA-Z0-9!@#$%^&*]{8,16}$')),
+client_id varchar2(40) not null unique check(regexp_like(client_id, '^[a-zA-Z0-9]{5,20}$')),
+client_pw varchar2(32) not null check(regexp_like(client_pw, '^[a-zA-Z0-9!@#$%^&*]{5,16}$')),
 client_email varchar2(100) not null unique,
 client_nick varchar2(30) not null unique check(regexp_like(client_nick, '^[가-힣a-zA-Z0-9!@#$%^&*]{1,10}$')),
 client_birth_year number(4),
-client_grade varchar(15) default 'normal' not null check(client_grade IN ('normal', 'super')),
-client_unlock_date date
+client_grade varchar2(15) default 'normal' not null check(client_grade IN ('normal', 'super')),
+client_unlock_date date,
+client_lock_reason varchar2(60)
 );
 create sequence client_seq;
 
@@ -62,6 +66,15 @@ post_like_date date default sysdate not null,
 primary key(post_like_client_no, post_like_post_no)
 );
 
+-- 코드URL 테이블, 시퀀스
+create table code(
+code_no number(19) primary key,
+code_post_no references post(post_no) unique,
+code_url varchar2(255)
+);
+
+create sequence code_seq;
+
 -- 댓글 테이블, 시퀀스, 뷰
 create table comments(
 comments_no number(19) primary key,
@@ -84,73 +97,80 @@ choose_comments_no references comments(comments_no) not null
 );
 create sequence choose_seq nocache;
 
+-- 인증 테이블
+create table auth(
+auth_email varchar2(40) primary key,
+auth_date date default sysdate not null,
+auth_num number(6) not null
+);
+
 --회원 초기 데이터
-insert into client values(client_seq.nextval, 'superadmin', 'superadmin', 'aaaa1111@naver.com', '광개토대왕', 1950, 'super', null);
-insert into client values(client_seq.nextval, 'bbbb2222', 'bbbb2222', 'bbbb2222@naver.com', '세종대왕', 1952, 'normal', null);
-insert into client values(client_seq.nextval, 'cccc3333', 'cccc3333', 'cccc3333@naver.com', '소수림왕', 1959, 'normal', null);
-insert into client values(client_seq.nextval, 'dddd4444', 'dddd4444', 'dddd4444@naver.com', '이완용', 1961, 'normal', null);
-insert into client values(client_seq.nextval, 'eeee5555', 'eeee5555', 'eeee5555@naver.com', '유관순', 1963, 'normal', null);
+insert into client values(client_seq.nextval, 'admin', 'admin', 'aaaa1111@naver.com', '광개토대왕', 1950, 'super', null, null);
+insert into client values(client_seq.nextval, 'bbbb2222', 'bbbb2222', 'bbbb2222@naver.com', '세종대왕', 1952, 'normal', null, null);
+insert into client values(client_seq.nextval, 'cccc3333', 'cccc3333', 'cccc3333@naver.com', '소수림왕', 1959, 'normal', null, null);
+insert into client values(client_seq.nextval, 'dddd4444', 'dddd4444', 'dddd4444@naver.com', '이완용', 1961, 'normal', null, null);
+insert into client values(client_seq.nextval, 'eeee5555', 'eeee5555', 'eeee5555@naver.com', '유관순', 1963, 'normal', null, null);
 
-insert into client values(client_seq.nextval, 'ffff6666', 'ffff6666', 'ffff6666@naver.com', '윤봉길', 1964, 'normal', null);
-insert into client values(client_seq.nextval, 'gggg7777', 'gggg7777', 'gggg7777@naver.com', '이수일', 1965, 'normal', null);
-insert into client values(client_seq.nextval, 'hhhh8888', 'hhhh8888', 'hhhh8888@naver.com', '심순애', 1967, 'normal', null);
-insert into client values(client_seq.nextval, 'iiii9999', 'iiii9999', 'iiii9999@naver.com', '김대행', 1975, 'normal', null);
-insert into client values(client_seq.nextval, 'jjjj0000', 'jjjj0000', 'jjjj0000@naver.com', '강현화', 1977, 'normal', null);
+insert into client values(client_seq.nextval, 'ffff6666', 'ffff6666', 'ffff6666@naver.com', '윤봉길', 1964, 'normal', null, null);
+insert into client values(client_seq.nextval, 'gggg7777', 'gggg7777', 'gggg7777@naver.com', '이수일', 1965, 'normal', null, null);
+insert into client values(client_seq.nextval, 'hhhh8888', 'hhhh8888', 'hhhh8888@naver.com', '심순애', 1967, 'normal', null, null);
+insert into client values(client_seq.nextval, 'iiii9999', 'iiii9999', 'iiii9999@naver.com', '김대행', 1975, 'normal', null, null);
+insert into client values(client_seq.nextval, 'jjjj0000', 'jjjj0000', 'jjjj0000@naver.com', '강현화', 1977, 'normal', null, null);
 
-insert into client values(client_seq.nextval, 'kkkk1111', 'kkkk1111', 'kkkk1111@naver.com', '촘스키', 1979, 'normal', null);
-insert into client values(client_seq.nextval, 'llll2222', 'llll2222', 'llll2222@naver.com', '소쉬르', 1981, 'normal', null);
-insert into client values(client_seq.nextval, 'nnnn3333', 'nnnn3333', 'nnnn3333@naver.com', '블룸필드', 1985, 'normal', null);
-insert into client values(client_seq.nextval, 'mmmm4444', 'mmmm4444', 'mmmm4444@naver.com', '자끄', 1987, 'normal', null);
-insert into client values(client_seq.nextval, 'oooo5555', 'oooo5555', 'oooo5555@naver.com', '라깡', 1989, 'normal', null);
+insert into client values(client_seq.nextval, 'kkkk1111', 'kkkk1111', 'kkkk1111@naver.com', '촘스키', 1979, 'normal', null, null);
+insert into client values(client_seq.nextval, 'llll2222', 'llll2222', 'llll2222@naver.com', '소쉬르', 1981, 'normal', null, null);
+insert into client values(client_seq.nextval, 'nnnn3333', 'nnnn3333', 'nnnn3333@naver.com', '블룸필드', 1985, 'normal', null, null);
+insert into client values(client_seq.nextval, 'mmmm4444', 'mmmm4444', 'mmmm4444@naver.com', '자끄', 1987, 'normal', null, null);
+insert into client values(client_seq.nextval, 'oooo5555', 'oooo5555', 'oooo5555@naver.com', '라깡', 1989, 'normal', null, null);
 
-insert into client values(client_seq.nextval, 'pppp6666', 'pppp6666', 'pppp6666@naver.com', '바흐찐', 1991, 'normal', null);
-insert into client values(client_seq.nextval, 'qqqq7777', 'qqqq7777', 'qqqq7777@naver.com', '이글턴', 1992, 'normal', null);
-insert into client values(client_seq.nextval, 'rrrr8888', 'rrrr8888', 'rrrr8888@naver.com', '프로이트', 1995, 'normal', null);
-insert into client values(client_seq.nextval, 'ssss9999', 'ssss9999', 'ssss9999@naver.com', '스티븐', 1999, 'normal', null);
-insert into client values(client_seq.nextval, 'tttt0000', 'tttt0000', 'tttt0000@naver.com', '빅또르', 2002, 'normal', null);
+insert into client values(client_seq.nextval, 'pppp6666', 'pppp6666', 'pppp6666@naver.com', '바흐찐', 1991, 'normal', null, null);
+insert into client values(client_seq.nextval, 'qqqq7777', 'qqqq7777', 'qqqq7777@naver.com', '이글턴', 1992, 'normal', null, null);
+insert into client values(client_seq.nextval, 'rrrr8888', 'rrrr8888', 'rrrr8888@naver.com', '프로이트', 1995, 'normal', null, null);
+insert into client values(client_seq.nextval, 'ssss9999', 'ssss9999', 'ssss9999@naver.com', '스티븐', 1999, 'normal', null, null);
+insert into client values(client_seq.nextval, 'tttt0000', 'tttt0000', 'tttt0000@naver.com', '빅또르', 2002, 'normal', null, null);
 
-insert into client values(client_seq.nextval, 'uuuu1111', 'uuuu1111', 'uuuu1111@naver.com', '마르크스', 2003, 'normal', null);
-insert into client values(client_seq.nextval, 'vvvv2222', 'vvvv2222', 'vvvv2222@naver.com', '니체', 2003, 'normal', null);
-insert into client values(client_seq.nextval, 'wwww3333', 'wwww3333', 'wwww3333@naver.com', '푸코', 2004, 'normal', null);
-insert into client values(client_seq.nextval, 'xxxx4444', 'xxxx4444', 'xxxx4444@naver.com', '데카르트', 2004, 'normal', null);
-insert into client values(client_seq.nextval, 'yyyy5555', 'yyyy5555', 'yyyy5555@naver.com', '홉스', 2004, 'normal', null);
+insert into client values(client_seq.nextval, 'uuuu1111', 'uuuu1111', 'uuuu1111@naver.com', '마르크스', 2003, 'normal', null, null);
+insert into client values(client_seq.nextval, 'vvvv2222', 'vvvv2222', 'vvvv2222@naver.com', '니체', 2003, 'normal', null, null);
+insert into client values(client_seq.nextval, 'wwww3333', 'wwww3333', 'wwww3333@naver.com', '푸코', 2004, 'normal', null, null);
+insert into client values(client_seq.nextval, 'xxxx4444', 'xxxx4444', 'xxxx4444@naver.com', '데카르트', 2004, 'normal', null, null);
+insert into client values(client_seq.nextval, 'yyyy5555', 'yyyy5555', 'yyyy5555@naver.com', '홉스', 2004, 'normal', null, null);
 
-insert into client values(client_seq.nextval, 'A1111111', 'A1111111', 'A1111111@naver.com', '갈릴레이', 1960, 'normal', null);
-insert into client values(client_seq.nextval, 'B2222222', 'B2222222', 'B2222222@naver.com', '다윈', 1965, 'normal', null);
-insert into client values(client_seq.nextval, 'C3333333', 'C3333333', 'C3333333@naver.com', '코페르니쿠스', 1951, 'normal', null);
-insert into client values(client_seq.nextval, 'D4444444', 'D4444444', 'D4444444@naver.com', '탈레스', 1951, 'normal', null);
-insert into client values(client_seq.nextval, 'E5555555', 'E5555555', 'E5555555@naver.com', '피타고라스', 1953, 'normal', null);
+insert into client values(client_seq.nextval, 'A1111111', 'A1111111', 'A1111111@naver.com', '갈릴레이', 1960, 'normal', null, null);
+insert into client values(client_seq.nextval, 'B2222222', 'B2222222', 'B2222222@naver.com', '다윈', 1965, 'normal', null, null);
+insert into client values(client_seq.nextval, 'C3333333', 'C3333333', 'C3333333@naver.com', '코페르니쿠스', 1951, 'normal', null, null);
+insert into client values(client_seq.nextval, 'D4444444', 'D4444444', 'D4444444@naver.com', '탈레스', 1951, 'normal', null, null);
+insert into client values(client_seq.nextval, 'E5555555', 'E5555555', 'E5555555@naver.com', '피타고라스', 1953, 'normal', null, null);
 
-insert into client values(client_seq.nextval, 'F6666666', 'F6666666', 'F6666666@naver.com', '퀴리', 1956, 'normal', null);
-insert into client values(client_seq.nextval, 'G7777777', 'G7777777', 'G7777777@naver.com', '뢴트겐', 1956, 'normal', null);
-insert into client values(client_seq.nextval, 'H8888888', 'H8888888', 'H8888888@naver.com', '에디슨', 1958, 'normal', null);
-insert into client values(client_seq.nextval, 'I9999999', 'I9999999', 'I9999999@naver.com', '테슬라', 1960, 'normal', null);
-insert into client values(client_seq.nextval, 'J0000000', 'J0000000', 'J0000000@naver.com', '노벨', 1951, 'normal', null);
+insert into client values(client_seq.nextval, 'F6666666', 'F6666666', 'F6666666@naver.com', '퀴리', 1956, 'normal', null, null);
+insert into client values(client_seq.nextval, 'G7777777', 'G7777777', 'G7777777@naver.com', '뢴트겐', 1956, 'normal', null, null);
+insert into client values(client_seq.nextval, 'H8888888', 'H8888888', 'H8888888@naver.com', '에디슨', 1958, 'normal', null, null);
+insert into client values(client_seq.nextval, 'I9999999', 'I9999999', 'I9999999@naver.com', '테슬라', 1960, 'normal', null, null);
+insert into client values(client_seq.nextval, 'J0000000', 'J0000000', 'J0000000@naver.com', '노벨', 1951, 'normal', null, null);
 
-insert into client values(client_seq.nextval, 'K1111111', 'K1111111', 'K1111111@naver.com', '영', 2015, 'normal', null);
+insert into client values(client_seq.nextval, 'K1111111', 'K1111111', 'K1111111@naver.com', '영', 2015, 'normal', null, null);
 
 -- 게시판 초기 데이터
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'커뮤니티',1,0);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'공지사항',1,1);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'홍보게시판',1,1);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'자바',4,0);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'자유게시판',4,4);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'질문게시판',4,4);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'팁게시판',4,4);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'C++',8,0);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'자유게시판',8,8);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'질문게시판',8,8);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'팁게시판',8,8);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'파이썬',12,0);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'자유게시판',12,12);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'질문게시판',12,12);
-Insert into BOARD (BOARD_NO,BOARD_NAME,BOARD_GROUP,BOARD_SUPER_NO) values (BOARD_SEQ.NEXTVAL,'팁게시판',12,12);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'커뮤니티',1,0);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'공지사항',1,1);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'홍보게시판',1,1);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'자바',4,0);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'자유게시판',4,4);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'질문게시판',4,4);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'팁게시판',4,4);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'C++',8,0);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'자유게시판',8,8);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'질문게시판',8,8);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'팁게시판',8,8);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'파이썬',12,0);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'자유게시판',12,12);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'질문게시판',12,12);
+insert into board(board_no,board_name,board_group,board_super_no) values(board_seq.nextval,'팁게시판',12,12);
 
 
 -- 게시글 초기 데이터
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,1,2,'안녕하세요 코딩피플이 만들어졌습니다.','많은 사랑 부탁 드려요',to_date('21/06/06','RR/MM/DD'),1,38,4,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,4,6,'자바를 배우고 싶은데...','어디서 어떻게 시작해야할지 몰라서 고민입니다.',to_date('21/06/06','RR/MM/DD'),0,4,1,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,5,6,'마방진을 만드는 중인데','package MBG;
+insert into post values(post_seq.nextval,1,2,'안녕하세요 코딩피플이 만들어졌습니다.','많은 사랑 부탁 드려요',to_date('20/04/06','RR/MM/DD'),15,38,0,'F');
+insert into post values(post_seq.nextval,4,6,'자바를 배우고 싶은데...','어디서 어떻게 시작해야할지 몰라서 고민입니다.',to_date('20/01/06','RR/MM/DD'),12,44,0,'F');
+insert into post values(post_seq.nextval,5,6,'마방진을 만드는 중인데','package MBG;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -203,18 +223,18 @@ public class MBG04 {
 	}
 }
 
-한 줄만 나오네요 ㅠㅠ',to_date('21/06/06','RR/MM/DD'),0,11,2,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,34,7,'자바에 대한 자잘한 팁','()',to_date('21/06/06','RR/MM/DD'),0,4,2,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,19,11,'c++이 좋을까 c#이 좋을까?','()',to_date('21/06/06','RR/MM/DD'),0,3,1,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,21,11,'에러가 나고 있네요 도와 주실 수 있으신가요?','()',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,1,13,'파이썬의 유래','()',to_date('21/06/06','RR/MM/DD'),0,3,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,23,14,'출력구문은 print() 뿐인가요?','(0',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,3,'자바 스터디그룹 모집합니다!','kkkk1111@naver.com로 메일 주세요!',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,5,'자바의 창시자 제임스 고슬링','(0',to_date('21/06/06','RR/MM/DD'),0,1,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,6,'이클립스 오류가 뜨네요 ㅠㅠㅠ','()',to_date('21/06/06','RR/MM/DD'),0,2,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,7,'자바 하면서 알아낸 몇가지 팁','1.2.3.4.5.',to_date('21/06/06','RR/MM/DD'),0,2,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,26,6,'너무 어려워요 도와주세요 ㅠㅠㅠ','()',to_date('21/06/06','RR/MM/DD'),0,3,0,'F');
-Insert into POST (POST_NO,POST_CLIENT_NO,POST_BOARD_NO,POST_TITLE,POST_CONTENTS,POST_DATE,POST_LIKE_COUNT,POST_VIEW_COUNT,POST_COMMENTS_COUNT,POST_BLIND) values (POST_SEQ.NEXTVAL,11,6,'급합니다... 도와주세요!!','package filter;
+한 줄만 나오네요 ㅠㅠ',to_date('20/06/03','RR/MM/DD'),2,11,0,'F');
+insert into post values(post_seq.nextval,34,7,'자바에 대한 자잘한 팁','()',to_date('21/01/06','RR/MM/DD'),113,442,0,'F');
+insert into post values(post_seq.nextval,19,11,'c++이 좋을까 c#이 좋을까?','()',to_date('21/02/06','RR/MM/DD'),121,311,0,'F');
+insert into post values(post_seq.nextval,21,11,'에러가 나고 있네요 도와 주실 수 있으신가요?','()',to_date('21/04/06','RR/MM/DD'),100,111,0,'F');
+insert into post values(post_seq.nextval,1,13,'파이썬의 유래','()',to_date('21/07/05','RR/MM/DD'),10,31,0,'F');
+insert into post values(post_seq.nextval,23,14,'출력구문은 print() 뿐인가요?','(0',to_date('21/04/05','RR/MM/DD'),10,11,0,'F');
+insert into post values(post_seq.nextval,11,3,'자바 스터디그룹 모집합니다!','kkkk1111@naver.com로 메일 주세요!',to_date('21/06/06','RR/MM/DD'),40,51,0,'F');
+insert into post values(post_seq.nextval,11,5,'자바의 창시자 제임스 고슬링','(0',to_date('21/06/16','RR/MM/DD'),2,4,0,'F');
+insert into post values(post_seq.nextval,11,6,'이클립스 오류가 뜨네요 ㅠㅠㅠ','()',to_date('21/03/06','RR/MM/DD'),1,2,0,'F');
+insert into post values(post_seq.nextval,11,7,'자바 하면서 알아낸 몇가지 팁','1.2.3.4.5.',to_date('21/06/02','RR/MM/DD'),1,2,0,'F');
+insert into post values(post_seq.nextval,26,6,'너무 어려워요 도와주세요 ㅠㅠㅠ','()',to_date('21/06/04','RR/MM/DD'),1,3,0,'F');
+insert into post values(post_seq.nextval,1,6,'급합니다... 도와주세요!!','package filter;
 
 import java.io.IOException;
 
@@ -254,6 +274,6 @@ public class LogoutFilter implements Filter{
 
 }
 
-필터를 만들고 있는데 다 막아버리네요 ㅠㅠ',to_date('21/06/06','RR/MM/DD'),1,15,5,'F');
+필터를 만들고 있는데 다 막아버리네요 ㅠㅠ',to_date('21/06/18','RR/MM/DD'),7,15,0,'F');
 
 commit;
