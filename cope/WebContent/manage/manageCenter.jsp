@@ -1,3 +1,4 @@
+<%@page import="cope.beans.board.BoardChartDto"%>
 <%@page import="cope.beans.client.ClientAgeRangeDto"%>
 <%@page import="cope.beans.board.BoardDto"%>
 <%@page import="cope.beans.board.BoardDao"%>
@@ -23,8 +24,8 @@
     List<ClientAgeRangeDto>ageRangeList = clientDao.getAgeRange();
     BoardDao boardDao = new BoardDao();
     //게시글 개수 List에 담기
-    List<BoardDto>boardSuperList = boardDao.showListBoardSuper();
-    List<Integer>countUnderpostList = boardDao.countUnderPosts(boardSuperList);
+//     List<BoardDto>boardSuperList = boardDao.showListBoardSuper();
+    List<BoardChartDto>countUnderpostList = boardDao.countUnderPosts();
  %>
 
 <style>
@@ -115,24 +116,24 @@
 									<canvas id="postChart" ></canvas>
 								</div>
 									<script>
-									var boardSuperNames = [];
-									<%for(int i=0; i<boardSuperList.size(); i++){%>
-									boardSuperNames[<%=i%>] = '<%=boardSuperList.get(i).getBoardName()%>';
+									var names = [];
+									<%for(int i=0; i<countUnderpostList.size(); i++){%>
+									names[<%=i%>] = '<%=countUnderpostList.get(i).getName()%>';
 									<%}%>
 									
-									var countUnderpostArray =[];
+									var count =[];
 									<%for(int i=0; i<countUnderpostList.size(); i++){%>
-									countUnderpostArray[<%=i%>] = <%=countUnderpostList.get(i)%>; // 배열을 복사합니다.
+									count[<%=i%>] = <%=countUnderpostList.get(i).getCount()%>; // 배열을 복사합니다.
 									<%}%>	
 									
 									var ctx = document.getElementById('postChart').getContext('2d');
 									var myChart = new Chart(ctx, {
 									    type: 'pie',
 									    data: {
-									    	labels: boardSuperNames,
+									    	labels: names,
 									        datasets: [{
 									            label: '게시판 비율',
-									            data: countUnderpostArray,
+									            data: count,
 									            backgroundColor: [
 									                'rgba(255, 255, 153, 0.2)',
 									                'rgba(204, 255, 153, 0.2)',
