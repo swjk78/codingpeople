@@ -27,11 +27,7 @@
 	padding-top: 15px;
 	padding-left: 130px;
 	}
-	
-	.warning{
-	font-size=8px;
-	
-	}
+
 	
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -95,9 +91,10 @@
 			<div class="post-title-input-div">
 				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="post-title-input post-title-input-underline input-title" required>
 			</div>
-			<div class="code-url">
-				<p class="warning">코드는 본문에 넣지 말고 <a href="https://gist.github.com">github-Gist</a>를 활용해주세요</p>
-				<input type="text" name="codeUrl" placeholder="하이라이팅된 code URL링크를 적어주세요" class="codeUrl">
+			<div class="github-gist-input-div">
+				<span style="display:inline;">Github gist Url :</span> <input type="text" name="codeUrl" placeholder="하이라이팅된 code URL링크를 적어주세요" class="inputCodeUrl" >" onblur="checkGistUrl();">
+				<br>
+				<span class="warning">(코드는 본문에 넣지 말고 <a href="https://gist.github.com">github-Gist</a>를 활용해주세요)</span>
 			</div>
 			<div>
 				<div class="post-contents-input-div">
@@ -125,9 +122,10 @@
 			<div class="post-title-input-div">
 				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="post-title-input post-title-input-underline input-title" value="<%=postDto.getPostTitle()%>"required>
 			</div>
-			<div class="code-url">
-			<p class="warning">코드는 본문에 넣지 말고 <a href="https://gist.github.com">github-Gist</a>를 활용해주세요</p>
-				<input type="text" name="codeUrl" placeholder="하이라이팅된 code URL링크를 적어주세요" class="codeUrl" value="<%=postCodeDao.getToInput(postNo)%>" onblur="checkGistUrl();">
+			<div class="github-gist-input-div">
+				<span style="display:inline;">Github gist Url :</span> <input type="text" name="codeUrl" placeholder="하이라이팅된 code URL링크를 적어주세요" class="inputCodeUrl" value="<%=postCodeDao.getToInput(postNo)%>" onblur="checkGistUrl();">
+				<br>
+				<span class="warning">(코드는 본문에 넣지 말고 <a href="https://gist.github.com">github-Gist</a>를 활용해주세요)</span>
 			</div>
 			<div>
 				<div class="post-contents-input-div">

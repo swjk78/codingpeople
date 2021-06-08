@@ -358,6 +358,15 @@ a{
 	text-decoration:none;	
 }
 
+.github-gist-input-div{
+	margin-top: 25px;
+	width:800px;
+}
+
+.inputCodeUrl{
+	width:600px;
+}
+
 
 .github-gist-div{
 margin-top: 50px;
@@ -369,4 +378,10 @@ margin-right: auto;
 .gist-title{
 font-size:15px;
 font-weight: bold;
+}
+
+	
+.warning{
+font-size:12px;
+
 }
