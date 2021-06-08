@@ -86,10 +86,10 @@ public class MBG04 {
 Insert into post values(post_seq.nextval,34,7,'자바에 대한 자잘한 팁','()',to_date('21/01/06','RR/MM/DD'),113,442,0,'F');
 Insert into post values(post_seq.nextval,19,11,'c++이 좋을까 c#이 좋을까?','()',to_date('21/02/06','RR/MM/DD'),121,311,0,'F');
 Insert into post values(post_seq.nextval,21,11,'에러가 나고 있네요 도와 주실 수 있으신가요?','()',to_date('21/04/06','RR/MM/DD'),100,111,0,'F');
-Insert into post values(post_seq.nextval,1,13,'파이썬의 유래','()',to_date('21/07/05','RR/MM/DD'),10,31,0,'F');
+Insert into post values(post_seq.nextval,1,13,'파이썬의 유래','()',to_date('21/02/05','RR/MM/DD'),10,31,0,'F');
 Insert into post values(post_seq.nextval,23,14,'출력구문은 print() 뿐인가요?','(0',to_date('21/04/05','RR/MM/DD'),10,11,0,'F');
 Insert into post values(post_seq.nextval,11,3,'자바 스터디그룹 모집합니다!','kkkk1111@naver.com로 메일 주세요!',to_date('21/06/06','RR/MM/DD'),40,51,0,'F');
-Insert into post values(post_seq.nextval,11,5,'자바의 창시자 제임스 고슬링','(0',to_date('21/06/16','RR/MM/DD'),2,4,0,'F');
+Insert into post values(post_seq.nextval,11,5,'자바의 창시자 제임스 고슬링','(0',to_date('20/01/16','RR/MM/DD'),2,4,0,'F');
 Insert into post values(post_seq.nextval,11,6,'이클립스 오류가 뜨네요 ㅠㅠㅠ','()',to_date('21/03/06','RR/MM/DD'),1,2,0,'F');
 Insert into post values(post_seq.nextval,11,7,'자바 하면서 알아낸 몇가지 팁','1.2.3.4.5.',to_date('21/06/02','RR/MM/DD'),1,2,0,'F');
 Insert into post values(post_seq.nextval,26,6,'너무 어려워요 도와주세요 ㅠㅠㅠ','()',to_date('21/06/04','RR/MM/DD'),1,3,0,'F');
@@ -133,4 +133,4 @@ public class LogoutFilter implements Filter{
 
 }
 
-필터를 만들고 있는데 다 막아버리네요 ㅠㅠ',to_date('21/06/18','RR/MM/DD'),7,15,0,'F');
+필터를 만들고 있는데 다 막아버리네요 ㅠㅠ',to_date('21/06/08','RR/MM/DD'),7,15,0,'F');
