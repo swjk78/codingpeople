@@ -59,19 +59,19 @@
 	int randomInt= (seed/no)%1000000;
 %>
 
-
+<jsp:include page="/template/aside.jsp"></jsp:include>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/post.css">
 
-
 <style>
-
 	.imgRound {
+	background-color: white;
 	border: 1.5px solid #ffffff;
 	border-radius: 50%;
 	padding: 5px;
 </style>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <script>
 	window.addEventListener('load', function() {
@@ -132,9 +132,10 @@
 
 </head>
 <body>
+<div class ="float-left padding-left-inter">
 <!-- 게시글영역 -->
 <div class="container-900 border">
-	<div class="row text-left boardName-div">
+	<div class="side-top text-left boardName-div">
 		<a class="boardSuperName" href="<%=request.getContextPath()%>/board/postList.jsp?boardGroup=<%=boardGroup%>">
 		<%=boardGroupName%></a>
 		<span class="dir-sign"> > </span>
@@ -196,15 +197,14 @@
 			<%} else {%>
 				<pre class="blind-text">(블라인드된 게시글입니다.)</pre>
 			<%} %>
-		</div>
-		<div class="row text-right">
+		<div class="row text-center">
 		<%if(isSuper){//관리자만 블라인드 버튼 %>
 			<a href="<%=root%>/manage/postBlind.kh?boardGroup=<%=boardGroup%>
 			&clientBlind=<%=postDto.getPostBlind()%>
 			&postNo=<%=postNo%>" class="form-btn form-btn-normal blind-btn">블라인드</a>
 		<%} %>
 		<a href="postLike.kh?boardGroup=<%=boardGroup%>&postNo=<%=postNo%>"
-		class="form-btn form-btn-normal btn-like">추천</a>
+		class="form-btn form-btn-normal btn-liketext-center">추천</a>
 		</div>
 </div>
 <!-- 	게시글 영역 끝 -->
@@ -231,31 +231,20 @@
 	<p class="comments-title-area text">댓글</p>
 </div>
 	
-<div class="comments-area container-850 border">
+<div class="comments-area container-850 border-comments">
 	<div class=comments-view>
 	<%for(CommentsViewDto commentsViewDto : commentsList){
 		int commentsNo =commentsViewDto.getCommentsNo(); // 자주 쓰여서 변수로 담아 둡니다.%>
 
 			<!-- 			각 댓글을 감싸고 있는 div는 서로 다른 id를 지니게 합니다.  -->
-				<div id="commentsOriginNo-<%=commentsNo%>" class="comments comments-box comments-box-border">
-					<%
-					//공교롭게도... 다시 "randomInt"를 뽑아내야하는... 이름이 길으니 구분은 잘 갈겁니다.
-					ClientDto clientDtoUsingOnlyGetNick = clientDao.myInfo(commentsViewDto.getCommentsClientNo());
-					clientId = clientDtoUsingOnlyGetNick.getClientId(); 
-					ch =  clientId.charAt(0);
-					no = (int)ch; //재정의
-						
-					seed = 216823123;
-					randomInt= (seed/no)%1000000; //재정의
-					 %>
-					<div class=writer-info>
+								<div class=writer-info>
 						<table class="mini-profile-table writer-info left">
 							<tr>
 								<td rowspan="2">
 									<img class="profile-img imgRound" src="https://dummyimage.com/35/<%=randomInt %>/ffffff&text=<%=ch %>" >		 	
 								</td>
 								<td>
-									<a href="<%=root %>/client/profile.jsp?clientNo=<%=commentsViewDto.getCommentsClientNo()%>"><%=commentsViewDto.getClientNick() %></a><br>
+									<a href="<%=root %>/client/profile.jsp?clientNo=<%=commentsViewDto.getCommentsClientNo()%>"class= "writer-info"><%=commentsViewDto.getClientNick() %></a><br>
 								</td>
 							</tr>
 							<tr>
@@ -271,6 +260,18 @@
 						</table>
 						
 					</div>
+				<div id="commentsOriginNo-<%=commentsNo%>" class="comments comments-box comments-box-border">
+					<%
+					//공교롭게도... 다시 "randomInt"를 뽑아내야하는... 이름이 길으니 구분은 잘 갈겁니다.
+					ClientDto clientDtoUsingOnlyGetNick = clientDao.myInfo(commentsViewDto.getCommentsClientNo());
+					clientId = clientDtoUsingOnlyGetNick.getClientId(); 
+					ch =  clientId.charAt(0);
+					no = (int)ch; //재정의
+						
+					seed = 216823123;
+					randomInt= (seed/no)%1000000; //재정의
+					 %>
+
 					
 					
 					<div class="form-comments float-container border margin-top-0">
@@ -452,8 +453,9 @@
 			<% }%>
 		</div>	
 	</div>
-
-
+</div>
+</div>
 	<!-- 이전글/다음글 영역 끝 -->
 </body>
 </html>
+<jsp:include page="/template/footer.jsp"></jsp:include>

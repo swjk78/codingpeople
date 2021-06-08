@@ -124,7 +124,7 @@ color:white;
 border: none;
 }
 
-.imgRound {
+.imgRound-aside{
 width: 80px;
 height:80px;
 background: white;
@@ -212,7 +212,7 @@ float:left;
 					<%if(!isLogin){//로그아웃 상태 %>
 												<div>
 												<br><br>
-								<img class="profile-img imgRound" src="<%=request.getContextPath()%>/image/annonymous.png" ><br><br>
+								<img class="profile-img imgRound-aside" src="<%=request.getContextPath()%>/image/annonymous.png" ><br><br>
 							<p class = "button-padding">로그인을 해주세요</p>
 									<a href = "<%=request.getContextPath()%>/client/login.jsp" >
 				<button id = loginButton value = "login" class = "loginButton test aside-border font-weight" style = cursor:pointer  >로그인</button></a><br>
@@ -223,7 +223,7 @@ float:left;
 					<%}else{//로그인 상태%>
 						<br><br>
 						<a href = "<%=root %>/client/profile.jsp?clientNo=<%=clientNo%>">
-						<img class="profile-img imgRound" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" ></a>
+						<img class="profile-img imgRound-aside" src="https://dummyimage.com/50/<%=randomInt %>/ffffff&text=<%=ch %>" ></a>
 						<%if(isSuper){//관리자 로그인%>
 						<p class = button-padding><strong>관리자님 환영합니다.</strong><p>
 				<a href = "<%=root%>/manage/manageCenter.jsp">
