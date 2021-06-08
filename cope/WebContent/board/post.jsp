@@ -1,3 +1,5 @@
+<%@page import="cope.beans.post.PostCodeDto"%>
+<%@page import="cope.beans.post.PostCodeDao"%>
 <%@page import="cope.beans.utils.DateUtils"%>
 <%@page import="cope.beans.comments.CommentsDao"%>
 <%@page import="cope.beans.comments.CommentsViewDto"%>
@@ -57,6 +59,10 @@
 		
 	int seed = 216823123;
 	int randomInt= (seed/no)%1000000;
+	
+	//gist를 가져올 도구들
+	PostCodeDao postCodeDao = new PostCodeDao();
+	PostCodeDto postCodeDto = new PostCodeDto();
 %>
 
 <jsp:include page="/template/aside.jsp"></jsp:include>
@@ -194,6 +200,18 @@
 		<div class="row text-left post-content" style="min-height:300px;">
 			<%if (postDto.getPostBlind() == 'F') {%>
 				<pre class="post-content word-break dd-border"><%=postDto.getPostContents()%></pre>
+				
+				<!-- 				깃허브지스트를 넣을 부분 -->
+				<%if(postCodeDao.isExist(postNo)){//지스트URL이 있다면 %>
+				<div class="github-gist-div">
+					<div><p class=gist-title>작성자의 GithubGist</p>
+							<%String url = postCodeDao.getToInput(postNo); %>
+							<%=url%>
+					</div>
+				</div>
+				<%} %>
+				<!-- 				깃허브지스트 끝 -->
+
 			<%} else {%>
 				<pre class="blind-text">(블라인드된 게시글입니다.)</pre>
 			<%} %>
