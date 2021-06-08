@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cope.beans.post.PostCodeDao;
+import cope.beans.post.PostCodeDto;
 import cope.beans.post.PostDao;
 import cope.beans.post.PostDto;
 
@@ -31,6 +33,20 @@ public class PostInsertServlet extends HttpServlet{
 			
 			// 게시글 등록
 			postDao.registPost(postDto);
+			
+			//codeUrl이 있다면
+			if(req.getParameter("codeUrl")!=null) {
+				PostCodeDao postCodeDao = new PostCodeDao();
+				PostCodeDto postCodeDto = new PostCodeDto();
+				
+				postCodeDto.setCodePostNo(postNo);
+				postCodeDto.setCodeUrl(req.getParameter("codeUrl"));
+				
+				postCodeDao.insert(postCodeDto);
+			}
+			else {
+			}
+
 			
 			resp.sendRedirect("post.jsp?boardGroup=" + boardGroup + "&postNo=" + postNo);
 		}
