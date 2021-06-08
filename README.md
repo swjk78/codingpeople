@@ -19,5 +19,3 @@ KH 당산 세미프로젝트 1조
 -   [발표](https://docs.google.com/document/d/1srqXQzfR8Qkx0r1Jxnddwjoi00T6jUmVL6oNeO8Dm2o/edit)
 
 -   [게시판 링크 정리](https://docs.google.com/document/d/1llFivJLyEklYg0a8ce7p-HK2EhCU5zZH1Om-eQDlgMw/edit)
-
--   [백업 파일 모음](https://mega.nz/folder/V6oSmYDZ#OCzsjjuj6xdeXlG-q1T3FQ)
