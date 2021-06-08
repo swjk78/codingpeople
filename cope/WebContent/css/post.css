@@ -14,23 +14,31 @@
 	margin-right: auto;
 }
 
-.border{			
-	border: 2px solid #B8BAD4;
+.border{		
+	text-align:left;
 	padding-top: 15px;
-	padding-left : 30px;
 	padding-right : 30px;
 }
+
+.border-comments{		
+	text-align:left;
+	padding-top: 15px;
+}
+
 
 .d-border{
 	border: 1.2px #B8BAD4;
 	border-style: dotted;
 	
 }
-
 .dd-border{
-	border: 2px #B8BAD4;
-	border-style: dotted;
-	
+	border: 2px #C1C5F6;
+	border-style: solid;
+}
+
+.side-top{
+	width:100%;
+	margin-bottom : 30px;
 }
 
 .row{
@@ -71,8 +79,6 @@
 	width:auto;
 }
 
-
-
 .form-btn {
 	border:none;
 }
@@ -83,8 +89,6 @@
 	padding : 5px 20px 5px 20px;
 	text-decoration: none;
 }
-
-
 
 
 .boardName-div{
@@ -98,7 +102,7 @@
 	font-size: 24px;
 	padding : 0px 0px 0px 35px;
 	text-decoration: none;
-	color:black;
+	color:white;
 }
 
 .boardSubName{
@@ -124,12 +128,8 @@
 .post-title{
 	display:inline-block;
 	font-size: 35px;
-	padding: 0px 0px 0px 15px;
+	padding: 20px 0px 0px 15px;
 	font-weight: 450;
-}
-
-.profile-div{
-	
 }
 
 .margin-top-0{
@@ -152,9 +152,8 @@
 }
 
 .comments-box.comments-box-border{
-	border: 1.2px dotted #B8BAD4;
-	padding-top: 15px;
-	padding-left : 30px;
+	border: 1.2px solid #B8BAD4;
+	padding-top: 10px;
 	padding-right : 30px;
 }
 .etc-left-div{
@@ -336,6 +335,8 @@
 /* 이전글 다음글*/
 
 .move-side-div{
+	padding-top: 100px;
+		padding-bottom: 150px;
 	width:800px;
 	margin-left: auto;
 	margin-right: auto;
@@ -346,4 +347,14 @@
 	color:#9A9EC2;
 }
 
-.move-side> a
+/* post.jsp와 aside간격 변경 */
+.padding-left-inter{
+	padding-left: 80px;
+}
+a.writer-info:VISITED, a.writer-name:VISITED{
+	text-decoration:none;
+}
+a{
+	text-decoration:none;
+	
+}
