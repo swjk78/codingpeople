@@ -92,7 +92,7 @@
 				<input type="text" name="postTitle" placeholder="제목을 입력하세요" class="post-title-input post-title-input-underline input-title" required>
 			</div>
 			<div class="github-gist-input-div">
-				<span style="display:inline;">Github gist Url :</span> <input type="text" name="codeUrl" placeholder="하이라이팅된 code URL링크를 적어주세요" class="inputCodeUrl" >" onblur="checkGistUrl();">
+				<span style="display:inline;">Github gist Url :</span> <input type="text" name="codeUrl" placeholder="하이라이팅된 code URL링크를 적어주세요" class="inputCodeUrl" >
 				<br>
 				<span class="warning">(코드는 본문에 넣지 말고 <a href="https://gist.github.com">github-Gist</a>를 활용해주세요)</span>
 			</div>

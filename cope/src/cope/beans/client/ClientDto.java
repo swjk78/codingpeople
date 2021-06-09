@@ -12,6 +12,7 @@ public class ClientDto {
 	private short clientBirthYear;
 	private String clientGrade;
 	private Date clientUnlockDate; // 정지 해제 날짜
+	private String clientLockReason;
 	
 	public ClientDto() {
 		super();
@@ -27,7 +28,7 @@ public class ClientDto {
 		return clientId;
 	}
 	public void setClientId(String clientId) {
-		if (Pattern.matches("^[a-zA-Z0-9]{8,20}$", clientId)) {
+		if (Pattern.matches("^[a-zA-Z0-9]{5,20}$", clientId)) {
 			this.clientId = clientId;
 		}
 	}
@@ -35,7 +36,7 @@ public class ClientDto {
 		return clientPw;
 	}
 	public void setClientPw(String clientPw) {
-		if (Pattern.matches("^[a-zA-Z0-9!@#$%^&*]{8,16}$", clientPw)) {
+		if (Pattern.matches("^[a-zA-Z0-9!@#$%^&*]{5,16}$", clientPw)) {
 			this.clientPw = clientPw;
 		}
 	}
@@ -91,5 +92,11 @@ public class ClientDto {
 		if (clientUnlockDate != null && dateUtils.compareWithSysdate(clientUnlockDate)) {
 			this.clientUnlockDate = null;
 		}
+	}
+	public String getClientLockReason() {
+		return this.clientLockReason;
+	}
+	public void setClientLockReason(String clientLockReason) {
+		this.clientLockReason = clientLockReason;
 	}
 }

@@ -222,7 +222,6 @@ public class BoardDao {
 	//
 	public List<BoardChartDto> countUnderPosts() {
 		String sql = "select board_name, count(*) from (select board_name from (select B.board_super_no from post P inner join board B on P.post_board_no = B.board_no order by B.board_no) X inner join board Y on X.board_super_no = Y.board_no) group by board_name";
-		System.out.println("rs.가능");
 		
 		List<BoardChartDto> boardChartDtoList = null;
 		
@@ -235,7 +234,6 @@ public class BoardDao {
 						BoardChartDto clientAgeRangeDto = new BoardChartDto();
 						clientAgeRangeDto.setName(rs.getString("board_name"));
 						clientAgeRangeDto.setCount(rs.getInt("count(*)"));
-						System.out.println(clientAgeRangeDto.getName() + "은 " + clientAgeRangeDto.getCount() + "개");
 
 				boardChartDtoList.add(clientAgeRangeDto);
 					}
@@ -262,7 +260,6 @@ public class BoardDao {
 						BoardChartDto clientAgeRangeDto = new BoardChartDto();
 						clientAgeRangeDto.setName(rs.getString("board_name"));
 						clientAgeRangeDto.setCount(rs.getInt("count(*)"));
-						System.out.println(clientAgeRangeDto.getName() + "은 " + clientAgeRangeDto.getCount() + "개");
 
 				boardChartDtoList.add(clientAgeRangeDto);
 					}

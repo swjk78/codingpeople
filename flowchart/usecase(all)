@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" modified="2021-06-08T13:16:12.658Z" agent="5.0 (Windows)" etag="QRzs7e2UxHy5bH2yMX42" version="14.7.6" type="github">
+  <diagram id="jlmu2Go-2CnB9rI986qc" name="Page-1">
+    <mxGraphModel dx="1342" dy="534" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bgelYOpoNbsLUO1VU0fk-1" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="230" y="300" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bgelYOpoNbsLUO1VU0fk-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="325" y="170" width="220" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="bgelYOpoNbsLUO1VU0fk-3" value="게시판" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="414" y="180" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="bgelYOpoNbsLUO1VU0fk-4" value="&lt;div&gt;게시글/댓글&lt;/div&gt;&lt;div&gt;조회&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="390" y="210" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bgelYOpoNbsLUO1VU0fk-6" value="&lt;div&gt;게시글 검색&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="389" y="300" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bgelYOpoNbsLUO1VU0fk-7" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="bgelYOpoNbsLUO1VU0fk-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="320" as="sourcePoint" />
+            <mxPoint x="590" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bgelYOpoNbsLUO1VU0fk-8" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="bgelYOpoNbsLUO1VU0fk-6" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="350" as="sourcePoint" />
+            <mxPoint x="590" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bgelYOpoNbsLUO1VU0fk-9" value="모든 접속자" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="210" y="270" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Qy8gn4p33AfxgDFILi_k-1" value="회원가입" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="390" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qy8gn4p33AfxgDFILi_k-2" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="380" as="sourcePoint" />
+            <mxPoint x="389" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

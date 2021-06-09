@@ -21,14 +21,14 @@
 		<form action = "join.kh" id = "form" method = "post" class="join-form">
 			<div class = "row text-left">
 				<label for = "clientId">아이디</label>
-				<input type = "text" name="clientId" id = "clientId" required class = "form-input form-input-underline" placeholder = "8~20자 이내의 영문 소대문자, 숫자 조합가능">
+				<input type = "text" name="clientId" id = "clientId" required class = "form-input form-input-underline" placeholder="5~20자 이내의 영문 소대문자, 숫자 조합가능">
 					<span class = "fail">아이디 형식이 올바르지 않습니다</span>
 					<span class = "success">올바른 형식의 아이디입니다</span>
 			</div>
 			<div class = "row text-left">
 				<label for = "clientPw">비밀번호</label>
 				<input type = "password" name="clientPw" id = "clientPw" required class = "form-input form-input-underline"
-							placeholder = "8~16자 이내의 영문 소대문자, 숫자, 특수문자(!@#$%^&*)조합 가능">
+							placeholder = "5~16자 이내의 영문 소대문자, 숫자, 특수문자(!@#$%^&*)조합 가능">
 				<input type = "password" id = "clientPw2" required class = "form-input form-input-underline padding-t"
 							placeholder = "비밀번호 재입력">
 					<div class = "fail failPw">비밀번호 형식이 올바르지 않습니다</div>

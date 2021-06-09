@@ -17,12 +17,11 @@ public class ResetPwServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			String inputPw = req.getParameter("inputPw");
-			String inputEmail = (String) req.getSession().getAttribute("inputEmail");
+			String inputEmail = req.getParameter("inputEmail");
 			
 			ClientDao clientDao = new ClientDao();
 			boolean result = clientDao.resetPw(inputPw, inputEmail);
 			if (result) {
-				req.getSession().removeAttribute("inputEmail");
 				resp.sendRedirect("login.jsp");
 			}
 			else {

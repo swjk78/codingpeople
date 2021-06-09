@@ -90,7 +90,6 @@ public class PostCodeDao {
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 					urlOrigin=rs.getString("code_url");
-					System.out.println(urlOrigin);
 					urlOutput = urlOrigin.replaceAll("\"", "\'"); //jsp에서 충돌나지 않게
 				}
 				else {

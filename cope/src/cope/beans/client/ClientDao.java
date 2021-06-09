@@ -134,7 +134,7 @@ public class ClientDao {
 	public List<ClientDto> list(ListParameter listParameter) {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select client_no, client_id, client_nick, client_email, client_birth_year,"
-					 	+ "client_grade, client_unlock_date from client order by #1 #2, client_no desc) tmp"
+					 	+ "client_grade, client_unlock_date, client_lock_reason from client order by #1 #2, client_no desc) tmp"
 					+ ") where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getOrderType());
 		sql = sql.replace("#2", listParameter.getOrderDirection());
@@ -156,6 +156,7 @@ public class ClientDao {
 					clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 					clientDto.setClientGrade(rs.getString("client_grade"));
 					clientDto.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
+					clientDto.setClientLockReason(rs.getString("client_lock_reason"));
 					clientList.add(clientDto);
 				}
 			}
@@ -170,7 +171,7 @@ public class ClientDao {
 	public List<ClientDto> search(ListParameter listParameter) {
 		String sql = "select * from(select rownum rn, tmp.* from("
 					 	+ "select client_no, client_id, client_nick, client_email, client_birth_year, client_grade,"
-					 	+ "client_unlock_date from client where instr(#1, ?) > 0 order by #2 #3, client_no desc) tmp"
+					 	+ "client_unlock_date, client_lock_reason from client where instr(#1, ?) > 0 order by #2 #3, client_no desc) tmp"
 					+ ") where rn between ? and ?";
 		sql = sql.replace("#1", listParameter.getSearchType());
 		sql = sql.replace("#2", listParameter.getOrderType());
@@ -194,6 +195,7 @@ public class ClientDao {
 					clientDto.setClientBirthYear(rs.getShort("client_birth_year"));
 					clientDto.setClientGrade(rs.getString("client_grade"));
 					clientDto.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
+					clientDto.setClientLockReason(rs.getString("client_lock_reason"));
 					clientList.add(clientDto);
 				}
 			}
@@ -243,9 +245,9 @@ public class ClientDao {
 		return clientCount;
 	}
 
-	// 정지 해제 날짜 갱신 기능
+	// 정지 상태 갱신 기능
 	public void refreshUnlockDate(int clientNo) {
-		String sql = "update client set client_unlock_date = null where client_no = ?";
+		String sql = "update client set client_unlock_date = null, client_lock_reason = null where client_no = ?";
 
 		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, clientNo);
@@ -256,7 +258,7 @@ public class ClientDao {
 	}
 
 	// 회원 정지 기능
-	public boolean lockClient(int clientNo, int lockHour) {
+	public boolean lockClient(int clientNo, int lockHour, String clientLockReason) {
 		Date unlockDate = null;
 		long unlockDateUtil = 0;
 
@@ -270,13 +272,14 @@ public class ClientDao {
 			unlockDate = new Date(unlockDateUtil);
 		}
 
-		String sql = "update client set client_unlock_date = ? where client_no = ?";
+		String sql = "update client set client_unlock_date = ?, client_lock_reason = ? where client_no = ?";
 
 		int count = 0;
 
 		try (Connection con = JdbcUtils.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setDate(1, unlockDate);
-			ps.setInt(2, clientNo);
+			ps.setString(2, clientLockReason);
+			ps.setInt(3, clientNo);
 			count = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -304,7 +307,7 @@ public class ClientDao {
 
 	// 로그인 기능
 	public ClientDto login(ClientDto clientDto) {
-		String sql = "select client_no, client_unlock_date from client where client_id = ? and client_pw = ?";
+		String sql = "select client_no, client_unlock_date, client_lock_reason from client where client_id = ? and client_pw = ?";
 
 		ClientDto find = null;
 
@@ -318,6 +321,7 @@ public class ClientDao {
 
 					find.setClientNo(rs.getInt("client_no"));
 					find.setClientUnlockDateRefresh(rs.getDate("client_unlock_date"));
+					find.setClientLockReason(rs.getString("client_lock_reason"));
 				}
 			}
 		} catch (Exception e) {
@@ -343,7 +347,6 @@ public class ClientDao {
 				ClientAgeRangeDto clientAgeRangeDto = new ClientAgeRangeDto();
 				clientAgeRangeDto.setTeen((rs.getString("age_range")) + "대");
 				clientAgeRangeDto.setCount(rs.getInt("count(*)"));
-				System.out.println(clientAgeRangeDto.getTeen() + "는 " + clientAgeRangeDto.getCount() + "명");
 
 				ageRangeList.add(clientAgeRangeDto);
 			}
@@ -364,9 +367,7 @@ public class ClientDao {
 
 			try (ResultSet rs = ps.executeQuery()) {
 				rs.next();
-				// System.out.println("등급" + rs.getString("client_grade"));
 				isSuper = rs.getString("client_grade").equals("super");
-				// System.out.println("불린" + isSuper);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

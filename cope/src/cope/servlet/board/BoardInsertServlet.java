@@ -31,7 +31,6 @@ public class BoardInsertServlet extends HttpServlet {
 
 			// 하위 게시판 목록
 			List<BoardDto> boardSubList = boardDao.showListBoardSub(boardDto.getBoardSuperNo());
-			System.out.println(boardSubList);
 
 			// 상위 게시판 추가
 			if (Integer.parseInt(req.getParameter("boardSuperNo")) == 0

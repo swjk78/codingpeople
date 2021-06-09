@@ -1,6 +1,7 @@
 package cope.servlet.client;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import cope.beans.client.ClientDao;
 import cope.beans.client.ClientDto;
 
-// 활동정지된 회원의 로그인 방지를 위한 테스트 로그인 서블릿
-// create by JK
 @WebServlet(urlPatterns = "/client/login.kh")
 public class ClientLoginServlet extends HttpServlet {
 	@Override
@@ -29,8 +28,8 @@ public class ClientLoginServlet extends HttpServlet {
 				resp.sendRedirect("login.jsp?notFound");
 			}
 			else if (find.getClientUnlockDate() != null) {
-				req.getSession().setAttribute("unlockDate", find.getClientUnlockDateString());
-				resp.sendRedirect("login.jsp");
+				resp.sendRedirect("login.jsp?unlockDate=" + URLEncoder.encode(find.getClientUnlockDateString(), "UTF-8")
+				+ "&clientLockReason=" + URLEncoder.encode(find.getClientLockReason(), "UTF-8"));
 			}
 			else {
 				req.getSession().setAttribute("clientNo", find.getClientNo());

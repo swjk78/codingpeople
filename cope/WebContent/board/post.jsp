@@ -111,10 +111,8 @@
 <script>
 	//댓글관련 기능
 	function ShowCommentsEditArea(targetNo){
-		console.log(targetNo+"번글을 수정합니다");
 		var originDiv = document.querySelector("#commentsOriginNo-"+targetNo);
 		var editDiv = document.querySelector("#commentsEditNo-"+targetNo);
-		console.log(editDiv);	
 		originDiv.style.display="none";
 		editDiv.style.display="block";
 	}

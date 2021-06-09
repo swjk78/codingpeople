@@ -144,8 +144,7 @@
 <meta charset="UTF-8">
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/client.css">
-
-<!-- 임시 스타일링 -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/layout.css">
 
 <style>
 
@@ -217,6 +216,9 @@
 	.blind{
 		text-decoration:line-through;
 		font-style:italic;
+	}
+	.postlist-margin-bottom{
+	margin-bottom: 10px;
 	}
 	
 	    float 스타일(다단 레이아웃)
@@ -333,13 +335,13 @@ top:0;
 		<%=clientDao.findClientNick(clientNo)%>의 작성한 글 목록</a></h1>
 		
 		<!-- 상위 게시판 선택 링크 -->
-					<select class = "border-thin top-menu">
-							<%for (BoardDto boardDto : superBoardList) {%>
-		    				clientPostList.jsp?clientNo=<%=clientNo%>&boardGroup=<%=boardDto.getBoardNo()%>
-							&pageSize=<%=pageSize%>
-					<option><%=boardDto.getBoardName()%></option>	
-								<%} %>
-		</select>
+		<div class = postlist-margin-bottom>
+		<%for (BoardDto boardDto : superBoardList) {%>
+		<a href="clientPostList.jsp?clientNo=<%=clientNo%>&boardGroup=<%=boardDto.getBoardNo()%>
+		&pageSize=<%=pageSize%>">
+		<%=boardDto.getBoardName()%></a>	
+		<%} %>
+		</div>
 		
 		<!-- 정렬 링크 -->
 		<div class="float-container-postlist top-menu">

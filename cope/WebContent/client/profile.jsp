@@ -84,7 +84,6 @@
 					<%}else{%>
 					<h4><%=clientDto.getClientEmail().substring(1,3) %>********</h4>
 					<%} %>
-					<p>okky 회원</p>
 				</div>
 				
 				<div class="profile-card-bottom">
