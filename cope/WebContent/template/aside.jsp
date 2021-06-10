@@ -8,7 +8,7 @@
     
 <!DOCTYPE html>
 <%
-Integer clientNo = (Integer) request.getSession().getAttribute("clientNo");
+Integer clientNo = (Integer) session.getAttribute("clientNo");
 boolean isLogin = clientNo!=null;
 boolean isSuper=false;
 	if(isLogin){
@@ -17,7 +17,7 @@ boolean isSuper=false;
 		
 		ClientDto clientDto = clientDao.findClient(clientNo);
 		if (clientDto.getClientUnlockDate() != null) {
-			request.getSession().removeAttribute("clientNo");
+			session.removeAttribute("clientNo");
 		}
 	}
 %>

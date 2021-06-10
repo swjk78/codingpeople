@@ -397,7 +397,7 @@
 			
 			
 			<div class="bottom-write">
-			<%if (request.getSession().getAttribute("clientNo") != null) {%>
+			<%if (session.getAttribute("clientNo") != null) {%>
 				
 				<a href="postForm.jsp?boardGroup=<%=boardGroup%>&write">글쓰기</a>
 			
